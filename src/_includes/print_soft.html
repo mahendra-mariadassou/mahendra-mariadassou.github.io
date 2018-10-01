@@ -1,0 +1,10 @@
+<dl class="dl-horizontal">
+    {% for soft in include.items %}
+    <dt>{{ soft.year }}</dt>
+    <dd>
+        <span class="text-primary"><strong>{{ soft.name }}</strong></span><br/>
+        <em>{{ soft.kind }}</em>
+        {{ soft.links }}<br/>
+    </dd>
+    {% endfor %}
+</dl>

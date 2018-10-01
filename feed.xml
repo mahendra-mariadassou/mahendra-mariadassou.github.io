@@ -1,30 +1,327 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Clémence Frioux</title>
+    <description>PhD Student at Inria Univ Rennes 1 Rennes, France
+</description>
+    <link>https://cfrioux.github.io/</link>
+    <atom:link href="https://cfrioux.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 31 Jul 2018 17:30:48 +0200</pubDate>
+    <lastBuildDate>Tue, 31 Jul 2018 17:30:48 +0200</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>GitHub Pages without the Workflow</title>
+        <description>&lt;p class=&quot;text-justify&quot;&gt;Jekyll nicely &lt;a href=&quot;http://jekyllrb.com/docs/github-pages/&quot;&gt;integrates with GitHub Pages&lt;/a&gt;.
+However, this comes with rules that forbid using Jekyll plugins but for authorized ones.&lt;br /&gt;
+We will see here how to deal with this limit.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; I am discussing here about User pages on GitHub Pages.
+For Project pages things are a bit different. For example for User pages, pages are on a &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch.
+For Project pages, pages are on a &lt;code class=&quot;highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt; branch.
+See &lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;two-choices&quot;&gt;Two choices&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;If you want, e.g., to use the &lt;a href=&quot;https://github.com/inukshuk/jekyll-scholar&quot;&gt;Jekyll-Scholar&lt;/a&gt; plugin
+(to generate pages from &lt;code class=&quot;highlighter-rouge&quot;&gt;.bib&lt;/code&gt; BibTeX reference files),
+you will have either not to use GitHub Pages
+(make a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;my-web-pages&lt;/code&gt; repository and sync your pages with a Web server somewhere else)
+or to shortcut the GitHub Pages workflow. This is what we will do here.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;This part is based on &lt;a href=&quot;https://github.com/barais/barais.github.io&quot;&gt;Olivier Barais’s template&lt;/a&gt;,
+itself based on &lt;a href=&quot;https://github.com/rudametw/rudametw.github.io&quot;&gt;Walter Rudametkin’s template&lt;/a&gt;.
+I chose not to fork their templates here since my site structure is different and I also
+wanted to build things from scratch to explain how to integrate elements one by one. Yet, without them,
+shortcutting the GitHub Pages workflow would certainly have been much more complicated.
+Please consider forking their templates that are much more advanced than mine for the moment.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-things-work-with-the-github-pages-workflow&quot;&gt;How things work with the GitHub Pages workflow&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;Jekyll takes its sources, i.e., files and specific directories (ones beginning by &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; in short) in the current path
+and compute pages in subdirectory &lt;code class=&quot;highlighter-rouge&quot;&gt;_src&lt;/code&gt;. See the Jekyll directory structure &lt;a href=&quot;http://jekyllrb.com/docs/structure/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;GitHub Pages require that your Jekyll sources are in the root directory of &lt;code class=&quot;highlighter-rouge&quot;&gt;username.github.io&lt;/code&gt;.
+Then it runs Jekyll and deploys the resulting pages to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://username.github.io&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;If you want to write your pages directly (e.g, without templates) you would have to put them
+at the root of the &lt;code class=&quot;highlighter-rouge&quot;&gt;username.github.io&lt;/code&gt; repository and add a &lt;code class=&quot;highlighter-rouge&quot;&gt;.nojekyll&lt;/code&gt; empty file to tell GitHub Pages not to
+run Jekyll each time you push things. This is very important if you have directories beginning with &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; since
+they have a special treatment with Jekyll (they are not deployed on the Web site).&lt;/p&gt;
+
+&lt;h2 id=&quot;putting-things-together&quot;&gt;Putting things together&lt;/h2&gt;
+
+&lt;p&gt;The solution that is adopted in &lt;a href=&quot;https://github.com/barais/barais.github.io&quot;&gt;Olivier Barais’s template&lt;/a&gt; and
+in &lt;a href=&quot;https://github.com/rudametw/rudametw.github.io&quot;&gt;Walter Rudametkin’s template&lt;/a&gt; is:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;define a &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; directory at the root (of the repository) containing the Jekyll sources&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;edit files in &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; as usual, and commit+push them to GitHub regularly&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;have Jekyll run on these sources and place them in &lt;code class=&quot;highlighter-rouge&quot;&gt;src/_site&lt;/code&gt; (default)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“build” the site regularly by copying the pages from &lt;code class=&quot;highlighter-rouge&quot;&gt;src/_site&lt;/code&gt; to the root of the repository,
+ and then commit+push the new versions of these to GitHub&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;For this one has two scripts that automate steps 3. and 4.
+Step 3. is achieved by &lt;code class=&quot;highlighter-rouge&quot;&gt;src/run-jekyll.sh&lt;/code&gt;. You can have it run in background while doing steps 1. and 2.
+Step 4. is achieved by &lt;code class=&quot;highlighter-rouge&quot;&gt;src/update-site.sh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Jekyll supports the possibility to tell in its configuration file
+where are the source and the target directories.
+I may use this in the future to simplify things and avoid some file copying.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 29 Jan 2016 00:00:00 +0100</pubDate>
+        <link>https://cfrioux.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</link>
+        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>github-pages</category>
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Generating a Page using Personal Data</title>
+        <description>&lt;p class=&quot;text-justify&quot;&gt;Static page generators such as &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; can
+use data stored in files to produce the information contained into HTML pages.&lt;br /&gt;
+We will have a look at this using a simple example.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-data-files&quot;&gt;The data files&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;The first step is to define the file(s) that will contain the information.
+This can be either JSON, YAML, or CSV files.
+For &lt;a href=&quot;/duties/&quot;&gt;my list of duties&lt;/a&gt; I chose to use YAML files, but another part of my site,
+the list of talks, used to rely on JSON files.
+Data files have to be put in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_data&lt;/code&gt; directory of the Jekyll tree structure.
+Sub-directories can be used to structure your set of data files. So here I put my data within &lt;code class=&quot;highlighter-rouge&quot;&gt;_data/duties&lt;/code&gt;.
+Further, we will have one file for the current duties, &lt;code class=&quot;highlighter-rouge&quot;&gt;currently.yml&lt;/code&gt;,
+and another file, &lt;code class=&quot;highlighter-rouge&quot;&gt;before.yml&lt;/code&gt;, for the old ones. Here is the &lt;code class=&quot;highlighter-rouge&quot;&gt;currently.yml&lt;/code&gt; one:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Pedagogic&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;since 2012&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Director of 1st and 2nd year of Master in CS (Applied cursus, MIAGE)&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Paris Ouest University&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Scientific&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;since 2014&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Member of the Nat. Committee for Scientific Research | CoNRS Sect. 6&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;CNRS&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;since 2014&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Member of the Laboratory Council | Conseil de Laboratoire&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;LIP6 Laboratory&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;since 2013&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Member of the CS Advisory Council | CCD Sect. 27&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Paris Ouest University&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;You have a list of 2 items, each item containing a name (category) and a list of values,
+with a value being a period, a name, and the location it took place
+(see &lt;a href=&quot;https://fr.wikipedia.org/wiki/YAML&quot;&gt;here&lt;/a&gt; for information about the YAML format).&lt;/p&gt;
+
+&lt;h2 id=&quot;from-data-to-html&quot;&gt;From data to HTML&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;To generate HTML information for this, one can create an HTML document, &lt;code class=&quot;highlighter-rouge&quot;&gt;duties.html&lt;/code&gt;,
+and use &lt;a href=&quot;http://liquidmarkup.org/&quot;&gt;Liquid templating&lt;/a&gt; to access the data.
+To generate a list you simply have to type in &lt;code class=&quot;highlighter-rouge&quot;&gt;duties.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;---
+layout: default
+title: duties
+---
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;site.data.duties.currently&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;h3&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;/h3&amp;gt;
+&amp;lt;ul&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;duty&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category.values&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+    &amp;lt;li&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; - &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;br/&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+    &amp;lt;/li&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;/ul&amp;gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;As you can see, to access the data in the file &lt;code class=&quot;highlighter-rouge&quot;&gt;_data/duties/currently.yml&lt;/code&gt;, we refer to &lt;code class=&quot;highlighter-rouge&quot;&gt;site.data.duties.currently&lt;/code&gt;.
+This can be read as “the &lt;code class=&quot;highlighter-rouge&quot;&gt;currently&lt;/code&gt; file that is in the &lt;code class=&quot;highlighter-rouge&quot;&gt;duties&lt;/code&gt; subdirectory of the site data directory”.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;For loops iterate over a list using some variable &lt;code class=&quot;highlighter-rouge&quot;&gt;v&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;v&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;list&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;...&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;To access to some attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; of a variable &lt;code class=&quot;highlighter-rouge&quot;&gt;v&lt;/code&gt;, we use double brackets and indexing.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;The rest is self-explanatory if you know HTML.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;You can get more information on Liquid templating &lt;a href=&quot;http://jekyllrb.com/docs/datafiles/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;http://liquidmarkup.org/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;factorizing-things&quot;&gt;Factorizing things&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;Now if you want to generate also the list of the old duties, you have to copy-paste the piece of code before,
+and replace &lt;code class=&quot;highlighter-rouge&quot;&gt;site.data.duties.currently&lt;/code&gt; by &lt;code class=&quot;highlighter-rouge&quot;&gt;site.data.duties.before&lt;/code&gt;. Too bad.
+A better way to do things is to define the code in terms of a variable &lt;code class=&quot;highlighter-rouge&quot;&gt;duties&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;duties&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;h3&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;/h3&amp;gt;
+&amp;lt;ul&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;duty&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category.values&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+    &amp;lt;li&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; - &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;br/&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+    &amp;lt;/li&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;/ul&amp;gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;Then you put this piece of code, say &lt;code class=&quot;highlighter-rouge&quot;&gt;print_duties&lt;/code&gt; within the Jekyll include directory, &lt;code class=&quot;highlighter-rouge&quot;&gt;_includes&lt;/code&gt;.
+In order to generate both lists of duties you now simply have to write in &lt;code class=&quot;highlighter-rouge&quot;&gt;duties.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;---
+layout: default
+title: duties
+---
+&amp;lt;h2&amp;gt;Currently&amp;lt;/h2&amp;gt;
+
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;currently&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+
+&amp;lt;h2&amp;gt;Before&amp;lt;/h2&amp;gt;
+
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;If you prefer to use Markdown, use instead a &lt;code class=&quot;highlighter-rouge&quot;&gt;duties.md&lt;/code&gt; file with:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;---
+layout: default
+title: duties
+---
+## Currently
+
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;currently&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+
+## Before
+
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;factorizing-things-revisited&quot;&gt;Factorizing things (revisited)&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;Indeed file inclusion supports parameters (see &lt;a href=&quot;http://jekyllrb.com/docs/templates/&quot;&gt;here&lt;/a&gt;).
+You can add the parameter and its value to the import as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;---
+layout: default
+title: duties
+---
+## Currently
+
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currently %}
+
+## Before
+
+{% include print_duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;In the &lt;code class=&quot;highlighter-rouge&quot;&gt;print_duties.html&lt;/code&gt; template that is in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_includes&lt;/code&gt; directory, you just have to prefix the name of the parameter with &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-liquid&quot; data-lang=&quot;liquid&quot;&gt;&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;include.duties&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;h3&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;/h3&amp;gt;
+&amp;lt;ul&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;duties&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;in&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;category.values&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+    &amp;lt;li&amp;gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; - &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&amp;lt;br/&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;duty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+    &amp;lt;/li&amp;gt;
+    &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&amp;lt;/ul&amp;gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Wed, 27 Jan 2016 00:00:00 +0100</pubDate>
+        <link>https://cfrioux.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</link>
+        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>liquid</category>
+        
+        <category>templates</category>
+        
+        <category>yaml</category>
+        
+      </item>
+    
+      <item>
+        <title>Web Site now using Jekyll</title>
+        <description>&lt;p class=&quot;text-justify&quot;&gt;New static Web site, now generated using &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;static-pages&quot;&gt;Static pages&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;There are many reasons to prefer static pages over dynamic ones.
+You may find some &lt;a href=&quot;http://nilclass.com/courses/what-is-a-static-website/#1&quot;&gt;here&lt;/a&gt;.
+It turns out you just have to write some HTML/CSS files using your editor or IDE of choice and then send these files to a server.
+You can do this in a responsive way using &lt;a href=&quot;http://getbootstrap.com/&quot;&gt;BootStrap&lt;/a&gt; and with style using available templates,
+see e.g., &lt;a href=&quot;http://html5up.net/&quot;&gt;HTML5UP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;There are limits to this approach.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;First, changing the style of your Web site over time soon becomes a burden. A solution is never to change this style.
+I am sure you have already seen the nice &lt;em&gt;no-css-no-javascript-HTML-2.0&lt;/em&gt; pages that some people like in academia.
+But what you are not one of these?
+Further, what if your pages relate to data you gather with time?
+Of course, you could try to keep your data and your manually edited Web pages synchronized. Not fun.&lt;/p&gt;
+
+&lt;h2 id=&quot;static-page-generators&quot;&gt;Static page generators&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;A solution is to follow a &lt;em&gt;data-and-generators&lt;/em&gt; approach.
+Using data, stored in a database or in files, you can generate not only up-to-date Web pages but also resumes, application files, etc.
+Nothing really new here.
+Indeed, I had used the &lt;a href=&quot;https://github.com/sebastien/tahchee&quot;&gt;TahChee&lt;/a&gt; python-based static Web site generator for some time.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;The choice of a generation framework is vast, &lt;a href=&quot;https://www.staticgen.com/&quot;&gt;see here&lt;/a&gt; for example.&lt;/p&gt;
+
+&lt;h2 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h2&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;At a first step I would have liked to find one based on the new language I am learning, &lt;a href=&quot;https://kotlinlang.org/&quot;&gt;Kotlin&lt;/a&gt;.
+None.
+&lt;a href=&quot;http://sysgears.com/grain/&quot;&gt;Grain&lt;/a&gt;, based on Groovy, and with support for the &lt;a href=&quot;http://gradle.org/&quot;&gt;Gradle&lt;/a&gt; build system seems nice too.
+But a bit too young.
+So let’s go for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;It’s quite simple to have a running Jekyll site:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;if you intend to publish your Web pages using GitHub pages, the good starting point is the very nice &lt;a href=&quot;http://jmcglone.com/guides/github-pages/&quot;&gt;tutorial by Jonathan McGlone&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;if not, you can simply follow the &lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot;&gt;Jekyll quick-start guide&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;text-justify&quot;&gt;&lt;strong&gt;Update:&lt;/strong&gt; just found the &lt;a href=&quot;http://jekyll.tips/&quot;&gt;Jekyll Tips&lt;/a&gt; site.
+Lots of interesting information here too.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Jan 2016 00:00:00 +0100</pubDate>
+        <link>https://cfrioux.github.io/blog/posts/2016/01/26/jekyll-site-launched/</link>
+        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/26/jekyll-site-launched/</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>github-pages</category>
+        
+      </item>
+    
   </channel>
 </rss>

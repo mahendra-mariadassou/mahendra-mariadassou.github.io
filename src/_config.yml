@@ -1,0 +1,109 @@
+#
+# SITE SETTINGS
+#
+
+# base of your site relative to the root of the Web site, eg / or ""
+baseurl: ""
+# URL of your site, eg https://mahendra-mariadassou.github.io
+url: "https://mahendra-mariadassou.github.io"
+
+# site information
+title: Mahendra Mariadassou
+description: > # this means to ignore newlines until the next tag
+  Researcher at Inra
+author: Mahendra Mariadassou
+blog_dir: /blog
+permalink: /blog/posts/:year/:month/:day/:title/ # prefixed style
+category_dir: /blog/categories/
+category_title_prefix: "category: "
+
+# author information
+picture: {{site.baseurl}}/docs/portrait.jpg
+email: firstname.lastname@inra.fr
+networks:
+  github:
+    url: https://github.com/
+    username: mahendra-mariadassou
+  linkedin:
+    url: https://www.linkedin.com/
+    username: in/mahendra-mariadassou-22830224/
+
+# contacts
+contacts:
+  research:
+    email: firstname.lastname@inra.fr
+    address: >
+      INRA MaIAGE<br/>
+      Bât. 233<br/>
+      Domaine de Vilvert<br/>
+      78352 Jouy-en-Josas<br/>
+      France
+    direction:
+      map: https://goo.gl/maps/7ZWDAq3Cbs22
+      public_transportation:
+        stop:
+        link:
+
+# research
+research:
+  presentation:
+    overview: true
+    publications: true
+    software: true
+  restriction:
+      publications: 10
+
+# apparence of posts
+
+# apparence of buttons
+link_btn_size: btn-xs
+link_btn_color: btn-primary
+publications_btn_size: btn-xs
+publications_btn_color: btn-default
+publications_btn_textcolor: text-primary
+
+# alerts
+alerts:
+  no-javascript:
+    danger: true
+    warning: true
+    information:  true
+
+# bibliography
+kind:
+  label: pp_kind # label used in .bib files to denote the kind (international/national) of references
+  separate:  # should international/national references be separated: (true | false)
+    article: true
+    inbook: false
+    inproceedings: true
+
+
+scholar:
+  style: _bibliography/mystyle.csl
+  locale: en
+  sort_by: year, pp_rank
+  order: descending
+  group_by: none
+  group_order: ascending
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: bib
+  replace_strings: true
+  join_strings:    true
+  use_raw_bibtex_entry: false
+  bibtex_skip_fields: [pp_shortbooktitle, pp_rank, pp_kind]
+  # details_dir:    bibliography
+  # details_layout: bibtex.html
+  # details_link:   Details
+  query: "@*"
+
+# other settings
+exclude:  ['Gemfile*', '*.sh', 'update_site.sh']
+plugins:
+  - jekyll-scholar
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem]
+markdown: kramdown
+highlighter: rouge
+kramdown:
+     # input: GFM
+     syntax_highlighter: rouge

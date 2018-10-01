@@ -1,0 +1,13 @@
+{% for category in include.misc %}
+<h3>{{ category.name }}</h3>
+<dl class="dl-horizontal">
+    {% for activity in category.values %}
+    <dt>{{ activity.period }}</dt>
+    <dd>
+        <span class="text-primary"><strong>{{ activity.name }}</strong></span><br/>
+        {{ activity.at }}<br/>
+        <em>{{ activity.role }}</em>
+    </dd>
+    {% endfor %}
+</dl>
+{% endfor %}

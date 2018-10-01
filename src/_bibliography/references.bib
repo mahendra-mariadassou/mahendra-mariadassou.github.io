@@ -1,0 +1,151 @@
+%
+% publications of Clémence Frioux
+% (limited to Journal Articles, Proceedings, Book Chapters, and Manuscripts)
+% THIS LIST IS NOT COMPLETE
+%
+
+% SPECIFIC FIELDS FOR THE WEB PAGES GENERATION ARE:
+% - DOI : the DOI of the bib item
+% - HAL_ID : the HAL URL of the bib item
+% - OPTLINK : the link to a page about the bib item (if not on DOI or HAL)
+% - PDF : the link to the PDF of the bib item
+% - PP_KIND : the kind of bib item (for sorting based on it) {international, national}
+% - PP_RANK : the rank of the bib item in the year (for sorting based on it)
+% - PP_SHORTBOOKTITLE : for conferences/workshops, abbreviation of it
+
+%
+%    DOI = {xxxx/xxxx},
+%    HAL_ID = {hal-xxxx},
+%    OPTLINK = {http://...},
+%    PDF = {https://hal.inria.fr/hal-xxxx/document},
+%    PP_KIND = {international/national},
+%    PP_RANK = {1/2/3...},
+%    PP_SHORTBOOKTITLE = {xxx},
+
+@String{LNCS = "Lecture Notes in Computer Science"}
+
+@String{ACM = "ACM"}
+@String{IEEE = "IEEE"}
+@String{IEEECS = "IEEE Comp. Soc."}
+@String{SPRINGER = "Springer"}
+
+% TODO : check no duplicates & no false positives on HAL
+
+%
+% ----- ARTICLES -----
+%
+
+@article{Laniau2017,
+    author = {Laniau, Julie and Frioux, Clémence and Nicolas, Jacques and Baroukh, Caroline and Cortes, María Paz and Got, Jeanne and Trottier, Camille and Eveillard, Damien and Siegel, Anne},
+    doi = {10.7717/peerj.3860},
+    issn = {21678359},
+    journal = {PeerJ},
+    keywords = {Answer Set Programming,Constraint-based analysis,Essential metabolite,Graph-based analysis,Metabolic networks},
+    number = {10},
+    title = {Combining graph and flux-based structures to decipher phenotypic essential metabolites within metabolic networks},
+    volume = {2017},
+    year = {2017},
+    PDF = {https://peerj.com/articles/3860.pdf},
+    HAL_ID = {hal-01635688}
+}
+
+@article{Prigent2017,
+    author = {Prigent, Sylvain and Frioux, Clémence and Dittami, Simon M. and Thiele, Sven and Larhlimi, Abdelhalim and Collet, Guillaume and Gutknecht, Fabien and Got, Jeanne and Eveillard, Damien and Bourdon, Jérémie and Plewniak, Frédéric and Tonon, Thierry and Siegel, Anne},
+    doi = {10.1371/journal.pcbi.1005276},
+    issn = {15537358},
+    journal = {PLoS Computational Biology},
+    number = {1},
+    title = {Meneco, a Topology-Based Gap-Filling Tool Applicable to Degraded Genome-Wide Metabolic Networks},
+    volume = {13},
+    year = {2017},
+    PDF = {http://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005276&type=printable},
+    HAL_ID = {hal-01449100}
+}
+
+@article{Haikarainen2014,
+    author = {Haikarainen, Teemu and Frioux, Clémence and Zhnag, Li-Qing and Li, Duo-Chuan and Papageorgiou, Anastassios C.},
+    doi = {10.1016/j.bbapap.2013.11.014},
+    issn = {15709639},
+    journal = {Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics},
+    number = {2},
+    pages = {422--429},
+    title = {Crystal structure and biochemical characterization of a manganese superoxide dismutase from Chaetomium thermophilum},
+    volume = {1844},
+    year = {2014}
+}
+
+@article{Aite2018,
+    author = {Aite, Méziane AND Chevallier, Marie AND Frioux, Clémence AND Trottier, Camille AND Got, Jeanne AND Cortés, María Paz AND Mendoza, Sebastián N. AND Carrier, Grégory AND Dameron, Olivier AND Guillaudeux, Nicolas AND Latorre, Mauricio AND Loira, Nicolás AND Markov, Gabriel V. AND Maass, Alejandro AND Siegel, Anne},
+    journal = {PLOS Computational Biology},
+    publisher = {Public Library of Science},
+    title = {Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of genome-scale metabolic models},
+    year = {2018},
+    month = {05},
+    volume = {14},
+    url = {https://doi.org/10.1371/journal.pcbi.1006146},
+    pages = {1-25},
+    abstract = {Author summary Genome-scale metabolic models describe an organism’s metabolism. Building good models requires the integration of all relevant available information, obtained by exploring different data types and biological databases. This process is not straightforward and choices are made along the way, for example, which data is analyzed, with what tools. It matters that all reconstruction steps are well documented so that models can be fully exploited by the community. Having this metadata allows other researchers to reproduce, improve or reuse a model as a blueprint to create new ones. Sadly, this information is usually scattered and its proper distribution is the exception rather than the norm when using “à la carte” pipelines that combine main platforms and individual tools. We created a platform for “à la carte” metabolic model generation that responds to the need of transparency and data-connection in the field. It includes a battery of tools to exploit heterogeneous data through customizable pipelines. At each step, relevant information is stored, ensuring reproducibility and documentation of processes. Furthermore, exploration of models and metadata during the reconstruction process is facilitated through the automatic generation of local wikis. This view offers a user-friendly solution to iteratively explore genome-scale metabolic models produced with personalized pipelines and poorly interoperable tools. We highlight these benefits by building models for organisms with various input data. Among them, we show why the combination of heterogeneous information is necessary to elucidate specificities of Tisochrysis lutea, a eukaryotic microalga, for anti-oxidant production.},
+    number = {5},
+    doi = {10.1371/journal.pcbi.1006146},
+    PDF = {http://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1006146&type=printable},
+    HAL_ID = {hal-01819150}
+}
+
+%
+% ----- CONFERENCES -----
+%
+
+@inproceedings{Frioux2017,
+    author = {Frioux, Clémence and Schaub, Torsten and Schellhorn, Sebastian and Siegel, Anne and Wanko, Philipp},
+    booktitle = {Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)},
+    pp_rank = {1},
+    doi = {10.1007/978-3-319-61660-5_28},
+    isbn = {9783319616599},
+    issn = {16113349},
+    mendeley-groups = {Zotero - ASP},
+    pages = {308--321},
+    publisher = {Springer, Cham},
+    title = {Hybrid metabolic network completion},
+    url = {http://link.springer.com/10.1007/978-3-319-61660-5{\_}28},
+    volume = {10377 LNAI},
+    year = {2017},
+    HAL_ID = {hal-01557347},
+    PDF = {https://hal.inria.fr/hal-01557347/document}
+}
+
+
+%
+% ----- BOOK CHAPTERS -----
+%
+
+% MISSING
+
+%
+% ----- MANUSCRIPTS -----
+%
+
+@article {Dittami307165,
+	author = {Dittami, Simon M. and Corre, Erwan and Brillet-Gueguen, Loraine and Pontoizeau, Noe and Aite, Meziane and Avia, Komlan and Caron, Christophe and Cho, Chung Hyun and Collen, Jonas and Cormier, Alexandre and Delage, Ludovic and Doubleau, Sylvie and Frioux, Clemence and Gobet, Angelique and Gonzalez-Navarrete, Irene and Groisillier, Agnes and Herve, Cecile and Jollivet, Didier and KleinJan, Hetty and Leblanc, Catherine and Lipinska, Agnieszka P. and Liu, Xi and Marie, Dominique and Markov, Gabriel V. and Minoche, Andre E. and Monsoor, Misharl and Pericard, Pierre and Perrineau, Marie-Mathilde and Peters, Akira F. and Siegel, Anne and Simeon, Amandine and Trottier, Camille and Yoon, Hwan So and Himmelbauer, Heinz and Boyen, Catherine and Tonon, Thierry},
+	title = {The genome of Ectocarpus subulatus highlights unique mechanisms for stress tolerance in brown algae},
+	year = {2018},
+	doi = {10.1101/307165},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {Brown algae are multicellular photosynthetic organisms belonging to the stramenopile lineage. They are successful colonizers of marine rocky shores world-wide. The genus Ectocarpus, and especially strain Ec32, has been established as a genetic and genomic model for brown algae. A related species, Ectocarpus subulatus Kuetzing, is characterized by its high tolerance of abiotic stress. Here we present the genome and metabolic network of a haploid male strain of E. subulatus, establishing it as a comparative model to study the genomic bases of stress tolerance in Ectocarpus. Our analyses indicate that E. subulatus has separated from Ectocarpus sp. Ec32 via allopatric speciation. Since this event, its genome has been shaped by the activity of viruses and large retrotransposons, which in the case of chlorophyll-binding proteins, may be related to the expansion of this gene family. We have identified a number of further genes that we suspect to contribute to stress tolerance in E. subulatus, including an expanded family of heat shock proteins, the reduction of genes involved in the production of halogenated defense compounds, and the presence of fewer cell wall polysaccharide-modifying enzymes. However, 96\% of genes that differed between the two examined Ectocarpus species, as well as 90\% of genes under positive selection, were found to be lineage-specific and encode proteins of unknown function. This underlines the uniqueness of brown algae with respect to their stress tolerance mechanisms as well as the significance of establishing E. subulatus as a comparative model for future functional studies.},
+	URL = {https://www.biorxiv.org/content/early/2018/04/25/307165},
+	eprint = {https://www.biorxiv.org/content/early/2018/04/25/307165.full.pdf},
+	journal = {bioRxiv},
+  PDF = {https://www.biorxiv.org/content/biorxiv/early/2018/04/25/307165.full.pdf}
+}
+
+@article {Frioux2018,
+  pp_rank = {1},
+	author = {Frioux, Clémence and Fremy, Enora and Trottier, Camille and Siegel, Anne},
+	title = {Scalable and exhaustive screening of metabolic functions carried out by microbial
+consortia},
+	year = {2018},
+	doi = {},
+	publisher = {accepted manuscript},
+	abstract = {},
+	URL = {},
+	journal = {To appear}
+}
