@@ -1,12 +1,12 @@
 ---
 layout: page
-title: A few words about me
+title: About Me
 weight : 1
 ---
 {: style="text-align: right"}
 ![photo]
 
-[photo]: {{site.baseurl}}/docs/portrait.JPG
+[photo]: {{site.baseurl}}/docs/portrait.jpg
 {: width="150px"} 
 
 ## Research Interest
