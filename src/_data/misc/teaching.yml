@@ -1,0 +1,13 @@
+- name: Teaching
+  values:
+  - period: 2017-2018
+    name: Licence <a href = "https://cri-paris.org/licence-fdv/">Frontières du Vivant</a>
+    role: Mathématiques pour les Sciences du Vivant
+    at: <a href="https://cri-paris.org/" target="_blank">Centre de Recherche Interdisciplinaire</a>
+
+- name: Supervising
+  values:
+  - period: 2018
+    name: Clément Hardy
+    role: Exploration des méthodes d’analyse de données compositionnelles pour l’étude du microbiome
+    at: Master 1  <a href="https://www.math.u-psud.fr/-mathematiques-appliquees-" target="_blank">Mathématiques Appliquées</a>, Université Paris Saclay
