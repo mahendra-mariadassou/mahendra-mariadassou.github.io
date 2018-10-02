@@ -18,7 +18,7 @@ category_dir: /blog/categories/
 category_title_prefix: "category: "
 
 # author information
-picture: http://genome.jouy.inra.fr/~mmariadasso/website/pictures/visage.jpg
+picture: /images/visage.jpg
 email: firstname.lastname@inra.fr
 networks:
   github:
