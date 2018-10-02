@@ -1,9 +1,24 @@
-- period: since 2015
+- period: since 2010
   kind: position
-  role: Computer Science PhD Candidate
-  at: Université de Rennes 1, <a href="https://www.inria.fr/en/" target="_blank">Inria</a>
+  role: Research Scientist in Statistics
+  at: <a href = "http://www.inra.fr">INRA</a>, <a href = "www.mia.inra.fr">MIA</a> department, <a href = "maiage.jouy.inra.fr">MaIAGE</a>  laboratory
 
-- period: 2015
+- period: 2006 - 2009
   kind: diploma
-  role: Master's Degree, Engineering School Degree
-  at: Université de Nice-Sophia Antipolis, Polytech Nice Sophia
+  role: Ph.D. in statistics on the "Robustness of Phylogenetic Trees" (supervised by <a href = "https://ab-h.github.io/">Avner Bar-Hen</a> and <a href = "http://lbm.ab.a.u-tokyo.ac.jp/~kishino/">Hirohisa Kishino</a>)
+  at: Université Paris Sud, Université Paris Descartes and University of Tokyo
+
+- period: 2005 - 2006
+  kind: diploma
+  role: Master's degres, "Probabilité et Statistiques"
+  at: Université Paris Sud
+
+- period: 2004 - 2005
+  kind: diploma
+  role: Master's degres, "Approches Interdisciplinaire du Vivant"
+  at: Université Paris Descartes, Centre de Recherche Interdisciplinaire (<a href = "https://cri-paris.org/">CRI</a>)
+
+- period: 2003 - 2007
+  kind: diploma
+  role: Étudiant Normalien
+  at: École Normale Supérieure <a href = "https://www.ens.fr">(ENS)</a>

@@ -10,7 +10,7 @@
         {% if item.kind == 'position' %}
           <span class="text-primary"><strong>{{ item.role }}</strong></span>
         {% endif %}
-        {% if item.kind == 'Internship' or item.kind == 'PhD collaboration' %}
+        {% if item.kind == 'Internship' or item.kind == 'PhD collaboration' or item.kind == 'Visiting Researcher' %}
           <span class="text-primary"><strong>{{ item.kind }}</strong></span><br/>
           <span>{{ item.role }}</span>
         {% endif %}

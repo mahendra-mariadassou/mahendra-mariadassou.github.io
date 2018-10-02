@@ -1,29 +1,30 @@
-- year: 2018
-  kind: Screening of microbiota metabolic capabilities and selection of minimal (minimal-size, minimal-exchanges) communities
-  name: MiSCoTO
-  links: <a href="https://pypi.org/project/Miscoto/" target="_blank"><i class="fab fa-python"></i> package</a>, <a href="https://github.com/cfrioux/miscoto" target="_blank"><i class="fab fa-github"></i> project</a>
-
 - year: 2017
-  kind: Traceable and reproducible reconstruction of metabolic networks
-  name: AuReMe
-  links: <a href="https://hub.docker.com/r/dyliss/aureme-img/" target="_blank"><i class="fab fa-docker"></i> image</a>, <a href="https://aureme.genouest.org" target="_blank">project ↗</a>
-
-- year: 2017
-  kind: Graph-based and constraint-based hybrid gap-filling of metabolic networks
-  name: Fluto
-  links: <a href="https://anaconda.org/cfrioux/flutopy" target="_blank"><i class="fab fa-python"></i> Conda package</a>, <a href="https://github.com/cfrioux/fluto" target="_blank"><i class="fab fa-github"></i> project</a>
+  kind: R package to analyze multivariate count using the Poisson Log-Normal distribution. Includes PCA, Network Inference, LDA, Mixture Models, etc.
+  name: PLNmodels
+  links: <a href="https://github.com/jchiquet/PLNmodels" target="_blank"><i class="fab fa-github"></i> project</a>
 
 - year: 2016
-  kind: Graph-based analysis tools for metabolic networks
-  name: MeNeTools
-  links: <a href="https://pypi.org/project/MeneTools/" target="_blank"><i class="fab fa-python"></i> package</a>, <a href="https://github.com/cfrioux/MeneTools" target="_blank"><i class="fab fa-github"></i> project</a>
+  kind: Python-based pipeline to reconstruct OTU count table from raw sequence reads
+  name: FROGS
+  links: <a href="frogs.toulouse.inra.fr" target="_blank">website</a>, <a href="https://github.com/geraldinepascal/FROGS" target="_blank"><i class="fab fa-github"></i> project</a>
 
 - year: 2015
-  kind: Graph-based gap-filling of metabolic networks
-  name: Meneco
-  links: <a href="https://pypi.org/project/meneco/" target="_blank"><i class="fab fa-python"></i> package</a>, <a href="https://github.com/bioasp/meneco" target="_blank"><i class="fab fa-github"></i> project</a>
+  kind: R package to detect adaptive shifts on phylogenies
+  name: PhylogeneticEM
+  links: <a href="https://cran.r-project.org/package=PhylogeneticEM" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="https://github.com/pbastide/PhylogeneticEM" target="_blank"><i class="fab fa-github"></i> project</a>
+
+- year: 2015
+  kind: R scripts to compute the Local Specifity Index, as used in <a href = "http://dx.doi.org/10.1111/ele.12478"><i>Mariadassou et al. (2015)</i></a>
+  name: Local specifity index
+  links: <a href="http://genome.jouy.inra.fr/~mmariadasso/website/source/specificity_index.tar.gz" target="_blank"><i class="fab fa-r-project"></i> R scripts</a>  (includes a vignette)
+
+- year: 2012
+  kind: R scripts to compute Taxon Influence Index, as used in <a href = "http://dx.doi.org/10.1093/sysbio/syr129"><i>Mariadassou et al. (2012)</i></a>
+  name: Taxon Influence Index
+  links: <a href="http://genome.jouy.inra.fr/~mmariadasso/website/source/TaxonInfluenceIndex.tar.gz" target="_blank"><i class="fab fa-r-project"></i> R scripts</a>
 
 - year:
   kind:
   name:
-  links:  
+  links:    
+  

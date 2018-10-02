@@ -1,16 +1,22 @@
 <div class="row text-center">
+    <!--{% comment %}
     <div class="col-sm-offset-0 col-md-4"></div>
     <div class="col-sm-12 col-md-4">
+    {% endcomment %}-->    
+    <div class="col-sm-offset-0 col-md-3"></div>
+    <div class="col-sm-6 col-md-3">
         <h4>Research | Recherche</h4>
         {% include print_contact.html contact=site.contacts.research %}
         <br/>
     </div>
     <!--{% comment %}
         Warning: When you uncomment: change other sections size to sm-6 and md-3
+        use <div class="col-sm-12 col-md-4"> if there is only one column
+    {% endcomment %}-->    
     <div class="col-sm-6 col-md-3">
         <h4>Teaching | Enseignement</h4>
-        {\% include print_contact.html contact=site.contacts.teaching %}
+        {% include print_contact.html contact=site.contacts.teaching %}
         <br/>
-    </div>{% endcomment %}-->
-    <div class="col-sm-offset-0 col-md-4"></div>
+    </div>
+    <div class="col-sm-offset-0 col-md-3"></div>
 </div>

@@ -1,7 +1,7 @@
 <div class="bs-callout bs-callout-warning">
-    <h4><i class="glyphicon glyphicon-wrench"></i> Works ahead!</h4>
+    <h4><i class="glyphicon glyphicon-wrench"></i>Under construction!</h4>
     <p class="text-justify">
-        Some conference references and/or pdf may be missing.
+        Some references and/or preprint may be missing.
     </p>
 </div>
 
@@ -36,6 +36,9 @@
         </a>
         <a href="#publications_nojs_manuscript">
             <button type="button" class="btn btn-primary">Manuscripts</button>
+        </a>
+        <a href="#publications_nojs_preprint">
+            <button type="button" class="btn btn-primary">Preprints</button>
         </a>
     </div>
 
@@ -102,6 +105,10 @@
     <h3 id="publications_nojs_manuscript">Manuscripts</h3>
 
     {% bibliography -q @phdthesis -T bib-noscript %}
+    
+    <h3 id="publications_nojs_preprint">Preprints</h3>
+
+    {% bibliography -q @unpublished -T bib-noscript %}
 </noscript>
 
 <div class="ifjavascript">
@@ -121,6 +128,9 @@
             </a></li>
             <li><a href="#publications_manuscript" data-toggle="tab">
                 Manuscripts
+            </a></li>
+            <li><a href="#publications_preprint" data-toggle="tab">
+                Preprints
             </a></li>
         </ul>
         <div class="tab-content">
@@ -191,6 +201,10 @@
             <div class="tab-pane" id="publications_manuscript">
                 <br/>
                 {% bibliography -q @phdthesis %}
+            </div>
+            <div class="tab-pane" id="publications_preprint">
+                <br/>
+                {% bibliography -q @unpublished %}
             </div>
         </div>
     </div>

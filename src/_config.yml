@@ -18,7 +18,7 @@ category_dir: /blog/categories/
 category_title_prefix: "category: "
 
 # author information
-picture: {{site.baseurl}}/docs/portrait.jpg
+picture: http://genome.jouy.inra.fr/~mmariadasso/website/pictures/visage.jpg
 email: firstname.lastname@inra.fr
 networks:
   github:
@@ -41,8 +41,21 @@ contacts:
     direction:
       map: https://goo.gl/maps/7ZWDAq3Cbs22
       public_transportation:
-        stop:
+        stop: Jouy-en-Josas (RER C)
         link:
+  teaching:
+    email: firstname.lastname@cri-paris.org
+    address: >
+      CRI<br/>
+      Bureau 3.01<br/>
+      10, rue Charles V<br/>
+      75004 Paris<br/>
+      France
+    direction:
+      map: https://goo.gl/maps/5xfPAR8cAhm
+      public_transportation:
+       stop: Saint-Paul (M1), Sully-Morland (M7)
+       link:
 
 # research
 research:
@@ -51,7 +64,7 @@ research:
     publications: true
     software: true
   restriction:
-      publications: 10
+      publications: 5
 
 # apparence of posts
 
@@ -71,22 +84,21 @@ alerts:
 
 # bibliography
 kind:
-  label: pp_kind # label used in .bib files to denote the kind (international/national) of references
-  separate:  # should international/national references be separated: (true | false)
-    article: true
+  label: pp_kind # label used in .bib files to denote the kind (applied/theoretical) of references
+  separate:  # should applied methodological references be separated: (true | false)
+    article: false
     inbook: false
-    inproceedings: true
-
+    inproceedings: false
 
 scholar:
   style: _bibliography/mystyle.csl
   locale: en
-  sort_by: year, pp_rank
+  sort_by: year, author
   order: descending
   group_by: none
-  group_order: ascending
+  group_order: descending
   source: ./_bibliography
-  bibliography: references.bib
+  bibliography: publications.bib
   bibliography_template: bib
   replace_strings: true
   join_strings:    true
