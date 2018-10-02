@@ -2,9 +2,9 @@
     {% for soft in include.items %}
     <dt>{{ soft.year }}</dt>
     <dd>
-        <span class="text-primary"><strong>{{ soft.name }}</strong></span><br/>
+        <span class="text-primary"><strong>{{ soft.name }}</strong></span> &ensp; {{ soft.links }}<br/>
         <em>{{ soft.kind }}</em>
-        {{ soft.links }}<br/>
+        <br/>
     </dd>
     {% endfor %}
 </dl>
