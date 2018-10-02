@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Clémence Frioux</title>
-    <description>PhD Student at Inria Univ Rennes 1 Rennes, France
+    <title>Mahendra Mariadassou</title>
+    <description>Researcher at Inra
 </description>
-    <link>https://cfrioux.github.io/</link>
-    <atom:link href="https://cfrioux.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 31 Jul 2018 17:30:48 +0200</pubDate>
-    <lastBuildDate>Tue, 31 Jul 2018 17:30:48 +0200</lastBuildDate>
-    <generator>Jekyll v3.7.3</generator>
+    <link>https://mahendra-mariadassou.github.io/</link>
+    <atom:link href="https://mahendra-mariadassou.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 02 Oct 2018 20:21:08 +0200</pubDate>
+    <lastBuildDate>Tue, 02 Oct 2018 20:21:08 +0200</lastBuildDate>
+    <generator>Jekyll v3.7.4</generator>
     
       <item>
         <title>GitHub Pages without the Workflow</title>
@@ -80,8 +80,8 @@ I may use this in the future to simplify things and avoid some file copying.&lt;
 
 </description>
         <pubDate>Fri, 29 Jan 2016 00:00:00 +0100</pubDate>
-        <link>https://cfrioux.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</link>
-        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</guid>
+        <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</link>
+        <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</guid>
         
         
         <category>jekyll</category>
@@ -251,8 +251,8 @@ title: duties
 
 </description>
         <pubDate>Wed, 27 Jan 2016 00:00:00 +0100</pubDate>
-        <link>https://cfrioux.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</link>
-        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</guid>
+        <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</link>
+        <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</guid>
         
         
         <category>jekyll</category>
@@ -313,8 +313,8 @@ So let’s go for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt
 Lots of interesting information here too.&lt;/p&gt;
 </description>
         <pubDate>Tue, 26 Jan 2016 00:00:00 +0100</pubDate>
-        <link>https://cfrioux.github.io/blog/posts/2016/01/26/jekyll-site-launched/</link>
-        <guid isPermaLink="true">https://cfrioux.github.io/blog/posts/2016/01/26/jekyll-site-launched/</guid>
+        <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/26/jekyll-site-launched/</link>
+        <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/26/jekyll-site-launched/</guid>
         
         
         <category>jekyll</category>
