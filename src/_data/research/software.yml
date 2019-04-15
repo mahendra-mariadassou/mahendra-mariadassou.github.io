@@ -1,7 +1,7 @@
 - year: 2017
   kind: R package to analyze multivariate count using the Poisson Log-Normal distribution. Includes PCA, Network Inference, LDA, Mixture Models, etc.
   name: PLNmodels
-  links: <a href="https://github.com/jchiquet/PLNmodels" target="_blank"><i class="fab fa-github"></i> project</a>
+  links: <a href="http://julien.cremeriefamily.info/PLNmodels/">website</a> and <a href="https://github.com/jchiquet/PLNmodels" target="_blank"><i class="fab fa-github"></i> project</a>
 
 - year: 2016
   kind: Python-based pipeline to reconstruct OTU count table from raw sequence reads

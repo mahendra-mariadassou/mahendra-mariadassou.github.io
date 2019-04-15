@@ -1,0 +1,14 @@
+{% for category in include.students %}
+<h3>{{ category.name }}</h3>
+<dl class="dl-horizontal">
+    {% for activity in category.values %}
+    <dt>{{ activity.period }}</dt>
+    <dd> 
+        <span class="text-primary"><strong>{{ activity.name }}</strong></span> {{ activity.now}}<br/> supervised by {{ activity.supervisors }}<br/>
+        <strong>Title:</strong> {{ activity.title }}<br/>
+        <em>{{ activity.univ }}</em><br/>
+        Thesis: <a href = {{ activity.thesis }} target="_blank"><i class="far fa-file-pdf"></i></a>
+    </dd>
+    {% endfor %}
+</dl>
+{% endfor %}

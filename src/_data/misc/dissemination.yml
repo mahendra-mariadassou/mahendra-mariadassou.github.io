@@ -1,3 +1,14 @@
+- name: Oral Presentations (Invited Speaker)
+  values:
+  - period: 2018
+    name: A mathematical framework for multivariate count data
+    role: 
+    at: <a href="http://maiage.jouy.inra.fr/?q=fr/rcam2018" target="_blank">RCAM 2018</a>, September 9th 2018, Athens, Greece
+  - period: 2017
+    name: The genomics of Chicken Domestication
+    role: 
+    at: <a href="http://www.wpsa.fr/congres/EuropeanPoutryGenetics/Index%20ESPG.html" target="_blank">ESPG 2017</a>, June 28th-30th 2017, Bari, Italy
+
 - name: Oral Presentations
   values:
   - period: 2018

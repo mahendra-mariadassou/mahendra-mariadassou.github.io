@@ -1,0 +1,17 @@
+- name: PhD Students
+  values:
+  - period: 2014 - 2017
+    supervisors: MM, S. Robin
+    name: <a href="https://pbastide.github.io" target="_blank">Paul Bastide</a>
+    now: (now at KU Leuven)
+    title: Exploration des méthodes d’analyse de données compositionnelles pour l’étude du microbiome
+    univ: <a href = "https://www.universite-paris-saclay.fr/fr/formation/doctorat/ecole-doctorale-de-mathematiques-hadamard-edmh">EDMH</a>, Université Paris Saclay
+    thesis: "/docs/thesis/Bastide_Manuscript_20171026.pdf"
+
+- name: Master's Students
+  values:
+  - period: 2018
+    supervisors: MM, M. Berland
+    name: Clément Hardy
+    title: Exploration des méthodes d’analyse de données compositionnelles pour l’étude du microbiome
+    univ: Master 1  <a href="https://www.math.u-psud.fr/-mathematiques-appliquees-" target="_blank">Mathématiques Appliquées</a>, Université Paris Saclay
