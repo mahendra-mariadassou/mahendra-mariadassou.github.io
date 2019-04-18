@@ -1,17 +1,72 @@
 - name: PhD Students
   values:
+  - period: 2018 - 2020
+    supervisors: MM, C. Ambroise (LaMME, UEVE), J. Plassais (Enterome)
+    name: <a href="https://abichat.github.io" target="_blank">Antoine Bichat</a>
+    title: "Prise en compte de l’organisation hiérarchique des espèces pour la découverte de signatures métagénomiques multi-échelles."
+    univ: <a href = "https://www.universite-paris-saclay.fr/fr/formation/doctorat/ecole-doctorale-de-mathematiques-hadamard-edmh">EDMH</a>, Université Paris Saclay
+
+  - period: 2016 - 2019
+    supervisors: MM, N. Radomski (Anses), M.-Y. Mistou (Anses), P. Bessière (INRA)
+    name: Meryl Vila Nova
+    title: Automatic method of bacterial typing by pangenome and allelic variants from high throughput sequencing
+    univ: <a href = "https://www.universite-paris-saclay.fr/fr/formation/doctorat/ecole-doctorale-de-mathematiques-hadamard-edmh">Université Paris-Est</a>, 
+
   - period: 2014 - 2017
-    supervisors: MM, S. Robin
+    supervisors: MM, S. Robin (INRA, AgroParisTech)
     name: <a href="https://pbastide.github.io" target="_blank">Paul Bastide</a>
     now: (now at KU Leuven)
-    title: Exploration des méthodes d’analyse de données compositionnelles pour l’étude du microbiome
+    title: "Processus stochastiques avec sauts sur arbres : application à l’évolution adaptative sur des phylogénies"
     univ: <a href = "https://www.universite-paris-saclay.fr/fr/formation/doctorat/ecole-doctorale-de-mathematiques-hadamard-edmh">EDMH</a>, Université Paris Saclay
     thesis: "/docs/thesis/Bastide_Manuscript_20171026.pdf"
-
+    
 - name: Master's Students
   values:
+  - period: 2019
+    supervisors: MM, M. Berland (MGP, INRA)
+    name: Léonard Dubois
+    title: "Benchmark in-silico des méthodes de détection d’abondance différentielle en métagénomique: Application au cas du microbiote intestinal"
+    univ: <a href = "https://www.universite-paris-saclay.fr/fr/education/master/m2-genomics-informatics-and-mathematics-for-health-and-environment-geniomhe#presentation-m2">Master GENIOMHE</a>, Université Paris Saclay
+
   - period: 2018
-    supervisors: MM, M. Berland
+    supervisors: MM, M. Berland (MGP, INRA)
+    name: Sana Zhagouani
+    title: Fouille de données pour l'exploration du lien entre microbiote intestinal et santé
+    univ: <a href = "http://www.essai.rnu.tn/accueil.htm">Ecole Supérieure de la Statistique et de l’Analyse de l’Information</a>, Projet de Fin d'Étude
+    thesis: "/docs/thesis/Zhagouani_master_thesis.pdf"  
+  
+  - period: 2018
+    supervisors: MM, M. Berland (MGP, INRA)
     name: Clément Hardy
     title: Exploration des méthodes d’analyse de données compositionnelles pour l’étude du microbiome
     univ: Master 1  <a href="https://www.math.u-psud.fr/-mathematiques-appliquees-" target="_blank">Mathématiques Appliquées</a>, Université Paris Saclay
+    thesis: "/docs/thesis/Hardy_master_thesis.pdf"
+    
+  - period: 2017
+    supervisors: MM, S. Schbath (MaIAGE, INRA)
+    name: Julie Lao
+    title: "Comparaison de méthodes statistiques d'inférence de réseaux de co-occurences au sein d'écosystèmes microbiens à partir de données métagénomiques"
+    univ: Master 2  <a href="https://sdv.univ-paris-diderot.fr/master-bio-informatique" target="_blank"></a>, Université Paris Diderot
+    thesis: "/docs/thesis/Lao_master_thesis.pdf"
+    
+  - period: 2014
+    supervisors: MM, S. Robin (MIA - AgroParisTech, INRA)
+    name: Paul Bastide
+    title: "Shifted stochastic processes evolving on trees : application to models of adaptive evolution on phylogenies."
+    univ: Master 2  <a href="https://www.universite-paris-saclay.fr/fr/formation/master/m2-mathematiques-du-vivant" target="_blank">Mathématiques pour les Sciences du Vivant</a>, Université Paris Saclay
+    thesis: "/docs/thesis/Bastide_master_thesis.pdf"
+    
+  - period: 2012
+    supervisors: MM, P. Bessière (MaIAGE, INRA)
+    name: Adrien Pain
+    title: Mise au point d’un pipeline de typage bactérien par approche pangénomique
+    univ: Master 2 <a href = "http://www.dsimb.inserm.fr/m2bi/">Biologie Informatique</a>, Université Paris Diderot
+    thesis: "/docs/thesis/Pain_master_thesis.pdf"    
+    
+  - period: 2012
+    supervisors: MM, P. Bessière (MaIAGE, INRA)
+    name: Camille Blin
+    title: Étude de la diversité génétique de souches de Lactobacillus delbrueckii et Propionibacterium Freudenreichii et lien avec leurs propriétés probiotiques
+    univ: Master 2 Biosciences, ENS Lyon
+    thesis: "/docs/thesis/Blin_master_thesis.pdf"    
+    
