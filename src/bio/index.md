@@ -9,7 +9,7 @@ rank: 6
 </div>
 
 <div class="row">
-  <h2><span class="text-primary">Education</span></h2>
+  <h2><span class="text-primary">Education and Positions</span></h2>
   {% include print_bio.html items=site.data.bio.education %}
 </div>
 
