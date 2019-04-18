@@ -1,3 +1,8 @@
+- year: 2019
+  kind: Additional functions for R package phyloseq
+  name: phyloseq-extended
+  links: <a href="https://github.com/mahendra-mariadassou/phyloseq-extended" target="_blank"><i class="fab fa-github"></i> project</a>
+
 - year: 2017
   kind: R package to analyze multivariate count using the Poisson Log-Normal distribution. Includes PCA, Network Inference, LDA, Mixture Models, etc.
   name: PLNmodels
