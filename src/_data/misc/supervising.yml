@@ -27,6 +27,7 @@
     name: Léonard Dubois
     title: "Benchmark in-silico des méthodes de détection d’abondance différentielle en métagénomique: Application au cas du microbiote intestinal"
     univ: Master 2 <a href = "https://www.universite-paris-saclay.fr/fr/education/master/m2-genomics-informatics-and-mathematics-for-health-and-environment-geniomhe#presentation-m2">GENIOMHE</a>, Université Paris Saclay
+    thesis: "/docs/thesis/Dubois_master_thesis.pdf" 
 
   - period: 2018
     supervisors: MM, M. Berland (MGP, INRA)
