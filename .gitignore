@@ -9,4 +9,4 @@ _site
 Gemfile
 Gemfile.lock
 src/docs
-src/
+src/teaching/Licence_FDV/*/
