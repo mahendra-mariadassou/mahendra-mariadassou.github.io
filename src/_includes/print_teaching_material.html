@@ -1,0 +1,13 @@
+{% for category in include.teaching_material %}
+<h3>{{ category.class }}</h3>
+<dl class="dl-horizontal">
+    {% for lecture in category.lectures %}
+    <dt>{{ lecture.name }}</dt>
+        {% for element in lecture.elements %}
+        <dd>
+            <a href = {{ element.at }} target="_blank"> {{ element.nature}}</a>
+        </dd>
+        {% endfor %}
+    </dl>
+    {% endfor %}
+{% endfor %}

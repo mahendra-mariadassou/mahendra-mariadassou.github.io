@@ -1,0 +1,11 @@
+- class: Cours de L1
+  lectures:
+    - name: Nombres complexes
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: "2019/Supports/Complexes.html"
+      - nature: Feuille d'exercices <i class= "far fa-file-pdf" ></i>
+        at: "2019/Supports/Complexes.html"
+      
+- class: Cours de L2
+  lectures:
