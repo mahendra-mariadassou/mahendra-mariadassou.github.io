@@ -1,5 +1,10 @@
 - class: Cours de L1
   lectures:
+    - name: Rappels
+      elements:
+      - nature: Rappels sur les fonctions usuelles <i class= "far fa-file-pdf" ></i>
+        at: "2019/Exercices/Fonctions_usuelles.pdf"
+        
     - name: Nombres complexes
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
