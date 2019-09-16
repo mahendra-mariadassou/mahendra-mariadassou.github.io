@@ -1,6 +1,6 @@
 - class: Cours de L1
   lectures:
-    - name: Rappels
+    - name: Fonctions usuelles
       elements:
       - nature: Rappels sur les fonctions usuelles <i class= "far fa-file-pdf" ></i>
         at: "2019/Exercices/Fonctions_usuelles.pdf"
