@@ -32,5 +32,25 @@
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/02_Limites.html"
 
+    - name: Dérivées et Différentielles
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: 
+
+    - name: Développement Limités
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: 
+        
+    - name: Fonctions de plusieurs variables
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: 
+        
+    - name: Dérivée partielle et dérivée totale
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: 
+        
 - class: Cours de L2
   lectures:
