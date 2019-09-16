@@ -40,17 +40,12 @@
     - name: Développement Limités
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
-        at: 
+        at: "2019/Supports/04_Développements_limités.html"
         
-    - name: Fonctions de plusieurs variables
+    - name: Dérivée partielle
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
-        at: 
-        
-    - name: Dérivée partielle et dérivée totale
-      elements:
-      - nature: Transparents <i class="fab fa-html5"></i>
-        at: 
+        at: "2019/Supports/05_Dérivées_partielles.html"
         
 - class: Cours de L2
   lectures:

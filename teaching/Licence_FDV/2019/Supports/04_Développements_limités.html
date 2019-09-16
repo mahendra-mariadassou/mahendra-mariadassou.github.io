@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Développements Limités</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Développements Limités',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Mahendra Mariadassou' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+  </style>
+
+  <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">4 novembre 2019</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introduction</h2></hgroup><article  id="introduction">
+
+</article></slide><slide class=""><hgroup><h2>Plan du cours</h2></hgroup><article  id="plan-du-cours">
+
+<ul>
+<li>Domaine d’étude</li>
+<li>Limites, continuité, dérivabilité et variations</li>
+<li>Comparaison locale de fonction</li>
+<li>Etude locale des fonctions</li>
+<li>Retour sur la limite</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Développement Limités</h2></hgroup><article  id="developpement-limites">
+
+<p>Le but des développements limités est de faire des <alert>approximations</alert> en <alert>négligeant</alert> certaines quantités. On va voir ici qu’on néglige toujours une quantité <alert>par rapport</alert> à une autre.</p>
+
+<p>On va formaliser cette intuition avec la notion de <alert>négligeabilité</alert> et les notations de Landau.</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Négligeabilité</h2></hgroup><article  id="negligeabilite">
+
+</article></slide><slide class=""><hgroup><h2>Définition</h2></hgroup><article  id="definition">
+
+<div class="definition">
+<p>On dit que \(f\) est <alert>négligeable</alert> devant \(g\) au voisinage de \(a \in \bar{\mathbb{R}}\) s’il existe une fonction \(\varepsilon\) définie au voisinage de \(a\) telle que \(\varepsilon(x) \to 0\) quand \(x \to a\) et \[\forall x \in D_f \cap D_g \quad f(x) = g(x) \varepsilon(x)\] Dans la plupart des cas, \(g\) est non nulle au voisinage de \(0\) et la condition précédente peut se reformuler: \(f\) est négligeable devant \(g\) au voisinage de \(a\) si et seulement si \(\displaystyle \frac{f}{g} \to 0\) quand \(x \to a\).</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Notation de Landau</h2></hgroup><article  id="notation-de-landau">
+
+<p>Si \(f\) est négligeable devant \(g\) en \(a\), on note</p>
+
+<ul>
+<li>\(f = o_a(g)\) en omettant \(a\) si le voisinage est clair. On dit qu’au voisinage de \(a\), \(f\) est un \(o(g)\) (prononcé &ldquo;petit o de g&rdquo;)</li>
+<li>Par un abus de notation, on utilise la même notation pour des expressions: \(x^2 = o(x)\) au voisinage de \(0\).</li>
+<li>On écrit enfin \(f = g + o(h)\) pour dire \(f - g = o(h)\).</li>
+</ul>
+
+<p>Les cas particuliers suivants sont à <alert>connaître</alert></p>
+
+<ul>
+<li>Si \(a \in \mathbb{R}\) et \(n &lt; m\) alors \((x - a)^n = o_{\pm \infty} ( (x-a)^m )\) et \((x - a)^m = o_{0} ( (x-a)^n )\)</li>
+<li>Si \(\lim_a g = \pm \infty\) et \(f\) est bornée au voisinage de \(a\) (par exemple \(\lim_a f\) finie), alors \(f = o(g)\)</li>
+<li>Si \(f = o_a(1)\), alors \(\lim_a f = 0\).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Propriétés des \(o\)</h2></hgroup><article  id="proprietes-des-o">
+
+<div class="proposition">
+<ul>
+<li>Si \(f = o(g)\) et \(g = o(h)\), alors \(f = o(h)\)</li>
+<li>Si \(f_1 = o(g)\) et \(f_2 = o(g)\), alors \(f_1 + f_2 = o(g)\)</li>
+<li>Si \(f = o(g)\), alors \(f \times h = o(g \times h)\)</li>
+<li>Si \(\lambda \in \mathbb{R}^*\), alors \(f = o(g) \Leftrightarrow f = o(\lambda g)\)</li>
+<li>Si \(f = o_a(1)\), alors \(\lim_a f = 0\).</li>
+<li>Si \(f_1 = o(g_1)\) et \(f_2 = o(g_2)\), alors \(f_1 \times f_2 = o(g_1 \times g_2)\)</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices">
+
+<p>Montrer que</p>
+
+<ul>
+<li>\(\forall \alpha \in \mathbb{R}_+ \quad x^\alpha = o_{+\infty}(e^x)\)</li>
+<li>\(\forall \alpha \in \mathbb{R}_+ \quad e^x = o_{-\infty}(x^{-\alpha})\)</li>
+<li>\(\forall \alpha \in \mathbb{R}_+ \quad \ln(x) = o_{+\infty}(x^\alpha)\)</li>
+<li>\(\forall \alpha \in \mathbb{R}_+ \quad x^{-\alpha} = o_{+\infty}(\ln(x))\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Approximation et somme</h2></hgroup><article  id="approximation-et-somme">
+
+<p>Une bonne règle heuristique à retenir pour s’assurer que le résultat approché est peu différent du résultat exact dans une somme est la suivante:</p>
+
+<ul>
+<li>Pour faire une approximation, on néglige un terme devant les autres <alert>à l’intérieur d’une somme</alert></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (I)</h2></hgroup><article  id="exemple-i">
+
+<p>Considérons la distance \(l&#39; = \frac{lf}{l + f}\) qui apparaît régulièrement en optique. On souhaite connaître la distance \(l&#39;\) quand la distance \(l\) est grande devant la focale \(f\) (\(l \gg f\)).</p>
+
+<ul>
+<li>Si on néglige \(f\) naivement en le posant égal à \(0\), on obtient \(l&#39; = 0\) qui est absurde</li>
+<li>En revanche, si on néglige \(f\) devant \(l\) dans la somme \(f+l\), on commet une faible erreur puisque \(l + f \simeq l\)</li>
+<li>On peut donc poursuivre le calcul avec l’approximation \(l&#39; \simeq \frac{lf}{l + f} \simeq f\).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (II)</h2></hgroup><article  id="exemple-ii">
+
+<p>De la même façon, si \(f(x)\) fait intervenir des sommes, on peut utiliser les mêmes arguments pour svoir comment \(x\) se comporte pour des grandes et des petites valeurs de \(x\). Par exemple pour \(f(x) = \frac{x}{1 + x^2}\):</p>
+
+<ul>
+<li>si \(x \gg 1\), alors \(x^2 + 1 \simeq x^2\) et \(f(x) \simeq \frac{x}{x^2} = 1/x\)</li>
+<li>si \(x \ll 1\), alors \(x^2 + 1 \simeq 1\) et \(f(x) \simeq x\)</li>
+</ul>
+
+<p>Faire une approximation est <alert>plus précis</alert> que calculer une limite: En effet dire \(f(x) \simeq x\) (quand \(x \to 0\)) est plus précis que d’écrire \(f\) tend vers \(0\) en \(0\). La limite se déduit de l’approximation mais pas l’inverse.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (III)</h2></hgroup><article  id="exemple-iii">
+
+<p>En notations de Landau, on a</p>
+
+<ul>
+<li>\(f(x) = x(1 + o(1)) = x + o(x)\) au voisinage de \(0\)</li>
+<li>\(\displaystyle f(x) = \frac{1}{x}(1 + o(1)) = \frac{1}{x} + o\left(\frac{1}{x}\right)\) au voisinage de \(+\infty\)</li>
+</ul>
+
+<p>C’est très utile mais on peut avoir d’aller plus loin et de connaître le comportement de \(f(x) - x\) au voisinage de \(0\). On sait juste \(f(x) - x = o(x)\) mais on ne connaît pas son ordre de grandeur: \(x^2\)? \(x^3\)? Autre chose?</p>
+
+<p>De même si on ne manipule pas directement des sommes mais des fonctions différentes (par exemple \(\cos(x)\), \(\sin(x)\)), peut-on faire le même genre d’approximation?</p>
+
+<p>C’est justement l’intérêt des développements limités.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice</h2></hgroup><article  id="exercice">
+
+<p>Donner des approximations des quantités suivantes: \[
+\begin{align}
+\frac{1}{1+A} &amp; &amp; A \ll 1 &amp; &amp; A \gg 1 \\
+\frac{3+B+2B^2}{2+3B+B^2} &amp; &amp; B \ll 1 &amp; &amp; B \gg 1 \\
+\frac{a+b}{ab} &amp; &amp; a \ll b &amp; &amp; a \gg b \\
+\frac{x^2 + y^2 + 2xy}{3x - y} &amp; &amp; x \ll y &amp; &amp; x \gg y \\
+\sqrt{u^2 + v^2} &amp; &amp; u \ll v &amp; &amp; u \gg v \\
+e^{\sqrt{w} - 1} &amp; &amp; w \ll 1 &amp; &amp; w \gg 1 \\
+\end{align}
+\]</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Développements Limités</h2></hgroup><article  id="developpements-limites">
+
+</article></slide><slide class=""><hgroup><h2>Premier Contact</h2></hgroup><article  id="premier-contact">
+
+<div class="definition">
+<p>Soit \(n \in \mathbb{R}\), \(a \in \mathbb{R}\) et \(f\) une fonction définie au voisinage de \(a\) <alert>sauf éventuellement en \(a\)</alert>. On dit que \(f\) admet un <alert>développement limité</alert> à l’ordre \(n\) en \(a\) (noté \(DL_n(a)\)) s’il existe des réels \((b_0, b_1, \dots, b_n)\) tels que \[
+\small
+\forall x \in D_f \quad f(x) = b_0 + b_1 (x - a) + \dots + b_n (x - a)^n + o( (x-a)^n )
+\]</p></div>
+
+<p>Attention, on ne développe pas les \((x - a)^k\) (puisqu’on regarde des termes correctifs quand on s’éloigne de \(a\)).</p>
+
+<p>De façon générale, en posant \(h = (x - a)\), on se ramènera <alert>toujours</alert> à des DL en \(0\).</p>
+
+<p>Le terme \(o( (x-a)^n )\) est appelé <em>reste</em> ou <em>terme complémentaire</em>, le terme \(b_0 + \dots + b_n (x-a)^n\) est appelé terme polynômial.</p>
+
+</article></slide><slide class=""><hgroup><h2>Formule de Taylor</h2></hgroup><article  id="formule-de-taylor">
+
+<p>Le théorème suivant permet de construire explicitement \(b_0, b_1, \dots, b_n\)</p>
+
+<div class="definition">
+<p>Soit \(n \in \mathbb{R}\), \(a \in \mathbb{R}\) et \(f\) une fonction définie au voisinage de \(a\) <alert>sauf éventuellement en \(a\)</alert>. Si \(f\) est \(n\) dérivable en \(a\), alors elle admet le \(DL_n(a)\) suivant \[
+\scriptsize
+f(x) = f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x - a)^n + o( (x-a)^n )
+\]</p></div>
+
+<p>Autrement si \(f\) est \(n\) fois dérivable, on sait choisir \(b_0, \dots, b_n\) sans (trop d’) efforts</p>
+
+</article></slide><slide class=""><hgroup><h2>Intuition</h2></hgroup><article  id="intuition">
+
+<p>Dans le développement de Taylor, les termes sont triés du plus important au moins important. En effet, au voisinage de \(a\) \[
+1 \gg (x - a) \gg (x - a)^2 \gg \dots \gg (x- a)^n \gg o((x-a)^n)
+\] Le DL permet donc d’obtenir des approximations successives, dites d’ordre \(0, 1, \dots, n\) de \(f\) (au voisinage de \(a\)) en ne gardant que les termes les plus à gauche: \[
+\scriptsize
+\begin{align}
+\text{Ordre } 0 \quad &amp; f(x) \simeq f(a) \\
+\text{Ordre } 1 \quad &amp; f(x) \simeq f(a) + f&#39;(a) (x - a) \\
+\text{Ordre } 2 \quad &amp; f(x) \simeq f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 \\
+\vdots \\
+\text{Ordre } n \quad &amp; f(x) \simeq f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x - a)^n \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Intuition (II)</h2></hgroup><article  id="intuition-ii">
+
+<p>Certaines des approximations précédentes sont bien connues:</p>
+
+<ul>
+<li>l’approximation d’ordre \(0\) est la limite</li>
+<li>l’approximation d’ordre \(1\) est la tangente</li>
+<li>Plus généralement, l’approximation d’ordre \(n\) est un polynôme de degré \(n\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Intuition (III)</h2></hgroup><article  id="intuition-iii">
+
+<p><img src="figures/devlim_DL-exp-1.png" width="720" /></p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Lien avec l’approximation</h2></hgroup><article  id="lien-avec-lapproximation">
+
+</article></slide><slide class=""><hgroup><h2>DLs et différentielle</h2></hgroup><article  id="dls-et-differentielle">
+
+<p>Quand on utilise les DLs dans des contextes concrets, l’absence de notations \(f\) et \(x\) peut entrainer des erreurs. On va donc revenir aux notions de différentielles pour l’expliciter.</p>
+
+<p>On considère deux quantités \(a\) et \(b\) reliées entre elles par une certaine relation \(b\) et on cherche une approximation de \(b(a)\) au voisinage d’une valeur de référence \(a_0\). Si \(b\) est continue, on sait que \(b(a)\) sera proche de \(b(a_0)\) mais on voudrait être plus précis.</p>
+
+<p>On définit les petits écarts \(\Delta b = b(a) - b(a_0)\) et \(\Delta a = a - a_0\). On sait que \(\Delta b \to 0\) quand \(\Delta a \to 0\) mais on cherche un lien plus précis entre \(\Delta b\) et \(\Delta a\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Illustration graphique</h2></hgroup><article  id="illustration-graphique">
+
+<p><img src="figures/devlim_derivative-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Lien avec la dérivée</h2></hgroup><article  id="lien-avec-la-derivee">
+
+<p>On a vu avec les <em>différentielles</em> que pour des variations infinitésimales, on a \[
+\text{d}b = \alpha \text{d}a \quad \text{ avec } \alpha = \frac{\text{d}b}{\text{d}a}
+\] Si on considère des variations <alert>suffisamment petites</alert> \(\Delta b\) et \(\Delta a\), cette relation doit rester valable: \[
+\Delta b \simeq \alpha \Delta a
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives</h2></hgroup><article  id="lien-avec-les-derivees-successives">
+
+<p>Si on n’est pas satisfait de l’approximation précédente, on peut rajouter des termes correctifs proportionnels à \(\Delta a^2, \Delta a^3, \dots\):</p>
+
+<p>\[
+\Delta b \simeq \alpha \Delta a + \beta \Delta a^2 + \gamma \Delta a^3 + \dots
+\]</p>
+
+<p>Compte tenus des définitions de \(\Delta b = b(a) - b(a_0)\) et \(\Delta a = a - a_0\), cela revient à approcher la relation \(b(a)\) par un polynôme \(b^{DL}\) de \(a\) de degré \(n\) (le fameux DL) \[
+b^{DL}(a) = b(a_0) + \alpha (a - a_0) + \beta (a - a_0)^2 + \gamma (a - a_0)^3 + \dots
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (II)</h2></hgroup><article  id="lien-avec-les-derivees-successives-ii">
+
+<p>Pour s’assurer que l’approximation \(b^{DL}(a) \simeq b(a)\) est valide au voisinage de \(a_0\), on impose à \(b^{DL}\) et \(b\) d’avoir la même valeur en \(a_0\), mais également la même pente, la même concavité, etc.</p>
+
+<p>En termes formels, \[
+\forall k \leq n \quad \frac{\text{d}^k b^{DL}}{\text{d}a^k}(a_0) = \frac{\text{d}^kb}{\text{d}a^k}(a_0)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice</h2></hgroup><article  id="exercice-1">
+
+<p>Dériver \(b^{DL}(a)\) 3 fois en \(a_0\) et montrer qu’au point de référence \(a_0\) on a</p>
+
+<ul>
+<li>\(\frac{\text{d} b^{DL}}{\text{d}a}(a_0) = \alpha\)</li>
+<li>\(\frac{\text{d}^2 b^{DL}}{\text{d}a^2}(a_0) = 2 \times \beta\)</li>
+<li>\(\frac{\text{d}^3 b^{DL}}{\text{d}a^3}(a_0) = 3 \times 2 \times \gamma\)</li>
+</ul>
+
+<p>En déduire les valeurs de \(\alpha\), \(\beta\), \(\gamma\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (III)</h2></hgroup><article  id="lien-avec-les-derivees-successives-iii">
+
+<p>On retrouve ainsi en égalisant les dérivées, et avec la notation de Leibniz la formule de Taylor \[
+\small
+b(a) \simeq b(a_0) + \frac{\text{d}b}{\text{d}a}(a_0)\Delta a + \frac{1}{2!}\frac{\text{d}^2b}{\text{d}a^2}(a_0) \Delta a^2 + \dots + \frac{1}{n!}\frac{\text{d}^n b}{\text{d}a^n}(a_0) \Delta a^n
+\] La méthode à suivre pour faire un DL est donc <alert>systématique</alert></p>
+
+<ul>
+<li>exprimer \(b\) en fonction de \(a\) (souvent donné dans l’exercice)</li>
+<li>choisir un point de référence \(a_0\) (idem)</li>
+<li>calculer les premières dérivées de \(b\)</li>
+<li>en déduire les coefficients du DL et conclure</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (I)</h2></hgroup><article  id="exemple-i-1">
+
+<p>Pour faire un DL de \(u = \cos(\theta)\) autour de \(\theta_0 = \pi/3\), on calcule les valeurs successives des dérivées de \(u\) en \(\theta_0\).</p>
+
+<ul>
+<li>\(u(\theta_0) = \cos(\theta_0) = \frac{1}{2}\)</li>
+<li>\(\frac{\text{d}u}{\text{d}\theta}(\theta_0) = -\sin(\theta_0) = -\frac{\sqrt{3}}{2}\)</li>
+<li>\(\frac{\text{d}^2u}{\text{d}\theta^2}(\theta_0) = -\cos(\theta_0) = -\frac{1}{2}\)</li>
+<li>\(\frac{\text{d}^3u}{\text{d}\theta^3}(\theta_0) = \sin(\theta_0) = \frac{\sqrt{3}}{2}\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (II)</h2></hgroup><article  id="exemple-ii-1">
+
+<p>D’ou on déduit que si \(\theta\) reste proche de \(\theta_0 = \frac{\pi}{3}\), on a \[
+\small
+\begin{align}
+u(\theta) = \cos(\theta) &amp; \simeq \frac{1}{2} - \frac{\sqrt{3}}{2}\left(\theta - \frac{\pi}{3}\right) - \frac{1}{2!} \frac{1}{2}\left(\theta - \frac{\pi}{3}\right)^2 + \frac{1}{3!} \frac{\sqrt{3}}{2}\left(\theta - \frac{\pi}{3}\right)^3 \\ 
+&amp; \simeq \frac{1}{2} - \frac{\sqrt{3}}{2}\left(\theta - \frac{\pi}{3}\right) - \frac{1}{4}\left(\theta - \frac{\pi}{3}\right)^2 + \frac{\sqrt{3}}{12}\left(\theta - \frac{\pi}{3}\right)^3 
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice</h2></hgroup><article  id="exercice-2">
+
+<p>En appliquant la procédure vue dans l’exemple, calculer un \(DL_3\) des fonctions suivantes</p>
+
+<ul>
+<li>\(v = \tan(u)\) lorsque \(u\) est proche de \(\frac{\pi}{6}\)</li>
+<li>\(v = \ln(u)\) lorsque \(u\) est proche de \(2\)</li>
+<li>\(A = 1 + t + 2t^2 + 3t^3\) lorsque \(t\) est proche de \(1\). Montrer que dans ce cas-là, le DL est en fait rigoureusement égal à \(A\) mais écrit sous une autre forme</li>
+<li>\(A = 1 + t + 2t^2 + 3t^3\) lorsque \(t\) est proche de \(0\). Commenter le résultat</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exercice - Proposition</h2></hgroup><article  id="exercice---proposition">
+
+<p>Dans la pratique, on se ramène toujours à des DLs en \(0\) et il est bon de connaître les \(DL_3(0)\) des fonctions suivantes (à calculer comme vu dans l’exemple)</p>
+
+<p>\[
+\begin{align}
+\sin(x) &amp; &amp; \cos(x) &amp; &amp; \tan(x) \\
+\frac{1}{1+u} &amp; &amp;  &amp; &amp; \frac{1}{1 - u} \\
+e^u &amp; &amp;  &amp; &amp; e^{-u} \\
+\sqrt{1+u} &amp; &amp;  &amp; &amp; \sqrt{1-u} \\
+\ln(1+u) &amp; &amp;  &amp; &amp; \ln(1-u) \\
+(1+u)^\alpha &amp; &amp;  &amp; &amp; (1-u)^{\alpha} \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>DLs classiques</h2></hgroup><article  id="dls-classiques">
+
+<p>Les DLs suivants au voisinage de \(0\) sont à connaître.</p>
+
+<div class="proposition">
+<p>\[
+\small
+\begin{align}
+e^x  = &amp; 1 + x + \frac{x^2}{2!} + \dots + \frac{x^n}{n!} + o(x^n) \\
+\cos(x) = &amp; 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \dots + (-1)^n \frac{x^{2n}}{2n!} + o(x^{2n}) \\
+\sin(x) = &amp; x - \frac{x^3}{3!} + \frac{x^5}{5!} + \dots + (-1)^n \frac{x^{2n+1}}{(2n+1)!} + o(x^{2n+1}) \\
+\frac{1}{1 + x} = &amp; 1 - x + x^2 + \dots + (-1)^n x^n + o(x^n) \\
+\ln(1+x) = &amp; x - \frac{x^2}{2} + \frac{x^3}{3} + \dots + (-1)^{n-1}\frac{x^n}{n} + o(x^n) \\
+(1+x)^\alpha = &amp; 1 + \alpha x + \frac{\alpha (\alpha - 1)}{2} x^2 + \dots \\
+ &amp; + \frac{\alpha (\alpha - 1) \dots (\alpha - (n - 1))}{n!} x^n + o(x^n) \\
+\end{align}
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Opérations sur les DLs</h2></hgroup><article  id="operations-sur-les-dls">
+
+<p>Comme pour les limites et les dérivées, on peut aussi utiliser des règles pour combiner les DLs.</p>
+
+<p><img src="figures/lego-assembled-disassembled.jpg" width="720px" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Addition, multiplication de DL</h2></hgroup><article  id="addition-multiplication-de-dl">
+
+<div class="proposition">
+<p>Si \(f\) et \(g\) admettent toutes deux un \(DL_n\) en \(0\) et \(\lambda \in \mathbb{R}\), alors</p>
+
+<ul>
+<li>\(f+g\) admet un \(DL_n\) en \(0\), qui s’obtient en additionnant les parties polynômiales des \(DL_n\) de \(f\) et \(g\) (penser à la linéarité de la dérivée: \((f+g)^{(k)} = f^{(k)} + g^{(k)}\))</li>
+<li>\(f \times g\) admet un \(DL_n\) en \(0\), qui s’obtient en multipliant les parties polynômiales des \(DL_n\) de \(f\) et \(g\) et <alert>en ne gardant que les termes de degrés \(\leq n\)</alert>.</li>
+<li>\(\lambda f\) admet un \(DL_n\) en \(0\), qui s’obtient en multipliant la partie polynômiale du \(DL_n\) de \(f\) par \(\lambda\).</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple">
+
+<ul>
+<li>\(\cos(x) = 1 - \frac{x^2}{2} + o(x^2)\)</li>
+<li>\(e^x = 1 + x + \frac{x^2}{2} + o(x^2)\)</li>
+</ul>
+
+<p>On a donc (les termes en rouges sont des \(o(x^2)\)):</p>
+
+<ul>
+<li>\(e^x + \cos(x) = 2 + x + o(x^2)\) (terme d’ordre \(2\) du \(DL_2\) nul)</li>
+<li>\[
+\small
+\begin{align}
+e^x \cos(x) = &amp; \left( 1 + x + \frac{x^2}{2} + o(x^2) \right) \left( 1 - \frac{x^2}{2} + o(x^2) \right) \\
+          = &amp; 1 - \frac{x^2}{2} + o(x^2) + x \color{red}{- \frac{x^3}{2} + o(x^3)} + \frac{x^2}{2} \color{red}{- \frac{x^4}{4} + o(x^4)} \\  
+          &amp; + o(x^2) + \color{red}{o(x^4) + o(x^4)} \\ 
+          = &amp; 1 + x + o(x^2)
+\end{align}
+\]</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Composition</h2></hgroup><article  id="composition">
+
+<div class="proposition">
+<p>Soit \(f: A \to B\) et \(g: B \to C\) deux fonctions avec \[
+0 \in A, 0 \in B \text{ et } f(0) = 0
+\] Si \(f\) et \(g\) admettent toutes deux un \(DL_n\) en \(0\), alors \(g \circ f\) s’obtient en composant les parties polynômiales des \(DL_n\) de \(f\) et \(g\) et <alert>en ne gardant que les termes de degrés \(\leq n\)</alert>.</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (I)</h2></hgroup><article  id="exemple-i-2">
+
+<p>Avec \(\sin(x) = x - \frac{x^3}{3!} + o(x^3)\) et \(\frac{x}{1+x} = x - x^2 + x^3 + o(x^3)\), on pose implicitement \(X = \frac{x^2}{1+x}\) (petit quand \(x\) est proche de \(0\)).</p>
+
+<p>\[
+\begin{align}
+\sin\left( \frac{x}{1+x} \right) = &amp; \sin(X) \\
+= &amp; X - \frac{X^3}{3!} + o(X^3) \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (II)</h2></hgroup><article  id="exemple-ii-2">
+
+<p>Pour finir le calcul, on développe et on ne garde que les termes de degré au plus \(3\) \[
+\begin{align}
+X = &amp; x - x^2 + x^3 + o(x^3) \\
+X^2 = &amp; (x - x^2 + x^3 + o(x^3))^2 = x^2 - 2x^3 + o(x^3) \\
+X^3 = &amp; (x - x^2 + x^3 + o(x^3))^3 = x^3 + o(x^3) \\
+o(X^3) = &amp; o(x^3)
+\end{align}
+\] et donc au final \[
+\begin{align}
+\sin\left( \frac{x}{1+x} \right) = &amp;  x - x^2 + x^3 - x^3/6 + o(x^3) \\
+ = &amp; x - x^2 +\frac{5x^3}{6} + o(x^3)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Quotient</h2></hgroup><article  class="smaller" id="quotient">
+
+<p>Comme d’habitude, quotienter par \(f\) revient à multiplier par \(1/f\), on cherche donc un \(DL_n\) de \(1/f\).</p>
+
+<div class="proposition">
+<p>Soit \(f\) une fonction admettant le \(DL_n(0)\) suivant: \[
+f(x) = b_0 + b_1 x + \dots + b_n x^n + o(x^n)
+\]</p>
+
+<ul>
+<li>Si \(b_0 = 0\), alors \(1/f\) n’a pas de DL en \(0\)</li>
+<li>Sinon, \(1/f\) admet un \(DL_n(0)\) obtenu en écrivant: \[
+\begin{align}
+\frac{1}{f(h)} = &amp; \frac{1}{b_0 + b_1 x + \dots + b_n x^n + o(x^n)} \\ 
+ = &amp; \frac{1}{b_0} \frac{1}{1 + \frac{b_1}{b_0} x + \dots + \frac{b_n}{b_0} x^n + o(x^n)}
+\end{align}
+\] Et il faut donc composer le \(DL_n(0)\) de \(u \mapsto \frac{1}{1 + u}\) avec \(u = \frac{b_1}{b_0} x + \dots + \frac{b_n}{b_0} x^n + o(x^n)\).</li>
+</ul></div>
+
+<p>Les calculs à faire peuvent être un brin compliqués…</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (I)</h2></hgroup><article  id="exemple-i-3">
+
+<p>On va calculer le \(DL_2(0)\) de \(1/e^{x}\). On sait que \[
+e^x = 1 + x + \frac{x^2}{2} + o(x^2) = 1 + u
+\] avec \(u = x + \frac{x^2}{2} + o(x^2)\). On va donc composer avec le \(DL_2(0)\) de \(\frac{1}{1+u}\), à savoir \[
+\frac{1}{1+u} = 1 - u + u^2 + o(u^2)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (II)</h2></hgroup><article  id="exemple-ii-3">
+
+<p>On commence par calculer \(u^2\) (et il est clair que \(o(u^2) = o(x^2)\)) \[
+\begin{align}
+u^2 = &amp; (x + \frac{x^2}{2} + o(x^2))^2 = x^2 + o(x^2)
+\end{align}
+\] D’où on tire \[
+\begin{align}
+\frac{1}{e^x} = &amp; \frac{1}{1+u} = 1 - u + u^2 + o(u^2) \\ 
+= &amp; 1 - \left(x + \frac{x^2}{2}\right) + x^2 + o(x^2) \\
+= &amp; 1 - x + \frac{x^2}{2} + o(x^2)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (III)</h2></hgroup><article  id="exemple-iii-1">
+
+<p>Dans ce cas précis, on aurait aussi pu remarquer que \(1/e^x = e^{-x}\) et se rappeler que le \(DL_2(0)\) de \(e^{-x}\) est \[
+\begin{align}
+e^{-x} = &amp; 1 + (-x) + \frac{(-x)^2}{2} + o((-x)^2) \\ 
+= &amp; 1 - x + \frac{x^2}{2} + o(x^2)
+\end{align}
+\] On retrouve heureusement le même résultat</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices-1">
+
+<p>Calculer les \(DL\)s suivants (ceux notés \([*]\) sont difficiles) \[
+\small
+\begin{align}
+DL_4(0) \; \text{ de } \; \frac{x}{\sin(x)} &amp; &amp; DL_2(0) \; \text{ de } \; \ln(a^x + b^x)  \quad [*]\\
+DL_4(0) \; \text{ de } \; \frac{1}{\cos(x)} &amp; &amp; DL_4(\pi/2) \; \text{ de } \; \sin(x)^{\sin(x)} \quad [*] \\
+DL_2(\pi/4) \; \text{ de } \; \sqrt{\tan(x)} &amp; &amp; DL_1(0) \; \text{ de } \; \sqrt{1 + \sqrt{1 - x}}  \\
+DL_4(0) \; \text{ de } \; e^{\cos(x)} &amp; &amp; DL_3(0) \; \text{ de } \; x\sqrt{\frac{1+x}{1-x}}  \\
+DL_3(1) \; \text{ de } \; \frac{\ln(x)}{\sqrt{x}} &amp; &amp; \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (I)</h2></hgroup><article  id="solutions-i">
+
+<p>Calculer les \(DL\)s suivants \[
+\small
+\begin{align}
+\frac{x}{\sin(x)} &amp; = \frac{1}{1 - [x^2/3! - x^4/5! + o(x^4)]} \\ 
+&amp; = 1 + [x^2/3! - x^4/5!] + [x^2/3! - x^4/5!]^2 + o(x^4) \\ 
+&amp; = 1 + \frac{x^2}{6} + \frac{7x^4}{360} + o(x^4) \\
+\ln(a^x + b^x) &amp; = x \ln(a) + \ln(1 + (b/a)^x) \\ 
+&amp; = x \ln(a) + \ln(2) + \frac{1}{2} \left[ (b/a)^x - 1 \right] - \frac{1}{8} \left[ (b/a)^x - 1 \right]^2 \\
+&amp; = \ln(2) + \frac{\ln(a) + \ln(b)}{2} x + x^2 \frac{\ln^2(b/a)}{2} - \frac{1}{8} x^2 \ln^2(b/a) + o(x^2) \\
+&amp; = \ln(2) + \frac{\ln(a) + \ln(b)}{2} x + \frac{3(\ln(a) - \ln(b))^2}{8} x^2 + o(x^2)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (II)</h2></hgroup><article  id="solutions-ii">
+
+<p>\[
+\small
+\begin{align}
+\frac{1}{\cos(x)} &amp; = \frac{1}{1 - [x^2/2! - x^4/4! + o(x^4)]} \\ 
+&amp; = 1 + [x^2/2! - x^4/4!] + [x^2/2! - x^4/4!]^2 + o(x^4) \\ 
+&amp; = 1 + \frac{x^2}{2} + \frac{5x^4}{24} + o(x^4) \\
+\sin(x)^{\sin(x)} &amp; = \sin(\pi/2 + h)^{\sin(\pi/2 + h)} = \cos(h)^{\cos(h)} \\
+&amp; = \exp\left[ (1 - h^2/2 + h^4/24) \ln(1 - h^2/2 + h^4/24) \right] + o(h^4) \\
+&amp; = \exp( (1 - h^2/2 + h^4/24) (- h^2/2 + h^4/24 - h^4/8)  ) + o(h^4) \\
+&amp; = \exp( (1 - h^2/2 + h^4/24) (- h^2/2 - h^4/12)  ) + o(h^4) \\
+&amp; = \exp( -h^2/2 - h^4/12 + h^4/4  ) + o(h^4) \\
+&amp; = \exp( -h^2/2 + h^4/6  ) + o(h^4) \\
+&amp; = 1 + (-h^2/2 + h^4/6) + (-h^2/2 + h^4/6)^2/2 + o(h^4) \\
+&amp; = 1 - h^2/2 + h^4/6 + h^4/8 = 1 - \frac{h^2}{2} + \frac{7h^4}{24} + o(h^4)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (III)</h2></hgroup><article  id="solutions-iii">
+
+<p>\[
+\small
+\begin{align}
+\tan(\pi/4 + x) &amp; = \tan(\pi/4) + \tan&#39;(\pi/4)x + \frac{\tan&#39;&#39;(\pi/4)}{2}x^2 + o(x^2) \\
+&amp; = 1 + 2x + 2x^2 + o(x^2) \\
+\sqrt{1+x} &amp; = 1 + \frac{x}{2} - \frac{1}{8}x^2 + o(x^2) \\
+\sqrt{\tan(\pi/4 + x)} &amp; = \sqrt{1 + (2x + 2x^2)} + o(x^2) \\ 
+&amp; = 1 + (x + x^2) - \frac{1}{8}(2x + 2x^2)^2 + o(x^2) \\
+&amp; = 1 + x + x^2 - \frac{1}{2}x^2 + o(x^2) = 1 + x - \frac{x^2}{2} + o(x^2)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (IV)</h2></hgroup><article  id="solutions-iv">
+
+<p>\[
+\small
+\begin{align}
+\sqrt{1-x} &amp; = 1 - \frac{x}{2} + o(x) \\
+\sqrt{2+h} &amp; = \sqrt{2} + \frac{h}{2\sqrt{2}} + o(h) \\
+\sqrt{1 + \sqrt{1 - x}} &amp;= \sqrt{1 + (1 - x/2)} + o(x) \\
+&amp; = \sqrt{2 - x/2} + o(x) = \sqrt{2} - \frac{x}{4\sqrt{2}} + o(x)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (V)</h2></hgroup><article  id="solutions-v">
+
+<p>\[
+\small
+\begin{align}
+\cos(x) &amp; = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^4) \\
+e^h  &amp;= 1 + h + \frac{h^2}{2} + o(h^2) \\
+e^{cos(x)} &amp; = e^{1 - \frac{x^2}{2!} + \frac{x^4}{4!}} + o(x^4) = e \left( e^{- \frac{x^2}{2!} + \frac{x^4}{4!}} \right) + o(x^4) \\
+&amp; = e \left( 1 + \left(- \frac{x^2}{2!} + \frac{x^4}{4!} \right) + \left(- \frac{x^2}{2!} + \frac{x^4}{4!} \right)^2/2 \right) + o(x^4) \\
+&amp; = e \left( 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \frac{x^4}{8} \right) + o(x^4) \\
+&amp; = e - \frac{e}{2}x^2 + \frac{e}{6}x^4 + o(x^4)
+\end{align}
+\] Comme le calcul fait intervenir \(e^{h}\) avec \(h\) d’ordre \(x^2\), il suffit de faire un DL\(_2\) de \(\exp\) en \(h\) pour avoir un DL\(_4\) en \(x\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (VI)</h2></hgroup><article  id="solutions-vi">
+
+<p>\[
+\small
+\begin{align}
+\sqrt{1+x} &amp; = 1 + x/2 - x/8 + o(x^2) \\
+\sqrt{1/ (1-x) } &amp; = (1-x)^{-1/2} \\
+&amp; = 1 -\frac{1}{2} (-x) + \frac{3}{8}(-x)^2 + o(x^2) \\ 
+&amp; = 1 +x/2 + 3x^2/8 + o(x^2) \\
+\sqrt{\frac{1+x}{1-x}} &amp; = (1 + x/2 - x^2/8)(1 +x/2 + 3x^2/8) + o(x^2) \\
+&amp; = 1 + x + o(x^2) \\
+x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
+\end{align}
+\] Comme on multiplie par \(x\) à la fin, on se contente d’un DL\(_2\) de \(\sqrt{\frac{1+x}{1-x}}\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (VI)</h2></hgroup><article  id="solutions-vi-1">
+
+<p>\[
+\small
+\begin{align}
+\frac{1}{\sqrt{1+x}} &amp; = 1 - \frac{x}{2} + \frac{3}{8}x^2 + o(x^2) \\
+\ln(1 + x) &amp; = x - \frac{x^2}{2} + \frac{x^3}{3} + o(x^3) \\
+           &amp; = x\left( 1 - \frac{x}{2} + \frac{x^2}{3} + o(x^2) \right) \\
+\frac{\ln(1+x)}{\sqrt{1+x}} &amp; = x \left[ (1 - \frac{x}{2} + \frac{x^2}{3})( 1 - \frac{x}{2} + \frac{3}{8}x^2 ) + o(x^2) \right]  \\
+&amp; = x \left[ 1 - x + \frac{23}{24}x^2 + o(x^2) \right] \\
+&amp; = x - x^2 + \frac{23}{24}x^3 + o(x^3)
+\end{align}
+\] Comme \(\ln(x) = x + o(x)\) et qu’on multiplie, on se contente d’un DL\(_2\) de \(\frac{1}{\sqrt{1+x}}\). On obtiendra bien un DL\(_3\) après multiplication.</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Retour sur les DLs d’ordre 1 et 2</h2></hgroup><article  id="retour-sur-les-dls-dordre-1-et-2">
+
+</article></slide><slide class=""><hgroup><h2>DL d’ordre 1 en physique</h2></hgroup><article  id="dl-dordre-1-en-physique">
+
+<p>Physiquement, l’approximation d’ordre \(1\) considère que les variations \(\Delta b\) et \(\Delta a\) sont proportionnelles, et ce dans le même rapport que les différentielles \(\text{d}b\) et \(\text{d}a\).</p>
+
+<p>Du point de vue graphique, cela revient à confondre la courbe de \(b(a)\) avec une droite (en l’occurence sa tangente en \(a_0\)). Les \(DL_1(0)\) sont très utilisés pour remplacer des petits angles \(\theta\), ils permettent d’écrire</p>
+
+<ul>
+<li>\(\sin(\theta) \simeq \theta\)</li>
+<li>\(\tan(\theta) \simeq \theta\)</li>
+</ul>
+
+<p>qui est une très bonne approximation pour des petits angles (de l’ordre de 0.3490659 radians).</p>
+
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique">
+
+<p><img src="figures/devlim_unnamed-chunk-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>DL d’ordre 2 en physique</h2></hgroup><article  id="dl-dordre-2-en-physique">
+
+<p>Si on s’éloigne un peu trop du point de référence \(a_0\) (et pour certaines valeurs de \(a_0\)), l’approximation par une droite n’est pas très satisfaisante et il faut rajouter un terme correctif en \((a - a_0)^2\) pour obtenir une meilleure approximation. Ceci revient à approcher le graphe de \(b(a)\) par une <em>parabole</em>.</p>
+
+<p>Le \(DL_1(0)\) est très utilisé pour remplacer le \(\cos\) de petits angles \(\theta\), il permet d’écrire</p>
+
+<ul>
+<li>\(\cos(\theta) \simeq 1 - \frac{\theta^2}{2}\)</li>
+</ul>
+
+<p>qui est une très bonne approximation pour des petits angles (jusqu’à 0.7853982 radians).</p>
+
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique-1">
+
+<p><img src="figures/devlim_dl-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice</h2></hgroup><article  id="exercice-3">
+
+<p>En optique ondulatoire, on a souvent affaire à la fonction <em>sinus cardinal</em> définie par \[
+\text{sinc}(x) = \frac{\sin(x)}{x}
+\]</p>
+
+<p>En partant du DL de \(\sin\), trouver directement le \(DL_4(0)\) de \(\text{sinc}(x)\). Pourquoi peut-on définir \(\text{sinc}(0) = 1\) ? Que peut-on dire de la dérivée première du sinus cardinal lorsque x tend 0 ? Et du signe de sa dérivée seconde ?</p>
+
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique-2">
+
+<p><img src="figures/devlim_sinus-cardinal-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques</h2></hgroup><article  id="interet-en-mathematiques">
+
+<p>Les DLs permettent de calculer très facilement des limites. En particulier, la règle de l’Hopital est un cas particulier de DLs.</p>
+
+<p>\[
+\begin{align}
+\frac{f(x) - f(x_0)}{g(x) - g(x_0)} &amp; = \frac{f&#39;(x_0)x + o(x)}{g&#39;(x_0)x + o(x)} \\ 
+&amp; = \frac{f&#39;(x_0)+ o(1)}{g&#39;(x_0) + o(1)} \xrightarrow[x \to x_0]{} \frac{f&#39;(x_0)}{g&#39;(x_0)}
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques (II)</h2></hgroup><article  id="interet-en-mathematiques-ii">
+
+<p>On peut aussi retrouver des limites classiques en \(0\) \[
+\begin{align}
+e^x = 1 + x + o(x) &amp; \Rightarrow \frac{e^x - 1}{x} \xrightarrow[x \to 0]{} 1 \\
+\sin(x) = x + o(x) &amp; \Rightarrow \frac{\sin(x)}{x} \xrightarrow[x \to 0]{} 1 \\
+\ln(1+x) = x + o(x) &amp; \Rightarrow \frac{\ln(1+x)}{x} \xrightarrow[x \to 0]{} 1 \\
+\end{align}
+\] et d’autres plus neuves \[
+\cos(x) = 1- \frac{x^2}{2} + o(x^2) \Rightarrow \frac{1 - \cos(x)}{x^2} \xrightarrow[x \to 0]{} \frac{1}{2} \\
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices d’applications (I)</h2></hgroup><article  id="exercices-dapplications-i">
+
+<ul>
+<li><p>Dans le modèle du gaz parfait avec \(PV = nRT\), on considère une enceinte étanche thermostatée (nombre de moles et température constants). On suppose que le volume de l’enceinte passe de \(V\) à \(V + \Delta V\). La pression évolue en conséquence de \(P\) à \(P + \Delta P\). Relier \(\Delta P\) à \(\Delta V\) en faisant un DL au premier ordre. Comment se compare les variations relatives \(\Delta P/P\) et \(\Delta V / V\).</p></li>
+<li><p>On considère une sphère de rayon \(R\) et de surface \(S\). On suppose que le rayon de la sphère passe de \(R\) à \(R + \Delta R\). La surface évolue en conséquence de \(S\) à \(S + \Delta S\). Relier \(\Delta S\) à \(\Delta R\) en faisant un DL au premier ordre. Comment se compare les variations relatives \(\Delta S/S\) et \(\Delta R / R\).</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exercices d’applications (II)</h2></hgroup><article  id="exercices-dapplications-ii">
+
+<ul>
+<li>On cherche à évaluer le comportement de la quantité \(f(t) = \frac{1}{\sqrt{t^2+\tau^2}}\) lorsque \(t\) est petit devant \(\tau\). Exprimer \(f(t)\) sour la forme \(C(1+x)^{\alpha}\) où \(x = t/\tau\) est une quantité sans dimension très petite et \(C\) et \(\alpha\) sont des constantes à déterminer. En faisant ensuite un DL à l’ordre 2 de \((1+x)^{\alpha}\), en déduire un DL\(_2\) de \(f(t)\).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exercices d’applications (III)</h2></hgroup><article  id="exercices-dapplications-iii">
+
+<p>En utilisant les DL (et surtout les théorèmes d’opérations) calculer les limites suivantes: \[
+\small
+\begin{align}
+\lim_{x \to 0} \frac{\cos(x) - 1}{\ln(1+x)\sin(x)} &amp; &amp; \lim_{x \to 0} \frac{\ln(1+\tan(x))}{\sin(x)} \\
+\lim_{x \to 0} \frac{\sin(x)\tan(x)}{\sin(x^2)} &amp; &amp; \lim_{x \to 0} \frac{1}{x^2} - \frac{1}{\sin^2(x)} \\
+\lim_{x \to 1} \frac{\ln(x)}{x^2 - 1} &amp; &amp; \lim_{x \to 1} \frac{\ln(x)(\tan(\pi x /4) - 1)}{(x - 1)^2} \\
+\lim_{x \to +\infty} \left(\frac{2x+1}{2x-1}\right)^{2x} &amp; &amp; \lim_{x \to +\infty} x\left( \left(1+\frac{1}{x}\right)^x - e \right)
+\end{align}
+\] Les courageux peuvent aussi essayer de calculer les DL\(_1\) des \(6\) premières fonctions.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices d’applications (III): Réponses</h2></hgroup><article  id="exercices-dapplications-iii-reponses">
+
+<p>\[
+\small
+\begin{align}
+\lim_{x \to 0} \frac{\cos(x) - 1}{\ln(1+x)\sin(x)} = -\frac{1}{2} &amp; &amp; \lim_{x \to 0} \frac{\ln(1+\tan(x))}{\sin(x)} = 1 \\
+\lim_{x \to 0} \frac{\sin(x)\tan(x)}{\sin(x^2)}  = 1 &amp; &amp; \lim_{x \to 0} \frac{1}{x^2} - \frac{1}{\sin^2(x)} = -\frac{1}{3}\\
+\lim_{x \to 1} \frac{\ln(x)}{x^2 - 1}  = \frac{1}{2} &amp; &amp; \lim_{x \to 1} \frac{\ln(x)(\tan(\pi x /4) - 1)}{(x - 1)^2} = \frac{\pi}{4} \\
+\lim_{x \to +\infty} \left(\frac{2x+1}{2x-1}\right)^{2x} = e &amp; &amp; \lim_{x \to +\infty} x\left( \left(1+\frac{1}{x}\right)^x - e \right) = \frac{1}{2}
+\end{align}
+\]</p></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
