@@ -10,3 +10,4 @@ Gemfile
 Gemfile.lock
 src/docs
 src/teaching/Licence_FDV/*/
+blog/posts/2016/01/*/*.html
