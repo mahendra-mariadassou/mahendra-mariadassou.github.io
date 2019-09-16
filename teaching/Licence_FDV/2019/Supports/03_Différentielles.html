@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calcul Différentiel</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Calcul Différentiel',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Mahendra Mariadassou' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+  </style>
+
+  <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">18 octobre 2018</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introduction</h2></hgroup><article  id="introduction">
+
+</article></slide><slide class=""><hgroup><h2>Plan du cours</h2></hgroup><article  id="plan-du-cours">
+
+<ul>
+<li>Domaine d’étude</li>
+<li>Limites, continuité, dérivabilité et variations</li>
+<li>Comparaison locale de fonction</li>
+<li>Etude locale des fonctions</li>
+<li>Retour sur la limite</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Rappel: la notion de dérivée</h2></hgroup><article  id="rappel-la-notion-de-derivee">
+
+<div class="definition">
+<p>La dérivée en \(x_0\) d’une fonction \(f\) dépendant de \(x\) est notée \(f&#39;(x_0)\) et définie comme suit \[f&#39;(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}\]</p></div>
+
+<ul>
+
+<li>
+
+La dérivée est la limite de deux <alert>petites</alert> quantités qui tendent chacune vers \(0\).
+
+</li>
+
+<li>
+
+Elle est utilisée (via son <alert>signe</alert>) pour étudier les variations (<alert>locales</alert>) de \(f\) et essayer de trouver les optimas (minima et maxima de \(f\)).
+
+</li>
+
+<li>
+
+Elle peut être difficile à calculer <alert>rigoureusement</alert>
+
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Rappel: le &ldquo;Formulaire&rdquo;</h2></hgroup><article  id="rappel-le-formulaire">
+
+<p>Pour éviter de recalculer \(f&#39;\) <em>from scratch</em> à chaque fois, on vous a invité à apprendre par coeur <alert>le formulaire</alert></p>
+
+<p>\[
+  \begin{align*}
+  \forall \alpha \in \mathbb{R}, \quad (x^{\alpha})&#39; = \alpha x^{\alpha - 1}  &amp; &amp;\\
+  \sin&#39;(x) = \cos(x) &amp; &amp; cos&#39;(x) = -\sin(x) \\
+  (e^x)&#39; = e^x &amp; &amp; \ln&#39;(x) = \frac{1}{x} \\
+  (u \times v)&#39; = u&#39;v + uv&#39; &amp; &amp; \left( \frac{u}{v} \right)&#39; = \frac{u&#39;v - uv&#39;}{v^2} \\
+  (g \circ f)(x) = f&#39;(x) g&#39;(f(x)) &amp; &amp; (f^{-1})&#39;(x) = \frac{1}{f&#39; \circ f^{-1} (x)}
+  \end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>À propos du &ldquo;Formulaire&rdquo;</h2></hgroup><article  id="a-propos-du-formulaire">
+
+<ul>
+<li>Le formulaire utilise des notations compactes et faciles à retenir mais gêne la compréhension</li>
+<li>On va aussi introduire des notations légèrement plus lourdes (très courantes en physique et en sciences expérimentales) qui mettent en évidence les quantités manipulées.</li>
+<li>Il reste néanmoins nécessaire d’avoir en tête le formulaire lors du calcul &ldquo;effectif&rdquo; des dérivées.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Différientielles et dérivées (I)</h2></hgroup><article  id="differientielles-et-derivees-i">
+
+<p>De façon générale, si deux quantités \(a\) et \(b\) sont liées entre elles par une relation quelconque (algébrique, géométrique, physique, etc), une infime variation de l’une (de \(a\) vers \(a + \text{d}a\)) va entraîner une infime variation de l’autre (de \(b\) vers \(b+\text{d}b\)). \[
+\text{Si:} \quad a \to a + \text{d}a \quad \text{alors} \quad b\to  b + \text{d}b
+\]</p>
+
+<ul>
+<li>La notation \(\text{d}\) dans \(\text{d}a\) et \(\text{d}b\) signale qu’on parle de variations minuscules et même <alert>infinitésimales</alert>, c’est à dire aussi petites que l’on veut.</li>
+<li>Les physiciens parlent souvent de <alert>différentielle</alert> (terme emprunté à Leibniz) pour désigner une variation infinitésimale.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Différentielles et dérivées (II)</h2></hgroup><article  id="differentielles-et-derivees-ii">
+
+<ul>
+<li>La dérivée peut se concevoir comme le <alert>taux de variation</alert> de \(b\) par rapport \(a\), c’est à dire comme le quotient \(\displaystyle \frac{\text{d}b}{\text{d}a}\) dans la limite où les variations \(\text{d}a\) et \(\text{d}b\) sont très petites.</li>
+<li>l’idée <alert>principale</alert> de la dérivée est la suivante
+
+<div class="proposition">
+<p>Si les différentielles sont suffisamment petites, alors elles sont proportionnelles entre elles et le coefficient de multiplication est la dérivée: \[\text{db} =  \frac{\text{d}b}{\text{d}a} \text{d}a\]</p></div></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Différentielles et dérivées (III)</h2></hgroup><article  id="differentielles-et-derivees-iii">
+
+<p>Dans la notation traditionnelle avec \(f&#39;(x)\), on retrouve bien un rapport entre deux variations infinitésimales:</p>
+
+<ul>
+<li>\(\text{d}f = f(x+h) - f(x)\) (petite variation de \(f\))</li>
+<li>\(\text{d}x = (x+h) - x\) (petite variation de \(x\))</li>
+</ul>
+
+<p>On voit souvent les deux notations</p>
+
+<ul>
+<li>\(\frac{\text{d}f(x)}{\text{d}x}\) qui insiste sur le rapport entre une petite variation de \(\text{d}f(x)\) et une petite variation de \(\text{d}x\)</li>
+<li>\(\frac{\text{d}}{\text{d}x}f(x)\) qui insiste sur le fait qu’on dérive par rapport à la quantité \(x\).</li>
+</ul>
+
+<p>Les deux sont à connaître.</p>
+
+</article></slide><slide class=""><hgroup><h2>Différentielles et dérivées (IV)</h2></hgroup><article  id="differentielles-et-derivees-iv">
+
+<p>On considère un angle qui mesure \(\alpha\) radians. Une variation infime de cet angle, notée \(\text{d}\alpha\), entrainera une minuscule variation de \(\sin(\alpha)\), notée \(\text{d}\sin(\alpha)\). Puisque la dérivée de \(\sin\) est \(\cos\), on la relation de proportionalité suivante entre les variations infinitésimales \[
+\text{d}\sin(\alpha) = \cos(\alpha) \text{d}\alpha
+\] En pratique, la relation précédente est vraie dès que \(\text{d}\alpha\) est <alert>suffisamment petit</alert> (dans cet exemple, de l’ordre du centi ou milligradient).</p>
+
+<p>On peut donc adopter une définition, moins rigoureuse mais plus pratique, des différentielles: ce sont des variations <alert>suffisamment petites</alert> pour que la relation de proportionnalité s’appelle (avec une précision raisonnable). [On donnera une définition rigoureuse plus tard]</p>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (I)</h2></hgroup><article  id="interpretation-graphique-i">
+
+<p><img src="figures/differentielles_derivative-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (II)</h2></hgroup><article  id="interpretation-graphique-ii">
+
+<ul>
+<li>Le graphique précédent représente \(b(a)\). Localement, entre \((a, b)\) et \((a + \text{d}a, b + \text{d}b)\), la courbe peut-être confondue avec tangente en \((a, b)\) et le coefficient directeur de cette tangente est \(\frac{\text{d}b}{\text{d}a}\).</li>
+<li>Il apparaît clairement sur le graphique précédent, et en toute généralité, que la valeur \(\frac{\text{d}b}{\text{d}a}\) <alert>dépend</alert> de \(a\) et qu’il faudrait donc la noter \(\frac{\text{d}b}{\text{d}a}(a)\).</li>
+<li>On peut définir la <alert>dérivéé de la dérivée</alert> comme \(\text{d}(\frac{\text{d}b}{\text{d}a})/\text{d}a\). Par souci de simplicité, on abrège la notation en \(\frac{\text{d}^2 b}{\text{d}a^2}\)</li>
+<li>De même, la dérivée troisième est notée \(\frac{\text{d}^3 b}{\text{d}a^3}\) et plus généralement la dérivée \(n\)-ème est notée \(\frac{\text{d}^n b}{\text{d}a^n}\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (III)</h2></hgroup><article  id="interpretation-graphique-iii">
+
+<p>On peut relier les dérivées successives au comportement du graphe de \(b(a)\) au voisinage de \(a\)</p>
+
+<ul>
+<li>\(b(a)\) indique la <alert>valeur</alert> de \(b\) au point \(a\).</li>
+<li>La dérivée première \(\frac{\text{d}b}{\text{d}a}(a)\) indique la <alert>pente</alert> de la courbe au voisinage de \(a\).
+
+<ul>
+<li>Une pente positive (\(\frac{\text{d}b}{\text{d}a} &gt; 0\)) correspond à une fonction <alert>localement</alert> croissante</li>
+<li>Une pente négative (\(\frac{\text{d}b}{\text{d}a} &lt; 0\)) correspond à une fonction <alert>localement</alert> décroissante</li>
+<li>Une pente nulle (\(\frac{\text{d}b}{\text{d}a} = 0\)) correspond à une absence de pente et à une fonction <alert>localement</alert> constante</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (IV)</h2></hgroup><article  id="interpretation-graphique-iv">
+
+<ul>
+<li>La dérivée seconde \(\frac{\text{d}^2 b}{\text{d}a^2}(a)\) indique la <alert>concavité</alert> de la courbe au voisinage de \(a\).
+
+<ul>
+<li>Une concavité positive (\(\frac{\text{d}^2b}{\text{d}a^2} &gt; 0\)) correspond à une fonction localement <alert>convexe</alert> (en forme de creux) en \(a\)</li>
+<li>Une concavité négative (\(\frac{\text{d}^2b}{\text{d}a^2} &lt; 0\)) correspond à une fonction localement <alert>concave</alert> (en forme de bosse) en \(a\)</li>
+<li>Une concavité nulle (\(\frac{\text{d}^2b}{\text{d}a^2} = 0\)) correspond à une absence de courbure et à une fonction localement <alert>linéaire</alert> en \(a\)</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (V)</h2></hgroup><article  id="interpretation-graphique-v">
+
+<p><img src="figures/differentielles_concavity-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Variable de dérivation</h2></hgroup><article  id="variable-de-derivation">
+
+<p>Attention à la <alert>variable de dérivation</alert>, les variations de \(b\) en réponse aux variations de \(a\) ne sont pas les mêmes que celles de \(b\) en réponse aux variations de \(u = g(a)\).</p>
+
+<p>On considère \(b = a^6\) et \(u = a^2\), de sorte que \(b = u^3\). On a \[
+\frac{\text{d}b}{\text{d}a}(a) = 6a^5 \quad \text{mais} \quad \frac{\text{d}b}{\text{d}u}(u) = 3u^2 (\neq 6a^5)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivée de fonctions composées (I)</h2></hgroup><article  id="derivee-de-fonctions-composees-i">
+
+<p>Il est très facile de manipuler les différentielles pour retrouver des dérivées compliquées. Il arrive souvent que la variation d’une quantité \(A\) implique la variation d’une quantité \(B\) qui implique la variation d’une quantité \(C\). On a alors des relations de proportionalité entre les différentielles: \[
+\text{d}B = \frac{\text{d}B}{\text{d}A} \text{d}A \quad \text{d}C = \frac{\text{d}C}{\text{d}B} \text{d}B \quad \text{d}C = \frac{\text{d}C}{\text{d}A} \text{d}A
+\] d’où on déduit aisément \[
+\frac{\text{d}C}{\text{d}A} = \frac{\text{d}C}{\text{d}B} \times \frac{\text{d}B}{\text{d}A}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivée de fonctions composées (II)</h2></hgroup><article  id="derivee-de-fonctions-composees-ii">
+
+<p>En alourdissant un peu les notations pour expliciter les points auquels sont calculés les dérivées, on obtient \[
+\frac{\text{d}C}{\text{d}A}(A) = \frac{\text{d}C}{\text{d}B}(B) \times \frac{\text{d}B}{\text{d}A}(A)
+\]</p>
+
+<p>D’où on tire par analogie (avec \(A=x\), \(B=f(x)\) et \(C=(g\circ f)(x)\) la formule fondamentale du calcul différentiel \[
+(g \circ f)&#39;(x) = f&#39;(x) g&#39;(f(x))
+\]</p>
+
+<p>On peut évidemment généraliser à la composée de plus de deux fonctions.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple">
+
+<p>En posant événtuellement \(u = \omega t + \phi\), calculer la dérivée par rapport à \(t\) de \(\sin(\omega t + \phi)\)</p>
+
+<p>\[
+\begin{align*}
+\frac{\text{d}(\sin(\omega t + \phi))}{\text{d}t}(t) &amp; = \frac{\text{d}\sin(u)}{\text{d}u}(u) \times \frac{\text{d}u}{\text{d}t}(t) \\
+&amp; = \cos(u) \times \omega \\
+&amp; = \omega \cos(\omega t + \phi)
+\end{align*}
+\] On n’oubliera pas de bien tout exprimer en fonction de la variable de dérivation (ici \(t\)).</p>
+
+</article></slide><slide class=""><hgroup><h2>Lien avec le formulaire</h2></hgroup><article  id="lien-avec-le-formulaire">
+
+<p>En combinant le mini-formulaire (exception faite de \((f^{-1})&#39;(x)\)) et le résultat précédent, on retrouve des dérivées connues uniquement comme cas particuliers \[
+\begin{align*}
+(e^{u(x)})&#39; = u&#39;(x)e^{u(x)} \\
+(\ln(u(x)))&#39; = \frac{u&#39;(x)}{u(x)} \\
+(u^\alpha(x))&#39; = \alpha u&#39;(x) u^{\alpha-1}(x)\\
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice: Dérivées de fonctions angulaires</h2></hgroup><article  id="exercice-derivees-de-fonctions-angulaires">
+
+<p>Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin) \[
+\begin{align*}
+\frac{\text{d}(\tan(\alpha))}{\text{d}\alpha} &amp; &amp; \frac{\text{d}[1/\cos(\alpha)]}{\text{d}\alpha} \\
+\frac{\text{d}[1/\sin(\alpha)]}{\text{d}\alpha} &amp; &amp; \frac{\text{d}[1/\tan(\alpha)]}{\text{d}\alpha}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions">
+
+<p>\[
+\begin{align*}
+\frac{\text{d}(\tan(\alpha))}{\text{d}\alpha} &amp; = \frac{1}{\cos^2(\alpha)} = 1 + \tan^2(\alpha)\\ \frac{\text{d}[1/\cos(\alpha)]}{\text{d}\alpha} &amp; = \frac{\sin(\alpha)}{\cos^2(\alpha)}\\
+\frac{\text{d}[1/\sin(\alpha)]}{\text{d}\alpha} &amp; = -\frac{\cos(\alpha)}{\sin^2(\alpha)}\\
+\frac{\text{d}[1/\tan(\alpha)]}{\text{d}\alpha} &amp; = \frac{-1}{\sin^2(\alpha)}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (dérivées de fonctions de bases)</h2></hgroup><article  id="exercices-derivees-de-fonctions-de-bases">
+
+<p>\[
+\begin{align*}
+\frac{\text{d}[u\ln(u) - u ]}{\text{d}u} &amp; &amp; \frac{\text{d}[(v - 1)e^v]}{\text{d}v}\\
+\frac{\text{d}[1/(1+\epsilon^2)]}{\text{d}\epsilon} &amp; &amp; \frac{\text{d}[1/\tan{\alpha}]}{\text{d}\alpha} \\
+\frac{\text{d}^2[\sin^2(\theta)]}{\text{d}\theta^2} &amp; &amp; \frac{\text{d}^2[x\sqrt{x}]}{\text{d}x^2} \\
+\frac{\text{d}^2[\ln(y)]}{\text{d}y^2} &amp; &amp; \frac{\text{d}^2[z^3+3z^2+3z+1]}{\text{d}z^2}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-1">
+
+<p>Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin) \[
+\small
+\begin{align*}
+\frac{\text{d}[u\ln(u) - u ]}{\text{d}u} = \ln(u) &amp; &amp; \frac{\text{d}[(v - 1)e^v]}{\text{d}v} = ve^v \\
+\frac{\text{d}[1/(1+\epsilon^2)]}{\text{d}\epsilon} = \frac{-2\varepsilon}{(1+\varepsilon^2)^2}&amp; &amp; \frac{\text{d}[1/\tan{\alpha}]}{\text{d}\alpha} = \frac{-1}{\sin^2(\alpha)} \\
+\frac{\text{d}^2[\sin^2(\theta)]}{\text{d}\theta^2} = 2\cos(2\theta) &amp; &amp; \frac{\text{d}^2[x\sqrt{x}]}{\text{d}x^2} = \frac{3}{4\sqrt{x}}\\
+\frac{\text{d}^2[\ln(y)]}{\text{d}y^2} = \frac{-1}{y^2} &amp; &amp; \frac{\text{d}^2[z^3+3z^2+3z+1]}{\text{d}z^2} = 6z + 6
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (dérivées de fonctions composées)</h2></hgroup><article  id="exercices-derivees-de-fonctions-composees">
+
+<p>Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin) \[
+\begin{align*}
+\frac{\text{d}[(1+u^3)^4]}{\text{d}u} &amp; &amp; \frac{\text{d}[\sqrt{1+v^2}]}{\text{d}v} \\
+\frac{\text{d}[\ln(1-x)]}{\text{d}x}  &amp; &amp; \frac{\text{d}[2\sin(\alpha - \frac{\pi}{8})]}{\text{d}\alpha} \\
+\frac{\text{d}[\tan^2(\theta)]}{\text{d}\theta} &amp; &amp; \frac{\text{d}[e^{-y^2}]}{\text{d}y} \\
+\frac{\text{d}[1/\sqrt{1+u^2}]}{\text{d}u} &amp; &amp; \frac{\text{d}[\sqrt{z^3 + 3z^2 + 3z + 1}]}{\text{d}z}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-2">
+
+<p>Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin) \[
+\scriptsize
+\begin{align*}
+\frac{\text{d}[(1+u^3)^4]}{\text{d}u} = 12u^2(1+u^3)^3 &amp; &amp; \frac{\text{d}[\sqrt{1+v^2}]}{\text{d}v} = \frac{v}{\sqrt{1+v^2}} \\
+\frac{\text{d}[\ln(1-x)]}{\text{d}x}  = \frac{-1}{1 - x} &amp; &amp; \frac{\text{d}[2\sin(\alpha - \frac{\pi}{8})]}{\text{d}\alpha} = 2\cos\left(\alpha - \frac{\pi}{8}\right)\\
+\frac{\text{d}[\tan^2(\theta)]}{\text{d}\theta} = 2\tan(\theta) + 2\tan^3(\theta))&amp; &amp; \frac{\text{d}[e^{-y^2}]}{\text{d}y} = -2y e^{-y^2}\\
+\frac{\text{d}[1/\sqrt{1+u^2}]}{\text{d}u} = -\frac{u}{(1+u^2)^{3/2}} &amp; &amp; \\ 
+\end{align*}
+\] \[
+\scriptsize
+\frac{\text{d}[\sqrt{z^3 + 3z^2 + 3z + 1}]}{\text{d}z} = \frac{3z^2 + 6z + 3}{2\sqrt{z^3 + 3z^2 + 3z + 1}}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivées de fonctions réciproques</h2></hgroup><article  id="derivees-de-fonctions-reciproques">
+
+<p>Les fonctions réciproques jouent un rôle fondamentales en sciences expérimentales. Il est souvent possible d’<alert>inverser</alert> une relation entre deux quantités \(a\) et \(b\). C’est à dire qu’on peut exprimer</p>
+
+<ul>
+<li>\(a\) en fonction de \(b\) (\(a = a(b)\))</li>
+<li>\(b\) en fonction de \(a\) (\(b = b(a)\))</li>
+</ul>
+
+<p>C’est le cas si \(a(b)\) (ou \(b(a)\)) est une <alert>bijection</alert> (ou plus simplement une fonctions strictement monotone). Dans ce cas, \(a(b)\) et \(b(a)\) sont dites <alert>réciproques</alert>.</p>
+
+<p>Dans le formalisme mathématique, on note plutôt \(y = f(x)\) et \(x = f^{-1}(y)\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Graphes de fonctions réciproques</h2></hgroup><article  id="graphes-de-fonctions-reciproques">
+
+<p>Les graphes de fonctions réciproques s’obtiennent aisément en <alert>permutant</alert> les axes des abscisses et des ordonnées.</p>
+
+<p><img src="figures/differentielles_graphes-reciproques-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivées de fonctions réciproques (II)</h2></hgroup><article  id="derivees-de-fonctions-reciproques-ii">
+
+<p>Au vu des relations de proportionalités entre les différentielles: \[
+\text{db} =  \frac{\text{d}b}{\text{d}a} \text{d}a \qquad \text{da} =  \frac{\text{d}a}{\text{d}b} \text{d}b
+\] On a évidemment la relation suivante: \[
+\frac{\text{d}b}{\text{d}a}(a) = \left( \frac{\text{d}a}{\text{d}b}(b) \right)^{-1}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivées de fonctions réciproques (III)</h2></hgroup><article  id="derivees-de-fonctions-reciproques-iii">
+
+<p>Attention à bien calculer les dérivées au point d’intérêt.</p>
+
+<p>Par exemple, si \(a\) et \(b\) sont des quantités positives, alors \(b=\sqrt{a} \Leftrightarrow a = b^2\).</p>
+
+<p>Sachant que \(\frac{\text{d}a}{\text{d}b} = \frac{\text{d}(b^2)}{\text{d}b} = 2b\), on déduit tout de suite que \(\frac{\text{d}b}{\text{d}a} = \frac{1}{2b}\). Mais pour que ce résultat soit intéressant, il faut le <alert>réexprimer</alert> en fonction de \(a\), c’est à dire \(\frac{\text{d}b}{\text{d}a} = \frac{1}{2\sqrt{a}}\).</p>
+
+<p>D’un point de formel, on retrouve la formule de la dérivée de la fonction réciproque. Si \(y = f(x)\) et \(x = f^{-1}(y)\), on a \[
+(f^{-1})&#39;(y) = \frac{\text{d}x}{\text{d}y}(y) = \left( \frac{\text{d}y}{\text{d}x}(x) \right)^{-1} = \frac{1}{f&#39;(x)} = \frac{1}{f&#39;\circ f^{-1}(y)}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice: Dérivées de fonctions trigonométriques réciproques</h2></hgroup><article  id="exercice-derivees-de-fonctions-trigonometriques-reciproques">
+
+<p>Les fonctions \(\arcsin(x)\), \(\arccos(x)\) et \(\arctan(x)\) sont les réciproques (sur un certain intervalle) des fonctions trigonométriques \(\sin(x)\), \(\cos(x)\), \(\tan(x)\).</p>
+
+<p>Montrer que (les résultats sont à connaître)</p>
+
+<ul>
+<li>\(\frac{\text{d}\arcsin(x)}{\text{d}x} = \frac{1}{\sqrt{1 - x^2}}\)</li>
+<li>\(\frac{\text{d}\arccos(x)}{\text{d}x} = \frac{-1}{\sqrt{1 - x^2}}\)</li>
+<li>\(\frac{\text{d}\arctan(x)}{\text{d}x} = \frac{1}{1+x^2}\)</li>
+</ul>
+
+<p>Indice: Quand \(\cos(x) &gt;0\), on a \(\cos(x) = \sqrt{1 - \sin^2(x)}\). Pareil pour \(\sin(x)\).</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Application des dérivées</h2></hgroup><article  id="application-des-derivees">
+
+</article></slide><slide class=""><hgroup><h2>Théorème et inégalité des acroissements finis (TAF/IAF)</h2></hgroup><article  id="theoreme-et-inegalite-des-acroissements-finis-tafiaf">
+
+<div class="theoreme">
+<p>Soit \(f: I = [a,b] \to \mathbb{R}\) une fonction dérivable sur \(I\). Il existe alors au moins un point \(c\) dans l’intervalle \((a, b)\) tel que \[f(b) - f(a) = f&#39;(c) (b - a)\]</p></div>
+
+<div class="theoreme">
+<p>Soit \(f: I = [a,b] \to \mathbb{R}\) une fonction dérivable sur \(I\). On suppose que pour tout \(x \in (a, b)\), on a \(m \leq f&#39;(x) \leq M\). Alors, pour tout \(x \in (a, b)\), \[m(x - a) \leq f(x) - f(a) \leq M(x-a)\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>TAF et IAF (II)</h2></hgroup><article  id="taf-et-iaf-ii">
+
+<ul>
+<li>TAF: La corde \([AB]\) entre \(A = (a, f(a))\) et \(B = (b, f(b))\) est parallèle à une des tangentes à la courbe (TAF).</li>
+<li>IAF: Si les tangentes extrêmes ont pour pentes \(m\) et \(M\), la courbe est comprise entre \(a\) et \(b\) entre les droites passant par \(A\) et de coefficient directeur \(m\) et \(M\).</li>
+</ul>
+
+<p><img src="figures/differentielles_taf-iaf-1.png" width="768" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Tableau de variations</h2></hgroup><article  id="tableau-de-variations">
+
+<div class="proposition">
+<p>Soit \(f: I = [a,b] \to \mathbb{R}\) une fonction continue sur \(I\) et dérivable sur \(I\) (sauf éventuellement en un nombre <alert>fini</alert> de points).</p>
+
+<ul>
+<li>\(f&#39; \geq 0\) (resp. \(f &gt; 0\) sauf éventuellement en un nombre <alert>fini</alert> de points) sur \(I\), alors \(f\) est croissante (resp. strictement croissante) sur \(I\)</li>
+<li>\(f&#39; \leq 0\) (resp. \(f &lt; 0\) sauf éventuellement en un nombre <alert>fini</alert> de points) sur \(I\), alors \(f\) est décroissante (resp. strictement décroissante) sur \(I\)</li>
+<li>\(f&#39; = 0\) sur \(I\), alors \(f\) est constante sur \(I\)</li>
+</ul></div>
+
+<p>C’est une conséquence directe du TAF.</p>
+
+</article></slide><slide class=""><hgroup><h2>Théorème de la bijection</h2></hgroup><article  class="smaller" id="theoreme-de-la-bijection">
+
+<div class = "theoreme">
+
+<p>Soit \(f\) une fonction <alert>continue</alert> et <alert>strictement monotone</alert> sur un intervalle \(I\). Alors \(f\) est bijective de \(I\) sur \(f(I)\).</p>
+
+<p>De plus \(f(I)\) se déduit simplement de \(I\) et de la monotonie de \(f\) comme suit: \[
+\begin{array}{|c||c|c|}
+\hline
+\text{forme de } I &amp; f \text{ croissante} &amp; f \text{ décroissante} \\
+\hline
+\hline
+[a, b] &amp; f(I) = [f(a), f(b)] &amp; f(I) = [f(b), f(a)] \\
+\hline
+[a, b) &amp; f(I) = [f(a), \lim_{b^-} f) &amp; f(I) = (\lim_{b^-} f , f(a)] \\
+\hline
+(a, b] &amp; f(I) = (\lim_{a^+} f, f(b)] &amp; f(I) = [f(b) , \lim_{a^+} f) \\
+\hline
+(a, b) &amp; f(I) = (\lim_{a^+} f, \lim_{b^-} f) &amp; f(I) = (\lim_{b^-} f , \lim_{a^+} f) \\
+\hline
+\end{array}
+\]</p>
+
+<p>On utilise souvent le signe de la dérivée pour prouver la stricte monotonie</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (I)</h2></hgroup><article  id="exercices-i">
+
+<p>Déterminer l’image de l’intervalle \(I\) par les fonctions suivantes: \[
+\small
+\begin{align}
+f: x \mapsto e^x - x &amp; &amp; \text{pour } I = \mathbb{R} &amp; &amp; \text{pour } I = (0, e) \\
+g: x \mapsto \ln(x+1) -x &amp; &amp; \text{pour } I = (-1, 0) &amp; &amp; \text{pour } I = [0, e] \\
+h: x \mapsto \frac{e^x + 1}{x+2} &amp; &amp; \text{pour } I = (-\infty, -2) &amp; &amp; \text{pour } I = \mathbb{R}_+ \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-3">
+
+<ul>
+<li>\(f\) est strictement décroissante sur \(\mathbb{R}_-\), strictement croissante sur \(\mathbb{R}_+\). De plus, \(\lim_{-\infty} f = \lim_{+\infty} f = +\infty\) et \(f(0) = 1\) donc \(f(\mathbb{R}) = [1, +\infty)\) et \(f((0, e)) = (1, e^e - e)\).</li>
+<li>\(g\) est strictement croissante sur \((-1, 0]\) et strictement décroissante sur \([0, +\infty)\). De plus, \(\lim_{-1} f = -\infty\), \(f(0) = 0\) et \(f(e) = \ln(1+e) - e\) donc \(f((-1, 0)) = (-\infty, 0)\) et \(f([0, e]) = [\ln(1+e) - e, 0]\)</li>
+<li>\(h\) est strictement décroissante sur \((-\infty, -2)\) et strictement croissante sur \([0, +\infty)\). De plus, \(\lim_{-\infty} f = 0\), \(\lim_{-2} f = -\infty\), \(f(0) = 1\) et \(\lim_{+\infty} f = +\infty\) donc \(f((-\infty, -2)) = (-\infty, 0)\) et \(f([0, \infty)) = [1, +\infty)\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (II)</h2></hgroup><article  id="exercices-ii">
+
+<ul>
+<li>En fonction de la valeur du paramètre \(m\), indiquer le nombre de solutions de l’équation \(x^3 - x = m\).</li>
+<li>Montrer que l’équation \(x^3 + x + 1 = 0\) admet une unique solution (notée \(\alpha\)) et que \(-1 &lt; \alpha &lt; 0\).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-4">
+
+<p>Corrigé en cours</p>
+
+</article></slide><slide class=""><hgroup><h2>Application (I)</h2></hgroup><article  id="application-i">
+
+<p>Trouver toutes les applications dérivables de \(\mathbb{R}_+^*\) telles que \(f(xy) = f(x) + f(y)\) (on peut se rappeler que \(\ln(x)\) est une primitive de \(1/x\))</p>
+
+<p>On raisonne par analyse-synthèse.</p>
+
+</article></slide><slide class=""><hgroup><h2>Application (II)</h2></hgroup><article  id="application-ii">
+
+<p><b>Analyse</b> Soit \(f\) une telle fonction. Soit \(y &gt; 0\), on pose \(g_y: x \mapsto f(xy)\). En dérivant \(g_y\), on obtient: \[
+g&#39;_y(x) = y f&#39;(xy) = f&#39;(x)
+\] Et en particulier, en \(x = 1\), \(f&#39;(y) = f&#39;(1) / y\) d’où on déduit que \(f(y) = a (\ln(y) + C)\) avec \(a = f&#39;(1)\) et \(C\) une constante à déterminer. On a également \(f(1) = f(1 \times 1) = 2f(1)\) donc \(f(1) = 0\) et \(aC = 0\),  \(a = 0\) ou \(C = 0\). Au final \(f\) doit être de la forme \(f(y) = a\ln(y)\).</p>
+
+<p><b>Synthèse</b> Soit \(f\) une fonction de la forme \(f(y) = a \ln(y)\) avec \(a \in \mathbb{R}\). On vérifie aisément que \(f\) est dérivable et satisfait \(f(xy) = f(x) + f(y)\) sur \(\mathbb{R}_+^*\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Dérivées successives</h2></hgroup><article  id="derivees-successives">
+
+<div class="définition">
+<p>On définit les dérivées successives de \(f\) en un point \(a \in D_f\) (resp. sur \(I \subset D_f\)) par \[
+\begin{cases}
+ &amp; f^{(0)} &amp; = &amp; f \\
+\forall k \in \mathbb{N}^* &amp; f^{(k)} &amp; = &amp; [f^{(k-1)}]&#39;
+\end{cases}
+\]</p>
+
+<ul>
+<li>On dit que \(f\) est \(k\) fois dérivable en \(a\) (resp. sur \(I\)) lorsque \(f^{(k)}(a)\) existe (resp. \(f^{(k)}\) est définie sur \(I\)).</li>
+<li>On dit que \(f\) est infiniment dérivable en \(a\) (resp. sur \(I\)) lorsque \(f^{(k)}(a)\) existe (resp. \(f^{(k)}\) est définie sur \(I\)) pour tout \(k \in \mathbb{N}\).</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Dérivées successives (II)</h2></hgroup><article  id="derivees-successives-ii">
+
+<div class="définition">
+<ul>
+<li>Une fonction \(f\) est dite \(D^k\) (en \(a\), sur \(I\)) si elle est \(k\)-fois dérivable (en \(a\), sur \(I\))</li>
+<li>Une fonction \(f\) est dite \(C^k\) (en \(a\), sur \(I\)) si elle est \(k\)-fois dérivable et que \(f^{(k)}\) est continue (en \(a\), sur \(I\)).</li>
+<li>Une fonction \(f\) est dite \(C^\infty\) (en \(a\), sur \(I\)) si elle est infiniment dérivable (en \(a\), sur \(I\)) (et on a \(D^\infty = C^\infty\))</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Exemples</h2></hgroup><article  id="exemples">
+
+<ul>
+<li>Tout polynôme est infiniment dérivable sur \(\mathbb{R}\)</li>
+<li>Toute fraction rationnelle est infiniment dérivable sur son domaine de définition</li>
+<li>\(x \mapsto \sqrt{x}\) est infiniment dérivable sur \(\mathbb{R}_+^*\) mais seulement \(C^0\) en \(0\).</li>
+<li>\(\sin\), \(\cos\), \(\tan\), \(\exp\), \(\ln\) sont \(C^\infty\) sur leurs domaines respectifs</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices">
+
+<p>Etudier l’existence des dérivées successives de</p>
+
+<ul>
+<li>\(f: x \mapsto (x - 1)^{3/2}\)</li>
+<li>\(g: x \mapsto \begin{cases} x^2 &amp; \text{si} &amp; x \geq 0 \\ x^3 &amp; \text{si} &amp; x &lt; 0 \end{cases}\)</li>
+<li>\(h: x \mapsto \begin{cases} x^2 \sin(1/x) &amp; \text{si} &amp; x \neq 0 \\ 0 &amp; \text{si} &amp; x = 0 \end{cases}\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-5">
+
+<ul>
+<li>\(f\) est définie sur \([1, +\infty)\), \(C^{\infty}\) sur \((1, +\infty)\) mais seulement \(C^1\) (dérivable de dérivée continue) en \(1\).</li>
+<li>\(g\) est \(C^\infty\) sur \(\mathbb{R}^*\) mais seulement \(C^1\) en \(0\).</li>
+<li>\(h\) est \(C^\infty\) sur \(\mathbb{R}^*\) mais seulement \(C^1\) en \(0\).</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Étude de fonctions</h2></hgroup><article  id="etude-de-fonctions">
+
+</article></slide><slide class=""><hgroup><h2>Tangentes verticales</h2></hgroup><article  id="tangentes-verticales">
+
+<div class="proposition">
+<p>Soit \(f: I = [a,b] \to \mathbb{R}\) une fonction continue sur \(I\), dérivable sur \(I\setminus \{a\}\). Si \(\lim_{a+} f&#39; = \pm \infty\), alors le graphe \(f\) admet une tangente verticale en \(a\).</p></div>
+
+<p><img src="figures/differentielles_tangente-verticale-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Recherche de minimums</h2></hgroup><article  id="recherche-de-minimums">
+
+<p>Soit \(f: I \to \mathbb{R}\) une fonction dérivable qu’on cherche à minimiser (typiquement une énergie, un temps, une surface). Il est parfois plus facile de chercher le minimum de \(f\) en passant par \(f&#39;\) qu’en faisant le tableau de variation complet de \(f\).</p>
+
+<div class="definition">
+<p>Les points critiques de \(f\) sont les points d’annulation de \(f&#39;\) <alert>et</alert> les bornes de son domaine de définition \(I\).</p></div>
+
+<div class="proposition">
+<p>Les minimums <alert>locaux</alert> de \(f\) sur \(I\) sont forcément atteints en un point critique.</p></div>
+
+<p>Il suffit donc d’étudier les points critiques (généralement peu nombreux) pour savoir où \(f\) est (localement) minimum et de comparer ces mininums pour trouver le minimum global.</p>
+
+<p>On note aussi que maximiser \(f\) revient à minimiser \(-f\), on se contente donc ici de chercher des minimums.</p>
+
+</article></slide><slide class=""><hgroup><h2>Point critique et minimum</h2></hgroup><article  id="point-critique-et-minimum">
+
+<p>Attention, un minimum est toujours un point critique mais un point critique n’est pas forcément un minimum.</p>
+
+<p><img src="figures/differentielles_point-critique-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Nature des points critiques</h2></hgroup><article  id="nature-des-points-critiques">
+
+<p>Si \(f\) est deux-fois dérivable, on peut déterminer si un point critique (hors bornes du domaine) est un maximum local ou un minimum local en fonction du signe de \(f&#39;&#39;\).</p>
+
+<div class="proposition">
+<p>Soit \(f: I = [a,b] \to \mathbb{R}\) une fonction deux fois dérivable sur \(I\) et \(a\) un point d’annulation de \(f&#39;\).</p>
+
+<ul>
+<li>\(f&#39;&#39;(a) &gt; 0\), \(a\) est un minimum local de \(f\)</li>
+<li>\(f&#39;&#39;(a) &lt; 0\), \(a\) est un maximum local de \(f\)</li>
+<li>\(f&#39;&#39;(a) = 0\) on peut pas conclure.</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Nature du point quand \(f&#39;&#39;(a) \neq 0\)</h2></hgroup><article  id="nature-du-point-quand-fa-neq-0">
+
+<p><img src="figures/differentielles_point-critique-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Nature du point quand \(f&#39;&#39;(a) = 0\)</h2></hgroup><article  id="nature-du-point-quand-fa-0">
+
+<p><img src="figures/differentielles_point-critique-3-1.png" width="720" /></p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Mise en oeuvre</h2></hgroup><article  id="mise-en-oeuvre">
+
+</article></slide><slide class=""><hgroup><h2>Application (I)</h2></hgroup><article  id="application-i-1">
+
+<p>Un pièton peut s’éloigner de \(x\) mètres d’une antenne-relais (située en \(x=0\)). La puissance \(f(x)\) des ondes-relais reçues est donnée par \[f(x) = \frac{e^{-(x - \alpha)^2}}{x}\] avec \(\alpha = 2\).</p>
+
+<ul>
+<li>À quelle distance doit-il se placer pour recevoir le moins d’ondes-relais?</li>
+<li>Même question s’il ne peut s’éloigner de plus de 3 mètres?</li>
+<li>Où doit-il se placer pour maximiser la réception?</li>
+<li>Même question s’il ne peut pas s’approcher de l’antenne à moins de 1 mètre.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Application (II)</h2></hgroup><article  id="application-ii-1">
+
+<p>Un campeur est situé à \(3\) kilomètres en aval de sa tente, de l’autre côté d’une rivière qui fait \(1\) km de large. Il nage à \(2\) km/h et marche à \(4\) km/h.</p>
+
+<ul>
+<li>Quel est le plus court chemin pour rentrer?</li>
+<li>Même question s’il existe un pont en face de sa tente.</li>
+</ul>
+
+<p><img src="figures/differentielles_riviere-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (I)</h2></hgroup><article  class="small" id="exercices-i-1">
+
+<p>Trouver les minimums et maximums globaux des fonctions suivantes (il est recommandé de s’aider d’un ordinateur pour calculer \(f\) en différentes valeurs, les exercices avec un (*) sont difficiles): \[
+\begin{align*}
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 &amp; &amp; \text{ pour } z \in [-2, 6] \\
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 &amp; &amp; \text{ pour } z \in [-2, 4] \\
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 &amp; &amp; \text{ pour } z \in [0, 2] \\
+f(t) = \frac{3 - 4t}{t^2 + 1} &amp; &amp; \text{ pour } t \in [-2, 4] \\
+f(x) = 3\cos(2x) - 5x &amp; &amp; \text{ pour } x \in [0, 6] \quad (*)\\
+f(x) = x\cos(x) - \sin(x) &amp; &amp; \text{ pour } x \in [-15, -5] \\
+f(z) = z^2e^{1-z} &amp; &amp; \text{ pour } z \in [-1/2, 5/2]\\
+f(t) = \ln(t^2 + t + 3) &amp; &amp; \text{ pour } t \in [-2, 2]
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  class="small" id="solutions-6">
+
+<p>\[
+\small
+\begin{array}{|cccc|}
+\hline
+f &amp; I &amp; \min &amp; \max \\
+\hline
+\hline 
+2z^4 - 16z^3 + 20z^2 - 7 &amp; [-2, 6] &amp; -257 &amp; 233 \\
+2z^4 - 16z^3 + 20z^2 - 7 &amp; [-2, 4] &amp; -199 &amp; 233 \\
+2z^4 - 16z^3 + 20z^2 - 7 &amp; [0, 2] &amp; -23 &amp; -1 \\
+\frac{3-4t}{t^2 + 1}     &amp; [-2, 4] &amp;  f(1 + \sqrt{2})  &amp; f(1 - \sqrt{2}) \\
+3\cos(2x) - 5x      &amp; [0, 6] &amp; f(0) &amp; f(30) \\
+x\cos(x) - \sin(x)      &amp; [-15, -5] &amp; f(-5) &amp; f(-15) \\
+x^2e^{1 - x} &amp; [-1/2, 5/2] &amp; f(0) = 0 &amp; f(2) = 4/e &amp; \\
+\ln(t^2 + t + 3) &amp; [-2, 2] &amp; \ln(3.75) &amp; 2\ln(3) \\
+\hline
+\end{array}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (II)</h2></hgroup><article  id="exercices-ii-1">
+
+<p>Calculer, à l’aide de dérivées, les limites suivantes: \[
+\begin{align*}
+\lim_{x \to 3} \frac{\ln(x) - \ln(3)}{x - 3} &amp; &amp; \lim_{x \to 2} \frac{\sqrt{x+2} - 2}{x - 2} \\
+\lim_{x \to 1} \frac{e^x - e}{x - 1} &amp; &amp; \lim_{x \to -1} \frac{x^{2017} + 1}{x + 1}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-7">
+
+<p>\[
+\begin{align*}
+\lim_{x \to 3} \frac{\ln(x) - \ln(3)}{x - 3} = \frac{1}{3} &amp; &amp; \lim_{x \to 2} \frac{\sqrt{x+2} - 2}{x - 2} = \frac{1}{4}\\
+\lim_{x \to 1} \frac{e^x - e}{x - 1} = e &amp; &amp; \lim_{x \to -1} \frac{x^{2017} + 1}{x + 1} = 2017
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (III)</h2></hgroup><article  id="exercices-iii">
+
+<p>À l’aide de la méthode de votre choix, montrez les inégalités (dites de convexité) suivantes: \[
+\small
+\begin{align*}
+\forall x \in \mathbb{R} &amp; \quad e^x \geq 1 + x \\
+\forall x \geq 0 &amp; \quad xe^x + 1 \geq e^x \geq 1 + x + \frac{x^2}{2} \\
+\forall x \in (-1, +\infty) &amp; \quad \ln(1+x) \leq x \\
+\forall x \leq 0 &amp; \quad 1+x \leq e^x \leq 1 + x + \frac{x^2}{2}
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (IV)</h2></hgroup><article  id="exercices-iv">
+
+<p>On considère la fonction \(f(x) = (x+1)e^{-x}\)</p>
+
+<ul>
+<li>Montrer par récurrence que pour tout entier \(n \geq 0\), il existe deux réels \(a_n\) et \(b_n\) tels que \(f^{(n)}(x) = (a_n x + b_n)e^{-x}\).</li>
+<li>Expliciter \(a_n\)</li>
+<li>Vérifier que la suite \(c_n = (-1)^n b_n\) est arithmétique. En déduire \(b_n\).</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
