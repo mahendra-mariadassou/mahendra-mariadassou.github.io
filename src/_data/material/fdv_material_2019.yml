@@ -23,14 +23,16 @@
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/01_Revisions.html"
       - nature: Feuille d'exercices (révisions générales) <i class= "far fa-file-pdf" ></i>
-        at: "2019/Exercices/01_Equations_générales.pdf"
+        at: "2019/Exercices/01_1_Equations_générales.pdf"
       - nature: Feuille d'exercices (équations trigonométriques) <i class= "far fa-file-pdf" ></i>
-        at: "2019/Exercices/02_Equations_trigonométriques.pdf"
+        at: "2019/Exercices/01_2_Equations_trigonométriques.pdf"
 
     - name: Limites (opérations)
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/02_Limites.html"
+      - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/02_Limites.pdf"
 
     - name: Dérivées et Différentielles
       elements:
