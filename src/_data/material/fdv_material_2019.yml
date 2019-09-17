@@ -32,21 +32,21 @@
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/02_Limites.html"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
-        at: "2019/Supports/02_Limites.pdf"
+        at: "2019/Exercices/02_Limites.pdf"
 
     - name: Dérivées et Différentielles
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/03_Différentielles.html"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
-        at: "2019/Supports/03_Différentielles.pdf"
+        at: "2019/Exercices/03_Différentielles.pdf"
 
     - name: Développement Limités
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/04_Développements_limités.html"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
-        at: "2019/Supports/04_Développements_limités.pdf"
+        at: "2019/Exercices/04_Développements_limités.pdf"
 
     - name: Dérivée partielle
       elements:
