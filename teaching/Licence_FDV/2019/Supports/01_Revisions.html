@@ -101,7 +101,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Octobre 2018 - Promo Fluor</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Octobre 2019 - Promo Fluor</p>
           </hgroup>
   </slide>
 
@@ -115,30 +115,26 @@ slide:not(.current) .plotly.html-widget{
 <li>Manipulations standards</li>
 <li>Fonctions usuelles</li>
 <li>Trigonométrie</li>
+<li>Notations Somme et Produit</li>
 </ul></li>
-<li>Limite, Continuité et Dérivabilité</li>
-<li>Développements Limités</li>
+<li>Limite</li>
+<li>Dérivabilité</li>
+<li>Développements limités</li>
+<li>Dérivées partielles</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Objectifs</h2></hgroup><article  id="objectifs">
 
 <ul>
 <li>Connaître quelques propriétés de \(\mathbb{N}\), \(\mathbb{Q}\) et \(\mathbb{R}\)</li>
-<li><em>Savoir faire une récurrence</em></li>
 <li>Savoir manipuler des puissances (en particulier avec \(e^x\) et \(\ln{x}\))</li>
 <li>Savoir résoudre des équations et des inéquations</li>
 <li>Connaître les valeurs et les identités remarquables en trigonométrie</li>
+<li>Utiliser les fonctions trigonométriques inverses</li>
+<li>Manipuler les notations somme et produit</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Logique (vue avec Marc)</h2></hgroup><article  id="logique-vue-avec-marc">
-
-<ul>
-<li>Quantificateurs</li>
-<li>Tables de vérités</li>
-<li>Implications et équivalence</li>
-<li>Négation</li>
-<li>Fonctions</li>
-</ul>
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Les ensembles de nombres</h2></hgroup><article  id="les-ensembles-de-nombres">
 
 </article></slide><slide class=""><hgroup><h2>Les nombres</h2></hgroup><article  id="les-nombres">
 
@@ -151,36 +147,6 @@ slide:not(.current) .plotly.html-widget{
 <li>\(\mathbb{R}\): les nombres réels (tous ceux qui peuvent apparaître comme la <em>mesure</em> de quelques chose et leurs opposés). La majorité des nombres réels ne sont pas rationnels: \(\sqrt{2}, \pi, e\).</li>
 <li>\(\mathbb{C}\): les nombres complexes (très utiles pour factoriser des polynômes ou représenter des courants électromagnétiques)</li>
 </ul>
-
-</article></slide><slide class=""><hgroup><h2>Le principe de récurrence (classique)</h2></hgroup><article  id="le-principe-de-recurrence-classique">
-
-<div class="theorem">
-Soit \(P(n)\) une propriété dépendant d’un entier \(n\). Soit \(n_0 \in \mathbb{N}\). Si les deux propriétés suivantes sont vérifiées: <br>
-
-<ul>
-
-<li>
-
-\(P(n_0)\) est vraie. [Initialisation]
-
-</li>
-
-<li>
-
-\(\forall n \geq n_0, P(n) \rightarrow P(n+1)\) [Hérédité]
-
-</li>
-
-</ul>
-
-<p><br> Alors \(\forall n \geq n_0, P(n)\) est vraie</p></div>
-
-<p><br></p>
-
-<div class="exercice">
-<p>Soit \(n\) un entier naturel non nul, trouver une formule close (c’est à dire sans \(\dots\)) et la démontrer pour</p>
-
-<p>\(S_n = \frac{1}{2!} + \frac{2}{3!} + \dots + \frac{n-1}{n!} + \frac{n}{(n+1)!}\)</p></div>
 
 </article></slide><slide class=""><hgroup><h2>La factorielle</h2></hgroup><article  id="la-factorielle">
 
@@ -234,6 +200,36 @@ Soit \(P(n)\) une propriété dépendant d’un entier \(n\). Soit \(n_0 \in \ma
 </tr>
 </table>
 
+</article></slide><slide class=""><hgroup><h2>Le principe de récurrence (classique)</h2></hgroup><article  id="le-principe-de-recurrence-classique">
+
+<div class="theorem">
+Soit \(P(n)\) une propriété dépendant d’un entier \(n\). Soit \(n_0 \in \mathbb{N}\). Si les deux propriétés suivantes sont vérifiées: <br>
+
+<ul>
+
+<li>
+
+\(P(n_0)\) est vraie. [Initialisation]
+
+</li>
+
+<li>
+
+\(\forall n \geq n_0, P(n) \rightarrow P(n+1)\) [Hérédité]
+
+</li>
+
+</ul>
+
+<p><br> Alors \(\forall n \geq n_0, P(n)\) est vraie</p></div>
+
+<p><br></p>
+
+<div class="exercice">
+<p>Soit \(n\) un entier naturel non nul, trouver une formule close (c’est à dire sans \(\dots\)) et la démontrer pour</p>
+
+<p>\(S_n = \frac{1}{2!} + \frac{2}{3!} + \dots + \frac{n-1}{n!} + \frac{n}{(n+1)!}\)</p></div>
+
 </article></slide><slide class=""><hgroup><h2>Parité, imparité et division euclidienne</h2></hgroup><article  id="parite-imparite-et-division-euclidienne">
 
 <p>Tout nombre entier \(n\) est soit pair, soit impair.</p>
@@ -268,13 +264,36 @@ Montrer (par l’absurde) que \(\sqrt{2}\) n’est pas rationnel. On pourra comm
 
 </li>
 
+<li>
+
+Généraliser et montrer que \(\sqrt{p}\) est irrationnel dès que \(p\) est premier
+
+</li>
+
 </div>
 
 <p><strong>Remarque</strong></p>
 
 <p>\(\sqrt{2}, \pi, e\) sont des nombres irrationnels. La nécessité de construire \(\mathbb{R}\) provient de raisons non-algébriques, pour manipuler des quantités d’intérêt (en géométrie pour \(\sqrt{2}\) et \(\pi\), en calculs d’intérêts pour \(e\)) qu’on ne peut pas exprimer comme des fractions d’entiers.</p>
 
-</article></slide><slide class=""><hgroup><h2>Majorant, minorant</h2></hgroup><article  id="majorant-minorant">
+</article></slide><slide class=""><hgroup><h2>Intervalle réel</h2></hgroup><article  id="intervalle-reel">
+
+<div class="definition">
+Un <alert>intervalle</alert> est un sous-ensemble \(I\) de \(\mathbb{R}\) tel que si \(x\) et \(y\) sont dans \(I\) alors tout \(t\) compris entre \(x\) et \(y\) est élément de \(I\).</div>
+
+<p><strong>Remarque</strong> Un intervalle est un sous-ensemble de \(\mathbb{R}\) sans &ldquo;trous&rdquo;, sans discontinuité.</p>
+
+<p>Il y a 3 types d’intervalles:</p>
+
+<ul>
+<li><em>ouvert</em>: \(]a, b[ = \{ x \in \mathbb{R} \quad \text{tels que} \quad a &lt; x &lt; b \}\) avec \(a\) et \(b\) dans \(\mathbb{R} \cup \{-\infty, +\infty\}\)</li>
+<li><em>semi-ouvert</em>: \([a, b[ = \{ x \in \mathbb{R} \quad \text{tels que} \quad a \leq x &lt; b \}\) avec \(a \in \mathbb{R}\) et \(b \in \mathbb{R} \cup \{+\infty\}\) ou \(]a, b]\) avec des contraintes sumilaires.</li>
+<li><em>fermés</em>: \([a, b] = \{ x \in \mathbb{R} \quad \text{tels que} \quad a \leq x \leq b \}\) avec \(a\) et \(b\) dans \(\mathbb{R}\)</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Quelques propriétés de \(\mathbb{R}\) (optionnel)</h2></hgroup><article  id="quelques-proprietes-de-mathbbr-optionnel">
+
+</article></slide><slide class=""><hgroup><h2>Majorant, minorant (optionnel)</h2></hgroup><article  id="majorant-minorant-optionnel">
 
 <div class="definition">
 <p>Un sous ensemble \(A \subset \mathbb{R}\) est dit <alert>majoré</alert> (resp. <alert>minoré</alert>) s’il existe un réel \(M\) (resp. \(m\)) tel que \[\forall x \in A, x \leq M \quad \quad \text{(resp. } x \geq m \text{)}\] On dit alors que \(M\) est majorant (resp. \(m\) est un minorant) de \(A\). <br> Si \(A\) est à la fois majorée et minorée, elle est <alert>bornée</alert>.</p></div>
@@ -305,9 +324,9 @@ Montrer que \(A\) est bornée si et seulement si il existe un réel \(M\) tel qu
 
 </li>
 
-</article></slide><slide class=""><hgroup><h2>Borne supérieure, inférieure</h2></hgroup><article  id="borne-superieure-inferieure">
+</article></slide><slide class=""><hgroup><h2>Borne supérieure, inférieure (optionnel)</h2></hgroup><article  id="borne-superieure-inferieure-optionnel">
 
-<p>Si \(M\) est un majorant de \(A\), alors \(M+1, M+2, \dots\), aussi. On peut chercher le <em>plus petit</em> majorant.</p>
+<p>Si \(M\) majore \(A\), alors tout \(x \geq M\) aussi. On cherche le <em>plus petit</em> majorant.</p>
 
 <div class="definition">
 <p>Soit \(A\) une partie <alert>non-vide</alert> de \(\mathbb{R}\), alors on dit que:</p>
@@ -368,7 +387,7 @@ Même question pour \(\inf A\)?
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Maximum, Minimum</h2></hgroup><article  id="maximum-minimum">
+</article></slide><slide class=""><hgroup><h2>Maximum, Minimum (optionnel)</h2></hgroup><article  id="maximum-minimum-optionnel">
 
 <div class="definition">
 
@@ -397,20 +416,7 @@ Soit \(A\) une partie minorée de \(\mathbb{R}\). Si \(\inf A\) est un élément
 <li>Toute partie <em>majorée</em> (resp. <em>minorée</em>) de \(\mathbb{Z}\) admet un maximum (resp. un minimum). Mais ce n’est plus vrai avec \(\mathbb{Q}\).</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Intervalle</h2></hgroup><article  id="intervalle">
-
-<div class="definition">
-Un <alert>intervalle</alert> est un sous-ensemble \(I\) de \(\mathbb{R}\) tel que si \(x\) et \(y\) sont dans \(I\) alors tout \(t\) compris entre \(x\) et \(y\) est élément de \(I\).</div>
-
-<p><strong>Remarque</strong> Un intervalle est un sous-ensemble de \(\mathbb{R}\) sans &ldquo;trous&rdquo;, sans discontinuité.</p>
-
-<p>Il y a 3 types d’intervalles:</p>
-
-<ul>
-<li><em>ouvert</em>: \(]a, b[ = \{ x \in \mathbb{R} \quad \text{tels que} \quad a &lt; x &lt; b \}\) avec \(a\) et \(b\) dans \(\mathbb{R} \cup \{-\infty, +\infty\}\)</li>
-<li><em>semi-ouvert</em>: \([a, b[ = \{ x \in \mathbb{R} \quad \text{tels que} \quad a \leq x &lt; b \}\) avec \(a \in \mathbb{R}\) et \(b \in \mathbb{R} \cup \{+\infty\}\) ou \(]a, b]\) avec des contraintes sumilaires.</li>
-<li><em>fermés</em>: \([a, b] = \{ x \in \mathbb{R} \quad \text{tels que} \quad a \leq x \leq b \}\) avec \(a\) et \(b\) dans \(\mathbb{R}\)</li>
-</ul>
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Opérations standards</h2></hgroup><article  id="operations-standards">
 
 </article></slide><slide class=""><hgroup><h2>Manipulations standards</h2></hgroup><article  id="manipulations-standards">
 
@@ -460,7 +466,7 @@ Un <alert>intervalle</alert> est un sous-ensemble \(I\) de \(\mathbb{R}\) tel qu
 <li>\(|2x + 1| = 3\)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Puissance</h2></hgroup><article  id="puissance" class="larger">
+</article></slide><slide class=""><hgroup><h2>Puissance</h2></hgroup><article  class="larger" id="puissance">
 
 <div class="definition">
 <p>Pour \(a &gt; 0\) et \(x \in \mathbb{R}\), on pose \(a^x = e^{x \ln a}\)</p></div>
@@ -582,6 +588,8 @@ Un <alert>intervalle</alert> est un sous-ensemble \(I\) de \(\mathbb{R}\) tel qu
 <li>\(5\left( \frac{1}{3} \right)^{x} \leq 10^{-10}\)</li>
 <li>\(\sqrt{x} \geq x + 1\)</li>
 </ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Rappels de trigonométrie</h2></hgroup><article  id="rappels-de-trigonometrie">
 
 </article></slide><slide class=""><hgroup><h2>Trigonométrie: les bases (I)</h2></hgroup><article  id="trigonometrie-les-bases-i">
 
@@ -723,6 +731,8 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 <li>\(\tan(3x) = 1\)</li>
 </ul>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Fonctions trigonométrique inverse</h2></hgroup><article  id="fonctions-trigonometrique-inverse">
+
 </article></slide><slide class=""><hgroup><h2>Fonctions trigonométriques inverses</h2></hgroup><article  id="fonctions-trigonometriques-inverses">
 
 <ul>
@@ -805,6 +815,8 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 <li>\(\sqrt{3}\cos(2x) + \sin(2x) &gt; 0\)</li>
 </ul>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Somme et Produit</h2></hgroup><article  id="somme-et-produit">
+
 </article></slide><slide class=""><hgroup><h2>Notations Somme et Produit</h2></hgroup><article  id="notations-somme-et-produit">
 
 <p>On utilise les signes \(\sum\) et \(\prod\) pour désigner des sommes et des produits</p>
@@ -813,13 +825,13 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 
 <p>\[ \prod_{i = 0}^n u_i = u_0 \times u_1 \times \dots \times u_{n-1} \times u_n\]</p>
 
-<p>L’ensemble des valeurs prises par l’indice \(î\) est ici \(\{0, 1, \dots, n-1, n\}\) mais il peut bien sûr être différent. Par exemple, pour tout \(n \geq 1\), on a \[n! = \prod_{i=1}^n i\].</p>
+<p>L’ensemble des valeurs prises par l’indice \(i\) est ici \(\{0, 1, \dots, n-1, n\}\) mais il peut bien sûr être différent. Par exemple, pour tout \(n \geq 1\), on a \[n! = \prod_{i=1}^n i\].</p>
 
 </article></slide><slide class=""><hgroup><h2>Variable muette</h2></hgroup><article  id="variable-muette">
 
 <p>La variable \(i\) dans la notation précédente est dite <strong>muette</strong>, elle n’a de sens qu’à l’intérieur de CE symbole \(\sum\) (ou \(\prod\)).</p>
 
-<p>Autrement dit les \(î\) situés à l’<strong>extérieur</strong> du symbole \(\sum\) sont complétement sans indépendants des \(i\) situés à l’<strong>intérieur</strong> du symbole \(\sum\).</p>
+<p>Autrement dit les \(i\) situés à l’<strong>extérieur</strong> du symbole \(\sum\) sont complétement indépendants des \(i\) situés à l’<strong>intérieur</strong> du symbole \(\sum\).</p>
 
 <p>On peut donc remplacer le symbole \(i\) par un autre, par exemple \(j\), à condition de rester <strong>cohérent</strong>: \[ \sum_{i = 0}^n u_i = \sum_{j = 0}^n u_j\]</p>
 
@@ -865,7 +877,7 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 <div class="exercice">
 </div>
 
-<p>Montrer que pour tout \(n \in \mathbb{N}\), on a \[\sum_{k=1}^n k^2 = n + 2\sum_{k=1}^{n-1}k + \sum_{k=0}^{n-1} k^2\] <br></p>
+<p>En posant \(j = k-1\), montrer que pour tout \(n \in \mathbb{N}\), on a \[\sum_{k=1}^n k^2 = n + 2\sum_{j=1}^{n-1} j + \sum_{j=0}^{n-1} j^2\] <br></p>
 
 </article></slide><slide class=""><hgroup><h2>Résultats classique (à connaître)</h2></hgroup><article  id="resultats-classique-a-connaitre">
 
@@ -877,7 +889,7 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 <li>\(\sum_{i=1}^n i^3 = \frac{n^2(n+1)^2}{4}\)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Somme des premiers termes d’une suite géométrique</h2></hgroup><article  id="somme-des-premiers-termes-dune-suite-geometrique">
+</article></slide><slide class=""><hgroup><h2>Somme des termes d’une suite géométrique</h2></hgroup><article  id="somme-des-termes-dune-suite-geometrique">
 
 <p>Cette formule sert dans tous les chapitres. Vous la connaissez en général avec \(n = 1\).</p>
 
@@ -904,13 +916,13 @@ Pour faire la différence avec les angles non-orientés, on utilise la notion d�
 
 <li>
 
-\(\prod_{i=1}^n \frac{i}{i+1}\)
+\(\sum_{i=1}^n \ln \left( \frac{i}{i+1} \right)\)
 
 </li>
 
 <li>
 
-\(\sum_{i=1}^n \ln \left( \frac{i}{i+1} \right)\)
+\(\prod_{i=1}^n \frac{i}{i+1}\)
 
 </li>
 
