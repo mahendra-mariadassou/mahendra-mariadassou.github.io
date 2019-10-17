@@ -37,6 +37,8 @@
         at: "2019/Supports/02_Limites.html"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/02_Limites.pdf"
+      - nature: Corrigé (partiel) de la feuille d'exercices <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/02_Limites_corrigé.pdf"
 
     - name: Dérivées et Différentielles
       elements:
