@@ -9,19 +9,23 @@
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/Complexes.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/Complexes.pdf"
       - nature: Feuille d'exercices <i class= "far fa-file-pdf" ></i>
         at: "2019/Exercices/Exercices_complexes.pdf"
       - nature: Devoir Maison <i class= "far fa-file-pdf" ></i>
         at: "2019/Exercices/DM_Complexes.pdf"
       - nature: Quizz 2018 <i class= "far fa-file-pdf" ></i>
-        at: "2019/Exercices/2018_quizz_complexe.pdf"
+        at: "2019/Exercices/2018_quizz_complexes.pdf"
       - nature: Corrigé Quizz 2018 <i class= "far fa-file-pdf" ></i>
-        at: "2019/Exercices/2018_quizz_complexe_corrigé.pdf"
+        at: "2019/Exercices/2018_quizz_complexes_corrigé.pdf"
       
     - name: Rappels généraux
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/01_Revisions.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/01_Revisions.pdf"
       - nature: Feuille d'exercices (révisions générales) <i class= "far fa-file-pdf" ></i>
         at: "2019/Exercices/01_1_Equations_générales.pdf"
       - nature: Corrigé de la feuille d'exercices (révisions générales) <i class= "far fa-file-pdf" ></i>
@@ -35,6 +39,8 @@
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/02_Limites.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/02_Limites.pdf"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/02_Limites.pdf"
       - nature: Corrigé (partiel) de la feuille d'exercices <i class="far fa-file-pdf"></i>
@@ -44,6 +50,8 @@
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/03_Différentielles.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/03_Différentielles.pdf"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/03_Différentielles.pdf"
 
@@ -51,6 +59,8 @@
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/04_Développements_limités.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/04_Développements_limités.pdf"        
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/04_Développements_limités.pdf"
       - nature: Feuille d'exercices avec corrigés <i class="far fa-file-pdf"></i>
