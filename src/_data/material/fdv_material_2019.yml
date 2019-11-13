@@ -56,6 +56,8 @@
         at: "2019/Supports/03_Différentielles.pdf"
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/03_Différentielles.pdf"
+      - nature: Corrigé (partiel) de la feuille d'exercices <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/03_Différentielles_corrigé.pdf"
 
     - name: Développement Limités
       elements:
