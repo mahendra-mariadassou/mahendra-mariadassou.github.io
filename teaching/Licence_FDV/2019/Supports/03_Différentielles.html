@@ -458,7 +458,7 @@ Elle peut être difficile à calculer <alert>rigoureusement</alert>
 
 <p>C’est une conséquence directe du TAF.</p>
 
-</article></slide><slide class=""><hgroup><h2>Théorème de la bijection</h2></hgroup><article  class="smaller" id="théorème-de-la-bijection">
+</article></slide><slide class=""><hgroup><h2>Théorème de la bijection</h2></hgroup><article  id="théorème-de-la-bijection" class="smaller">
 
 <div class = "theoreme">
 
@@ -646,13 +646,31 @@ g&#39;_y(x) = y f&#39;(xy) = f&#39;(x)
 <p>Un campeur est situé à \(3\) kilomètres en aval de sa tente, de l’autre côté d’une rivière qui fait \(1\) km de large. Il nage à \(2\) km/h et marche à \(4\) km/h.</p>
 
 <ul>
-<li>Quel est le plus court chemin pour rentrer?</li>
+<li>Quel est le chemin le plus rapide pour rentrer?</li>
 <li>Même question s’il existe un pont en face de sa tente.</li>
 </ul>
 
 <p><img src="figures/differentielles_riviere-1.png" width="720" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Exercices (I)</h2></hgroup><article  class="small" id="exercices-i-1">
+</article></slide><slide class=""><hgroup><h2>Correction</h2></hgroup><article  id="correction">
+
+<p>On note \(3 - x\) la distance entre la position initiale du campeur et le point où il entre dans la rivière et se met à nager pour rejoindre sa tente.</p>
+
+<p>Pour minimiser son trajet, le campeur marche en ligne droite jusqu’au point de traversée, marchant \(3 - x\) km, puis nage en ligne droite du point de traversée jusqu’à la tente, nageant \(\sqrt{1 + x^2}\) km (d’après le théorème de Pythagore). <img src="figures/differentielles_riviere-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Correction (II)</h2></hgroup><article  id="correction-ii" class="smaller">
+
+<p>Son temps total de parcours \(T(x)\) est donc donné par \[
+T(x) = \frac{3-x}{4} + \frac{\sqrt{1+x^2}}{2}
+\] avec \(x \in [0, 3]\). \(T\) est dérivable sur \([0, 3]\) (comme somme et composée de fonctions dérivables) et a pour dérivée: \(T&#39;(x) = -\frac{1}{4} + \frac{x}{2\sqrt{1 + x^2}}\). On cherche le point d’annulation de \(T&#39;\).</p>
+
+<p>\[ T&#39;(x) = 0 \Leftrightarrow 4x = \sqrt{1 + x^2} \Leftrightarrow 16x^2 = 1 + x^2 \Leftrightarrow x = \pm 1/\sqrt{15}\] Les points critiques de \(T\) dans \([0, 3]\) sont donc \(\{0, 1/\sqrt{15}, 3\}\). En évaluant \(T\) en chacun des points, on trouve \(T(0) = 1.25\), \(T(3) = \sqrt{10}/2 \simeq 1.58\) et \(T(1/\sqrt{15}) \simeq 1.20\). Le minimum sur \([0, 3]\) est donc atteint en \(x = 1/\sqrt{15}\) et le trajet le plus rapide consiste à marcher \(3 - 1/\sqrt{15}\) km le long de la rive avant de nager en ligne droite vers la tente.</p>
+
+</article></slide><slide class=""><hgroup><h2>Correction (III)</h2></hgroup><article  id="correction-iii" class="smaller">
+
+<p>S’il y a un pont en face de la tente, une autre stratégie consiste à marcher jusqu’au pont puis à le traverser à pied (plutôt qu’à la nage). On a alors \(T(0) = 1 &lt; T(1/\sqrt{15})\) et le chemin le plus rapide consiste alors à marcher jusqu’au pont pour traverser la rivière à pied sur le pont.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (I)</h2></hgroup><article  id="exercices-i-1" class="small">
 
 <p>Trouver les minimums et maximums globaux des fonctions suivantes (il est recommandé de s’aider d’un ordinateur pour calculer \(f\) en différentes valeurs, les exercices avec un (*) sont difficiles): \[
 \begin{align*}
@@ -667,7 +685,7 @@ f(t) = \ln(t^2 + t + 3) &amp; &amp; \text{ pour } t \in [-2, 2]
 \end{align*}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  class="small" id="solutions-6">
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions-6" class="small">
 
 <p>\[
 \small
