@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intégration</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Intégration',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Mahendra Mariadassou' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+  </style>
+
+  <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">3 février 2020</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introduction</h2></hgroup><article  id="introduction">
+
+</article></slide><slide class=""><hgroup><h2>Avant propos</h2></hgroup><article  id="avant-propos">
+
+<p>L’objectif de ce cours est de comprendre l’intégrale. On présente souvent l’intégrale sous forme d’aire ou d’une primitive. Ces deux interprétations ne sont pas fausses mais masquent la nature fondamentale des intégrales</p>
+
+<center>
+
+Une intégrale est une <alert>somme</alert>
+
+</center>
+
+</p>
+
+<p>Plus précisément une somme de très nombreux éléménts (une infinité d’éléments) qui sont tous très petits (infinitésimaux). Il est souvent <alert>commode</alert> de calculer au moyen d’une primitive.</p>
+
+</article></slide><slide class=""><hgroup><h2>Intuition géométrique</h2></hgroup><article  id="intuition-géométrique">
+
+<div class="definition">
+<p>Soit \(f\) une fonction continue sur un <strong>segment</strong> \([a,b]\) (avec \(a \leq b\)). On appelle <em>intégrale de \(a\) à \(b\) de \(f\)</em> l’aire située entre</p>
+
+<ul>
+<li>la courbe de \(f\)</li>
+<li>l’axe des abscisses</li>
+<li>les droites d’équation \(x=a\) et \(x=b\).</li>
+</ul>
+
+<p>en attribuant un signe <strong>négatif</strong> aux parties situées sous l’axe des abscisses. L’intégrale sur \([a,b]\) de \(f\) est notée \(\int_a^b f(x)dx\)</p></div>
+
+<p>On pose par convention (pour généraliser la notion) \[
+\int_b^a f(x)dx = - \int_a^b f(x)dx
+\]</p>
+
+<p><strong>Remarque</strong> La variable \(x\) est muette mais on intègre <alert>toujours</alert> par rapport à une variable.</p>
+
+</article></slide><slide class=""><hgroup><h2>Intuition géométrique (II)</h2></hgroup><article  id="intuition-géométrique-ii">
+
+<p><img src="figures/int%C3%A9gration_integrale-illustration-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Théorème fondamental du calcul intégral</h2></hgroup><article  id="théorème-fondamental-du-calcul-intégral">
+
+<p>L’aire rouge compte positivement, l’aire bleue négativement.</p>
+
+<div class="theorem">
+<p>Soit \(f\) une fonction continue sur un <strong>segment</strong> \([a,b]\) et \(F\) une primitive de \(f\) sur \([a,b]\). On a alors \[
+\int_a^b f(x)dx = F(b) - F(a) = [F(x)]_a^b
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Remarques sur le théorème</h2></hgroup><article  id="remarques-sur-le-théorème">
+
+<p>Le Théorème fondamental du calcul intégral est indispensable, en pratique, pour calculer des intégrales mais ne renseigne pas</p>
+
+<ul>
+<li>sur le lien entre intégrale et somme,</li>
+<li>sur la façon dont on utilise les intégrales dans de nombreuses situations.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Primitives usuelles</h2></hgroup><article  id="primitives-usuelles">
+
+<p>On rappelle quelques primtives usuelles (qui se déduisent des dérivées usuelles)</p>
+
+<p>\[
+\begin{array}{|c||c|}
+\hline
+\text{Fonction } f &amp; \text{Primitive } F \\
+\hline
+x^\alpha \quad (\alpha \neq -1) &amp; x^{\alpha+1} / {(\alpha + 1})  \\
+\hline
+1 / x &amp; \ln(x) \\
+\hline 
+e^x &amp; e^x \\
+\hline
+\cos(x) &amp; \sin(x) \\
+\hline
+\sin(x) &amp; -\cos(x) \\
+\hline
+\frac{1}{\sqrt{1 - x^2}} &amp; \arcsin(x) \\
+\hline 
+\frac{-1}{\sqrt{1 - x^2}} &amp; \arccos(x) \\
+\hline 
+\frac{1}{1+x^2} &amp; \arctan(x) \\
+\hline
+\end{array}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Recherche de Primitives (I)</h2></hgroup><article  id="recherche-de-primitives-i">
+
+<p>Contrairement à la dérivation, il y a peu de régles automatiques pour trouver des primitives, la seule qui fonctionne est la régle d’addition</p>
+
+<div class="proposition">
+<p>Soit \(f\) et \(g\) deux fonctions continues sur un <strong>segment</strong> \([a,b]\) dont \(F\) et \(G\) sont deux primitives. \(F+G\) est alors une primitive de \(f+g\) sur le segment \([a, b]\).</p></div>
+
+<p>Mais on ne sait pas faire mieux, en particulier multiplier, quotienter, composer, etc…</p>
+
+<p>Si on n’a pas affaire à une fonction de primitive astucieuse, il faut être <strong>astucieux</strong> et reconnaître une forme détournée, souvent cachée par un changement de variable.</p>
+
+</article></slide><slide class=""><hgroup><h2>Recherche de Primitives (II)</h2></hgroup><article  id="recherche-de-primitives-ii">
+
+<p>Les changements de variables classiques sont les suivants:</p>
+
+<p>\[
+\begin{array}{|c||c|}
+\hline
+\text{Fonction } f &amp; \text{Primitive } F \\
+\hline
+u&#39;(x) u(x)^\alpha \quad (\alpha \neq -1) &amp; \frac{u(x)^{\alpha+1}}{(\alpha + 1)}  \\
+\hline
+\frac{u&#39;(x)}{u(x)} &amp; \ln|u(x)| \\
+\hline 
+u&#39;(x) e^{u(x)} &amp; e^{u(x)} \\
+\hline
+u&#39;(x) \cos(u(x)) &amp; \sin(u(x)) \\
+\hline
+u&#39;(x) \sin(u(x)) &amp; -\cos(u(x)) \\
+\hline
+\end{array}
+\] Le but du jeu est bien sûr d’identifier la <strong>bonne</strong> fonction \(u(x)\) qui permet de se ramener au tableau précédent et attention à la <alert>valeur absolue</alert> dans la primitive de \(u&#39;/u\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice (I)</h2></hgroup><article  id="exercice-i">
+
+<p>Trouver une primitive des fonctions (de \(x\)) suivantes (avec \(a \neq 0\)): \[
+\begin{align*}
+f(x) = 1 - \frac{x^2}{2} &amp; &amp; f(x) = x^2 / (1+x^3) \\
+f(x) = \frac{x^3}{2} + \frac{3x^5}{4} &amp; &amp; f(x) = x^2 / \sqrt{1 + x^3} \\
+f(x) = 1 / (ax + b) &amp; &amp; f(x) = x^2 \sqrt{1 + x^3} \\
+f(x) = \cos(ax + b) &amp; &amp; f(x) = 1 / \sqrt{1 - x^2} \\
+f(x) = e^{ax + b}   &amp; &amp; f(x) = 1 / (1 + x^2)
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions (I)</h2></hgroup><article  id="solutions-i">
+
+<p>Les primitives sont \[
+\begin{align*}
+F(x) = x - \frac{x^3}{6} &amp; &amp; F(x) = \frac{1}{3} \ln|1+x^3| \\
+F(x) = \frac{1}{8}(x^4 + x^6) &amp; &amp; F(x) = \frac{2}{3} (1+x^3)^{1/2} \\
+F(x) = \frac{1}{a}\ln|ax+b| &amp; &amp; F(x) = \frac{2}{9} (1+x^3)^{3/2} \\
+F(x) = \frac{1}{a}\sin(ax + b) &amp; &amp; F(x) = \arcsin(x) \\
+F(x) = \frac{1}{a}e^{ax + b}   &amp; &amp; F(x) = \arctan(x)
+\end{align*}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercice (II)</h2></hgroup><article  id="exercice-ii">
+
+<p>Calculer ces intégrales (en reconnaissant parfois des formes décrites dans <strong>Recherche de Primitives (II)</strong>) : \[
+\begin{align*}
+\int_{1}^2 (1 - x + x^2 - x^3)dx &amp; &amp; \int_0^{\pi} \sin(x)dx \\
+\int_{1}^4 \frac{dx}{\sqrt{x}} &amp; &amp; \int_{-\pi/2}^{\pi/2} \cos(x)dx \\
+\int_0^1 \frac{dx}{1+x} &amp; &amp; \int_{0}^1 \frac{2xdx}{1+x^2} \\
+\int_{1}^2 (1+x)^{\alpha}dx \quad (\alpha \neq -1) &amp; &amp; \int_{0}^1 x^2 e^{-x^3}dx \\
+\int_0^2 e^x dx &amp; &amp; \int_1^e \frac{\ln(x)}{x}dx
+\end{align*}
+\]</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>L’intégrale comme une somme</h2></hgroup><article  id="lintégrale-comme-une-somme">
+
+</article></slide><slide class=""><hgroup><h2>Intégrale et Somme</h2></hgroup><article  id="intégrale-et-somme">
+
+<p>Une intégrale est une <alert>somme</alert>. La notation \(\int_{a}^b f(x)dx\) est très explicite:</p>
+
+<ul>
+<li>le terme \(dx\) sous-entend une <alert>variable</alert> \(x\) qui varie très lentement par petits pas de longueur \(dx\) entre \(a\) et \(b\).</li>
+<li>le terme \(f(x)dx\) siginifie que les petits pas \(dx\) sont multipliés par un coefficient multiplicatif, \(f(x)\), qui varie lorsque \(x\) varie. Au début, le coefficient multiplicatif vaut \(f(a)\), à la fin \(f(b)\) et entre les deux, il varie comme \(f\).</li>
+<li>Le signe \(\int\) correspond au \(S\) allongé de Somme.</li>
+</ul>
+
+<p>Il faut donc comprendre \(\int_{a}^b f(x)dx\) comme <em>la somme de petites quantités \(f(x)dx\) obtenues en faisant varier \(x\) par petits pas \(dx\) entre \(a\) et \(b\)</em>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique</h2></hgroup><article  id="interprétation-graphique">
+
+<p><img src="figures/int%C3%A9gration_somme-de-riemann-1.png" width="720" /></p>
+
+<ul>
+<li>Si \(f(x) &gt; 0\), \(f(x)dx\) est l’aire du rectangle foncé</li>
+<li>Si \(f(x) &lt; 0\), \(f(x)dx\) est l’opposé de la même aire.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Calcul d’une intégrale simple</h2></hgroup><article  id="calcul-dune-intégrale-simple">
+
+<p>On va calculer l’intégrale simple \(\int_{z_1}^{z_2} dz\). C’est la <em>somme de toutes les petites variations \(dz\) lorsque \(z\) passe de la valeur initiale \(z_1\) à la valeur finale \(z_2\).</em></p>
+
+<p>Quel que soit le chemin pris entre \(z_1\) et \(z_2\), en faisant la somme des petites variations successives, on obtient la variation totale, c’est à dire \(\Delta z = z_2 - z_1\).</p>
+
+<p>Mais que faire quand on doit calculer une intégrale plus complexe du type \(\int_{z_1}^{z_2} f(z)dz\) avec \(f\) qui dépend de \(z\)?</p>
+
+</article></slide><slide class=""><hgroup><h2>Calcul d’une intégrale complexe</h2></hgroup><article  id="calcul-dune-intégrale-complexe">
+
+<p>\(f(z)\) est un coefficient de proportionalité. La quantité \(f(z)dz\) est proportionnelle à \(dz\), on peut la comprendre comme la <alert>différentielle</alert> de quelque chose.</p>
+
+<p>En particulier, si on trouve une fonction \(F(z)\) telle que \(\frac{dF(z)}{dz} = f(z)\), c’est à dire une <strong>primitive</strong> de \(f\), on a alors la relation</p>
+
+<p>\[
+dF = f(z) dz
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Calcul d’une intégrale complexe (II)</h2></hgroup><article  id="calcul-dune-intégrale-complexe-ii">
+
+<p>Ainsi, lorsque \(z\) varie entre \(z_1\) et \(z_2\) par petits pas \(dz\), la quantité \(F(z)\) varie par petits pas \(dF = f(z)dz\) entre une valeur initiale notée \(F_1 = F(z 1 )\) et une valeur finale \(F_2 = F(z_2)\).</p>
+
+<p>La somme des petits éléments \(f(z)dz\) entre \(z_1\) et \(z_2\) est donc la même que celle des petits incréments \(dF\) entre \(F_1\) et \(F_2\).</p>
+
+<p>\[
+\int_{z_1}^{z_2} f(z)dz = \int_{F_1}^{F_2} dF = \Delta F = F_2 - F_1
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Primitive et forme différentielle</h2></hgroup><article  id="primitive-et-forme-différentielle">
+
+<p>Les quantités infinitésimales ci-dessous sont de la forme \(f(x) dx\). Les exprimer sous la forme \(f (x)dx = dF\) , où \(F\) est par définition une primitive de \(f\). Par exemple, \(\cos(\theta) d\theta = d(\sin(\theta))\) car \(\frac{d\sin(\theta)}{d\theta} = \cos(\theta)\).</p>
+
+<p>\[
+\begin{align}
+-u e^{u^2} \text{d}u &amp; &amp; 3 \cos(\theta) \sin^2(\theta) \text{d} \theta \\
+\left( v / \sqrt{1 - v^2} \right) \text{d} v &amp; &amp; x^{\alpha} dx \\
+\sin(\alpha \varepsilon) \text{d} \varepsilon &amp; &amp; (y^3 \text{d}y) / (\alpha^4 + y^4)^2 \\
+(1 + \tan^2(\alpha)) \text{d} \alpha &amp; &amp; \text{d} z / ( 1 + a z) \quad (a \neq 0)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Primitive et forme différentielle (II)</h2></hgroup><article  id="primitive-et-forme-différentielle-ii">
+
+<p>\[
+\begin{align}
+-u e^{u^2} \text{d}u = d(-e^{u^2}/2)&amp; &amp; 3 \cos(\theta) \sin^2(\theta) \text{d} \theta = d(\sin^3(\theta)) \\
+\left( \frac{v}{\sqrt{1 - v^2}} \right) \text{d} v =d(-\sqrt{1-v^2}) &amp; &amp; x^{\alpha} dx = d\left(\frac{x^{\alpha+1}}{\alpha+1} \right)\\
+\sin(\alpha \varepsilon) \text{d} \varepsilon = d\left(\frac{-\cos(\alpha \varepsilon)}{\alpha} \right)&amp; &amp; \frac{y^3 \text{d}y}{(\alpha^4 + y^4)^2} = d\left( \frac{-1}{4(\alpha^4 + y^4)}\right)\\
+(1 + \tan^2(\alpha)) \text{d} \alpha = d(\tan(\alpha)) &amp; &amp; \text{d} z / ( 1 + a z) = d\left( \frac{\ln|1+az|}{a} \right)
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Sommes de Riemann</h2></hgroup><article  id="sommes-de-riemann">
+
+<p>Soit \(f\) une fonction continue sur un segment \([a, b]\). On va considérer des pas \(dx\) bien choisis, de la forme \(\frac{b - a}{n}\). Posons</p>
+
+<p>\[
+x_0 = 1, x_1 = a + \frac{b-a}{n}, ..., x_n = a + n\frac{b-a}{n} = b
+\] L’aire de chaque rectangle \(f(x)dx\) est donc \(f(x_k) \frac{b-a}{n}\) (en fonction du point \(x_k\) où on l’évalue) et leur somme vaut \[
+S_n = \sum_{k = 0}^{n-1} f(x_k) dx = \sum_{k = 0}^{n-1} f(x_k) (x_{k+1} - x_k) = \sum_{k = 0}^{n-1} f(x_k) \frac{b-a}{n}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Sommes de Riemann (II)</h2></hgroup><article  id="sommes-de-riemann-ii">
+
+<p>D’après la définition de l’intégrale, on devrait avoir \(S_n \simeq \int_{a}^b f(x)dx\) et on a effectivement le théorème suivant:</p>
+
+<div class="theorem">
+<p>Soit \(f\) une fonction continue sur un <strong>segment</strong> \([a,b]\). Pour tout \(n \geq 1\), on pose \[
+S_n = \frac{b-a}{n} \sum_{k = 0}^{n-1} f \left( a + k \frac{b-a}{n} \right)
+\] Alors \[
+S_n \xrightarrow[n \to \infty]{} \int_{a}^b f(x)dx
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Sommes de Riemann (IV)</h2></hgroup><article  id="sommes-de-riemann-iv">
+
+<p>On peut également construire d’autres suites de rectangles qui donnent une somme de Riemann qui convergent vers la même quantité:</p>
+
+<p><img src="figures/int%C3%A9gration_somme-de-riemann-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Sommes de Riemann (V)</h2></hgroup><article  id="sommes-de-riemann-v">
+
+<p>On peut également construire d’autres suites de rectangles qui donnent une somme de Riemann qui convergent vers la même quantité:</p>
+
+<p><img src="figures/int%C3%A9gration_somme-de-riemann-3-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Sommes de Riemann (VI)</h2></hgroup><article  id="sommes-de-riemann-vi">
+
+<p>En particulier, on peut considérer les rectangles d’aires \[
+\begin{align}
+\mathcal{A}_k &amp; = (x_{k+1} - x_{k}) f(x_k) =  \frac{b-a}{n} f\left( a + k \frac{b-a}{n} \right) \\
+\mathcal{B}_k &amp; = (x_{k+1} - x_{k}) f(x_{k+1}) = \frac{b-a}{n} f\left( a + (k+1) \frac{b-a}{n} \right) \\
+\mathcal{C}_k &amp; = (x_{k+1} - x_{k}) \frac{f(x_{k}) + f(x_{k+1})}{2} \\ 
+&amp; = \frac{b-a}{n} \frac{f\left( a + k \frac{b-a}{n} \right) + f\left( a + (k+1) \frac{b-a}{n} \right)}{2}
+\end{align}
+\] Et obtenir 3 sommes de Riemann différentes qui <strong>convergent toutes</strong> vers la <alert>même limite</alert> \(\int_{a}^{b} f(x)dx\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (I)</h2></hgroup><article  id="interprétation-graphique-i">
+
+<p>L’approximation \(f(x)dx \simeq f(x_k) (x_{k+1} - x_{k})\) revient à:</p>
+
+<ul>
+<li>considérer que \(f\) est constante sur \([x_k, x_{k+1}]\)</li>
+<li>que la primitive \(F\) de \(f\) est affine, de pente \(f(x_k)\) sur \([x_k, x_{k+1}]\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (II)</h2></hgroup><article  id="interprétation-graphique-ii">
+
+<p>Approximation pour \(n = 10\)</p>
+
+<p><img src="figures/int%C3%A9gration_somme-de-riemann-approximation-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Interprétation graphique (III)</h2></hgroup><article  id="interprétation-graphique-iii">
+
+<p>Approximation pour \(n = 50\) (Meilleure)</p>
+
+<p><img src="figures/int%C3%A9gration_somme-de-riemann-approximation-2-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (I)</h2></hgroup><article  id="exercices-i">
+
+<p>Vérifier que les sommes suivantes sont bien des sommes de Riemann (c’est à dire peuvent s’écrire sous la forme \(\frac{b-a}{n} \sum f(x_k)\) avec \(f, a, b\) à déterminer) et calculer leurs limites \[
+\begin{align}
+A_n = \sum_{k = 0}^{n-1} \frac{k}{n^2} &amp; &amp; B_n = \sum_{k = 1}^n \frac{k}{n^2} \\ 
+C_n = \sum_{k = 0}^{n-1} \frac{k}{k^2 + n^2} &amp; &amp; D_n = \sum_{k = 1}^n \frac{1}{n+k}
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (I) : Réponses</h2></hgroup><article  id="exercices-i-réponses">
+
+<p>Pour toutes les sommes de Riemann, on a \(a = 0\) et \(b = 1\). \[
+\begin{align}
+A_n = \sum_{k = 0}^{n-1} \frac{k}{n^2} \rightarrow \int_0^1 xdx &amp; &amp; B_n = \sum_{k = 1}^n \frac{k}{n^2} \rightarrow \int_0^1 xdx \\ 
+C_n = \sum_{k = 0}^{n-1} \frac{k}{k^2 + n^2} \rightarrow \int_0^1 \frac{xdx}{1+x^2} &amp; &amp; D_n = \sum_{k = 1}^n \frac{1}{n+k} \rightarrow \int_0^1 \frac{dx}{1+x}
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices (II)</h2></hgroup><article  id="exercices-ii">
+
+<p>Même consigne (mais attention, ici on n’a pas forcément \(a = 0\) et \(b = 1\))</p>
+
+<p>\[
+\begin{align}
+E_n = \sum_{k = 0}^{n-1} \frac{1}{\sqrt{n^2 - k^2}} &amp; &amp; F_n = \sum_{k = 1}^n \frac{n}{{n^2 + k^2}} \\ 
+G_n = \sum_{k = 0}^{n-1} \frac{k}{n\sqrt{n^2 - k^2}} &amp; &amp; H_n = \sum_{k = 1}^n \frac{k^2}{n^3}
+\end{align}
+\]</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Propriétés de l’intégrale</h2></hgroup><article  id="propriétés-de-lintégrale">
+
+</article></slide><slide class=""><hgroup><h2>Linéarité</h2></hgroup><article  id="linéarité">
+
+<div class="proposition">
+<p>Soit \(f, g\) deux fonctions continues sur un <strong>segment</strong> \([a,b]\) et \(\lambda \in \mathbb{R}\). \[
+\begin{align}
+\int_{a}^b f(t) + g(t)dt &amp; = \int_a^b f(t)dt + \int_a^b g(t)dt \\
+\int_a^b \lambda f(t)dt&amp; = \lambda \int_a^b f(t)dt
+\end{align}
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Relation de Chasles</h2></hgroup><article  id="relation-de-chasles">
+
+<div class="proposition">
+<p>Soit \(f\) continue sur un <strong>segment</strong> \([a,b]\) et \((x, y, z) \in [a, b]\) (quel que soit leur ordre) \[
+\int_x^z f(t)dt = \int_x^y f(t)dt + \int_y^z f(t)dt
+\]</p></div>
+
+<p>On n’a pas besoin d’avoir \(x \leq y \leq z\) mais il faut que \(f\) soit bien continue sur les intervalles \([x, y]\), \([y, z]\), \([x, z]\) (avec les bornes éventuellement réordonnées).</p>
+
+</article></slide><slide class=""><hgroup><h2>Positivité et croissance</h2></hgroup><article  id="positivité-et-croissance">
+
+<div class="proposition">
+<p>Soit \(f\) et \(g\) continues sur \([a,b]\) et <alert>\(a \leq b\)</alert>. Si</p>
+
+<ul>
+<li>\(f\) est <alert>positive</alert>, alors \[
+\int_a^b f(t)dt \geq 0
+\]</li>
+<li>Si \(f(x) \leq g(x)\) pour tout \(x \in [a, b]\) alors \[
+\int_a^b f(t)dt \leq \int_a^b g(t)dt
+\]</li>
+</ul></div>
+
+</article></slide><slide class=""><hgroup><h2>Passage à la valeur absolue</h2></hgroup><article  id="passage-à-la-valeur-absolue">
+
+<div class="proposition">
+<p>Soit \(f\) continue sur \([a,b]\) et <alert>\(a \leq b\)</alert>. \[
+- \int_{a}^b |f(t)|dt \leq \int_a^b f(t)dt \leq \int_{a}^b |f(t)|dt
+\] En particulier, \[
+\left| \int_a^b f(t)dt \right| \leq \int_{a}^b |f(t)|dt
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Encadrement</h2></hgroup><article  id="encadrement">
+
+<div class="proposition">
+<p>Soit \(f\) continue sur \([a,b]\) et <alert>\(a \leq b\)</alert>. S’il existe deux réels \(m\) et \(M\) tels que \(m \leq f(x) \leq M\) pour tout \(x \in [a, b]\), alors \[
+m(b-a) \leq \int_a^b f(t)dt \leq M(b - a)
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Valeur moyenne d’une fonction</h2></hgroup><article  id="valeur-moyenne-dune-fonction">
+
+<div class="proposition">
+<p>Soit \(f\) continue sur \([a,b]\) et <alert>\(a \leq b\)</alert>. On appelle <alert>valeur moyenne</alert> de \(f\) sur \([a, b]\) la quantité \[
+\frac{1}{b-a} \int_a^b f(t)dt
+\] Cette quantité est atteinte par \(f\) en au moins un point de \([a, b]\).</p></div>
+
+<p>C’est l’équivalent du théorème des acroissements finis, reformulé avec des intégrales plutôt qu’avec des dérivées.</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Techniques de calcul</h2></hgroup><article  id="techniques-de-calcul">
+
+</article></slide><slide class=""><hgroup><h2>Intégration par parties (IPP)</h2></hgroup><article  id="intégration-par-parties-ipp">
+
+<p>L’idée d’une IPP est de profiter de la formule de dérivation d’un produit: \((fg)&#39; = f&#39;g + fg&#39;\). Si on a deux fonctions de classe \(\mathcal{C}^1\) sur \([a, b]\), on sait que: \[
+\int_a^b (fg)&#39;(t) dt = [f(t)g(t)]_a^b
+\] Mais on sait aussi que \[
+\int_a^b (fg)&#39;(t) dt = \int_a^b f&#39;(t)g(t) dt + \int_a^b f(t)g&#39;(t) dt
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Intégration par parties (IPP) (II)</h2></hgroup><article  id="intégration-par-parties-ipp-ii">
+
+<div class="proposition">
+<p>Soit \(f\), \(g\) de classe \(\mathcal{C}^1\) sur \([a,b]\). On a alors \[
+\int_a^b f&#39;(t)g(t) dt = [f(t)g(t)]_a^b - \int_a^b f(t)g&#39;(t) dt
+\]</p></div>
+
+<p>Lorsqu’on fait une IPP, il est recommandé de bien préciser \(f, g, f&#39;, g&#39;\).</p>
+
+</article></slide><slide class=""><hgroup><h2>IPP: Exemple</h2></hgroup><article  id="ipp-exemple">
+
+<p>On cherche à calculer \(A = \int_0^1 xe^{x}dx\). On sait facilement intégrer et dériver \(e^x\) et \(x\) donc deux choix s’offrent à nous:</p>
+
+<ul>
+<li>Poser \(f&#39;(x) = x\) et \(g(x) = e^x\). Mais on devra calculer \(\int_0^1 f(x)g&#39;(x)dx = \int_0^1 \frac{x^2}{2} e^x dx\)…</li>
+<li>Poser \(f&#39;(x) = e^{x}\) et \(g(x) = x\). On devra calculer \(\int_0^1 f(x)g&#39;(x)dx = \int_0^1 e^x dx\). C’est mieux.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>IPP: Exemple (II)</h2></hgroup><article  id="ipp-exemple-ii">
+
+<p>On pose donc \(f&#39;(x) = e^{x}\) et \(g(x) = x\) d’où on tire \(f(x) = e^x\) et \(g&#39;(x) = 1\) et on injecte dans la formule: \[
+\begin{align}
+\int_0^1 xe^{x} dx &amp; = \int_0^1 g(x)f&#39;(x) dx \\ 
+&amp; = [g(x)f(x)]_0^1 - \int_0^1 g&#39;(x)f(x) dx \\
+&amp; = [xe^x]_0^1 - \int_0^1 e^xdx = [xe^x]_0^1 - [e^x]_0^1 \\ 
+&amp; = e - (e - 1) = 1
+\end{align}
+\]</p>
+
+<p>Les IPP sont surtout utiles pour les intégrales de fonction du type \(x^k e^x\), \(x^k \cos(x)\) et \(\cos(x)e^x\).</p>
+
+</article></slide><slide class=""><hgroup><h2>IPP: Exercices</h2></hgroup><article  id="ipp-exercices">
+
+<p>Calculer les intégrales suivantes à l’aide d’une ou plusieures IPP</p>
+
+<p>\[
+\begin{align}
+A = \int_{-1}^1 xe^{3x}dx &amp;  &amp; B = \int_0^1 y^4 e^y dy \\
+C = \int_{0}^1 (t^2 + t)e^{2t} dt  &amp; &amp; D = \int_{1}^e 1.\ln(x) dx \\
+E_n = \int_{1}^e u^n \ln(u) du \quad (n \in \mathbb{N}) &amp; &amp; F = \int_{\sqrt{e}}^e \frac{\ln(v)}{v}dv \\
+G = \int_{1}^{e^2} (2x^3 + 1) \ln(x)dx &amp; &amp; H = \int_1^4 \sqrt{3s} \ln(s) ds
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>IPP: Solutions</h2></hgroup><article  id="ipp-solutions">
+
+<p>Calculer les intégrales suivantes à l’aide d’une ou plusieures IPP</p>
+
+<p>\[
+\begin{align}
+A = \frac{2}{9}(e^3 + 2e^{-3}) &amp;  &amp; B = 9e - 24 \\
+C = e^2/2 &amp; &amp; D = 1 \\
+E_n = \frac{1}{(n+1)^2}\left[ ne^{n+1} + 1 \right] &amp; &amp; F = 3/8 \\
+G = \frac{1}{8}(7e^8 + 1) + (e^2 + 1) &amp; &amp; H = \frac{4}{\sqrt{3}} \left[ 8\ln(2) - \frac{7}{3}\right]
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>IPP: Exercices (II)</h2></hgroup><article  id="ipp-exercices-ii">
+
+<p>Calculer les intégrales suivantes à l’aide d’une ou plusieures IPP (et éventuellement d’un peu de linéarisation…)</p>
+
+<p>\[
+\begin{align}
+A = \int_{0}^{\pi/2} \cos(x)e^x dx &amp;  &amp; B = \int_0^{\pi/2} \sin(x)e^x dx \\
+C = \int_{0}^1 x^2\cos(x) dx  &amp; &amp; D = \int_{0}^1  x^2 \cos^2(x)\\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Changement de variables</h2></hgroup><article  id="changement-de-variables">
+
+<div class="theorem">
+<p>Soit \(f\) continue sur \([a,b]\) et \(\phi\) une fonction \(\mathcal{C}^1\) d’un intervalle \([\alpha, \beta]\) dans \([a, b]\) telle que \(\phi(\alpha) = a\) et \(\phi(\beta) = b\). Alors on peut effectuer le changement de variables \(x = \phi(t)\) de la façon suivante \[
+\int_a^b f(x) dx = \int_{\alpha}^{\beta} f(\phi(t)) \phi&#39;(t) dt
+\]</p></div>
+
+</article></slide><slide class=""><hgroup><h2>En pratique</h2></hgroup><article  id="en-pratique">
+
+<p>Quand on change de variable, on a trois éléments à changer:</p>
+
+<ul>
+<li><alert>la variable:</alert> (ça va sans dire…) Il faut remplacer toutes les occurences de \(x\) par leur expression \(\phi(t)\)</li>
+<li><alert>les bornes</alert> quand \(x\) varie entre \(a\) et \(b\), \(t\) varie entre \(\alpha\) et \(\beta\). Comme \(x = \phi(t)\), on doit avoir \(a=\phi(\alpha)\) et \(b = \phi(\beta)\) et il faut donc trouver un \(\alpha\) et un \(\beta\) convenable.</li>
+<li><alert>l’élement différentiel \(dx\)</alert> Comme on intègre par rapport à \(t\), il faut remplacer \(dx\) par une expression qui fait intervenir \(dt\). Comme \(x = \phi(t)\), on sait que \(\frac{dx}{dt} = \phi&#39;(t)\), c’est à dire \(dx = \phi&#39;(t) dt\).</li>
+</ul>
+
+<p>En pratique, on utilise souvent la formule &ldquo;de la droite vers la gauche&rdquo;. Intuitivement, les deux intégrales sont égales parce qu’on somme des petits éléments égaux: \[
+f(x)dx = g(t)dt \; [ = f(\phi(t)) \phi&#39;(t) ]
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Changement de variable: exemple</h2></hgroup><article  id="changement-de-variable-exemple">
+
+<p>On cherche à calculer \(I = \int_1^e \frac{\ln(t)}{t}dt\) à l’aide du changement de variable \(x = \ln(t)\). On effectue les trois changements.</p>
+
+<ul>
+<li>On change la variable: \(\frac{\ln(t)}{t} = x/e^x\)</li>
+<li>On change les bornes: quand \(t\) varie entre \(1\) et \(e\), \(x = \ln(t)\) varie entre \(0\) et \(1\).</li>
+<li>On change l’élément différentiel: \(t = e^x\) donc \(dt = e^x dx\)</li>
+</ul>
+
+<p>\[
+\begin{align}
+I &amp; = \int_{t = 1}^{t = e} \frac{\ln(t)}{t}dt = \int_{x = 0}^{x = 1} \frac{x}{e^x} e^x dx = \int_0^1 xdx = 1/2
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Deuxième exemple (I)</h2></hgroup><article  id="deuxième-exemple-i">
+
+<p>On veut calculer l’intégrale \(I = \int_{\pi/6}^{\pi/3} \frac{\cos(\theta)}{\sin(\theta)} d\theta\). On remarque au numérateur une différentielle connue puisque \(\cos(\theta) d\theta = d(\sin(\theta))\). Il est donc tentant d’essayer de tout écrire en fonction de \(y = \sin(\theta)\).</p>
+
+<ul>
+<li>Concernant l’élément différentiel, on sait que \(dy = \cos(\theta) d\theta\)</li>
+<li>On veut réécrire l’expression dans l’intégrale en fonction de \(y\) seulement: \(\frac{\cos(\theta)}{\sin(\theta)} d\theta = \frac{dy}{\sin(\theta)} = \frac{dy}{y}\)</li>
+<li>On veut changer les bornes, quand \(\theta = \pi/6\), \(y = \sin(\pi/6) = 1/2\) et quand \(\theta = \pi/3\), \(y = \sin(\pi/6) = \sqrt{3}/2\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Deuxième exemple (II)</h2></hgroup><article  id="deuxième-exemple-ii">
+
+<p>On a donc</p>
+
+<p>\[
+\begin{align}
+I &amp; = \int_{\theta = \pi/6}^{\theta = \pi/3} \frac{\cos(\theta)}{\sin(\theta)}d\theta \\ 
+  &amp; = \int_{y = 1/2}^{y = \sqrt{3}/2} \frac{dy}{y} \\ 
+  &amp; = [\ln(y)]_{1/2}^{\sqrt{3}/2} = \ln(\sqrt{3})
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Troisième exemple (I)</h2></hgroup><article  id="troisième-exemple-i">
+
+<p>On cherche à calculer l’intégrale \(\int_{0}^{\pi/2} \sin^{3}(\alpha) d\alpha\) avec le changement de variable \(u = \cos(\alpha)\)</p>
+
+<ul>
+<li>Concernant l’élément différentiel, on sait que \(du = -\sin(\alpha) d\alpha\)</li>
+<li>On veut réécrire l’expression dans l’intégrale en fonction de \(u\) uniquement: \[
+\begin{align}
+\sin^{3}(\alpha)d\alpha &amp; = \sin^2(\alpha) \sin(\alpha) d\alpha = - \sin^2(\alpha) du \\ 
+               &amp; = -(1 - \cos^2(\alpha)) du = - (1 - u^2)du
+\end{align}                 
+\]</li>
+<li>On veut changer les bornes,
+
+<ul>
+<li>quand \(\alpha = 0\), \(u = \cos(\alpha) = \cos(0) = 1\)</li>
+<li>quand \(\alpha = \pi/\), \(u = \cos(\alpha) = \cos(\pi/2) = 0\)</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Troisième exemple (II)</h2></hgroup><article  id="troisième-exemple-ii">
+
+<p>On a donc</p>
+
+<p>\[
+\begin{align}
+I &amp; = \int_{\alpha = 0}^{\alpha = \pi/2} \sin^3(\alpha) d\alpha \\ 
+  &amp; = \int_{u = 1}^{u = 0} -(1 - u^2)du \\ 
+  &amp; = \int_{u = 0}^{u = 1} (1 - u^2)du \\
+  &amp; = \left[u - \frac{u^3}{3}\right]_{0}^1 = \frac{2}{3}
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Changement de variable: exercices</h2></hgroup><article  id="changement-de-variable-exercices">
+
+<p>Calculer les intégrales suivantes à l’aide du changement de variable proposé: \[
+\small
+\begin{align}
+\int_{\pi/4}^{\pi/3} \tan(\theta) d\theta &amp; &amp; \text{en posant } v = \cos(\theta) \\
+\int_{0}^{\pi/2} \cos^3(\theta) d\theta &amp; &amp; \text{en posant } v = \sin(\theta) \\
+\int_0^{\pi / \omega} \cos\left( \frac{\pi}{3}  - \frac{\omega t }{2}\right)dt &amp; &amp; \text{en posant } y = \frac{\pi}{3}  - \frac{\omega t}{2} \\
+\int_{x_0}^{x_0 + H} (x - x_0) e^{- \left( \frac{x - x_0}{h} \right)^2} dx&amp; &amp; \text{en posant } z = \left(\frac{x - x_0}{h}\right)^2 \\
+\int_0^R \frac{dr}{(R^2 + r^2)^{3/2}} &amp; &amp; \text{en posant } r = R\tan(\alpha) 
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Changement de variable: exercices (II)</h2></hgroup><article  id="changement-de-variable-exercices-ii">
+
+<p>Calculer les intégrales suivantes:</p>
+
+<p>\[
+\small
+\begin{align}
+\int_{0}^{1} w \sqrt{3w+1} dw &amp; &amp; \text{en posant } z = 3w+1 \\
+\int_{0}^{1} \frac{dx}{e^x + 1} &amp; &amp; \text{en posant } v= e^x [*] \\
+\int_1^{2} \frac{ds}{s(s^3+1)} &amp; &amp; \text{en posant } y = s^3 + 1 [*]\\
+\int_{-1}^{0} \frac{u^3 du}{(u^2 + 1)\sqrt{u^2 +1}} &amp; &amp; \text{en posant } v = u^2 + 1 \\
+\int_0^3  \frac{t \ln(t^2 + 1)}{t^2 + 1} &amp; &amp; \text{en posant } x = t^2 + 1
+\end{align}
+\]</p>
+
+<p>\([*]\) On peut utiliser le fait que \(1/(x(x-1)) = 1/(x-1) - 1/x\) et \(1/(x(x+1)) = 1/x - 1/(x+1)\).</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Intégrale à borne variable</h2></hgroup><article  id="intégrale-à-borne-variable">
+
+</article></slide><slide class=""><hgroup><h2>Un problème de notation</h2></hgroup><article  id="un-problème-de-notation">
+
+<p>Jusqu’à présent, on a uniquement des intégrales de la forme \(I = \int_{x_0}^{x_1} f(x)dx\) mais rien n’oblige les deux bornes à être des constantes. On pourrait avoir envie de faire varier la valeur finale (\(b\)) et de l’appeler \(x\).</p>
+
+<p><alert>Attention</alert>, bien qu’il soit tout à fait légitime d’appeler la valeur finale \(x\), il faut alors faire attention aux notations pour éviter le grand n’importe quoi \(\int_{x_0}^x f(x)dx\).</p>
+
+<p>Ici on a donné le même nom \(x\)à deux choses différentes:</p>
+
+<ul>
+<li>la quantité qui varie par petit pas et qu’on utilise pour faire une grande somme de petits éléments;</li>
+<li>la valeur finale pour laquelle on arrête de sommer.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Solution</h2></hgroup><article  id="solution">
+
+<p>Pour lever l’incertitude, on donne un nom différent à la <alert>variable d’intégration</alert> et aux <alert>bornes d’intégration</alert>. Par exemple, on écrit souvent:</p>
+
+<p>\[
+I(x) = \int_{x_0}^x f(t)dt
+\]</p>
+
+<p>Le résultat de l’intégration n’est plus un nombre bien défini mais une valeur qui dépend de \(x\), c’est une <strong>fonction</strong>, notée \(I(x)\). Si \(F\) est une primitive de \(f\), on peut en effet écrire \[
+I(x) = \int_{x_0}^x f(t)dt = F(x) - F(x_0)
+\]</p>
+
+<p>En particulier \(I(x)\) est <alert>la primitive de \(f\) qui s’annule en \(x_0\)</alert> (toutes les primitives sont égales à constante près et \(I(x_0) = 0\))</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple">
+
+<p>Un mobile se déplace sur une droite en partant du point \(x = 0\). Sa vitesse au temps \(t\) est notée \(v(t)\). On sait alors que sa position au temps \(t\) est donnée par \[
+x(t) = \int_0^t v(z)dz
+\]</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Comparaison somme - intégrale</h2></hgroup><article  id="comparaison-somme---intégrale">
+
+</article></slide><slide class=""><hgroup><h2>À savoir</h2></hgroup><article  class="smaller" id="à-savoir">
+
+<div class="proposition">
+<p>Soit \(f\) positive, continue et <alert>décroissante</alert> sur \(\mathbb{R}\). Alors pour tout \(n\), on a \[
+\int_1^{n+1} f(x)dx \leq \sum_{i=1}^n f(i) \leq \int_0^{n} f(x)dx
+\] En particulier, la suite \(S_n = \sum_{i=1}^n f(i)\) est de même nature que \(\int_1^n f(x)dx\).</p>
+
+<ul>
+<li>elle diverge si \(\int_{1}^n f(x)dx\) diverge (car minorée par une suite divergente)</li>
+<li>elle converge si \(\int_{1}^\infty f(x)dx\) existe (car croissante et majorée).</li>
+</ul>
+
+<p>En résumé \(S_n\) converge quand \(n \to +\infty\) <alert>si et seulement si</alert> \(\int_1^\infty f(x)dx\) existe.</p></div>
+
+<p><strong>Note</strong> Si \(f\) n’est pas intégrale en \(0\), on peut remplacer le terme de droite par \(f(1) + \int_1^{n} f(x)dx\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Démonstration</h2></hgroup><article  class="smaller" id="démonstration">
+
+<p>La preuve est basée sur l’idée suivante (à retenir car très puissante et facile à réutiliser): pour tout \(n \geq 1\) et \(x \in [n-1, n]\), on a</p>
+
+<p>\[
+f(n) \leq f(x) \leq f(n-1)
+\] par décroissance de \(f\). En intégrant par rapport à \(x\) sur \([n-1, n]\), on obtient donc \[
+\int_{n-1}^n f(n)dx \leq \int_{n-1}^n f(x)dx \leq \int_{n-1}^n f(n-1)dx \Rightarrow f(n) \leq \int_{n-1}^n f(x)dx \leq f(n-1)
+\] qu’on peut réécrire \[
+\int_{n}^{n+1} f(x)dx \leq f(n) \leq \int_{n-1}^n f(x)dx
+\] Il suffit ensuite de sommer et d’utilise la relation de Chasles pour conclure.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices">
+
+<ul>
+<li>En utlisant une comparaison somme intégrale, montrer que la suite \(S_n(\alpha) = \sum_{i=1}^n \frac{1}{n^\alpha}\) converge <alert>si et seulement si</alert> \(\alpha &gt; 1\).</li>
+<li>Trouver un équivalent de la suite \(H_n = S_n(1)\) (aussi appelée série harmonique), c’est à dire une fonction simple \(f(n)\) telle que \(H_n / f(n) \to 1\) quand \(n \to \infty\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  class="smaller" id="solutions">
+
+<p>En appliquant le résultat précédent à la fonction \(f: x \mapsto x^{-\alpha}\) on montre \[
+\int_1^{n+1} x^{-\alpha} dx \leq S_n(\alpha) \leq 1 + \int_1^{n} x^{-\alpha} dx
+\] On cherche donc à savoir si \(I_n = \int_1^n x^{-\alpha}dx\) converge quand \(n \to \infty\) \[
+I_n = \begin{cases} \ln(n) &amp; \text{si } \alpha = 1 \\ \frac{n^{1 - \alpha} - 1}{1-\alpha} &amp; \text{si } \alpha \neq 1\end{cases}
+\] En utilisant les limites classiques des fonctions puissances et logarithmes, on montre que \(I_n \to \infty\) si et seulement si \(\alpha \leq 1\). On en déduit que \(S_n(\alpha)\) converge si et seulement si \(\alpha &gt; 1\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Solutions II</h2></hgroup><article  class="smaller" id="solutions-ii">
+
+<p>En reprenant l’encadrement précédent pour \(\alpha = 1\), on montre que \(H_n = S_n(1)\) vérifie l’encadrement \[
+\ln(n+1) \leq H_n \leq 1 + \ln(n)
+\] Par théorème d’encadrement, \(\frac{H_n}{\ln(n)} \to 1\), qu’on écrit de façon compacte \(H_n \sim \ln(n)\) (c’est ce qu’on appelle un développement asymptotique de \(H_n\))</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Problème du chasse-neige</h2></hgroup><article  id="problème-du-chasse-neige">
+
+</article></slide><slide class=""><hgroup><h2>Énoncé</h2></hgroup><article  id="énoncé">
+
+<p>Il a commencé à neiger à un rythme soutenu ce matin. Un chasse neige a commencé à déneiger la route à 12h. Il a déneigé 2 km la première heure et 1 kilomètre la deuxième heure. À quelle heure a-t-il commencé à neiger?</p>
+
+</article></slide><slide class=""><hgroup><h2>Solution (I)</h2></hgroup><article  id="solution-i">
+
+<p>On va essayer de &ldquo;formaliser&rdquo; l’énoncé pour le traduire en langage mathématiques et trouver la solution. On va faire quelques hypothèses:</p>
+
+<ul>
+<li>la neige tombe à rythme constant \(\rho\)</li>
+<li>la quantité de neige accumulée \(n\) est proportionnelle au temps écoulé depuis qu’il a commencé à neiger</li>
+<li>la vitesse \(v\) du chasse-neige est inversement propotionnelle à la quantité de neige accumulée</li>
+<li>on mesure le temps \(t\) (en heure) à partir de midi et on note \(T\) le temps écoulé (à midi depuis le début des chutes)</li>
+</ul>
+
+<p>Avec tous ces élements en main, on va écrire des relations entre les différentes quantités du problème.</p>
+
+</article></slide><slide class=""><hgroup><h2>Solution (II)</h2></hgroup><article  class="smaller" id="solution-ii">
+
+<ul>
+<li>Au temps \(t\), il neige depuis \(T+t\) heures et la neige accumulée en une portion de route non déblayée est donc \(n(t) = \rho(T+t)\)</li>
+<li>Lorsque le chasse neige déblaie cette portion, il le fait à vitesse \(v(t) = v_0 / \rho(T+t)\) (\(v_0\) correspond en un sens à l’efficacité du chasse-neige).</li>
+<li>La distance \(dx\) parcourue par le chasse-neige entre les temps \(t\) et \(t + dt\) est donc \(dx = v(t)dt\).</li>
+</ul>
+
+<p>En intégrant, on trouve que la position \(x(u)\) du chasse neige au temps \(u\) est \[
+x(u) = \int_0^u dx = \int_0^u v(t)dt = \int_0^u \frac{v_0dt}{\rho(t+T)} = \frac{v_0}{\rho}[\ln|t+T|]_0^u = \frac{v_0}{\rho}\ln\frac{u+T}{T}
+\] D’après l’énoncé \(x(1) = 2\) et \(x(2) = 3\). On a donc \[
+2x(2) = 3x(1) \Leftrightarrow 2\ln\frac{2+T}{T} = 3\ln\frac{1+T}{T} \Leftrightarrow \left(\frac{2+T}{T} \right)^2 = \left( \frac{1+T}{T} \right)^3
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Solution III</h2></hgroup><article  class="smaller" id="solution-iii">
+
+<p>En continuant les calculs, on obtient</p>
+
+<p>\[
+\begin{align}
+T(2+T)^2 = (1+T)^3 &amp; \Leftrightarrow T^3 + 4T^2 + 4T = T^3 + 3T^2 + 3 + 1 \\
+                   &amp; \Leftrightarrow T^2 + T - 1 = 0 \\
+                   &amp; \Leftrightarrow T = \frac{1 \pm \sqrt{5}}{2}
+\end{align}                 
+\] Comme \(T\) est une durée, donc positive, on en déduit qu’il a commencé à neiger il y a \(\frac{1+\sqrt{5}}{2}\).</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Problème (pour les braves)</h2></hgroup><article  id="problème-pour-les-braves">
+
+</article></slide><slide class=""><hgroup><h2>Motivation</h2></hgroup><article  id="motivation">
+
+<p>Si on tire \(2n\) pièces (équilibrées) à pile ou face et qu’on note \(X\) le nombre de piles, le résultat le plus probable est \(X=n\).</p>
+
+<p><img src="figures/int%C3%A9gration_rbinom-1.png" width="400px" style="display: block; margin: auto;" /> et on peut note \(p_n = P(X=n)\) la probabilité d’un tel évènement. <alert>Mais comment évolue \(p_n\) quand \(n\) est grand?</alert>. C’est ce qu’on va essayer de voir dans ce problème.</p>
+
+</article></slide><slide class=""><hgroup><h2>Préalable</h2></hgroup><article  id="préalable">
+
+<p>A l’aide des distributions binomiales, montrer que \[
+p_n = \frac{(2n)!}{2^{2n}(n!)^2}
+\] Cette formule est exacte mais pas très pratique, car on ne peut pas facilement comparer \(n!\) et \((2n)!\).</p>
+
+<p>On va essayer d’y remédier avec la <alert>formule de Stirling</alert>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Formule de Stirling</h2></hgroup><article  id="formule-de-stirling">
+
+<p>On va essayer d’utiliser nos connaissances pour trouver un équivalent de \(n!\) et démontrer la formule de Stirling: \[
+n! \sim \sqrt{2\pi n} \left( \frac{n}{e} \right)^n
+\] On va procéder en deux temps:</p>
+
+<ul>
+<li>faire un développement asymptotique pour montrer que \[\ln(n!) = (n+\frac{1}{2})\ln(n) - n + C + o(1)\] pour un certain \(C &gt; 0\) inconnu</li>
+<li>calculer \(C\) en étudiant les intégrales de Wallis.</li>
+</ul>
+
+<!-- ## Formule de Taylor Lagrange -->
+
+<!-- Soit $f$ une fonction de classe $\mathcal{C}^{n}$ sur $[a,b]$. On a vu en cours la formule de <alert>Taylor-Young</alert> qui stipule: -->
+
+<!-- $$ f(b) - f(a) = (b-a)f'(a) + \dots + \frac{(b-a)^n}{n!}f^{(n)}(a) + o((b-a)^n)$$ -->
+
+<!-- Dans cette formule, on n'utilise juste le fait que $f$ est $n$-fois dérivable en $a$.  -->
+
+<!-- Si elle est en fait $n+1$ fois dérivable, on peut préciser le terme de reste à l'aide de $f^{(n+1)}$: c'est le but du théorème de <alert>Taylor-Lagrange</alert> -->
+
+<!-- ## Formule de Taylor Lagrange (II) -->
+
+<!-- <div class = "proposition"> -->
+
+<!-- Soit $f$ est de classe continue $\mathcal{C}^{n+1}$ sur $[a,b]$, alors il existe un réel $c \in (a, b)$ tel que -->
+
+<!-- $$ -->
+
+<!-- f(b) - f(a) = (b-a)f'(a) + \dots + \frac{(b-a)^{n}}{n!}f^{(n)}(a) + \frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(c) -->
+
+<!-- $$ -->
+
+<!-- En particulier, le terme de reste est $\frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(c)$, qui est évidemment bien $o((b-a)^n)$.  -->
+
+<!-- </div> -->
+
+<!-- Le théorème de Taylor-Lagrange peut-être vu comme une généralisation du théorème des acroissements finis (on retrouve exactement le TAF pour $n = 0$) -->
+
+</article></slide><slide class=""><hgroup><h2>Préalable</h2></hgroup><article  id="préalable-1">
+
+<p>Avant de pouvoir faire le développement de \(\ln(n!)\) on va devoir établir quelques résultats préalables.</p>
+
+</article></slide><slide class=""><hgroup><h2>Formule de Taylor étendue</h2></hgroup><article  id="formule-de-taylor-étendue">
+
+<p>On suppose que \(f\) est concave, de classe \(\mathcal{C}^2\) sur \([a,b]\) et on note \(M\) un majorant de \(|f&#39;&#39;|\) sur \([a,b]\). On va chercher un majorant de \[g(x) = f(x) - \left[ f(a) + (x-a) \frac{f(b) - f(a)}{b-a} \right]\] qui est la différence entre \(f\) et son approximation par une fonction linéaire sur \([a,b]\).</p>
+
+<ul>
+<li>Montrer que pour tout \(x\) dans \([a,b]\), \(g(x) = \int_a^x g&#39;(u) du\) et \(g&#39;(u) = \int_a^u f&#39;&#39;(t)dt + g&#39;(a)\)</li>
+<li>En déduire que \(g(x) = \int_{u=a}^{u=x} [ \int_{t=a}^{t=u} f&#39;&#39;(t)dt + g&#39;(a)]du\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Formule de Taylor étendue (II)</h2></hgroup><article  id="formule-de-taylor-étendue-ii">
+
+<ul>
+<li>En utilisant le TAF puis la concavité de \(f\), montrer que \(g&#39;(a) \leq f&#39;(a) - f&#39;(b)\)</li>
+<li>En utilisant l’IAF, montrer que \(g&#39;(a) \leq M (b - a)\)</li>
+<li>Déduire des résultats précédents que \[
+g(x) \leq M(x-a) \left[ \frac{x - a}{2} + (b-a)\right]
+\]</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Formule de Taylor étendue (III)</h2></hgroup><article  id="formule-de-taylor-étendue-iii">
+
+<ul>
+<li>En déduire que \(\int_a^b g(u)du \leq M \frac{2(b - a)^3}{3}\)</li>
+<li>En calculant \(\int_a^b g(x)dx\), montrer que \[
+\int_a^b f(x)dx - (b-a)\frac{f(a)+f(b)}{2} \leq M \frac{2(b - a)^3}{3}
+\] En particulier, si \(a = n\) et \(b = n+1\), on a \[
+\int_n^{n+1} f(x)dx - \frac{f(n)+f(n+1)}{2} \leq \frac{2}{3}\max_{x \in [n, n+1]} |f&#39;&#39;(x)|
+\] En faisant plus d’efforts, on pourrait remplacer le \(2/3\) par un \(1/12\) (valeur optimale).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Approximation de \(\ln(n!)\)</h2></hgroup><article  id="approximation-de-lnn">
+
+<p>On pose \(u_n = \int_{n}^{n+1} \ln(x) dx - \frac{\ln(n) + \ln(n+1)}{2}\) et \(U_n = \sum_{i=1}^n u_n\).</p>
+
+<ul>
+<li>Vérifier que \(\ln(x)\) est concave</li>
+<li>Montrer que \(0 \leq u_n \leq \frac{2}{3n^2}\) pour tout \(n\)</li>
+<li>En déduire que \(U_n\) est croissante et majorée et donc converge vers une limite \(C\) (à ne pas déterminer)</li>
+<li>En déduire \[
+\sum_{i=1}^n \ln(i) = \int_{1}^n \ln(x)dx + \frac{\ln(n)}{2} + C + o(1)
+\]</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Digressions</h2></hgroup><article  id="digressions">
+
+<p>On a fait beaucoup d’effort pour écrire un développement asymptotique de \(\ln(n!)\) alors qu’une simple comparaison somme-intégrale aurait déjà donné \[
+\ln(n!) \sim n\ln(n)
+\] Mais ce développement n’est pas suffisamment précis pour obtenir un développement de \(n!\). En effet, on peut avoir \(\ln(n!) - n\ln(n) \to \pm \infty\) qui ne permet pas de passer à l’exponentielle (puisque \(e^\infty = +\infty\) et \(e^{-\infty} = 0\)).</p>
+
+<p>Quelle précision est nécessaire? Il faut être capable de déterminer précisément l’exponentielle du terme de reste, qui doit donc être d’ordre \(o(1)\) puisque \(e^{o(1)} \to e^0 = 1\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Digressions (suite)</h2></hgroup><article  id="digressions-suite">
+
+<p>On a le travail pour \(f(x) = \ln(x)\) mais le raisonnement marche pour n’importe quelle fonction \(f\). En utilisant le raisonnement précédent, on peut montrer que \[
+\left| \int_{1}^n f(x)dx - \left[ \sum_{i=1}^{n} f(i) - \frac{f(1)+f(n)}{2}\right] \right| \leq \sum_{i=1}^n \frac{1}{6}\max_{x \in [i, i+1]} f&#39;&#39;(x)
+\]</p>
+
+<p>Pour peu qu’on soit capable de contrôler \(\sum_{i=1}^n \frac{1}{6}\max_{x \in [i, i+1]} f&#39;&#39;(x)\) et de calculer \(\int_1^n f(x)dx\) , cette majoration permet souvent de donner une bonne approximation de \(\sum_i f(i)\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Intégrales de Wallis</h2></hgroup><article  id="intégrales-de-wallis">
+
+<p>On sait désormais que \(n! = L \sqrt{n}(n/e)^n (1 + o(1))\) (avec \(L = e^C\) et \(e^{o(1)} = 1+ o(1)\)). Il nous reste donc à calculer \(L\).</p>
+
+<p>On recourre pour ce faire aux intégrales de Wallis définies par \[
+I_n = \int_{0}^{\pi/2} \cos^{n}(x)dx
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Étude de \(I_n\)</h2></hgroup><article  id="étude-de-i_n">
+
+<ul>
+<li>Calculer \(I_0\), \(I_1\), \(I_2\) et \(I_3\);</li>
+<li>À l’aide d’une IPP, montrer que \(I_{n+2} = \frac{n+1}{n+2} I_n\) pour tout \(n\);</li>
+<li>En déduire que \(I_{2n} = \frac{\pi}{2} \frac{(2n)!}{(2^n n!)^2}\) (ça vous rappelle quelque chose?)</li>
+<li>Montrer que \(I_{2n} I_{2n+1} = \frac{\pi}{2(2n+1)}\) pour tout \(n\);</li>
+<li>Montrer que \(I_n\) est décroissante;</li>
+<li>Montrer que \(n (I_{2n})^2 \to \frac{\pi}{4}\) quand \(n \to \infty\)</li>
+<li>En déduire la valeur de \(L\) et un équivalent de \(p_n\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Conclusion</h2></hgroup><article  id="conclusion">
+
+<p>On vient de montrer que \[
+p_n \sim \frac{1}{\sqrt{\pi n}} \quad \text{et} \quad n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
+\]</p>
+
+<p>Les étudiants attentifs pourront remarquer que les intégrales de Wallis suffisaient en fait pour calculer un équivalent de \(p_n\)…</p>
+
+<p>La formule de Stirling est en fait un résultat plus fort qui peut être utilisé dans d’autres circonstances, par exemple pour calculer un équivalent de n’importe proba de la forme \(P(X = k)\) quand \(k=\lfloor \alpha n \rfloor\) avec \(\alpha \in (0, 1)\) et \(X \sim \mathcal{B}(n, 1/2)\)</p></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
