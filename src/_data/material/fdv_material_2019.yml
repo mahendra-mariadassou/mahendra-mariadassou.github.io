@@ -74,6 +74,8 @@
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/05_Dérivées_partielles.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/05_Dérivées_partielles.pdf"
 
     - name: Intégrations
       elements:
