@@ -76,7 +76,9 @@
         at: "2019/Supports/05_Dérivées_partielles.html"
       - nature: Transparents <i class="far fa-file-pdf"></i>
         at: "2019/Supports/05_Dérivées_partielles.pdf"
-
+      - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/05_Dérivée_partielle.pdf"
+    
     - name: Intégrations
       elements:
       - nature: Transparents <i class="fab fa-html5"></i>
