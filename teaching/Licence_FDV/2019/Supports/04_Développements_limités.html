@@ -117,15 +117,15 @@ slide:not(.current) .plotly.html-widget{
 <li>Retour sur la limite</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Développement Limités</h2></hgroup><article  id="developpement-limites">
+</article></slide><slide class=""><hgroup><h2>Développement Limités</h2></hgroup><article  id="développement-limités">
 
 <p>Le but des développements limités est de faire des <alert>approximations</alert> en <alert>négligeant</alert> certaines quantités. On va voir ici qu’on néglige toujours une quantité <alert>par rapport</alert> à une autre.</p>
 
 <p>On va formaliser cette intuition avec la notion de <alert>négligeabilité</alert> et les notations de Landau.</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Négligeabilité</h2></hgroup><article  id="negligeabilite">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Négligeabilité</h2></hgroup><article  id="négligeabilité">
 
-</article></slide><slide class=""><hgroup><h2>Définition</h2></hgroup><article  id="definition">
+</article></slide><slide class=""><hgroup><h2>Définition</h2></hgroup><article  id="définition">
 
 <div class="definition">
 <p>On dit que \(f\) est <alert>négligeable</alert> devant \(g\) au voisinage de \(a \in \bar{\mathbb{R}}\) s’il existe une fonction \(\varepsilon\) définie au voisinage de \(a\) telle que \(\varepsilon(x) \to 0\) quand \(x \to a\) et \[\forall x \in D_f \cap D_g \quad f(x) = g(x) \varepsilon(x)\] Dans la plupart des cas, \(g\) est non nulle au voisinage de \(0\) et la condition précédente peut se reformuler: \(f\) est négligeable devant \(g\) au voisinage de \(a\) si et seulement si \(\displaystyle \frac{f}{g} \to 0\) quand \(x \to a\).</p></div>
@@ -148,7 +148,7 @@ slide:not(.current) .plotly.html-widget{
 <li>Si \(f = o_a(1)\), alors \(\lim_a f = 0\).</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Propriétés des \(o\)</h2></hgroup><article  id="proprietes-des-o">
+</article></slide><slide class=""><hgroup><h2>Propriétés des \(o\)</h2></hgroup><article  id="propriétés-des-o">
 
 <div class="proposition">
 <ul>
@@ -228,7 +228,7 @@ e^{\sqrt{w} - 1} &amp; &amp; w \ll 1 &amp; &amp; w \gg 1 \\
 \end{align}
 \]</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Développements Limités</h2></hgroup><article  id="developpements-limites">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Développements Limités</h2></hgroup><article  id="développements-limités">
 
 </article></slide><slide class=""><hgroup><h2>Premier Contact</h2></hgroup><article  id="premier-contact">
 
@@ -287,7 +287,7 @@ f(x) = f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Lien avec l’approximation</h2></hgroup><article  id="lien-avec-lapproximation">
 
-</article></slide><slide class=""><hgroup><h2>DLs et différentielle</h2></hgroup><article  id="dls-et-differentielle">
+</article></slide><slide class=""><hgroup><h2>DLs et différentielle</h2></hgroup><article  id="dls-et-différentielle">
 
 <p>Quand on utilise les DLs dans des contextes concrets, l’absence de notations \(f\) et \(x\) peut entrainer des erreurs. On va donc revenir aux notions de différentielles pour l’expliciter.</p>
 
@@ -299,7 +299,7 @@ f(x) = f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac
 
 <p><img src="figures/devlim_derivative-1.png" width="720" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Lien avec la dérivée</h2></hgroup><article  id="lien-avec-la-derivee">
+</article></slide><slide class=""><hgroup><h2>Lien avec la dérivée</h2></hgroup><article  id="lien-avec-la-dérivée">
 
 <p>On a vu avec les <em>différentielles</em> que pour des variations infinitésimales, on a \[
 \text{d}b = \alpha \text{d}a \quad \text{ avec } \alpha = \frac{\text{d}b}{\text{d}a}
@@ -307,7 +307,7 @@ f(x) = f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac
 \Delta b \simeq \alpha \Delta a
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives</h2></hgroup><article  id="lien-avec-les-derivees-successives">
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives</h2></hgroup><article  id="lien-avec-les-dérivées-successives">
 
 <p>Si on n’est pas satisfait de l’approximation précédente, on peut rajouter des termes correctifs proportionnels à \(\Delta a^2, \Delta a^3, \dots\):</p>
 
@@ -319,7 +319,7 @@ f(x) = f(a) + f&#39;(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac
 b^{DL}(a) = b(a_0) + \alpha (a - a_0) + \beta (a - a_0)^2 + \gamma (a - a_0)^3 + \dots
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (II)</h2></hgroup><article  id="lien-avec-les-derivees-successives-ii">
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (II)</h2></hgroup><article  id="lien-avec-les-dérivées-successives-ii">
 
 <p>Pour s’assurer que l’approximation \(b^{DL}(a) \simeq b(a)\) est valide au voisinage de \(a_0\), on impose à \(b^{DL}\) et \(b\) d’avoir la même valeur en \(a_0\), mais également la même pente, la même concavité, etc.</p>
 
@@ -339,7 +339,7 @@ b^{DL}(a) = b(a_0) + \alpha (a - a_0) + \beta (a - a_0)^2 + \gamma (a - a_0)^3 +
 
 <p>En déduire les valeurs de \(\alpha\), \(\beta\), \(\gamma\)</p>
 
-</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (III)</h2></hgroup><article  id="lien-avec-les-derivees-successives-iii">
+</article></slide><slide class=""><hgroup><h2>Lien avec les dérivées successives (III)</h2></hgroup><article  id="lien-avec-les-dérivées-successives-iii">
 
 <p>On retrouve ainsi en égalisant les dérivées, et avec la notation de Leibniz la formule de Taylor \[
 \small
@@ -418,7 +418,7 @@ e^x  = &amp; 1 + x + \frac{x^2}{2!} + \dots + \frac{x^n}{n!} + o(x^n) \\
 \end{align}
 \]</p></div>
 
-</article></slide><slide class=""><hgroup><h2>Opérations sur les DLs</h2></hgroup><article  id="operations-sur-les-dls">
+</article></slide><slide class=""><hgroup><h2>Opérations sur les DLs</h2></hgroup><article  id="opérations-sur-les-dls">
 
 <p>Comme pour les limites et les dérivées, on peut aussi utiliser des règles pour combiner les DLs.</p>
 
@@ -674,7 +674,7 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 
 <p>qui est une très bonne approximation pour des petits angles (de l’ordre de 0.3490659 radians).</p>
 
-</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique">
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="représentation-graphique">
 
 <p><img src="figures/devlim_unnamed-chunk-2-1.png" width="720" /></p>
 
@@ -690,7 +690,7 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 
 <p>qui est une très bonne approximation pour des petits angles (jusqu’à 0.7853982 radians).</p>
 
-</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique-1">
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="représentation-graphique-1">
 
 <p><img src="figures/devlim_dl-2-1.png" width="720" /></p>
 
@@ -702,11 +702,11 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 
 <p>En partant du DL de \(\sin\), trouver directement le \(DL_4(0)\) de \(\text{sinc}(x)\). Pourquoi peut-on définir \(\text{sinc}(0) = 1\) ? Que peut-on dire de la dérivée première du sinus cardinal lorsque x tend 0 ? Et du signe de sa dérivée seconde ?</p>
 
-</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="representation-graphique-2">
+</article></slide><slide class=""><hgroup><h2>Représentation graphique</h2></hgroup><article  id="représentation-graphique-2">
 
 <p><img src="figures/devlim_sinus-cardinal-1.png" width="720" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques</h2></hgroup><article  id="interet-en-mathematiques">
+</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques</h2></hgroup><article  id="intérêt-en-mathématiques">
 
 <p>Les DLs permettent de calculer très facilement des limites. En particulier, la règle de l’Hopital est un cas particulier de DLs.</p>
 
@@ -717,7 +717,7 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 \end{align}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques (II)</h2></hgroup><article  id="interet-en-mathematiques-ii">
+</article></slide><slide class=""><hgroup><h2>Intérêt en mathématiques (II)</h2></hgroup><article  id="intérêt-en-mathématiques-ii">
 
 <p>On peut aussi retrouver des limites classiques en \(0\) \[
 \begin{align}
@@ -754,15 +754,15 @@ e^x = 1 + x + o(x) &amp; \Rightarrow \frac{e^x - 1}{x} \xrightarrow[x \to 0]{} 1
 \end{align}
 \] Les courageux peuvent aussi essayer de calculer les DL\(_1\) des \(6\) premières fonctions.</p>
 
-</article></slide><slide class=""><hgroup><h2>Exercices d’applications (III): Réponses</h2></hgroup><article  id="exercices-dapplications-iii-reponses">
+</article></slide><slide class=""><hgroup><h2>Exercices d’applications (III): Réponses</h2></hgroup><article  id="exercices-dapplications-iii-réponses">
 
 <p>\[
 \small
 \begin{align}
 \lim_{x \to 0} \frac{\cos(x) - 1}{\ln(1+x)\sin(x)} = -\frac{1}{2} &amp; &amp; \lim_{x \to 0} \frac{\ln(1+\tan(x))}{\sin(x)} = 1 \\
 \lim_{x \to 0} \frac{\sin(x)\tan(x)}{\sin(x^2)}  = 1 &amp; &amp; \lim_{x \to 0} \frac{1}{x^2} - \frac{1}{\sin^2(x)} = -\frac{1}{3}\\
-\lim_{x \to 1} \frac{\ln(x)}{x^2 - 1}  = \frac{1}{2} &amp; &amp; \lim_{x \to 1} \frac{\ln(x)(\tan(\pi x /4) - 1)}{(x - 1)^2} = \frac{\pi}{4} \\
-\lim_{x \to +\infty} \left(\frac{2x+1}{2x-1}\right)^{2x} = e &amp; &amp; \lim_{x \to +\infty} x\left( \left(1+\frac{1}{x}\right)^x - e \right) = \frac{1}{2}
+\lim_{x \to 1} \frac{\ln(x)}{x^2 - 1}  = \frac{1}{2} &amp; &amp; \lim_{x \to 1} \frac{\ln(x)(\tan(\pi x /4) - 1)}{(x - 1)^2} = \frac{\pi}{2} \\
+\lim_{x \to +\infty} \left(\frac{2x+1}{2x-1}\right)^{2x} = e^2 &amp; &amp; \lim_{x \to +\infty} x\left( \left(1+\frac{1}{x}\right)^x - e \right) = -\frac{e}{2}
 \end{align}
 \]</p></article></slide>
 
