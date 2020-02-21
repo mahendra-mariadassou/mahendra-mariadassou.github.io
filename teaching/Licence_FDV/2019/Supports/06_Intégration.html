@@ -428,6 +428,17 @@ G_n = \sum_{k = 0}^{n-1} \frac{k}{n\sqrt{n^2 - k^2}} &amp; &amp; H_n = \sum_{k =
 \end{align}
 \]</p>
 
+</article></slide><slide class=""><hgroup><h2>Exercices (II) : Réponses</h2></hgroup><article  id="exercices-ii-réponses" class="smaller">
+
+<p>\[
+\begin{align}
+E_n &amp; = \sum_{k = 0}^{n-1} \frac{1}{\sqrt{n^2 - k^2}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{1}{\sqrt{1 - (k/n)^2}} \to \int_0^1 \frac{dx}{\sqrt{1 - x^2}} = [\arcsin(x)]_0^1 = \frac{\pi}{2}\\
+F_n &amp; = \sum_{k = 1}^n \frac{n}{{n^2 + k^2}} = \frac{1}{n} \sum_{k=1}^{n} \frac{1}{1 + (k/n)^2} \to \int_0^1 \frac{dx}{1 + x^2} = [\arctan(x)]_0^1 = \frac{\pi}{4} \\ 
+G_n &amp; = \sum_{k = 0}^{n-1} \frac{k}{n\sqrt{n^2 - k^2}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{k/n}{\sqrt{1 - (k/n)^2}} \to \int_0^1 \frac{xdx}{\sqrt{1 - x^2}} =\left[-\sqrt{1-x^2}\right]_0^1 = 1 \\
+H_n &amp; = \sum_{k = 1}^n \frac{k^2}{n^3} = \frac{1}{n} \sum_{k=1}^{n} (k/n)^2 \to \int_0^1 x^2dx = \left[ \frac{x^3}{3}\right]_0^1 = \frac{1}{3}
+\end{align}
+\]</p>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Propriétés de l’intégrale</h2></hgroup><article  id="propriétés-de-lintégrale">
 
 </article></slide><slide class=""><hgroup><h2>Linéarité</h2></hgroup><article  id="linéarité">
@@ -549,11 +560,13 @@ G = \int_{1}^{e^2} (2x^3 + 1) \ln(x)dx &amp; &amp; H = \int_1^4 \sqrt{3s} \ln(s)
 <p>\[
 \begin{align}
 A = \frac{2}{9}(e^3 + 2e^{-3}) &amp;  &amp; B = 9e - 24 \\
-C = e^2/2 &amp; &amp; D = 1 \\
+C = (e^2-1)/2 &amp; &amp; D = 1 \\
 E_n = \frac{1}{(n+1)^2}\left[ ne^{n+1} + 1 \right] &amp; &amp; F = 3/8 \\
 G = \frac{1}{8}(7e^8 + 1) + (e^2 + 1) &amp; &amp; H = \frac{4}{\sqrt{3}} \left[ 8\ln(2) - \frac{7}{3}\right]
 \end{align}
 \]</p>
+
+<p>Corrections détaillées disponibles <a href='https://mahendra-mariadassou.github.io/teaching/Licence_FDV/2019/Exercices/06_1_Intégration_corrigé.pdf' title=''>ici</a></p>
 
 </article></slide><slide class=""><hgroup><h2>IPP: Exercices (II)</h2></hgroup><article  id="ipp-exercices-ii">
 
@@ -565,6 +578,8 @@ A = \int_{0}^{\pi/2} \cos(x)e^x dx &amp;  &amp; B = \int_0^{\pi/2} \sin(x)e^x dx
 C = \int_{0}^1 x^2\cos(x) dx  &amp; &amp; D = \int_{0}^1  x^2 \cos^2(x)\\
 \end{align}
 \]</p>
+
+<p>Corrections détaillées disponibles <a href='https://mahendra-mariadassou.github.io/teaching/Licence_FDV/2019/Exercices/06_1_Intégration_corrigé.pdf' title=''>ici</a></p>
 
 </article></slide><slide class=""><hgroup><h2>Changement de variables</h2></hgroup><article  id="changement-de-variables">
 
@@ -671,7 +686,9 @@ I &amp; = \int_{\alpha = 0}^{\alpha = \pi/2} \sin^3(\alpha) d\alpha \\
 \end{align}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Changement de variable: exercices (II)</h2></hgroup><article  id="changement-de-variable-exercices-ii">
+<p>Corrections détaillées disponibles <a href='https://mahendra-mariadassou.github.io/teaching/Licence_FDV/2019/Exercices/06_1_Intégration_corrigé.pdf' title=''>ici</a></p>
+
+</article></slide><slide class=""><hgroup><h2>Changement de variable: exercices (II)</h2></hgroup><article  id="changement-de-variable-exercices-ii" class="smaller">
 
 <p>Calculer les intégrales suivantes:</p>
 
@@ -682,11 +699,13 @@ I &amp; = \int_{\alpha = 0}^{\alpha = \pi/2} \sin^3(\alpha) d\alpha \\
 \int_{0}^{1} \frac{dx}{e^x + 1} &amp; &amp; \text{en posant } v= e^x [*] \\
 \int_1^{2} \frac{ds}{s(s^3+1)} &amp; &amp; \text{en posant } y = s^3 + 1 [*]\\
 \int_{-1}^{0} \frac{u^3 du}{(u^2 + 1)\sqrt{u^2 +1}} &amp; &amp; \text{en posant } v = u^2 + 1 \\
-\int_0^3  \frac{t \ln(t^2 + 1)}{t^2 + 1} &amp; &amp; \text{en posant } x = t^2 + 1
+\int_0^3  \frac{t \ln(t^2 + 1)}{t^2 + 1}dt &amp; &amp; \text{en posant } x = t^2 + 1
 \end{align}
 \]</p>
 
 <p>\([*]\) On peut utiliser le fait que \(1/(x(x-1)) = 1/(x-1) - 1/x\) et \(1/(x(x+1)) = 1/x - 1/(x+1)\).</p>
+
+<p>Corrections détaillées disponibles <a href='https://mahendra-mariadassou.github.io/teaching/Licence_FDV/2019/Exercices/06_1_Intégration_corrigé.pdf' title=''>ici</a></p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Intégrale à borne variable</h2></hgroup><article  id="intégrale-à-borne-variable">
 
@@ -725,7 +744,7 @@ x(t) = \int_0^t v(z)dz
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Comparaison somme - intégrale</h2></hgroup><article  id="comparaison-somme---intégrale">
 
-</article></slide><slide class=""><hgroup><h2>À savoir</h2></hgroup><article  class="smaller" id="à-savoir">
+</article></slide><slide class=""><hgroup><h2>À savoir</h2></hgroup><article  id="à-savoir" class="smaller">
 
 <div class="proposition">
 <p>Soit \(f\) positive, continue et <alert>décroissante</alert> sur \(\mathbb{R}\). Alors pour tout \(n\), on a \[
@@ -741,7 +760,7 @@ x(t) = \int_0^t v(z)dz
 
 <p><strong>Note</strong> Si \(f\) n’est pas intégrale en \(0\), on peut remplacer le terme de droite par \(f(1) + \int_1^{n} f(x)dx\).</p>
 
-</article></slide><slide class=""><hgroup><h2>Démonstration</h2></hgroup><article  class="smaller" id="démonstration">
+</article></slide><slide class=""><hgroup><h2>Démonstration</h2></hgroup><article  id="démonstration" class="smaller">
 
 <p>La preuve est basée sur l’idée suivante (à retenir car très puissante et facile à réutiliser): pour tout \(n \geq 1\) et \(x \in [n-1, n]\), on a</p>
 
@@ -760,7 +779,7 @@ f(n) \leq f(x) \leq f(n-1)
 <li>Trouver un équivalent de la suite \(H_n = S_n(1)\) (aussi appelée série harmonique), c’est à dire une fonction simple \(f(n)\) telle que \(H_n / f(n) \to 1\) quand \(n \to \infty\)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  class="smaller" id="solutions">
+</article></slide><slide class=""><hgroup><h2>Solutions</h2></hgroup><article  id="solutions" class="smaller">
 
 <p>En appliquant le résultat précédent à la fonction \(f: x \mapsto x^{-\alpha}\) on montre \[
 \int_1^{n+1} x^{-\alpha} dx \leq S_n(\alpha) \leq 1 + \int_1^{n} x^{-\alpha} dx
@@ -768,7 +787,7 @@ f(n) \leq f(x) \leq f(n-1)
 I_n = \begin{cases} \ln(n) &amp; \text{si } \alpha = 1 \\ \frac{n^{1 - \alpha} - 1}{1-\alpha} &amp; \text{si } \alpha \neq 1\end{cases}
 \] En utilisant les limites classiques des fonctions puissances et logarithmes, on montre que \(I_n \to \infty\) si et seulement si \(\alpha \leq 1\). On en déduit que \(S_n(\alpha)\) converge si et seulement si \(\alpha &gt; 1\).</p>
 
-</article></slide><slide class=""><hgroup><h2>Solutions II</h2></hgroup><article  class="smaller" id="solutions-ii">
+</article></slide><slide class=""><hgroup><h2>Solutions II</h2></hgroup><article  id="solutions-ii" class="smaller">
 
 <p>En reprenant l’encadrement précédent pour \(\alpha = 1\), on montre que \(H_n = S_n(1)\) vérifie l’encadrement \[
 \ln(n+1) \leq H_n \leq 1 + \ln(n)
@@ -793,7 +812,7 @@ I_n = \begin{cases} \ln(n) &amp; \text{si } \alpha = 1 \\ \frac{n^{1 - \alpha} -
 
 <p>Avec tous ces élements en main, on va écrire des relations entre les différentes quantités du problème.</p>
 
-</article></slide><slide class=""><hgroup><h2>Solution (II)</h2></hgroup><article  class="smaller" id="solution-ii">
+</article></slide><slide class=""><hgroup><h2>Solution (II)</h2></hgroup><article  id="solution-ii" class="smaller">
 
 <ul>
 <li>Au temps \(t\), il neige depuis \(T+t\) heures et la neige accumulée en une portion de route non déblayée est donc \(n(t) = \rho(T+t)\)</li>
@@ -807,7 +826,7 @@ x(u) = \int_0^u dx = \int_0^u v(t)dt = \int_0^u \frac{v_0dt}{\rho(t+T)} = \frac{
 2x(2) = 3x(1) \Leftrightarrow 2\ln\frac{2+T}{T} = 3\ln\frac{1+T}{T} \Leftrightarrow \left(\frac{2+T}{T} \right)^2 = \left( \frac{1+T}{T} \right)^3
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Solution III</h2></hgroup><article  class="smaller" id="solution-iii">
+</article></slide><slide class=""><hgroup><h2>Solution III</h2></hgroup><article  id="solution-iii" class="smaller">
 
 <p>En continuant les calculs, on obtient</p>
 
