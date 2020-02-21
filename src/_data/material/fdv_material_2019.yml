@@ -86,7 +86,9 @@
       - nature: Transparents <i class="fab fa-html5"></i>
         at: "2019/Supports/06_Intégration.html"
       - nature: Transparents <i class="far fa-file-pdf"></i>
-        at: "2019/Supports/06_Intégration.pdf"        
+        at: "2019/Supports/06_Intégration.pdf" 
+      - nature: Correction des exercices des transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/06_1_Intégration_corrigé.pdf" 
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/06_Intégration.pdf"
       - nature: Feuille d'exercices avec corrigés (bientôt) <i class="far fa-file-pdf"></i>
