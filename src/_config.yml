@@ -10,7 +10,7 @@ url: "https://mahendra-mariadassou.github.io"
 # site information
 title: Mahendra Mariadassou
 description: > # this means to ignore newlines until the next tag
-  Researcher at Inra
+  Researcher at Inrae
 author: Mahendra Mariadassou
 blog_dir: /blog
 permalink: /blog/posts/:year/:month/:day/:title/ # prefixed style
@@ -19,7 +19,7 @@ category_title_prefix: "category: "
 
 # author information
 picture: /images/visage.jpg
-email: firstname.lastname@inra.fr
+email: firstname.lastname@inrae.fr
 networks:
   github:
     url: https://github.com/
@@ -31,9 +31,9 @@ networks:
 # contacts
 contacts:
   research:
-    email: firstname.lastname@inra.fr
+    email: firstname.lastname@inrae.fr
     address: >
-      INRA MaIAGE<br/>
+      INRAE MaIAGE<br/>
       Bât. 233<br/>
       Domaine de Vilvert<br/>
       78352 Jouy-en-Josas<br/>
