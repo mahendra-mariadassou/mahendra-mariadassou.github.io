@@ -94,6 +94,21 @@
       - nature: Feuille d'exercices avec corrigés (bientôt) <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/06_Intégration_corrigé.pdf"
 
-        
+    - name: Partiel S1
+      elements:
+      - nature: Partiel (français) <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/partiel_S1_analyse.pdf"
+      - nature: Partiel (anglais) <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/partiel_S1_analyse_en.pdf"
+      
+    - name: Partiel S2
+      elements:
+      - nature: Partiel (français) <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/partiel_S2_analyse.pdf"
+      - nature: Partiel (anglais) <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/partiel_S2_analysis_en.pdf"
+      - nature: Corrigé (français) <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/partiel_S2_analyse_corrigé.pdf"
+
 - class: Cours de L2
   lectures:
