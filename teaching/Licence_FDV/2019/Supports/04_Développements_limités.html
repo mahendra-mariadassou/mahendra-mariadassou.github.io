@@ -85,6 +85,13 @@ slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
   </style>
 
   <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
@@ -99,7 +106,7 @@ slide:not(.current) .plotly.html-widget{
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      
       <p data-config-presenter><!-- populated from slide_config.json --></p>
             <p style="margin-top: 6px; margin-left: -2px;">4 novembre 2019</p>
           </hgroup>
@@ -143,7 +150,7 @@ slide:not(.current) .plotly.html-widget{
 <p>Les cas particuliers suivants sont à <alert>connaître</alert></p>
 
 <ul>
-<li>Si \(a \in \mathbb{R}\) et \(n &lt; m\) alors \((x - a)^n = o_{\pm \infty} ( (x-a)^m )\) et \((x - a)^m = o_{0} ( (x-a)^n )\)</li>
+<li>Si \(a \in \mathbb{R}\) et \(n &lt; m\) alors \((x - a)^n = o_{\pm \infty} ( (x-a)^m )\) et \((x - a)^m = o_{a} ( (x-a)^n )\)</li>
 <li>Si \(\lim_a g = \pm \infty\) et \(f\) est bornée au voisinage de \(a\) (par exemple \(\lim_a f\) finie), alors \(f = o(g)\)</li>
 <li>Si \(f = o_a(1)\), alors \(\lim_a f = 0\).</li>
 </ul>
@@ -166,7 +173,7 @@ slide:not(.current) .plotly.html-widget{
 
 <ul>
 <li>\(\forall \alpha \in \mathbb{R}_+ \quad x^\alpha = o_{+\infty}(e^x)\)</li>
-<li>\(\forall \alpha \in \mathbb{R}_+ \quad e^x = o_{-\infty}(x^{-\alpha})\)</li>
+<li>\(\forall \alpha \in \mathbb{R}_+ \quad e^x = o_{-\infty}(|x|^{-\alpha})\)</li>
 <li>\(\forall \alpha \in \mathbb{R}_+ \quad \ln(x) = o_{+\infty}(x^\alpha)\)</li>
 <li>\(\forall \alpha \in \mathbb{R}_+ \quad x^{-\alpha} = o_{+\infty}(\ln(x))\)</li>
 </ul>
@@ -227,6 +234,25 @@ slide:not(.current) .plotly.html-widget{
 e^{\sqrt{w} - 1} &amp; &amp; w \ll 1 &amp; &amp; w \gg 1 \\
 \end{align}
 \]</p>
+
+</article></slide><slide class=""><hgroup><h2>Correction</h2></hgroup><article  id="correction">
+
+<p>\[
+\begin{align}
+\text{Quand } A \ll 1, \frac{1}{1+A} \simeq 1 &amp; &amp; \text{quand } A \gg 1, \frac{1}{1+A} \simeq \frac{1}{A} \\
+\text{Quand } B \ll 1, \frac{3+B+2B^2}{2+3B+B^2} \simeq \frac{3}{2} &amp; &amp; \text{quand } B \gg 1, \frac{3+B+2B^2}{2+3B+B^2} \simeq 2 \\
+\text{Quand } a \ll b, \frac{a+b}{ab} \simeq \frac{1}{a} &amp; &amp; \text{quand } a \gg b, \frac{a+b}{ab} \simeq \frac{1}{b} \\
+\text{Quand } x \ll y, \frac{x^2 + y^2 + 2xy}{3x - y} \simeq -y &amp; &amp; \text{quand } x \gg y, \frac{x^2 + y^2 + 2xy}{3x - y} \simeq \frac{x}{3} \\
+\text{Quand } u \ll v, \sqrt{u^2 + v^2} \simeq |v| &amp; &amp; \text{quand } u \gg v, \sqrt{u^2 + v^2} \simeq |u| \\
+\text{Quand } w \ll 1, e^{\sqrt{w} - 1} \simeq \frac{1}{e} &amp; &amp; \text{quand } w \gg 1, e^{\sqrt{w} - 1} \simeq e^{\sqrt{w} - 1} \\
+\end{align}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Correction (II)</h2></hgroup><article  id="correction-ii">
+
+<p>La quantité \(e^{\sqrt{w} -1}\) est un cas particulier au sens où la somme est dans l’argument de l’exponentielle. On a donc \[
+e^{\sqrt{w} -1} = \frac{1}{e} e^{\sqrt{w}}
+\] Et il n’y a pas de somme et donc on ne peut en général négliger aucun terme. La formule se simplifie néanmoins quand \(w \ll 1\) parce qu’on a alors \(e^{\sqrt{w}} \simeq 1\). Mais on n’a négligé aucun terme pour arriver à cette approximation.</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Développements Limités</h2></hgroup><article  id="développements-limités">
 
