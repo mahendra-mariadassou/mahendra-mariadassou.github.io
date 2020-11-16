@@ -708,7 +708,7 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 
 <p>Si on s’éloigne un peu trop du point de référence \(a_0\) (et pour certaines valeurs de \(a_0\)), l’approximation par une droite n’est pas très satisfaisante et il faut rajouter un terme correctif en \((a - a_0)^2\) pour obtenir une meilleure approximation. Ceci revient à approcher le graphe de \(b(a)\) par une <em>parabole</em>.</p>
 
-<p>Le \(DL_1(0)\) est très utilisé pour remplacer le \(\cos\) de petits angles \(\theta\), il permet d’écrire</p>
+<p>Le \(DL_2(0)\) est très utilisé pour remplacer le \(\cos\) de petits angles \(\theta\), il permet d’écrire</p>
 
 <ul>
 <li>\(\cos(\theta) \simeq 1 - \frac{\theta^2}{2}\)</li>
@@ -738,7 +738,7 @@ x\sqrt{\frac{1+x}{1-x}} &amp; = x + x^2 + o(x^3)
 
 <p>\[
 \begin{align}
-\frac{f(x) - f(x_0)}{g(x) - g(x_0)} &amp; = \frac{f&#39;(x_0)x + o(x)}{g&#39;(x_0)x + o(x)} \\ 
+\frac{f(x) - f(x_0)}{g(x) - g(x_0)} &amp; = \frac{f&#39;(x_0)(x -x_0) + o(x-x_0)}{g&#39;(x_0)(x - x_0) + o(x - x_0)} \\ 
 &amp; = \frac{f&#39;(x_0)+ o(1)}{g&#39;(x_0) + o(1)} \xrightarrow[x \to x_0]{} \frac{f&#39;(x_0)}{g&#39;(x_0)}
 \end{align}
 \]</p>
