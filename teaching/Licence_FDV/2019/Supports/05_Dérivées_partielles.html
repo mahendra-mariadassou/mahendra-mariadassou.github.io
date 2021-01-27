@@ -40,6 +40,7 @@
     };
   </script>
 
+  <script src="libs/header-attrs-2.6/header-attrs.js"></script>
   <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
@@ -85,6 +86,13 @@ slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
   </style>
 
   <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
@@ -99,7 +107,7 @@ slide:not(.current) .plotly.html-widget{
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      
       <p data-config-presenter><!-- populated from slide_config.json --></p>
             <p style="margin-top: 6px; margin-left: -2px;">18 novembre 2019</p>
           </hgroup>
@@ -198,11 +206,11 @@ f: (x, y) \mapsto z = 4x+3y
 <li>fixant les autres</li>
 </ul>
 
-<p>Par exemple en \((x_0, y_0)\), on peut définir</p>
+<p>Par exemple en \((x_0, y_0)\), on peut définir deux fonctions</p>
 
 <ul>
-<li>\(g: x \mapsto f(x, y_0)\)</li>
-<li>\(h: y \mapsto f(x_0, y)\)</li>
+<li>\(g_{y_0}: x \mapsto f(x, y_0)\) qui dépend uniquement de \(x\) (\(y_0\) est un paramètre)</li>
+<li>\(h_{x_0}: y \mapsto f(x_0, y)\) qui dépend uniquement de \(y\) (\(x_0\) est un paramètre)</li>
 </ul>
 
 <p>et on définit les <alert>dérivées partielles</alert> de \(f\) à partir de ces fonctions.</p>
@@ -210,8 +218,8 @@ f: (x, y) \mapsto z = 4x+3y
 </article></slide><slide class=""><hgroup><h2>Dérivées partielles (II)</h2></hgroup><article  id="dérivées-partielles-ii">
 
 <div class="definition">
-<p>Soit \(f: \mathbb{R}^2 \to \mathbb{R}\). Les dérivées partielles de \(f\) par rapport à \(x\) et \(y\) en \((x_0, y_0)\) sont \(h&#39;(x_0)\) et \(g&#39;(y_0)\) où \(g\) et \(h\) sont définies par \(g(x) = f(x, y_0)\) et \(h(y) = g(x_0, y)\). Elles sont notées \[
-\frac{\partial f}{\partial x}(x_0, y_0) = g&#39;(x_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0) = h&#39;(x_0)
+<p>Soit \(f: \mathbb{R}^2 \to \mathbb{R}\). Les dérivées partielles de \(f\) par rapport à \(x\) et \(y\) en \((x_0, y_0)\) sont \(h_{x_0}&#39;(y_0)\) et \(g_{y_0}&#39;(x_0)\) où \(g_{y_0}\) et \(h_{x_0}\) sont définies par \(g_{y_0}(x) = f(x, y_0)\) et \(h_{x_0}(y) = f(x_0, y)\). Elles sont notées \[
+\frac{\partial f}{\partial x}(x_0, y_0) = g_{y_0}&#39;(x_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0) = h&#39;_{x_0}(y_0)
 \] Les fonctions correspondantes sont notées \(\frac{\partial f}{\partial x}\) et \(\frac{\partial f}{\partial y}\).</p></div>
 
 <p><strong>Remarque</strong> Si \(z = f(x,y)\), on peut aussi écrire \(\frac{\partial z}{\partial x}\) et \(\frac{\partial z}{\partial y}\).</p>
