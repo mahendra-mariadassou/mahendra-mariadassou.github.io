@@ -91,17 +91,19 @@
         at: "2019/Exercices/06_1_Intégration_corrigé.pdf" 
       - nature: Feuille d'exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/06_Intégration.pdf"
-      - nature: Feuille d'exercices avec corrigés (bientôt) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/06_Intégration_corrigé.pdf"
+      - nature: Correction (manuscrite) des exercices <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/06_Intégration_corrigé_manuscrit.pdf"
+      - nature: Correction des problèmes <i class="far fa-file-pdf"></i>
+        at: "2019/Exercices/06_Intégration_corrigé.pdf"  
 
-    - name: Partiel S1
+    - name: Partiel S1 (2019)
       elements:
       - nature: Partiel (français) <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/partiel_S1_analyse.pdf"
       - nature: Partiel (anglais) <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/partiel_S1_analyse_en.pdf"
       
-    - name: Partiel S2
+    - name: Partiel S2 (2019)
       elements:
       - nature: Partiel (français) <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/partiel_S2_analyse.pdf"
