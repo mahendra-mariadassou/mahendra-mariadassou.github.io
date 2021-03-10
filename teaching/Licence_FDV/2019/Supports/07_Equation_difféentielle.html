@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Équations différentielles (simple)</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Équations différentielles (simple)',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Mahendra Mariadassou' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+  <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="libs/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
+  </style>
+
+  <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">10 Mars 2021</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introduction</h2></hgroup><article  id="introduction">
+
+</article></slide><slide class=""><hgroup><h2>Avant propos (I)</h2></hgroup><article  id="avant-propos-i">
+
+<p>L’objectif de ce cours est de présenter et d’apprendre à résoudre des équations différentielles du premier ordre. Les équations différentielles interviennent naturellement en:</p>
+
+<ul>
+<li>physique (principe fondamental de la dynamique),</li>
+<li>chimie (cinétique d’une réaction),</li>
+<li>biologie (dynamique des population, épidémiologie).</li>
+</ul>
+
+<p>Une <alert>équation différentielle</alert> est une équation que doit vérifier une fonction, disons \(y(x)\), et qui fait intervenir au moins une de ses dérivées, par exemple \(y&#39;(x)\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Définition</h2></hgroup><article  id="définition">
+
+<div class="definition">
+<p>Soit \(I = [a, b]\) un segment, \(x \mapsto a(x)\) et \(x \mapsto b(x)\) deux fonctions continues sur \(I\) et \((E)\) l’équation différentielle \[
+y&#39;(x) = a(x)y(x) + b(x)
+\] La fonction \(f(x)\) est solution de \((E)\) sur \(I\) si elle est vérifie l’égalité \(f&#39;(x) = a(x)f(x) + b(x)\) pour tout \(x \in I\).</p></div>
+
+<p>L’équation précédente est dite <alert>linéaire du premier ordre</alert> car elle fait uniquement intervenir</p>
+
+<ul>
+<li>\(y\) et \(y&#39;\) sans transformation, par opposition à \(y^2\), \(\ln(y&#39;)\), etc (linéaire)</li>
+<li>les dérivées d’ordre au plus 1, par opposition à \(y&#39;&#39;\), \(y^{(3)}\), etc (premier ordre)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Conditions Initiales</h2></hgroup><article  id="conditions-initiales">
+
+<p>Une équation différentielle admet en général une <alert>infinité</alert> de solutions qui ne diffèrent que par la valeur d’une ou plusieurs constantes.</p>
+
+<p>L’ensemble des solutions est appelé <alert>solution générale</alert> de l’équation différentielle. Lorsque qu’on cherche à résoudre un problème concret, on impose en général des <alert>conditons limites</alert> (par exemple la position initiale en mécanique, ou la concentration initiale d’un substrat en chimie).</p>
+
+<p>L’unique solution qui vérifie ces conditions limites (si elle existe) est dite solution particulière de l’équation différentielle.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple">
+
+<p>L’équation différentielle \[
+y&#39;(x) = y(x)
+\] admet comme solution générale sur \(\mathbb{R}\) la fonction \(y(x) = Ae^x\) avec \(A\) une constante quelconque.</p>
+
+<p>Si on impose la condition limite \(y(0) = 2\), on peut vérifier que la constante \(A\) doit valoir \(2\) pour que la condition soit vérifiée (puisque \(y(0) = A\)).</p>
+
+<p>La solution particulière qui vérifie \(y(0)=2\) est donc \(y(x) = 2e^x\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices">
+
+<p>Parmi les équations suivantes, lesquelles sont linéaires d’ordre 1?</p>
+
+<ul>
+<li>\(y(x) - y&#39;(x) = 0\)</li>
+<li>\(y(x) - y&#39;(x) - y&#39;&#39;(x) = 0\)</li>
+<li>\(\lambda y(x) - y&#39;(x) = 0\) avec \(\lambda \in \mathbb{R}\)</li>
+<li>\(f(x) - y&#39;(x) = 0\) avec \(f(x)\) une fonction continue</li>
+<li>\(y^2(x) - y&#39;(x) = 0\)</li>
+<li>\(y(x) - (y&#39;(x))^2 = 0\)</li>
+<li>\(y&#39;(x) - y&#39;&#39;(x) = 0\)</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Méthodes de résolution: fonctions tests</h2></hgroup><article  id="méthodes-de-résolution-fonctions-tests">
+
+</article></slide><slide class=""><hgroup><h2>Essai de fonctions tests</h2></hgroup><article  id="essai-de-fonctions-tests">
+
+<p>Avant de présenter des méthodes <alert>systématiques</alert> mais compliquées, on doit rappeler que la première méthode de résolution est l’<alert>essai de fonctions tests</alert>.</p>
+
+<p>Si la solution saute aux yeux, inutile de se fatiguer avec des calculs compliquées. Et dans le cas contraire, on peut toujours essayer avec des <em>fonctions tests simples</em> (exponentielle, logarithme, fonctions trigonométrique, fonctions puissances) et essayer de bricoler pour trouver la solution.</p>
+
+<p>Dans tous les cas, il suffit d’injecter notre fonction test et sa dérivée première (ou d’autres dérivées si on a affaire à des équations d’ordre supérieur à 1) dans l’équation différentielle et de vérifier si cette dernière est vérifiée.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (I)</h2></hgroup><article  id="exemple-i">
+
+<p>On cherche à résoudre l’équation \(x^2 y&#39;(x) = 5\). On essaie différentes fonctions tests:</p>
+
+<ul>
+<li>\(y(x) = e^x\) donne \(y&#39;(x) = e^x\) et on a \(x^2 y&#39;(x) = x^2 e^x \neq 5\)</li>
+<li>\(y(x) = \ln(x)\) donne \(y&#39;(x) = 1/x\) et on a \(x^2 y&#39;(x) = x \neq 5\)</li>
+<li>\(y(x) = x^{\alpha}\) (avec \(\alpha\) à déterminer) donne \(y&#39;(x) = \alpha x^{\alpha - 1}\) et on a \(x^2 y&#39;(x) = \alpha x^{\alpha - 1} \neq 5\) qui est constant si \(\alpha = -1\).</li>
+</ul>
+
+<p>On y est presque, \(y(x) = 1/x\) donne \(x^2 y&#39;(x) = -1\) qui est certes différent de \(5\) mais seulement à une constante multiplicative près.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple (II)</h2></hgroup><article  id="exemple-ii">
+
+<p>On teste donc \(y(x) = -5/x\) qui donne bien \(x^2 y&#39;(x) = 5\).</p>
+
+<p>On a donc trouvé une solution de l’équation \(x^2y&#39;(x) = 5\) et on peut remarquer à ce niveau que toutes les fonctions \[
+x \mapsto -5/x + A
+\] avec \(A\) une constante arbitraire sont solutions (c’est la fameuse <strong>solution générale</strong>).</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices-1">
+
+<p>En essayant plusieurs fonctions tests (simples) en les modifiants, trouver une solution aux équations différentielles</p>
+
+<ul>
+<li>\(y&#39;(x) = 10\)</li>
+<li>\(y&#39;&#39;(x) = 10\)</li>
+<li>\(xy&#39;(x) = 1\)</li>
+<li>\(xy&#39;(x) = y(x)\)</li>
+<li>\(y&#39;(x) = 1 + y^2(x)\)</li>
+<li>\(y&#39;(x) = \sqrt{x}\)</li>
+<li>\(y&#39;(x) + y(x) = 0\)</li>
+<li>\(y&#39;&#39;(x) + \omega^2 y(x) = 0\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Commentaires</h2></hgroup><article  id="commentaires">
+
+<p>La méthode des fonctions tests est intéressante mais présente des défauts majeurs:</p>
+
+<ul>
+<li>elle ne fonctionne pas à tous les coups</li>
+<li>elle permet de trouver une solution mais pas forcément toutes (la solution générale)</li>
+<li>l’absence de solution générale est pénalisant si on veut imposer des conditions limites: un boulet de canon et un objet laché sans vitesse initiale vérifient la même équation différentielles mais ont pourtant des trajectoires très différentes à cause de leurs conditions limites différentes</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Équations directement intégrables</h2></hgroup><article  id="équations-directement-intégrables">
+
+</article></slide><slide class=""><hgroup><h2>Principe (I)</h2></hgroup><article  id="principe-i">
+
+<p>Il arrive que l’analyse scientifique du phénomène aboutisse à une relation du type \[
+db = f(a) da
+\] pour une certaine fonction \(f(a)\), qui peut se réexprimer en \[
+\frac{db}{da} = f(a)
+\] ce qui signifie que \(b(a)\) est une primitive de \(f(a)\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Primitive (II)</h2></hgroup><article  id="primitive-ii">
+
+<p>En particulier, si \(F(a)\) est une primitive quelconque de \(f(a)\), la solution générale de l’équation est \[
+b(a) = F(a) + K
+\] où \(K\) est une constante. La solution générale est déterminée à une constante près, c’est caractéristique des équations du premier ordre.</p>
+
+</article></slide><slide class=""><hgroup><h2>Primitive (III)</h2></hgroup><article  id="primitive-iii">
+
+<p>La valeur de la constante \(K\) est généralement donnée par une <strong>condition limite</strong> \(b(a_0) = b_0\).</p>
+
+<p>En injectant dans l’équation précédente, on trouve \(K = b(a_0) - F(a_0) = b_0 - F(a_0)\).</p>
+
+<p>Les équations précédentes qui peuvent se mettre sous la forme \(\frac{db}{da} = f(a)\) et se résoudre en cherchant une primitive de \(f\) sont dites <strong>directement intégrables</strong>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  class="smaller" id="exercices-2">
+
+<p>Résoudre les équations directement intégrables suivantes (en prenant soin de vérifier <strong>à posteriori</strong> que la solution trouvée vérifie bien l’équation différentielle et la condition limite):</p>
+
+<ul>
+<li>\(\frac{db}{da} = \cos(a)\) avec cond. lim. \(b(\pi/6) = 1/2\)</li>
+<li>\(\frac{db}{da} = \frac{1}{\sqrt{1 - a^2}}\) avec cond. lim. \(b(1/2) = \pi/6\)</li>
+<li>\(\frac{df}{dx} = \left(\frac{X}{x}\right)^2 + 1\) avec \(X\) constante et cond. lim. \(f(X) = 0\)</li>
+<li>\(\frac{df}{dx} = U \cos(kx)\) avec \(U, k\) constantes et cond. lim. \(f(0) = \frac{U}{k}\)</li>
+<li>\(\frac{df}{dx} = \alpha (x - X)^2\) avec \(\alpha, X\) constantes et cond. lim. \(f(0) = 0\)</li>
+<li>\(\frac{df}{dx} = -(x - x_0) e^{-\beta (x - x_0)^2}\) avec \(\beta, x_0\) constantes et cond. lim. \(f(x_0) = 0\)</li>
+<li>\(\frac{dy}{dt} = v_0\) avec \(v_0\) constante et cond. lim. \(y(t_0) = y_0\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Application</h2></hgroup><article  id="application">
+
+<p>On lâche une vitesse d’une hauteur \(H\) sans vitesse initiale. On néglige les frottements de l’air et considère uniquement l’action de la gravité. On note \(v(t)\) sa vitesse (dirigée vers le bas) et \(h(t)\) sa hauteur à l’instant \(t\).</p>
+
+<ul>
+<li>Écrire l’équation différentielle et la condition initiale vérifiée par \(v(t)\). En déduire \(v(t)\).</li>
+<li>Écrire l’équation différentielle et la condition initiale vérifiée par \(h(t)\). En déduire \(h(t)\).</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Méthode de résolution: séparation des variables</h2></hgroup><article  id="méthode-de-résolution-séparation-des-variables">
+
+</article></slide><slide class=""><hgroup><h2>Un exemple</h2></hgroup><article  id="un-exemple">
+
+<p>Il arrive que l’équation différentielles soit trop compliquée pour être mise sous la forme \(db/da = f(a)\), par exemple:</p>
+
+<p>\[
+\frac{dy}{dx} = -\frac{xy}{X^2} \quad \text{ avec } X \text{ constante}
+\]</p>
+
+<p>Dans ce cas-là, il faut recourir à d’autre techniques. L’une d’entre elles consiste à <strong>séparer</strong> les variables pour mettre l’équation sous la forme \[
+f(a)da = g(b) db
+\]</p>
+
+<p>Dans notre exemple, on a par exemple \[
+\frac{dy}{y} = -\frac{xdx}{X^2}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Principe de résolution</h2></hgroup><article  id="principe-de-résolution">
+
+<p>Une équation de la forme \(f(a)da = g(b) db\) peut être résolue en trouvant une primitive \(F\) de \(f\) et une \(G\) de \(g\). En effet, en utilisant la notation différentielle</p>
+
+<ul>
+<li>\(dF = f(a)da\)</li>
+<li>\(dG = g(b)db\)</li>
+</ul>
+
+<p>On peut réécrire l’équation: \[
+dF = dG
+\] Dont la solution générale est évidemment \[
+F(a) = G(b) + K
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Principe de résolution (II)</h2></hgroup><article  id="principe-de-résolution-ii">
+
+<p>Là encore, si on se donne une condition limite \(b(a_0) = b_0\), la valeur de \(K\) est déterminée par \[
+K = F(a_0) - G(b_0)
+\] et la solution peut se réécrire \[
+F(a) - F(a_0) = G(b) - G(b_0)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple-1">
+
+<p>L’équation différentielle \(\frac{du}{d\theta} = \frac{\cos(\theta)}{u}\) peut-être mise sous la forme séparée \(udu = \cos(\theta)d\theta\) ou de façon équivalente: \[
+d[u^2/2] = d[\sin(\theta)]
+\] La solution générale de l’équation est donc: \[ 
+\frac{u^2}{2} = \sin(\theta) + K
+\] Si on impose en plus la condition limite \(u(\theta = 0) = 1\), on obtient \(K = 1/2\) et la solution peut donc se réécrire sous la forme \[
+u(\theta) = \sqrt{2\sin\left( \theta \right) + 1}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices-3">
+
+<p>Résoudre les équations différentielles suivantes:</p>
+
+<ul>
+<li>\(\frac{dy}{dx} = - \frac{xy}{X^2}\) avec \(X\) const. et cond. lim. \(y(0) = Y\)</li>
+<li>\(\frac{dy}{dx} = e^{y - x}\) avec cond. lim. \(y(0) = \ln(2)\)</li>
+<li>\(\frac{dv}{du} = n \frac{\cos(u)}{\cos(v)}\) avec \(n\) const. et cond. lim. \(v(0) = 0\)</li>
+<li>\(\frac{dv}{du} = 1 + \alpha v\) avec \(\alpha\) const. et cond. lim. \(v(0) = 1/\alpha\)</li>
+<li>\(\frac{dy}{dx} = \left(\frac{x}{y}\right)^2\) avec cond. lim. \(y(1) = 0\)</li>
+<li>\(\frac{dy}{dx} = \left(\frac{y}{x}\right)^2\) avec cond. lim. \(y(1) = 1/2\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemples importants: croissance bactérienne</h2></hgroup><article  id="exemples-importants-croissance-bactérienne">
+
+<p>Une population bactérienne dans un milieu riche en nutriment contient à l’instant initial \(N_0\) bactéries : ces bactéries peuvent se diviser. Chaque bactérie a la même probabilité par unité de temps de se diviser, notée \(\lambda\). Pendant un tout petit intervalle de temps \(dt\), chaque bactérie a donc une (toute petite) probabilité \(\lambda dt\) de se diviser. Comme il y a \(N(t)\) bactéries à l’instant \(t\), il y en a \(N(t) \lambda dt\) qui se divisent entre l’instant \(t\) et l’instant \(t + dt\). La variation du nombre de bactéries entre \(t\) et \(t + dt\) peut donc s’écrire \(dN = N (t)\lambda\) dt. On peut mettre également cette équation différentielle sous la forme : \[
+\frac{dN}{dt} = \lambda N
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Croissance bactérienne (II)</h2></hgroup><article  class="smaller" id="croissance-bactérienne-ii">
+
+<p>Il ne s’agit pas d’une équation directement intégrable, on essaye donc de séparer les variables en réécrivant: \[
+\frac{dN}{N} = \lambda dt
+\] Donc la solution générale est \[
+\ln(N) = \lambda t + K
+\] Ou encore, en notant \(K&#39; = e^{K}\) \[
+N(t) = K&#39; e^{\lambda t}
+\] Au vu de la condition limite \(N(t = 0) = N_0\), on peut montrer que \(K&#39; = N_0\) et que la solution est donc \[
+N(t) = N_0 e^{\lambda t}
+\] En particulièrement, la population double de taille au bout d’un temps \(t = \ln(2) / \lambda\), généralement inteprété comme le temps de division.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemples: frottements visqueux</h2></hgroup><article  id="exemples-frottements-visqueux">
+
+<p>Une balle de ping-pong de masse \(m\) est lâchée sans vitesse initiale : elle tombe verticalement avec une vitesse \(v(t)\), en subissant la force de pesanteur \(mg\) dirigée vers le bas ainsi qu’une force de frottement \(f = −\alpha v\) (opposée au mouvement et proportionnelle à la célérité de la balle). L’équation différentielle du mouvement s’écrit : \[
+\frac{dv}{dt} = -\frac{\alpha}{m}v + g
+\] On remarque que l’on peut atteindre une vitesse limite constante notée \(v_{\infty}\), pour laquelle l’accélération de la pesanteur compense les frottements : \(v_\infty\) vérifie \(\frac{dv}{dt} = 0\) et vaut donc : \[
+v_\infty = \frac{mg}{\alpha}
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Frottements visqueux (II)</h2></hgroup><article  id="frottements-visqueux-ii">
+
+<p>En introduisant \(v_\infty\) précédemment défini dans l’équation on peut la réécrire sous la forme: \[
+\frac{dv}{dt} = -\frac{\alpha}{m}(v - v_\infty)
+\] qui n’est pas directement intégrable. On peut néanmoins séparer les variable pour écrire: \[
+\frac{dv}{v - v_\infty} = -\frac{\alpha}{m} dt
+\] qui s’intègre sous la forme \[
+\ln |v - v_\infty| = -\frac{\alpha}{m} t + K
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Frottements visqueux (III)</h2></hgroup><article  id="frottements-visqueux-iii">
+
+<p>Cette solution peut se réécrire: \[
+|v - v_\infty| = K&#39; e^{-\frac{\alpha}{m} t} \Leftrightarrow v(t) = v_\infty + Ce^{-\frac{\alpha}{m}t}
+\] avec \(K&#39; = e^K\) et \(C = \pm K&#39;\) en fonction du signe de \(v - v_\infty\). Dans tous les cas, cette solution fait toujours tendre \(v\) vers \(v_\infty\), indépendamment de la solution initiale.</p>
+
+<p>Notre condition limite \(v(0) = 0\) nous permet de déduire \(C = -v_\infty\) et donc d’écrire la solution de notre équation: \[
+v(t) = v_\infty(1 - e^{-\frac{\alpha}{m}t})
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Autres exemples</h2></hgroup><article  id="autres-exemples">
+
+<ul>
+<li>Un conducteur décide de faire accéler sa voiture de façon uniforme (accélération \(\alpha\) uniforme). En écrivant puis résolvant deux équations différentielles, déterminer la position de la voiture à l’instant \(t\). On notera \(x_0\) et \(v_0\) les positions et vitesses initiales.</li>
+<li>Dans le plan \((x, y)\), Déterminer le tracé d’une courbe qui vérifie l’équation \(\frac{dy}{dx} + \frac{x}{y} = 0\) et passe par le point \((0, 1)\). De quelle forme géométrique s’agit-il?</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>En général</h2></hgroup><article  id="en-général">
+
+</article></slide><slide class=""><hgroup><h2>Quelques notions à avoir</h2></hgroup><article  id="quelques-notions-à-avoir">
+
+<ul>
+<li>En général on ne pas résoudre <strong>exactement</strong> les équations différentielles.</li>
+<li>On doit avoir recours à des méthodes <strong>numériques</strong> pour approcher les solutions.</li>
+<li>Les équations <strong>directement intégrables</strong> et <strong>séparables</strong> sont des exceptions importantes.</li>
+<li>Une autre grande classe d’équation qu’on sait résoudre (dans la plupart des cas) est celle des équations <strong>linéaires</strong></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Équations linéaires</h2></hgroup><article  id="équations-linéaires">
+
+<p>Une équation différentielle est dite <strong>linéaire homogène</strong> si elle peut être mise sous la forme: \[
+a_0(x)f(x) + a_1(x)f&#39;(x) + \dots + a_n(x) f^{(n)}(x) = 0
+\] et <strong>linéaire inhomogène</strong> si elle peut être mise sous la forme: \[
+a_0(x)f(x) + a_1(x)f&#39;(x) + \dots + a_n(x) f^{(n)}(x) = b(x)
+\] La différence consiste en la présence ou non d’un second membre à l’équation.</p>
+
+</article></slide><slide class=""><hgroup><h2>Principe de superposition</h2></hgroup><article  id="principe-de-superposition">
+
+<p>Soit \((E)\) une équation différentielle linéaire homogène et \(f_1\) et \(f_2\) deux solutions de \((E)\). On montre facilement que pour tous réels \(\alpha_1\) et \(\alpha_2\), la fonction \(f = \alpha_1 f_1 + \alpha_2 f_2\) est <strong>encore</strong> une solution de \((E)\). On peut donc superposer des fonctions solutions pour en construire de nouvelles.</p>
+
+<p>Autrement dit, l’ensemble des solutions de \((E)\) est un <strong>espace vectoriel</strong> de fonctions. Pour le caractériser complètement, il suffit donc de déterminer une <strong>base de solutions</strong>.</p>
+
+<p>Mieux, une équation linéaire homogène de degré \(n\) admet toujours une base de cardinal \(n\). Il reste donc à trouver ces \(n\) fonctions solutions de base…</p>
+
+</article></slide><slide class=""><hgroup><h2>Équation linéaire homogène à coefficients constants</h2></hgroup><article  id="équation-linéaire-homogène-à-coefficients-constants">
+
+<p>Une équation différentielle linéaire homogène est dite à <strong>coefficients constants</strong> si les fonctions coefficients \(a_0, a_1, \dots, a_n\) sont constantes (<em>i.e.</em> ne dépendent pas de \(x\)). Dans ce cas, l’équation peut s’écrire: \[
+a_0 f(x) + a_1 f&#39;(x) + \dots + a_n f^{(n)}(x) = 0
+\]</p>
+
+<p>Pour ce type d’équation, on cherche une solution de la forme \(f_r: x \mapsto e^{rx}\). En substituant, on constate que \(f_r\) est solution si et seulement si \(r\) est solution de l’équation <strong>caractéristique</strong> \[
+a_0 + a_1 r + \dots + a_n r^n = 0
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Équation linéaire homogène à coefficients constants (II)</h2></hgroup><article  id="équation-linéaire-homogène-à-coefficients-constants-ii">
+
+<p>Sauf cas très particuliers, l’équation caractéristique admet \(n\) solutions distinctes notées \(r_1, r_2, \dots, r_n\) (réels ou complexes) qui permettent de construire \(n\) solutions particulières de l’équation différentielle. Ces fonctions forment une <strong>famille libre</strong> de dimension \(n\) et constituent donc une base de l’espace des solutions.</p>
+
+<p>La solution générale de l’équation différentielle est donc: \[
+f = \alpha_1 f_{r_1} + \alpha_2 f_{r_2} + \dots + \alpha_n f_{r_n}
+\] avec \(\alpha_1, \dots, \alpha_n\) déterminés par les conditions limites de l’équation différentielle.</p>
+
+</article></slide><slide class=""><hgroup><h2>Exercices</h2></hgroup><article  id="exercices-4">
+
+<ul>
+<li>Reprendre l’exercice de la croissance d’une population bactérienne, montrer qu’il s’agit d’une équation linéaire homogène à coefficients constants et retrouver la solution.</li>
+<li>Reprendre l’exercice des frottements visqueux, montrer qu’il s’agit d’une équation linéaire homogène à coefficients constants et retrouver la solution (on pourra poser \(V = v - v_\infty\) et trouver une équation vérifiée par \(V\)).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Principe de superposition et équation inhomogène</h2></hgroup><article  id="principe-de-superposition-et-équation-inhomogène">
+
+<p>Dans le cas d’une équation linéaire inhomogène \((E)\): \[
+a_0(x)f(x) + a_1(x)f&#39;(x) + \dots + a_n(x) f^{(n)}(x) = b(x)
+\] et de l’équation homogène associée \((E_0)\): \[
+a_0(x)f(x) + a_1(x)f&#39;(x) + \dots + a_n(x) f^{(n)}(x) = 0
+\] Le principe de superposition s’applique différemment.</p>
+
+<ul>
+<li>Soit \(f_0\) une solution particulière de \((E)\)</li>
+<li>Soit \(f_1\) une solution de \((E_0)\)</li>
+</ul>
+
+<p>Alors \(f = f_0 + f_1\) est solution de \((E)\).</p>
+
+</article></slide><slide class=""><hgroup><h2>Équation linéaire inhomogène à coefficients constants</h2></hgroup><article  id="équation-linéaire-inhomogène-à-coefficients-constants">
+
+<p>Pour résoudre une équation linéaire inhomogène à coefficients constants \((E)\), on procède donc en trois temps:</p>
+
+<ul>
+<li>on commence par chercher une solution particulière \(f_0\) de \((E)\) (souvent simple ou évidente, par exemple un état d’équilibre en physique)</li>
+<li>on cherche ensuite la solution de générale de \((E_0)\), sous la forme \(\alpha_1 f_1 + \dots + \alpha_n f_n\)</li>
+<li>on ajoute les deux et on détermine les coefficients \(\alpha_i\) à l’aide des conditons limites.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Exemple important: phénomène oscillant</h2></hgroup><article  id="exemple-important-phénomène-oscillant">
+
+<p>Les équations différentielles d’ordre 2 sont très importantes en physique: elles interviennent systématiquement dans l’étude de système oscillants.</p>
+
+<p>On considère par exemple une masse pnctuelle \(m\) fixée à un ressort de longueur à vide \(l_0\) et de constante de raideur \(k\). Le ressort est fixée au plafond en un point (origine des positions, avec un axe dirigé vers le bas) et on note \(l(t)\) la position de la masse au temps \(t\) (qui correspond également à la longueur du ressort au temps).</p>
+
+<p>En faisant un bilan des forces (cf cours de physique), on a: \[
+m \frac{d^2l}{dt^2} = mg - k(l - l_0)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Phénomène oscillant (II)</h2></hgroup><article  id="phénomène-oscillant-ii">
+
+<p>L’équation peut se réécrire sous la forme: \[
+\frac{d^2l}{dt^2} + \frac{k}{m}l = g + \frac{k}{m} l_0
+\] qui n’est pas homogène.</p>
+
+<p>On cherche donc une solution particulière simple, par exemple constante (pour annuler le terme \(\frac{d^2l}{dt^2}\)). La fonction constante \(l(t) = l_0 + \frac{mg}{k}\) est solution (et correspond à un état d’équilibre). On note \(l_{text{eq}}\) cette solution et on décrit le système en fonction de \(L = l - l_{text{eq}}\). En injectant dans \((E)\), on montre que \(L\) vérifie l’équation homogène \[
+\frac{d^2L}{dt^2} + \frac{k}{m}L = 0
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Phénomène oscillant (III)</h2></hgroup><article  id="phénomène-oscillant-iii">
+
+<p>L’équation caractéristique associée est \[
+r^2 + \frac{k}{m} = 0
+\] dont les solutions sont \(r_1 = i\sqrt{k/m}\) et \(r_2 = -i\sqrt{k/m}\). En notant \(\omega = \sqrt{k/m}\), notre base est donc donnée par le couple de fonctions \[
+f_1(t) = e^{i\omega t} \qquad f_2(t) = e^{-i\omega t}
+\] C’est correct mais pas forcément interprétable… Cherchons une base plus intuitive.</p>
+
+</article></slide><slide class=""><hgroup><h2>Phénomène oscillant (IV)</h2></hgroup><article  id="phénomène-oscillant-iv">
+
+<p>On se rappelle que si \((f_1, f_2)\) est une base, alors \((e_1, e_2) = ( (f_1 + f_2)/2, (f_1 - f_2)/2)\) aussi. Dans notre cas, on adopte donc la nouvelle base \[
+\begin{align*}
+e_1(t) &amp;= \frac{f_1(t) + f_2(t)}{2} = \frac{e^{i\omega t} + e^{-i\omega t}}{2} = \cos(\omega t) \\
+e_2(t) &amp;= \frac{f_1(t) - f_2(t)}{2} = \frac{e^{i\omega t} - e^{-i\omega t}}{2} = \sin(\omega t)
+\end{align*}
+\] Notre solution générale peut donc s’écrire sous la forme \[
+L(t) = A \cos(\omega t) + B \sin(\omega t)
+\] Ou en se rappelant du cours de début d’année: \[
+L(t) = R \cos(\omega t + \phi)
+\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Phénomène oscillant (V)</h2></hgroup><article  id="phénomène-oscillant-v">
+
+<p>Les deux formulations précédentes sont <strong>équivalentes</strong> mathématiquement et dépendent de deux paramètres chacune mais correspondent à des interprétations différentes.</p>
+
+<p>Pour déterminer \(R\) et \(phi\), on se donne des conditions initiales. Supposons que le ressort est laché <em>sans vitesse initiale</em> et avec un <em>allongement initial nul</em>. On a</p>
+
+<ul>
+<li>\(l(0) = l_0 \Leftrightarrow L(0) = A\cos(0) + B\sin(0) + l_{\text{eq}} = l_0\)</li>
+<li>\(l&#39;(0) = 0 \Leftrightarrow L&#39;(0) = -A\omega \sin(0) + B\omega\cos(0) = 0\)</li>
+</ul>
+
+<p>d’où on déduit \(A = l_0 - l_{\text{eq}}\) et \(B = 0\). La solution de notre équation est donc: \[
+L(t) = (l_0 - l_{\text{eq}}) \cos(\omega t) \Leftrightarrow l(t) = l_{\text{eq}} + (l_0 - l_{\text{eq}}) \cos(\omega t)
+\]</p></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -94,7 +94,14 @@
       - nature: Correction (manuscrite) des exercices <i class="far fa-file-pdf"></i>
         at: "2019/Exercices/06_Intégration_corrigé_manuscrit.pdf"
       - nature: Correction des problèmes <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/06_Intégration_corrigé.pdf"  
+        at: "2019/Exercices/06_Intégration_corrigé.pdf"
+        
+    - name: Équations différentielles (simples)
+      elements:
+      - nature: Transparents <i class="fab fa-html5"></i>
+        at: "2019/Supports/07_Equation_difféentielle.html"
+      - nature: Transparents <i class="far fa-file-pdf"></i>
+        at: "2019/Supports/07_Equation_difféentielle.pdf" 
 
     - name: Partiel S1 (2019)
       elements:
