@@ -103,21 +103,21 @@
       - nature: Transparents <i class="far fa-file-pdf"></i>
         at: "2019/Supports/07_Equation_difféentielle.pdf" 
 
-    - name: Partiel S1 (2019)
+    - name: Partiel S1
       elements:
-      - nature: Partiel (français) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/partiel_S1_analyse.pdf"
-      - nature: Partiel (anglais) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/partiel_S1_analyse_en.pdf"
+      - nature: Partiel 2019 (analyse) <i class="far fa-file-pdf"></i>
+        at: "2019/Partiels/partiel_S1_analyse.pdf"
+      - nature: Partiel 2020 (analyse+algèbre) <i class="far fa-file-pdf"></i>
+        at: "2020/Partiels/partiel_S1.pdf"
+      - nature: Corrigé 2020 (analyse) <i class="far fa-file-pdf"></i>
+        at: "2020/Partiels/partiel_S1_analyse_corrigé.pdf"
       
-    - name: Partiel S2 (2019)
+    - name: Partiel S2
       elements:
-      - nature: Partiel (français) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/partiel_S2_analyse.pdf"
-      - nature: Partiel (anglais) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/partiel_S2_analysis_en.pdf"
-      - nature: Corrigé (français) <i class="far fa-file-pdf"></i>
-        at: "2019/Exercices/partiel_S2_analyse_corrigé.pdf"
+      - nature: Partiel 2019 (français) <i class="far fa-file-pdf"></i>
+        at: "2019/Partiels/partiel_S2_analyse.pdf"
+      - nature: Corrigé 2019 (français) <i class="far fa-file-pdf"></i>
+        at: "2019/Partiels/partiel_S2_analyse_corrigé.pdf"
 
 - class: Cours de L2
   lectures:
