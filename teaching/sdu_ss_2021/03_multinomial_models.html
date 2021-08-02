@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multinomial models</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mahendra Mariadassou, INRAE" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/custom_weihai_ss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multinomial models
+### Mahendra Mariadassou, INRAE
+### Shandong University, Weihai (CN)<br>Summer School 2021
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      P: "{\\mathcal{P}}",
+      N: "{\\mathcal{N}}",
+      M: "{\\mathcal{M}}",
+      D: "{\\mathcal{D}}",
+      LN: "{\\mathcal{LN}}",
+      Rbb: "{\\mathbb{R}}",
+      Nbb: "{\\mathbb{N}}",
+      Sbb: "{\\mathbb{S}}", 
+      bpi: "{\\boldsymbol{\\pi}}",
+      bp: "{\\mathbf{p}}",
+      bg: "{\\mathbf{g}}",
+      bm: "{\\mathbf{m}}",
+      bn: "{\\mathbf{n}}",
+      bo: "{\\mathbf{o}}",
+      bs: "{\\mathbf{s}}",
+      bx: "{\\mathbf{x}}",
+      bA: "{\\mathbf{A}}",
+      bB: "{\\mathbf{B}}",
+      bM: "{\\mathbf{M}}",
+      bS: "{\\mathbf{S}}",
+      bX: "{\\mathbf{X}}",
+      bY: "{\\mathbf{Y}}",
+      bZ: "{\\mathbf{Z}}",
+      balpha: "{\\boldsymbol{\\alpha}}",
+      bbeta: "{\\boldsymbol{\\beta}}",
+      bfeta: "{\\boldsymbol{\\eta}}",
+      bgamma: "{\\boldsymbol{\\gamma}}",
+      bphi: "{\\boldsymbol{\\phi}}",
+      btau: "{\\boldsymbol{\\tau}}", 
+      btheta: "{\\boldsymbol{\\theta}}",
+      bTheta: "{\\boldsymbol{\\Theta}}",
+      bmu: "{\\boldsymbol{\\mu}}",
+      bSigma: "{\\boldsymbol{\\Sigma}}",
+      bOmega: "{\\boldsymbol{\\Omega}}"
+    }
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+---
+class: middle
+
+
+
+# Reminder
+
+.pull-left[
+- Interest for .alert[multivariate count data] 
+- Counts in ecology have .alert[peculiar] features:
+  - sparse (.grey[grey cell] = null count)
+  - overdispersed 
+  - not centered around a central location parameter
+- Example from Jakuschkin, Fievet, Schwaller, Fort, Robin, and Vacher [Jak+16]  
+  
+&lt;img src="03_multinomial_models_files/figure-html/oaks_histo-1.png" width="800px" /&gt;
+  
+]
+
+.pull-right[
+
+![](03_multinomial_models_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+]
+
+---
+# Multinomial models
+
+By increasing order of complexity
+
+1. Multinomial 
+2. Mixture of Multinomial
+3. Dirichlet Multinomial (Mixture)
+4. Latent-Dirichlet Allocation
+
+---
+class: inverse, center, middle
+
+# Multinomial distribution
+
+---
+# Multinomial distribution (MN)
+
+#### Intuition 
+- There are `\(p\)` species with proportions `\(\bpi = (\pi_1, \dots, \pi_p)\)` in the sample
+- You pick `\(N\)` (total count) individuals with replacement in the sample
+- `\(Y_j\)` it the number of individuals from species `\(j\)`
+
+--
+
+#### Mathematical model
+$$
+\bY \sim \mathcal{M}(N, \bpi)
+$$
+--
+
+#### Density
+
+The probability mass function (PMF) at `\(\bY = (Y_1, \dots, Y_p)\)` where `\(\sum_j Y_j = N\)` is given by 
+
+$$
+`\begin{equation}
+P(\bY; \bpi) = \frac{N!}{Y_1! \dots Y_p!}\prod_{j=1}^p \pi_j^{Y_j} \Leftrightarrow \log P(\bY; \bpi) = \sum_{j=1}^p Y_j \log(\pi_j) + C
+\end{equation}`
+$$
+where `\(C\)` does not depend on `\(\bpi\)`. 
+---
+
+# Maximum Likelihood Estimation
+
+#### Likelihood
+
+The log-likelihood of a i.i.d sample `\((\bY_i, \dots, \bY_n)\)` is given by: 
+
+$$
+`\begin{equation}
+\ell(\bpi) = \log P((\bY_1, \dots, \bY_n); \bpi) = \sum_{i=1}^n \log P(\bY_i; \bpi) = \sum_{j=1}^p \left(\sum_{i=1}^n Y_{ij}\right) \log(\pi_j) + C
+\end{equation}`
+$$
+where 
+- `\(\bY_i = (Y_{i1}, \dots, Y_{ip})\)` 
+- the total count in sample `\(i\)` is `\(N_i = Y_{i1} + \dots + Y_{ip}\)`.
+
+--
+
+#### Inference
+
+The maximum likelihood estimate `\(\hat{\bpi}\)` of `\(\bpi\)`, defined as `\(\hat{\bpi} = \text{arg}\max_{\bpi} \ell(\bpi)\)` is given by
+
+$$
+`\begin{equation}
+\hat{\pi}_{j} = \frac{\sum_{i=1}^n Y_{ij}}{\sum_{i=1}^n N_{i}} = \frac{Y_{+j}}{N_+}
+\end{equation}`
+$$
+---
+# MLE Demo
+
+&lt;img src="ext_figures/MN_mle.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Other properties: Moments
+
+To make things easier, note that if `\(X_1, \dots, X_N\)` are i.i.d variable `\(\sim \M(1, \pi)\)` then 
+$$
+\bY = \sum_{i=1}^N X_i \sim \M(N, \bpi) \quad \text{and} \quad Y_j \sim \mathcal{B}(N, \pi_j)
+$$
+
+- Mean: `\(E[Y_j] = N\pi_j\)`
+- Variance: `\(V[Y_j] = N\pi_j(1 - \pi_j)\)`
+- Signal to Noise Ratio (SNR) `\(\frac{\sqrt{V[y_j]}}{E[Y_j]} = \sqrt{\frac{1 - \pi_j}{\pi_j}}\)` `\(\Rightarrow\)` small probabilities are hard to estimate correctly
+- Covariance: `\(Cov[Y_j, Y_{j'}] = N\pi_j 1_{\{j=j'\}} - N\pi_j\pi_{j'}\)`
+  - Only .alert[negative] (off-diagonal) covariances
+  - Variance matrix (of rank `\(p-1\)`):
+$$
+V[\bY] = N \left[ Diag(\bpi) - \bpi \bpi^\top \right]
+$$
+- Correlation: `\(\rho[Y_j, Y_{j'}] = -\sqrt{\frac{\pi_j \pi_{j'}}{(1-\pi_j)(1-\pi_{j'})}}\)` (well defined even when `\(\pi_j \to 1\)`)
+
+
+---
+class: inverse, center, middle
+
+# Mixture of Multinomials
+
+---
+# Mixture of Multinomials
+
+- Each sample belongs to one of `\(K\)` groups
+- Group `\(k\)` is characterized by its composition `\(\bpi_k\)` and its proportion `\(\alpha_k\)`
+- A sample from group `\(k\)` has composition `\(\bpi_k\)`
+- Counts are sampled according to a multinomial process
+
+--
+
+#### Mathematical model
+
+$$
+`\begin{align*}
+Z &amp; \sim \M(1, \balpha) \\
+\bY|Z = k &amp; \sim \M(N, \bpi_k)
+\end{align*}`
+$$
+where `\(\balpha = (\alpha_1, \dots, \alpha_K)\)` are the proportions of the `\(K\)` groups,
+
+---
+
+# Density of the mixture
+
+Note `\(\btheta = (\balpha, \bpi_1, \dots, \bpi_K)\)` the parameters. If `\(Z\)` is observed and equal to `\(k\)`, the PMF at `\(\bY = (Y_1, \dots, Y_p)\)` where `\(\sum_{j=1}^p Y_j = N\)` is given by 
+
+$$
+`\begin{equation}
+P(\bY, Z = k; \btheta) = P(Z = k; \balpha) P(\bY; \bpi_k) = \alpha_k \frac{N!}{Y_1! \dots Y_p!}\prod_{j=1}^p \pi_{kj}^{Y_j} = \frac{N!}{Y_1! \dots Y_p!} \times \alpha_k \prod_{j=1}^p \pi_{kj}^{Y_j}
+\end{equation}`
+$$
+--
+
+The PMF of the observed counts `\(\bY\)` when `\(Z\)` is unobserved is obtained by marginalizing over `\(Z\)`
+
+$$
+`\begin{equation}
+P(\bY; \btheta) = \sum_{k = 1}^K P(\bY, Z = k; \btheta) = \frac{N!}{Y_1! \dots Y_p!} \times \sum_{k=1}^K \left( \alpha_k \prod_{j=1}^p \pi_{kj}^{Y_j} \right)
+\end{equation}`
+$$
+--
+
+- For one sample, the log-likelihood involves a .alert[sum over `\(K\)` terms].
+- For `\(n\)` samples, the log-likelihood involves a .alert[sum over `\(K^n\)` terms]
+
+---
+
+# Density of the mixture (II)
+
+With multiple samples `\(\bY = (\bY_1,\dots,\bY_n)\)`, the log likelihood is only nice for `\(\log P(\bY, Z; \bpi)\)`, not for `\(\log P(\bY; \bpi)\)`
+
+$$
+`\begin{align}
+\ell_{comp}(\btheta) &amp; = \log P(\bY_1, \dots, \bY_n, Z_1, \dots Z_n; \btheta) \\
+&amp; = \sum_{i=1}^n \log P(Z_i; \balpha) + \log P(\bY; Z_i, \btheta) \\
+&amp; = \sum_{i=1}^n \sum_{k=1}^K 1\{Z_i = k\}\left[ \log(\alpha_k) + \sum_{j=1}^p Y_{ij} \log(\pi_{kj})\right] +  C \\
+\ell_{obs}(\btheta) &amp; = \log P(\bY_1, \dots, \bY_n; \btheta) \\
+&amp; = \sum_{i=1}^n \log \left( \sum_{k=1}^K P(\bY_i, Z = k; \btheta) \right) + C
+\end{align}`
+$$
+
+.alert[Direct maximization] of the log-likelihood `\(\log P(\bY; \btheta)\)` is impossible so we resort to the EM algorithm by Dempster, Laird, and Rubin [DLR77]. 
+
+---
+# EM algorithm
+
+The EM algorithm is based on the following .alert[decomposition] ([NH98]), for any density `\(q = q(Z)\)` on `\(Z\)`
+
+$$
+`\begin{align}
+\ell_{obs}(\btheta) &amp; = \log\left(\sum_{k=1}^K P(\bY, Z; \btheta)\right) \\
+&amp; = \log \sum_{k=1}^K q(Z) \frac{P(\bY, Z; \btheta)}{q(Z)} \\ 
+&amp; \geq \sum_{k=1}^K q(Z) \log \frac{P(\bY, Z; \btheta)}{q(Z)} \\
+&amp; = E_q\left[\log P(\bY, Z; \btheta)\right] + \mathcal{H}(q) = F(q, \btheta)
+\end{align}`
+$$
+where `\(\mathcal{H}(q) = -E_q[\log(q)]\)` is the .alert[entropy] of the distribution `\(q\)`.    
+
+--
+
+Maximizing `\(\ell_{obs}(\btheta)\)` can be done iteratively by alternating two tractable steps: 
+
+- .alert[Estimation (E) step:] `\(q^{(t+1)} = \text{arg}\max_q  F(q, \btheta^{(t)})\)`
+- .alert[Maximization (M) step:] `\(\btheta^{(t+1)} = \text{arg}\max_q  F(q^{(t+1)}, \btheta)\)`
+
+---
+# Solving the E step: tools
+
+### Posterior probability
+
+Decomposition of the ratio
+
+$$
+\frac{P(\bY, Z; \btheta)}{q(Z)} = P(\bY; \btheta) \times \frac{P(Z | \bY; \btheta)}{q(Z)}
+$$
+
+--
+
+### Kullback-Leibler divergence
+
+Kullback-Leibler divergence for two distributions `\(q\)` and `\(q'\)`
+
+$$
+`\begin{equation}
+D(q \| q') = E_q\left[ \log \frac{q}{q'} \right] = \int_{\mathcal{X}} q(x) \log \frac{q(x)}{q'(x)} dx
+\end{equation}`
+$$
+
+- For any two distributions `\(D(q || q') \geq 0\)`
+-  `\(D(q \| q') = 0 \Leftrightarrow q = q'\)` almost-everywhere. 
+
+---
+
+&lt;img src="ext_figures/estep_tools.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## KL divergence properties: demo
+
+Based on `\(\log(1+x) \leq x\)`
+
+&lt;img src="ext_figures/kl_demo.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+# Solving the E step: demo 
+
+The solution of the E-step is given by `\(q(Z) = P(Z | \bY; \btheta)\)`
+
+&lt;img src="ext_figures/estep_demo.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+# Special case of mixture of MN
+
+For the mixture of MN, the posterior `\(P(Z | \bY; \btheta)\)` has the form `\(q = q_{\btau_1, \dots, \btau_n} = \M(1, \tau_1) \otimes \dots \otimes \M(1, \tau_n)\)` where 
+- each `\(Z_i\)` has its own multinomial parameter `\(\tau_i\)`
+- `\(\tau_{ik} = P[Z_i = k | \bY_i; \btheta]\)`
+
+--
+
+The EM algorithm can thus be written
+
+- .alert[Estimation (E) step:] `\(\tau_{ik}^{(t+1)} = E_{\btheta^{(t)}}[Z_i = k| \bY_i] \propto P(\bY_i, Z_i = k; \btheta^{(t)})\)`
+- .alert[Maximization (M) step:] `\(\btheta^{(t+1)} = \text{arg}\max_q  F(q^{(t+1)}, \btheta)\)`
+
+---
+# Update formula: `\(E\)`-step
+
+$$
+`\begin{equation}
+\tilde{\tau}_{ik}^{(t+1)} \propto P(\bY_i, Z_i = k; \btheta^{(t)}) = \alpha_k^{(t)} \prod_{j=1}^p \left(\pi_{kj}^{(t)}\right)^{Y_j}
+\end{equation}`
+$$
+
+---
+# Update formula: M-step
+
+$$
+`\begin{equation}
+\pi_{kj}^{(t+1)} = \frac{\sum_{i=1}^n \tau_{ik} Y_{ij}}{\sum_{i=1}^n \tau_{ik}N_i}
+\end{equation}`
+$$
+
+&lt;img src="ext_figures/mstep_demo.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Inference
+
+To sum up
+
+1. Choose a starting point `\(\btheta^{(0)}\)`
+2. Iterate until convergence between:
+  - E-step: `\(\tilde{\tau}_{ik}^{(t+1)} \propto P(\bY_i, Z_i = k; \btheta^{(t)})\)`
+  - M-step: `\(\pi_{kj}^{(t+1)} = \frac{\sum_{i=1}^n \tau_{ik} Y_{ij}}{\sum_{i=1}^n \tau_{ik}N_i}\)` and `\(\alpha_{k}^{(t+1)} = \frac{\sum_{i=1}^n \tau_{ik}}{n}\)`
+
+--
+
+Each step of the iteration .alert[increases the objective function] `\(F(q, \btheta)\)` until it reaches a maximum (which can be local).
+
+--
+
+Right after performing the E-step, 
+$$
+F(q^{(t+1)}, \theta^{(t)}) = \ell_{obs}(\theta^{(t)})
+$$
+
+---
+## Other properties: moments
+
+To make things easier, we rely on the laws of
+- total expectation `\(E[Y_j] = E[ E[Y_j|Z] ]\)`
+- total variance `\(V[\bY] = E[ V[\bY|Z] ] + V[E[\bY|Z]]\)`
+
+- Mean: `\(E[Y_j] = N\sum_{k=1}^K \alpha_k \pi_{kj} = N \bar{\pi}_{.j}\)`
+- Variance: `\(V[Y_j] = \sum_{k=1}^K \alpha_k \left[ N\pi_{kj}(1 - \pi_{kj}) + N^2(\pi_{kj} - \bar{\pi}_{.j})^2 \right]\)`
+  - Note that `\(V[Y_j] &gt; N\bar{\pi}_{.j}(1 - \bar{\pi}_{.j})\)` 
+  - In fact  `\(V[Y_j] = N\bar{\pi}_{.j}(1 - \bar{\pi}_{.j}) + (N^2-1) \underbrace{\sum_{k=1}^K \alpha_k (\pi_{kj} - \bar{\pi}_{.j})^2}_{=V[\pi_{Zj}]}\)`
+- Covariance: `\(V[Y_j, Y_{j'}] = -N \bar{\pi}_{., jj'} + N^2 Cov[\pi_{Zj}, \pi_{Zj'}]\)`
+  - Arbitrary signs
+  
+---
+class: inverse, center, middle
+
+# Dirichlet Multinomial
+
+---
+## The gamma `\(\Gamma\)` function 
+
+The gamma function is a positive-valued function whose domain is the positive real numbers
+
+$$
+\Gamma(x) = \int_0^\infty t^{x-1} e^{-t} dt
+$$
+
+For all positive values:
+$$
+\Gamma(x+1) = x\Gamma(x)
+$$
+
+In particular, for positive integers `\(n\)`, the `\(\Gamma\)` function satisfies
+
+$$
+\Gamma(n+1) = n! = 1 \times \dots \times n
+$$
+
+---
+# The beta function
+
+The beta function is a positive-valued function whose domain is the positive real numbers
+
+$$
+B(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1} dt
+$$
+
+A key property of the beta function is its relation to the gamma function
+$$
+B(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+$$
+from which we can deduce the property
+$$
+B(x+1,y) = \frac{x}{x+y} B(x,y)
+$$
+---
+## Relationship to the `\(\Gamma\)` function
+
+Based on computing `\(\Gamma(x)\Gamma(y)\)` with the change of variable `\(u = zt\)` and `\(v = (1-t)z\)` and the change of variable relationship 
+$$
+dudv = 
+\left|
+`\begin{matrix}
+t &amp; z \\
+(1-t) &amp; -z
+\end{matrix}`
+\right|
+dtdz = zdtdz
+$$
+
+---
+## Dirichlet distribution 
+
+A p-dimensional .alert[Dirichlet distribution] with parameter `\(\balpha\)`, noted `\(\D(\balpha)\)` is a family of probability distributions over `\(\Sbb^{p-1}\)`, the space of `\(p\)`-dimensional
+probability vector. 
+
+It is parameterized by a `\(p\)`-dimensional vector `\(\balpha\)` (not necessarily a probability vector) and has density 
+
+$$
+`\begin{align}
+P(\bpi; \balpha) &amp; = \underbrace{\frac{\prod_{j=1}^p \Gamma(\alpha_j)}{\Gamma\left(\sum_{k=1}^p \alpha_j\right)}}_{=\exp(-A(\btheta))} \prod_{j=1}^p \pi_j^{\alpha_j - 1} \\
+&amp; = \frac{1}{\pi_1 \dots \pi_p} \exp\left( \sum_{j=1}^p \alpha_j \ln(\pi_j) - A(\balpha) \right)
+\end{align}`
+$$
+--
+
+One can sample from `\(\D(\balpha)\)` by
+- sampling `\(p\)` independent Gamma variables `\(X_i \sim \Gamma(\alpha_i, 1)\)`
+- taking the sum `\(S = \sum_{j=1}^p X_i\)`
+- setting `\(\bpi = \left( \frac{X_1}{S}, \dots, \frac{X_p}{S} \right)\)`
+
+---
+## A few properties of `\(\D(\balpha)\)`
+
+Let `\(\alpha_0 = \sum_{j=1}^p \alpha_j\)`, then the .alert[marginals] are beta distributed `\(\pi_j \sim \mathcal{B}(\alpha_j, \alpha_0)\)` with density 
+$$
+`\begin{equation}
+P(\pi_j; \balpha) = \underbrace{\frac{\Gamma(\alpha_0)}{\Gamma(\alpha_j)\Gamma(\alpha_0 - \alpha_j)}}_{=B(\alpha_j, \alpha_0 - \alpha_j)} x^{\alpha_j-1}(1-x)^{\alpha_0 - \alpha_j-1}
+\end{equation}`
+$$
+
+--
+
+- Mean 
+$$
+E[\pi_j] = \int_0^1 \frac{x^{\alpha_j}(1-x)^{\alpha_0 - \alpha_j - 1}}{B(\alpha_j, \alpha_0 - \alpha_j)} dx = \frac{B(\alpha_j+1, \alpha_0 - \alpha_j)}{B(\alpha_j, \alpha_0 - \alpha_j)} = \frac{\alpha_j}{\alpha_0}
+$$
+
+- Variance
+$$
+`\begin{align}
+E[\pi_j^2] &amp; = \int_0^1 \frac{x^{\alpha_j+1}(1-x)^{\alpha_0 - \alpha_j - 1}}{B(\alpha_j, \alpha_0 - \alpha_j)} dx = \frac{B(\alpha_j+2, \alpha_0 - \alpha_j)}{B(\alpha_j, \alpha_0 - \alpha_j)} = \frac{(\alpha_j+1)\alpha_j}{(\alpha_0+1)\alpha_0} \\
+V[\pi_j] &amp; = \frac{\alpha_j (\alpha_0 - \alpha_j)}{\alpha_0^2 (\alpha_0+1)}
+\end{align}`
+$$
+
+---
+## A few properties of `\(\D(\balpha)\)`
+
+- Aggregation: proportions can be .alert[aggregated]
+$$
+`\begin{equation}
+\bpi \sim \D(\balpha) \Rightarrow \left( \pi_j, \pi_{j'}, \sum_{k \neq j,j'} \pi_k\right) \sim \D(\alpha_j, \alpha_{j'}, \alpha_0 - \alpha_j - \alpha_{j'})
+\end{equation}`
+$$
+
+- Covariance
+$$
+`\begin{equation}
+Cov(\pi_j, \pi_{j'}) = -\frac{\alpha_j \alpha_{j'}}{\alpha_0^2 (\alpha_0+1)}
+\end{equation}`
+$$
+  - Only .alert[negative covariances] at the proportion level. 
+---
+## Covariance computation (demo)
+
+---
+## Covariance computation (II)
+
+Parametrize `\((x, y, 1-x-y)\)` for `\(0 \leq x+y \leq 1\)` as `\((x, (1-x)z, (1-x)(1-z))\)` where `\(0 \leq x,z \leq 1\)` and do a change of variable. 
+
+$$
+`\begin{align}
+E[\pi_j \pi_{j'}] &amp; = \int_{x=0}^1 \int_{y=0}^{1-x} \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_j)\Gamma(\alpha_{j'})\Gamma(\alpha_{0} - \alpha_{j} - \alpha_{j'})}x^{\alpha_j}y^{\alpha_{j'}} (1-x-y)^{\alpha_0 - \alpha_j - \alpha_{j'}-1}dxdy \\
+&amp; = \int_{x=0}^1 \int_{z=0}^{1} \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_j)\Gamma(\alpha_{j'})\Gamma(\alpha_{0} - \alpha_{j} - \alpha_{j'})} ((1-x)z)^{\alpha_{j'}} ((1-x)z)^{\alpha_0 - \alpha_j - \alpha_{j'}-1} dx (1-x)dz \\
+&amp; = \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_j)\Gamma(\alpha_{j'})\Gamma(\alpha_{0} - \alpha_{j} - \alpha_{j'})} \int_0^1 x^{\alpha_j}(1 - x)^{\alpha_0 - \alpha_j}dx \int_0^1 z^{\alpha_{j'}}(1 - z)^{\alpha_0 - \alpha_j - \alpha_{j'} - 1}dz  \\
+&amp; = \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_j)\Gamma(\alpha_{j'})\Gamma(\alpha_{0} - \alpha_{j} - \alpha_{j'})} \frac{\Gamma(\alpha_j+1) \Gamma(\alpha_0-\alpha_j+1)}{\Gamma(\alpha_0 + 2)} \frac{\Gamma(\alpha_{j'}+1) \Gamma(\alpha_0-\alpha_j - \alpha_{j'})}{\Gamma(\alpha_0-\alpha_j+1)}  \\
+&amp; = \frac{\Gamma(\alpha_0) \Gamma(\alpha_j+1) \Gamma(\alpha_{j'}+1)}{\Gamma(\alpha_0+2) \Gamma(\alpha_j) \Gamma(\alpha_{j'})}  = \frac{\alpha_j\alpha_{j'}}{\alpha_0 (\alpha_0+1)}\\
+\end{align}`
+$$
+---
+## Dirichlet Multinomial distribution (DCM)
+
+The Dirichlet - Multinomial distribution is defined by
+
+- sampling a probabilibity vector `\(\bpi\)` from `\(\D(\balpha)\)`
+- `\(\bpi\)` can be seen as a noisy version of `\(\balpha / \alpha_0\)`
+- sampling counts `\(\bY_i\)` from a multinomial `\(Y_i \sim \M(N, \bpi)\)`
+
+--
+
+The PMF of the DCM is given by
+
+$$
+`\begin{align}
+P(\bY; \balpha) &amp; = \int P(\bY; \bpi) P(\bpi; \balpha) d\bpi \\
+                &amp; = \frac{\Gamma(\alpha_0)\Gamma(N+1)}{\Gamma(N+\alpha_0)} \prod_{j=1}^p \frac{\Gamma(Y_j + \alpha_j)}{\Gamma(\alpha_j)\Gamma(Y_j + 1)}
+\end{align}`
+$$
+
+---
+## A few properties of `\(DCM(\balpha)\)`
+
+Using the laws of total expectation and covariance and noting `\(p_j = \alpha_j / \alpha_0\)`
+
+- Mean of `\(Y_j\)`
+
+$$
+`\begin{equation}
+E[Y_j] = E[\underbrace{E[Y_j|\pi_j]}_{=N\pi_j}] = E[N\pi_j] = N \frac{\alpha_j}{\alpha_0} = Np_j
+\end{equation}`
+$$
+- Variance of `\(Y_j\)`
+
+$$
+`\begin{align}
+V[Y_j] &amp; = E[\underbrace{V[Y_j|\pi_j]}_{=N\pi_j(1 - \pi_j)}] + V[\underbrace{E[Y_j|\pi_j]}_{=N\pi_j}]\\ 
+&amp; = NE[\pi_j] - NE[\pi_j^2] + N^2 V[\pi_j] \\
+&amp; = Np_j - N\frac{(\alpha_j+1)\alpha_j}{(\alpha_0+1)\alpha_0} + N^2 \frac{\alpha_j (\alpha_0 - \alpha_j)}{\alpha_0^2 (\alpha_0+1)} = Np_j(1-p_j)\frac{N+\alpha_0}{1+\alpha_0}
+\end{align}`
+$$
+Note that `\(V[Y_j] &gt; Np_j(1-p_j)\)`. 
+
+---
+## A few properties of `\(DCM(\balpha)\)`
+
+- Covariance of `\(Y_j\)`, `\(Y_{j'}\)`
+
+$$
+`\begin{align}
+Cov[Y_j,Y_{j'}] &amp; = E[\underbrace{Cov[Y_j,Y_{j'}|\pi_j,\pi_{j'}]}_{=-N\pi_j\pi_{j'}}] + Cov[\underbrace{E[Y_j|\pi_j]E[Y_{j'}|\pi_{j'}]}_{=N\pi_jN\pi_{j'}}]\\ 
+&amp; = -NE[\pi_j\pi_{j'}] + N^2Cov[\pi_j, \pi_{j'}] \\
+&amp; = -N \frac{\alpha_j\alpha_{j'}}{\alpha_0 (\alpha_0+1)} - N^2 \frac{\alpha_j \alpha_{j'}}{\alpha_0^2 (\alpha_0+1)} \\
+&amp; = -N p_j p_ {j'}\frac{N+\alpha_0}{1+\alpha_0} &lt; 0
+\end{align}`
+$$
+The covariance between counts is .alert[always negative]. 
+
+- Correlation of `\(Y_j\)`, `\(Y_{j'}\)` .alert[doesn't depend on N]
+
+$$
+`\begin{equation}
+\rho[Y_j,Y_{j'}] = -\frac{-p_j p_{j'}}{\sqrt{p_j(1-p_j)}\sqrt{p_{j'}(1-p_{j'})}} = - \sqrt{\frac{\alpha_j \alpha_{j'}}{(\alpha_0 - \alpha_j)(\alpha_0 - \alpha_{j'})}}
+\end{equation}`
+$$
+
+---
+## A few properties of `\(DCM(\balpha)\)`
+
+In matrix notation, 
+
+$$
+V(\bY) = N\left[ Diag(\bp) - \bp \bp^\top \right] \left(\frac{N+\alpha_0}{1+\alpha_0}\right)
+$$
+
+--
+
+Compare with 
+$$
+V(\bY) = N\left[ Diag(\bp) - \bp \bp^\top \right]
+$$
+for the MN distribution. DCM induces .alert[overdispersion] compared to `\(\M(N, \bp)\)`. 
+
+--
+
+Note also that when `\(\alpha \to \infty\)` such that `\(\balpha / \alpha_0 \to \bp\)`, `\(DCM(\balpha) \to \M(N, \bp)\)`.
+
+---
+## About the Newton method
+
+Consider a twice differentiable function `\(f: \Rbb \to \Rbb\)` and the problem
+$$
+\min_{\Rbb} f(x)
+$$
+
+- Starting point `\(x_0\)`
+- Iterations
+
+.pull-left[
+1/ quadratic approximation `\(g\)` of `\(f\)` around `\(x_k\)`
+$$
+g(t) = f(x_k + t) \simeq f(x_k) + f'(x_k)t + \frac{1}{2}f''(x_k)t^2
+$$
+2/ minimization of `\(g\)`
+$$
+`\begin{aligned}
+g'(t) = f'(x_k) + tf''(x_k) \Rightarrow \\ g'(t) = 0 \text{ iff } t = -\frac{f'(x_k)}{f''(x_k)}
+\end{aligned}`
+$$
+]
+
+.pull-right[
+3/ update `\(x_k\)` by setting `\(x_{k+1} = x_k + t\)`. 
+$$
+x_{k+1} = x_k + t = x_k - \frac{f'(x_k)}{f''(x_k)} 
+$$
+- If `\(f\)` is convex `\(\Delta x = x_{k+1} - x_k\)` is a descent direction
+$$
+`\begin{align}
+f'(x_k) \Delta x &amp; = -\frac{[f('x)]^2}{f''(x)} \leq 0 \\
+f(x_{k+1}) - f(x_k) &amp; \simeq g(x_{k+1}) - f(x_k) = -\frac{[f('x)]^2}{2f''(x)}
+\end{align}`
+$$
+]
+
+
+---
+## About the Newton method (II)
+
+.pull-left[
+If `\(f \Rbb^p \to \Rbb\)` with `\(p &gt; 1\)`:
+
+- replace derivative with .alert[gradient]
+$$
+f'(x) \to g_f(x)
+$$
+- replace inverse of second order derivative with .alert[inverse Hessian]
+$$
+1/f''(x) \to H(x)^{-1}
+$$
+- replace update with .alert[matrix notations]:
+$$
+x_{k+1} = x_k - H(x)^{-1} g_f(x)
+$$
+]
+
+---
+## Sherman-Morrison formula
+
+Let `\(A\)` be an invertible square matrix of size `\(n\)` and `\(u,v\)` are column vectors of size `\(n\)`. If `\(1 + v^\top A^{-1}u \neq 0\)`, then `\(A + uv^\top\)` is invertible and 
+
+$$
+(A + uv^\top)^{-1} = A^{-1} - \frac{A^{-1} u v^\top A^{-1}}{1 + v^\top A^{-1}u}
+$$
+
+This is actually an .alert[equivalence] but we can check the `\(\Rightarrow\)` direction easily.  
+
+---
+## Single Parameter Exponential families
+
+A single parameter .alert[exponential family] is a set of distributions with density of the form
+$$
+f_\theta(x) = h(x) \exp\left(\eta(\theta)T(x) + A(\theta) \right)
+$$
+where `\(h(x)\)`, `\(\eta(\theta)\)`, `\(T(x)\)` and `\(A(\theta)\)` are known functions. 
+
+--
+
+If `\(\eta(\theta) = \theta\)`, the family is in .alert[canonical form] (see the Poisson distribution). In that case, 
+
+.pull-left[
+- `\(\theta\)` is the .alert[natural parameter]
+- `\(T(x)\)` is the .alert[sufficient statistic]
+- `\(A(\theta)\)` is the .alert[log normalizer]
+]
+
+.pull-right[
+$$
+`\begin{align}
+A'(\theta) &amp; = E_\theta[T(X)] \\
+A''(\theta) &amp; = V_\theta[T(X)] \\
+\end{align}`
+$$
+]
+
+--
+
+Proof: Differentiate `\(1 = \int_x h(x)e^{\theta T(x) - A(\theta)}dx\)`
+
+---
+## Vector exponential families
+
+A vector .alert[exponential family] is a set of distributions with density of the form
+$$
+f_{\btheta}(\bx) = h(\bx) \exp\left(\eta(\btheta)^\top T(\bx) + A(\btheta) \right)
+$$
+where `\(h(\bx)\)`, `\(\eta(\btheta)\)`, `\(T(\bx)\)` and `\(A(\btheta)\)` are known functions. 
+
+--
+
+If `\(\eta(\btheta) = \btheta\)`, the family is in .alert[canonical form]. In that case, 
+
+.pull-left[
+- `\(\btheta\)` is the vector of .alert[natural parameters]
+- `\(T(\bx)\)` is the vector of .alert[sufficient statistics]
+- `\(A(\theta)\)` is the scalar .alert[log normalizer]
+]
+
+.pull-right[
+$$
+`\begin{align}
+\nabla A(\btheta) &amp; = E_\btheta[T(X)] \\
+\nabla^2 A(\btheta) &amp; = V_\btheta[T(X)] \\
+\end{align}`
+$$
+]
+
+---
+## Inference for Dirichlet distributions
+
+Assume we have a sample `\((\bpi_1, \dots, \bpi_n)\)`, with `\(\bpi_i = (\pi_{i1}, \dots, \pi_{ip})\)`, from `\(\D(\balpha)\)`. The likelihood function is given by
+
+$$
+`\begin{align}
+P(\bpi_1, \dots, \bpi_n; \balpha) = \prod_{i=1}^n \Gamma(\alpha_0) \prod_{j=1}^p \Gamma(\alpha_j)^{-1} \pi_{ij}^{\alpha_j - 1}
+\end{align}`
+$$
+Up to a constant term, the log-likelihood is given by 
+$$
+`\begin{align}
+\ell(\balpha) &amp; = \sum_{i=1}^n \log \Gamma(\alpha_0) + \sum_{j=1}^p - \log \Gamma(\alpha_j) + (\alpha_j - 1) \log(\pi_{ij}) \\
+&amp; = n \left[ \log \Gamma(\alpha_0) - \sum_{j=1}^p \log \Gamma(\alpha_j)\right] + \sum_{j=1}^p \alpha_j \underbrace{\sum_{i=1}^n \log(\pi_{ij})}_{v_j} + C \\
+&amp; = n \left[ \log \Gamma(\alpha_0) - \sum_{j=1}^p \log \Gamma(\alpha_j)\right] + \sum_{j=1}^p \alpha_j v_j + C
+\end{align}`
+$$
+---
+## Inference for Dirichlet distributions (II)
+
+Because of the `\(\Gamma\)` function, there is no explicit formula for `\(\hat{\balpha} = \text{arg}\max_{\balpha} \ell(\balpha)\)` but we can use the .alert[Newton-Raphson] method to optimize it by iterating the updates:
+$$
+\balpha^{(t+1)} = \balpha^{(t)} - H^{-1}(\balpha^{(t)}) \bg(\balpha^{(t)})
+$$
+where
+- `\(\bg(\balpha^{(t)})\)` is the gradient of `\(\ell\)`
+- `\(H(\balpha^{(t)})\)` is the hessian of `\(\ell\)`
+
+--
+
+Introduce `\(\Psi(x) = \frac{d}{dx} \ln\Gamma(x)\)` (digamma function) and `\(\Psi'(x) = \frac{d}{dx} \Psi(x)\)` (polygamma function). The gradient of `\(\ell\)` is given by
+$$
+g_j = \frac{\partial \ell(\balpha)}{\partial \alpha_j} = \Psi(\alpha_0) - \Psi(\alpha_j) + v_j
+$$
+
+and the hessian by 
+
+$$
+`\begin{equation}
+h_{jj'} = \frac{\partial^2 \ell(\balpha)}{\partial \alpha_j\alpha_{j'}} = \Psi'(\alpha_0) - \Psi'(\alpha_j) 1_{\{j = j'\}}
+\end{equation}`
+$$
+
+&lt;!-- --- --&gt;
+&lt;!-- ## About the di and polygamma function --&gt;
+
+&lt;!-- `\(\Psi(x)\)` are `\(\Psi'(x)\)` are very useful functions called the .alert[digamma] and .alert[polygamma (of order 1)] functions.  --&gt;
+
+&lt;!-- -- --&gt;
+&lt;!-- They are well characterized and have integral representations --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- \Psi(x) = \int_0^{+\infty} \left( \frac{e^{-t}}{t} - \frac{e^{-xt}}{1 - e^{-t}} \right) dt --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- and for `\(n \geq 1\)`,  --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- \Psi^{(n)}(x) = (-1)^{n+1}\int_0^{+\infty} \frac{t^n e^{-xt}}{1 - e^{-t}} dt  --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- -- --&gt;
+
+&lt;!-- In particular `\(\Psi\)` is .alert[concave] and `\(\Psi'\)` is .alert[convex]. Moreover --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- \Psi'(x) = \frac{1}{x} + \frac{1}{2x^2} + o(x^{-2}) --&gt;
+&lt;!-- $$ --&gt;
+
+---
+## Inference for Dirichlet distributions (III)
+
+In matrix format
+
+$$
+H = -Diag(\Psi'(\alpha_1), \dots, \Psi'(\alpha_p)) + \Psi'(\alpha_0) 1_p 1_p^\top
+$$
+This is a diagonal plus constant matrix which can be inverted using the Shermann-Morrison formula. Noting `\((1/\Psi'(\balpha) = (1/\Psi'(\alpha_1),\dots,1/\Psi'(\alpha_p))\)`
+
+$$
+H^{-1} = -Diag(1/\Psi'(\balpha)) +  \frac{(1/\Psi'(\balpha))(1/\Psi'(\balpha))^\top}{1/\Psi'(\alpha_0) + 1/\Psi'(\balpha))^\top 1_p}
+$$
+--
+
+There is no explicit formula for `\(H^-{1} \bg\)` but 
+- the computation is straightforward using a computer. 
+- `\(\ell(\balpha)\)` is concave so there is a .alert[unique maximum] reached by the Newton-Raphson method. 
+
+--
+The concavity of `\(\ell(\balpha)\)` relies on properties of .alert[exponential families] and is a nice problem. 
+
+---
+## Concavity of `\(\ell(\balpha)\)`: demo
+
+We need to prove that `\(H\)` is a .alert[(semi)definite negative matrix] of dimension `\(p\)`, or equivalently that for all `\(x \in \Rbb^p\)`
+$$
+x^\top H x \leq 0
+$$
+---
+## Concavity of `\(\ell(\balpha)\)`: demo
+
+`\(\D(\balpha)\)` is an exponential family in canonical form with 
+- sufficient statistic `\(T(\bpi) = (\log(\pi_1), \dots, \log(\pi_p))\)` 
+- log-normalizer `\(A(\balpha) = \sum_{j=1}^p \log\Gamma(\alpha_j) - \log\Gamma(\alpha_0)\)`
+
+--
+
+Simple computations show:
+$$
+`\begin{align}
+\frac{\partial A(\balpha)}{\partial \alpha_j} &amp; = \Psi(\alpha_j) - \Psi(\alpha_0) \\
+\frac{\partial^2 A(\balpha)}{\partial \alpha_j\partial \alpha_{j'}} &amp; = \Psi(\alpha_j) 1_{\{j = j'\}}- \Psi(\alpha_0) = -h_{jj'}
+\end{align}`
+$$
+and thus 
+$$
+H = - \nabla^2 A(\balpha) = -Cov(T(\bpi))
+$$
+In particular
+$$
+x^\top H x = -x^\top Cov(T(\bpi)) x = -Cov(x^\top T(\bpi)) \leq 0
+$$
+&lt;!-- --- --&gt;
+&lt;!-- ## Concavity of `\(\ell(\balpha)\)` --&gt;
+
+&lt;!-- Based on Jakovčević Stor, Slapničar, and Barlow [JSB15], if `\(D\)` is diagonal and `\(z\)` is vector the eigenvalues of `\(D + \rho zz^\top\)` are given by the zeroes of `\(f(\lambda) = 1 + \rho z^\top(D - \lambda I)^{-1}z\)`.  --&gt;
+
+&lt;!-- -- --&gt;
+&lt;!-- In our problem, `\(f\)` reduces to  --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- f(\lambda) = 1 - \sum_{j=1}^p \frac{\Psi'(\alpha_0)}{\Psi'(\alpha_k) + \lambda} --&gt;
+&lt;!-- $$ --&gt;
+&lt;!-- which increases over `\((0, \infty)\)` and goes to `\(1\)` as `\(\lambda \to \infty\)` as the `\(\Psi'(\alpha_k)\)` are positive and we just need to prove --&gt;
+
+&lt;!-- $$ --&gt;
+&lt;!-- \begin{equation} --&gt;
+&lt;!-- f(0) &gt; 0 \Leftrightarrow 1 &gt; \sum_{j=1}^p \frac{\Psi'(\alpha_0)}{\Psi'(\alpha_k)} \Leftrightarrow \frac{1}{\Psi'(\alpha_0)} &gt; \sum_{j=1}^p \frac{1}{\Psi'(\alpha_k)} --&gt;
+&lt;!-- \end{equation} --&gt;
+&lt;!-- $$ --&gt;
+
+---
+## Inference for DCM distributions
+
+Adaptation to DCM requires more work. Following Sklar [Skl14], we define the .alert[dual gamma] as
+$$
+\Gamma(a, n) = \frac{\Gamma(n+a)}{\Gamma(a)} = \prod_{i=0}^{n-1} (a+i)
+$$
+--
+
+With this notation, the likelihood is thus 
+
+$$
+`\begin{align}
+P(\bY; \balpha) &amp; = \frac{\Gamma(\alpha_0)\Gamma(n+1)}{\Gamma(n+\alpha_0)} \prod_{j=1}^p \frac{\Gamma(Y_j + \alpha_j)}{\Gamma(\alpha_j)\Gamma(Y_j + 1)} \\
+&amp; = \frac{\Gamma(N+1)}{\prod_{j=1}^p \Gamma(Y_j+1)} \frac{\prod_{j=1}^p \Gamma(\alpha_j, Y_j)}{\Gamma(\alpha_0, N) }
+\end{align}`
+$$
+---
+## Inference for DCM distributions (II)
+
+Assume we have a sample `\((\bY_1, \dots, \bY_n)\)`, with `\(\bY_i = (Y_{i1}, \dots, Y_{ip})\)`, from `\(DCM(\balpha)\)`. The likelihood function is given by, up to terms not depending on `\(\balpha\)` by
+$$
+`\begin{align}
+\ell(\balpha) &amp; = \sum_{i=1}^n \sum_{j=1}^p \log \Gamma(\alpha_j, Y_{ij}) - \sum_{i=1}^n \log \Gamma(\alpha_0, N_i) \\
+&amp; = \sum_{i=1}^n \sum_{j=1}^p \sum_{k=1}^{Y_{ij}} \log (\alpha_j + k) - \sum_{i=1}^n \sum_{k=1}^{N_i} \log (\alpha_0 + k)
+\end{align}`
+$$
+
+--
+
+There is no .alert[sufficient statistics] of fixed dimension like before but we can precompute `\(p \times M\)` quantities, where `\(M = \max_i N_i\)` to speed up computation. 
+
+For `\(0 \leq m \leq N_\max\)`, note
+- `\(u_{jm} = \sum_{i=1}^n 1_{\{Y_{ij} \geq m\}}\)` the number of samples where count `\(j\)` exceeds `\(m\)`
+- `\(v_{m} = \sum_{i=1}^n 1_{\{N_i \geq m\}}\)` the number of samples where total count `\(N_i\)` exceeds `\(m\)`
+
+---
+## Inference for DCM distributions (III)
+
+With those quantities
+
+$$
+`\begin{equation}
+\ell(\balpha) = \sum_{j=1}^p \sum_{m=1}^M u_{jm}\log(\alpha_j+m) - \sum_{m=1}^M v_{m}\log(\alpha_0+m)
+\end{equation}`
+$$
+--
+
+We can again compute the gradient and the hessian and use the same iterative procedure
+
+- gradient 
+$$
+`\begin{equation}
+g_j = \frac{\partial \ell(\balpha)}{\partial \alpha_j} = \sum_{m=1}^M \frac{u_{jm}}{\alpha_j +m} - \frac{v_{m}}{\alpha_0 +m}
+\end{equation}`
+$$
+- hessian (diagonal plus constant)
+$$
+`\begin{equation}
+h_{jj'} = \frac{\partial^2 \ell(\balpha)}{\partial \alpha_j \partial \alpha_{j'}} = -1_{\{j=j'\}}\sum_{m=1}^M \frac{u_{jm}}{(\alpha_j +m)^2} + \sum_{m=1}^M \frac{v_{m}}{(\alpha_0 +m)^2}
+\end{equation}`
+$$
+
+---
+## Concavity of `\(\ell(\alpha)\)`
+
+Let `\(d_j = \sum_{m=1}^M \frac{u_{jm}}{(\alpha_j + m)^2}\)` and `\(d_0 = \sum_{m=1}^M \frac{v_{m}}{(\alpha_0 + m)^2}\)`. The matrix `\(H\)` is again of the form
+
+$$
+H = -Diag(d_1, \dots, d_n) + d_0 11^\top
+$$
+And therefore `\(\ell(\alpha)\)` is concave iff `\(H\)` is semidefinite negative. 
+
+--
+We can study the eigenvalue of `\(H\)` to prove that they are all negative (not done during the lectures). 
+
+
+---
+# Latent Dirichlet Allocation (LDA)
+
+The model was first introduced in Pritchard, Stephens, and Donnelly [PSD00] for genetic data and later in Blei, Ng, and Jordan [BNJ03] for topic modeling in text documents. 
+
+### Intuition
+
+.pull-left[
+Using the word analogy: 
+- archetype = topic
+- sample = document (set of words)
+- species = word
+- species count = word count
+]
+
+.pull-right[
+- There are `\(K\)` topics, `\(n\)` documents, `\(p\)` words
+- Document `\(i\)` has `\(N_i\)` words
+- Document `\(i\)` is of mixture of topics with proportions `\(\btheta_i = (\theta_{i1}, \dots, \theta_{iK})\)`
+- Topic `\(k\)` has word proportions `\(\bpi_{k} = (\pi_{k1}, \dots, \pi_{kp})\)`.
+- The `\(l\)`-th word `\((l = 1,\dots,N_i)\)` belongs to topic `\(Z_{il}\)` and is equal to `\(W_{il}\)`
+- Word `\(j\)` appears `\(Y_{ij}\)` times in document `\(i\)`
+]
+
+---
+## LDA (II)
+
+.pull-left[
+- There are `\(K\)` topics, `\(n\)` documents, `\(p\)` words
+- Document `\(i\)` has `\(N_i\)` words
+- Document `\(i\)` is of mixture of topics with proportions `\(\btheta_i = (\theta_{i1}, \dots, \theta_{iK})\)`
+- Topic `\(k\)` has word proportions `\(\bpi_{k} = (\pi_{k1}, \dots, \pi_{kp})\)`.
+- The `\(l\)`-th word `\((l = 1,\dots,N_i)\)` belongs to topic `\(Z_{il}\)` and is equal to `\(W_{il}\)`
+- Word `\(j\)` appears `\(Y_{ij}\)` times in document `\(i\)`
+]
+
+.pull-right[
+- `\(\btheta_i \sim \D(\balpha)\)`
+- `\(\bpi_{k} \sim \D(\bbeta)\)`
+- `\(Z_{il} | \btheta_i \sim \M(1, \btheta_i)\)`
+- `\(W_{il} | Z_{il} = k \sim \M(1, \bpi_{k})\)`
+- `\(Y_{ij} = \sum_{l=1}^{N_i} 1_{\{W_{il} = j\}}\)`
+]
+
+--
+
+The (hyper)parameters of the models are `\((\balpha, \bpi)\)`, similar to mixture of DCM
+- different status for `\(\bpi_k\)`: .alert[fixed] (mixt. of DCM) versus .alert[random] (LDA)
+- different interpretation for `\(\balpha\)`: 
+  - LDA: (unnormalized) mixing proportions .alert[within a sample] 
+  - Mixture of DCM: group proportions .alert[across samples]. 
+
+---
+
+## Density and likelihood
+  
+If we note `\(\bpi_k = (\bpi_{k1}, \dots, \bpi_{kp})\)` the word content of each topic and `\(\bpi = (\bpi_1, \dots, \bpi_K)\)`:
+
+$$
+`\begin{equation}
+P(\bY_i,\bZ_i,\btheta_i,\bpi; \balpha,\bbeta) = \underbrace{\prod_{k=1}^K P(\bpi_{k}; \bbeta)}_{\text{common to all } i} \times P(\btheta_i; \balpha)  \prod_{l=1}^{N_i} P(Z_{il}|\btheta_i)P(W_{il}|Z_{il})
+\end{equation}`
+$$
+Estimating the sample parameters `\((\bZ_i,\btheta_i,\bpi)\)` requires computing:
+
+$$
+`\begin{equation}
+P(\bZ_i,\btheta_i,\bpi | \bY_i; \balpha,\bbeta) = \frac{\prod_{k=1}^K P(\bpi_{k}; \bbeta) P(\btheta_i; \balpha)  \prod_{l=1}^{N_i} P(Z_{il}|\btheta_i)P(W_{il}|Z_{il})}{P(\bY_i; \balpha,\bbeta)}
+\end{equation}`
+$$
+which is .alert[ugly] because of the coupling between `\(\btheta = (\btheta_1, \dots, \btheta_n)\)` and `\(\bpi\)` in `\(P(\bY_i; \balpha,\bbeta)\)`. 
+
+$$
+`\begin{align}
+P(\bY_i; \balpha,\bbeta) &amp; = \int_{\bpi_i} \int_{\btheta_i} \sum_{\bZ_i} P(\bZ_i,\btheta_i,\bpi, \bY_i; \balpha,\bbeta) d\btheta_i d\bpi \\
+&amp; = \int_{\bpi} P(\bpi; \bbeta) \int_{\btheta_i} P(\btheta_i; \balpha) \sum_{\bZ_i} P(\bZ_i | \btheta_i) P(\bY_i | \bZ_i, \btheta_i) d\btheta_i d\bpi \\
+\end{align}`
+$$
+
+---
+## Variational approximation
+
+The posterior density `\(P(\bZ_i,\btheta_i,\bpi | \bY_i; \balpha,\bbeta)\)` is .alert[untractable] so we can't use the EM algorithm...
+
+--
+
+**Strategy**
+
+Instead of estimating `\(P(\bZ_i,\btheta_i,\bpi | \bY_i; \balpha,\bbeta)\)` directly, assume that it takes the form 
+$$
+`\begin{equation}
+Q(\bZ_i,\btheta_i,\bpi; \bgamma_i, \btau_i, \bphi   ) = \underbrace{P(\bZ_i ; \btau_i)}_{\text{Multinomial}} \underbrace{P(\btheta_i ; \bgamma_i)}_{\text{Dirichlet}} \underbrace{P(\bpi ; \bphi)}_{\text{Dirichlet, shared}}
+\end{equation}`
+$$
+
+where `\(\bgamma_i\)`, `\(\btau_i\)` and `\(\bphi\)` are variational parameters
+- `\(\gamma_{ik} \simeq E[\theta_{ik} | \bY_i; \balpha, \bbeta]\)`
+- `\(\tau_{ilk} \simeq P[Z_{il} = k | \bY_i; \balpha, \bbeta]\)`
+- `\(\bphi_{kj} \simeq E[\pi_{kj} | \bY_i; \balpha, \bbeta]\)`
+
+And update those parameter until convergence to minimize:
+$$
+D(Q(\btheta_i,\bZ_i,\bpi; \bgamma_i, \btau_i, \bphi) || P(\bZ_i,\btheta_i,\bpi | \bY_i; \balpha,\bbeta))
+$$
+
+---
+## Variational approximation updates
+
+### Goal: Maximize `\(F(Q, (\balpha, \bbeta))\)`
+
+Alternate between (variational) `\(E\)` step and `\(M\)` step until convergence
+
+.pull-left[
+
+**Variational E step**
+
+Update `\(Q\)` 
+
+$$
+`\begin{align}
+\gamma_{ik} &amp; \propto \alpha_k + \sum_{l=1}^{N_i} \tau_{ikl} \\
+\tau_{ilk}  &amp; \propto \pi_{kW_{il}} \exp\left( \Psi(\gamma_{ik}) - \Psi\left(\sum_{k=1}^K \gamma_{ik} \right)\right) \\
+\phi_{kj}  &amp; \propto \sum_{i=1}^n \sum_{l=1}^{N_i} \tau_{ilk} 1_{\{W_{il} = j\}}      
+\end{align}`
+$$
+]
+
+.pull-right[
+
+**M step**
+
+Update `\(\balpha\)` and `\(\bbeta\)` 
+
+- No explicit formula but the Newton method from the DCM part can be used
+]
+
+---
+class: inverse, center, middle
+
+# Conclusion 
+
+---
+class: middle
+# .top[Take home messages]
+
+### Transformations are .alert[suboptimal compared to GLM].
+
+### Multinomial-based distributions capture .alert[mean proportions but not their correlations].
+
+### More flexible models require more efforts to be adjusted to the data
+
+---
+Blei, D. M., A. Y. N. Ng, and M. I. Jordan (2003). "Latent Dirichlet
+Allocation". In: _JMLR_ 3. URL:
+[https://jmlr.csail.mit.edu/papers/v3/blei03a.html](https://jmlr.csail.mit.edu/papers/v3/blei03a.html).
+
+Dempster, A. P., N. M. Laird, and D. B. Rubin (1977). "Maximum
+Likelihood from Incomplete Data Via the EM Algorithm". In: _Journal of
+the Royal Statistical Society: Series B (Methodological)_ 39.1, pp.
+1-22. URL:
+[https://doi.org/10.1111/j.2517-6161.1977.tb01600.x](https://doi.org/10.1111/j.2517-6161.1977.tb01600.x).
+
+Jakovčević Stor, N., I. Slapničar, and J. Barlow (2015). "Forward
+stable eigenvalue decomposition of rank-one modifications of diagonal
+matrices". In: _Linear Algebra and its Applications_ 487, pp. 301-315.
+ISSN: 0024-3795. URL:
+[https://doi.org/10.1016/j.laa.2015.09.025](https://doi.org/10.1016/j.laa.2015.09.025).
+
+Jakuschkin, B., V. Fievet, L. Schwaller, et al. (2016). "Deciphering
+the pathobiome: intra-and interkingdom interactions involving the
+pathogen Erysiphe alphitoides". In: _Microbial ecology_ 72.4, pp.
+870-880.
+
+Neal, R. M. and G. E. Hinton (1998). "A View of the Em Algorithm that
+Justifies Incremental, Sparse, and other Variants". In: _Learning in
+Graphical Models_. Ed. by M. I. Jordan. Dordrecht: Springer
+Netherlands, pp. 355-368. URL:
+[https://doi.org/10.1007/978-94-011-5014-9_12](https://doi.org/10.1007/978-94-011-5014-9_12).
+
+Pritchard, J. K., M. Stephens, and P. Donnelly (2000). "Inference of
+Population Structure Using Multilocus Genotype Data". In: _Genetics_
+155.2, pp. 945-959. URL:
+[https://www.genetics.org/content/155/2/945](https://www.genetics.org/content/155/2/945).
+
+Sklar, M. (2014). _Fast MLE Computation for the Dirichlet Multinomial_.
+arXiv: 1405.0099 [stat.ML].
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
