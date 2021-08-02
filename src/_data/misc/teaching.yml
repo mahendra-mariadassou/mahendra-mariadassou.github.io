@@ -11,3 +11,10 @@
     name: Master <a href = "http://www.math-evry.cnrs.fr/departement/doku.php?id=formation:master:m2isg">Ingénierie Statistique et Génomique</a>
     role: Modèle d'évolution (18h / year)
     at: <a href="https://www.universite-paris-saclay.fr/fr">Université Paris Saclay</a>
+    
+- name: Summer School
+  values:
+  - period: Summer 2021
+    name: Shandong University Statistical Summer School
+    role: A tour through statistical models for multivariate counts (20h) <br> <a href="sdu_ss_2021">Lecture slides</a>
+    at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>

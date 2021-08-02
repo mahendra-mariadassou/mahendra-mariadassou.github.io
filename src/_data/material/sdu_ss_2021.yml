@@ -1,0 +1,26 @@
+- class: Lectures slides
+  lectures:
+    - name: Lecture 1
+      elements:
+      - nature: Introduction to multivariate count data <i class= "far fa-file-pdf" ></i>
+        at: "01_introduction.pdf"
+        
+    - name: Lecture 2
+      elements:
+      - nature: Transformation for count data <i class="fab fa-html5"></i>
+        at: "02_transformation.html"
+
+    - name: Lecture 3
+      elements:
+      - nature: Multinomial based models <i class="fab fa-html5"></i>
+        at: "03_multinomial_models.html"
+
+    - name: Lecture 4
+      elements:
+      - nature: Poisson Log-Normal models <i class="fab fa-html5"></i>
+        at: "04_pln_models.html"
+        
+    - name: Lecture 5
+      elements:
+      - nature: Applications of PLN models <i class="fab fa-html5"></i>
+        at: "https://pln-team.github.io/slideshow/slides#1"

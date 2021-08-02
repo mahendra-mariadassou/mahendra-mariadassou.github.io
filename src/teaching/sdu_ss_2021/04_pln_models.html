@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>PLN models</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mahendra Mariadassou, INRAE" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/custom_weihai_ss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PLN models
+### Mahendra Mariadassou, INRAE
+### Shandong University, Weihai (CN)<br>Summer School 2021
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      P: "{\\mathcal{P}}",
+      N: "{\\mathcal{N}}",
+      M: "{\\mathcal{M}}",
+      D: "{\\mathcal{D}}",
+      LN: "{\\mathcal{LN}}",
+      Rbb: "{\\mathbb{R}}",
+      Nbb: "{\\mathbb{N}}",
+      Sbb: "{\\mathbb{S}}", 
+      bpi: "{\\boldsymbol{\\pi}}",
+      bp: "{\\mathbf{p}}",
+      bg: "{\\mathbf{g}}",
+      bm: "{\\mathbf{m}}",
+      bn: "{\\mathbf{n}}",
+      bo: "{\\mathbf{o}}",
+      bs: "{\\mathbf{s}}",
+      bx: "{\\mathbf{x}}",
+      bA: "{\\mathbf{A}}",
+      bB: "{\\mathbf{B}}",
+      bM: "{\\mathbf{M}}",
+      bS: "{\\mathbf{S}}",
+      bX: "{\\mathbf{X}}",
+      bY: "{\\mathbf{Y}}",
+      bZ: "{\\mathbf{Z}}",
+      balpha: "{\\boldsymbol{\\alpha}}",
+      bbeta: "{\\boldsymbol{\\beta}}",
+      bfeta: "{\\boldsymbol{\\eta}}",
+      bgamma: "{\\boldsymbol{\\gamma}}",
+      bphi: "{\\boldsymbol{\\phi}}",
+      btau: "{\\boldsymbol{\\tau}}", 
+      btheta: "{\\boldsymbol{\\theta}}",
+      bTheta: "{\\boldsymbol{\\Theta}}",
+      bmu: "{\\boldsymbol{\\mu}}",
+      bSigma: "{\\boldsymbol{\\Sigma}}",
+      bOmega: "{\\boldsymbol{\\Omega}}"
+    }
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+---
+class: middle
+
+
+
+# Reminder
+
+.pull-left[
+- Interest for .alert[multivariate count data] 
+- Counts in ecology have .alert[peculiar] features:
+  - sparse (.grey[grey cell] = null count)
+  - overdispersed 
+  - not centered around a central location parameter
+- Example from Jakuschkin, Fievet, Schwaller, Fort, Robin, and Vacher [Jak+16]  
+  
+&lt;img src="04_pln_models_files/figure-html/oaks_histo-1.png" width="800px" /&gt;
+  
+]
+
+.pull-right[
+
+![](04_pln_models_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+]
+
+---
+# PLN models
+
+1. Multivariate Normal
+1. The Log Normal distribution 
+1. The Poisson Log Normal distribution
+1. Variational Approximation
+1. Parameter Estimation
+
+---
+class: inverse, center, middle
+
+# Multivariate Normal
+
+---
+
+## Multivariate Normal distribution (MVN)
+
+The .alert[multivariate normal distribution] of a p-dimensional random vector `\(\bY = (Y_1,\ldots, Y_p)\)` can be written in the following notation:
+
+$$
+\bY \sim \N(\bmu, \bSigma) \quad \text{or sometimes} \quad \N_p(\bmu, \bSigma)
+$$
+where `\(\bmu\)` is the mean vector of `\(\bY\)`  
+$$
+\bmu = E[\bY] = (E[Y_1], \dots, E[Y_p])
+$$
+and `\(\bSigma\)` is the `\(p \times p\)` variance matrix 
+
+$$
+`\begin{equation}
+\bSigma = (\Sigma_{jj'})_{j,j'} \; \text{ where } \; \Sigma_{j,j'} = Cov(Y_j, Y_{j'})
+\end{equation}`
+$$
+
+--
+
+The density of `\(Y\)` is given by 
+$$
+`\begin{align}
+P(Y; \bmu, \bSigma) &amp; = \frac{1}{\sqrt{(2\pi)^p |\bSigma|}} \exp\left( -\frac{(\bY - \bmu)^\top \bSigma^{-1} (\bY - \bmu)}{2} \right) 
+\end{align}`
+$$
+and for any `\(\bx \in \Rbb^p\)`, `\(\bx^\top \bY \sim \N(\bx^\top \bmu, \bx^\top \bSigma \bx)\)`
+---
+## Moments of the MVN (I)
+
+- Let `\(\bOmega = \bSigma^{-1}\)` and note `\(\bfeta_1 = \bSigma^{-1} \bmu\)` and `\(\bfeta_2 = -\bSigma^{-1}/2\)`. 
+- Note that for any vector `\(\bx\)` and symmetric matrix `\(\bA\)`, 
+  - `\(\bx^\top A \bx = \langle \bx \bx^\top, \bA\rangle\)` where `\(\langle \bA, \bB \rangle = Tr(\bA^\top \bB)\)` is the matrix dot product. 
+
+$$
+`\begin{align}
+P(Y; \bmu, \bSigma) &amp; = \frac{1}{\sqrt{(2\pi)^p |\bSigma|}} \exp\left( -\frac{(\bY - \bmu)^\top \bSigma^{-1} (\bY - \bmu)}{2} \right) \\
+&amp; = \frac{1}{(2\pi)^{p/2}} \exp\left( \bY^\top \bSigma^{-1} \bmu -\frac{1}{2}\bY^T \bSigma^{-1}\bY - \frac{1}{2}\bmu^\top\bSigma^{-1}\bmu - \frac{1}{2}\log|\bSigma|\right) \\
+&amp; = \frac{1}{(2\pi)^{p/2}} \exp\left( \bY^\top \bSigma^{-1} \bmu -\frac{1}{2}\langle \bY \bY^T, \bSigma^{-1}\rangle - \frac{1}{2}\bmu^\top\bSigma^{-1}\bmu - \frac{1}{2}\log|\bSigma|\right) \\
+&amp; = \frac{1}{(2\pi)^{p/2}} \exp\left( \bY^\top \bfeta_1 + \langle \bY \bY^T, \bfeta_2 \rangle +  \frac{1}{4}\bfeta_1^\top\bfeta_2\bfeta_1 + \frac{1}{2}\log|-2\bfeta_2|\right) \\
+\end{align}`
+$$
+In particular, the MVN is an exponential family with natural parameters `\((\bfeta_1, \bfeta_2) = (\bOmega\bmu, -\bOmega/2)\)`, sufficient statistics `\((\bY, \bY\bY^\top)\)` and log-normalizer `\(A(\bfeta_1, \bfeta_2) = -\frac{1}{4}\bfeta_1^\top\bfeta_2\bfeta_1 - \frac{1}{2}\log|-2\bfeta_2|\)`. 
+
+---
+## Moments of the MVN (II)
+
+By definition of the MVN, `\(E[\bY]\)` and `\(V[\bY]\)` are given by:
+$$
+E[\bY] = \bmu \quad \text{ and } V[\bY] = \bSigma
+$$
+By definition of the variance matrix, 
+$$
+V[\bY] = E[\bY \bY^\top] - E[\bY]E[\bY]^\top \Rightarrow E[\bY \bY^\top] = \bSigma + \bmu\bmu^\top
+$$
+
+--
+
+In addition, for all `\(\bx \in \Rbb^p\)`, the moment generating function of the MVN is given by
+
+$$
+E[\exp(\bx^\top \bY)] = \exp\left( \bx^\top \bmu + \frac{1}{2} \bx^t \bSigma \bx\right)
+$$
+
+The last useful equality is that for `\(\bx\)` and symmetric matrix `\(\bS\)`
+
+$$
+E[(\bY - \bx)^\top \bS (\bY - \bx)] = (\bmu - \bx)^\top \bS (\bmu - \bx) + Tr(\bSigma \bS)
+$$
+
+
+---
+## MGF of the MVN: demo
+
+Based on the MGF of a univariate gaussian function
+
+---
+class: inverse, center, middle
+
+# Log Normal distribution
+
+---
+
+## Log normal (LN) distribution 
+
+A random variable `\(\bY\)` is .alert[multivariate lognormal] with parameters `\((\bmu, \bSigma)\)`, noted `\(\bY \sim \LN(\bmu, \bSigma)\)`, iff 
+- `\(\bY\)` has positive components
+- the vector `\(\bZ = \log(\bY) = (\log(Y_1), \dots, \log(Y_p))\)` is gaussian with `\(\bZ \sim \N(\mu, \bSigma)\)`.
+
+--
+
+The density of the multivariate density is quite involved but the density of the univariate log-normal is easy. If `\(Y \sim \LN(\mu, \sigma^2)\)`, the density of `\(Y\)` is given by
+
+$$
+f_Y(x) = \frac{1}{x\sigma\sqrt{2\pi}} \exp\left( - \frac{(\ln(x) - \mu)^2}{2\sigma^2} \right)
+$$
+--
+Demo: Based on the cumulative distribution function
+
+
+---
+## Moments of the LN
+
+Since `\(\bY \sim e^{\N(\bmu, \bSigma)}\)`, one could be tempted to say `\(E[\bY] = e^{\bmu}\)` and `\(V[\bY] = e^{\bSigma}\)` where the exponential is applied coefficient by coefficient. 
+
+--
+
+But this is wrong due to Jensen's inequality and the convexity of `\(\exp\)`. Fortunately, we can use the MGF of MVN to compute `\(E[Y_j]\)`, `\(V[Y_j]\)` and `\(Cov(Y_j, Y_{j'})\)`:
+
+--
+
+.pull-left[ 
+$$
+`\begin{align}
+E[Y_j] &amp; = e^{\mu_j + \Sigma_{jj}/2} \\
+V[Y_j] &amp; = e^{2\mu_j + \Sigma_{jj}}(e^{\Sigma_{jj}} - 1) \\
+       &amp; = E[Y_j]^2 (e^{\Sigma_{jj}} - 1) \\
+Cov[Y_j, Y_{j'}] &amp; = e^{\mu_j + \mu_{j'} + \frac{1}{2}(\Sigma_{jj}+\Sigma_{j'j'})}(e^{\Sigma_{jj'}} - 1) \\
+&amp; = E[Y_j]E[Y_{j'}] (e^{\Sigma_{jj'}} - 1)
+\end{align}`
+$$
+]
+
+.pull-right[
+Note `\(\bZ = \log(\bY) \sim \N(\bmu, \bSigma)\)`. Proof based on the fact that
+$$
+`\begin{align}
+E[Y_j] &amp; = E[e^{Z_j}] \\
+E[Y_j^2] &amp; = E[e^{2Z_j}] \\
+E[Y_j Y_{j'}] &amp; = E[e^{Z_j + Z_{j'}}] \\
+\end{align}`
+$$
+]
+
+--
+
+In particular `\(Cov[Y_j, Y_{j'}]\)` has the .alert[same sign] as `\(\Sigma_{jj'}\)` and can thus be .alert[positive or negative]. 
+
+---
+class: inverse, center, middle
+
+# Poisson Log Normal distribution
+
+---
+## Poisson Log Normal (PLN) distribution
+
+A `\(p\)`-dimensional random variable `\(\bY\)` taking values in `\(\Nbb^p\)` is said to be .alert[PLN] [AH89] with parameters `\((\bmu, \bSigma)\)` iff there exists a `\(p\)`-dimensional random variable `\(\bZ\)` such that 
+
+$$
+`\begin{align}
+\bZ &amp; \sim \LN(\bmu, \bSigma) \\
+Y_j | Z_j &amp; \sim \P(Z_j) \; \text{independently for all } j\\
+\end{align}`
+$$
+
+--
+
+Or equivalently
+
+$$
+`\begin{align}
+\bZ &amp; \sim \N(0, \bSigma) \\
+Y_j | Z_j &amp; \sim \P(e^{\bmu + Z_j}) \; \text{independently for all } j
+\end{align}`
+$$
+Since the canonical form of the Poisson distribution is `\(\P(e^\theta)\)`, we prefer the .alert[last formulation]. 
+
+---
+## Moments of the PLN
+
+`\(\bY\)` is an (infinite) mixture of independent Poisson variable so we can use the laws of .alert[total expectation] and .alert[total covariance] to compute its mean and covariance. 
+
+--
+
+.pull-left[
+
+$$
+`\begin{align}
+E[Y_j] &amp; = E[E[Y_j | Z_j]] \\
+       &amp; = E[e^{Z_{j}}] = e^{\mu_j + \Sigma_{jj}/2}
+\end{align}`
+$$
+
+$$
+`\begin{align}
+V[Y_j] &amp; = E[V[Y_j | Z_j]] + V[E[Y_j | Z_j]] \\
+&amp; = E[e^{Z_j}] + V[e^{Z_j}] \\
+&amp; = E[Y_j] + E[Y_j]^2(E) (e^{\Sigma_{jj}} - 1)
+\end{align}`
+$$
+Note that `\(V[Y_j] &gt; E[Y_j]\)` `\(\Rightarrow\)` .alert[overdispersion] compared to Poisson with same mean. 
+]
+
+--
+
+.pull-right[
+$$
+`\begin{align}
+Cov[Y_j, Y_{j'}] &amp; = E[Cov[\underbrace{Y_j, Y_{j'}}_{\text{independent}}| Z_j, Z_{j'}]] \\
+&amp; \quad + Cov[E[Y_j | Z_j]E[Y_{j'} | Z_{j'}]] \\
+&amp; = Cov[e^{Z_j}, e^{Z_{j'}}] \\
+&amp; = E[Y_j]E[Y_{j'}](e^{\Sigma_{jj'}} - 1)
+\end{align}`
+$$
+Note that `\(Cov[Y_j, Y_{j'}]\)` has the .alert[same sign] as `\(\Sigma_{jj'}\)` and can be .alert[negative or positive]. 
+]
+
+---
+## Density
+
+.pull-left[
+If `\(\bZ\)` is .alert[observed]
+$$
+`\begin{align}
+P(\bY, \bZ; \bmu, \bSigma) &amp; = P(\bY | \bZ) P(\bZ; \bmu, \bSigma) \\
+&amp; = \prod_{j=1}^p \underbrace{P(Y_j|Z_j)}_{\text{Poisson}} \underbrace{P(\bZ; \bmu, \bSigma)}_{\text{MVN}} \\
+\log P(\bY, \bZ; \bmu, \bSigma) &amp; = \sum_{j=1}^p \log P(Y_j|Z_j) + \log P(\bZ; \bmu, \bSigma)) \\
+&amp; = \sum_{j=1}^p (Z_jY_j - e^{Z_j} + \log(Y_j!)) + \\
+&amp; \quad -\frac{1}{2}\log|\bSigma| - \frac{p}{2}\log(2\pi) \\
+&amp; \quad -\frac{(\bZ - \bmu)^\top \bSigma^{-1} (\bZ - \bmu)}{2}
+\end{align}`
+$$
+]
+
+--
+
+.pull-right[
+If `\(\bZ\)` is .alert[not observed]
+$$
+`\begin{align}
+P(\bY; \bmu, \bSigma) &amp; = \int_{\bZ} P(\bY | \bZ) P(\bZ; \bmu, \bSigma) d\bZ \\
+&amp; = \frac{1}{\prod_j Y_j!}\int_{\bZ} [ e^{\bY^\top \bZ - \sum_{j} e^{Z_j}} ]{}P(\bZ; \bmu, \bSigma)dZ \\
+&amp; = \frac{1}{\prod_j Y_j!} E_{\bZ}[e^{\bY^\top \bZ - \sum_{j} e^{Z_j}}]
+\end{align}`
+$$
+We can compute `\(E_{\bZ}[e^{\bY^\top \bZ}]\)` using the MGF of `\(\bZ\)` but not `\(E_{\bZ}[e^{\bY^\top \bZ} - \sum_j e^{Z_j}]\)`...
+$$
+\log P(\bY; \bmu, \bSigma) = ?
+$$
+]
+
+--
+.center[
+We can compute `\(\ell_{comp}(\bmu, \bSigma)\)` but not `\(\ell_{obs}(\bmu, \bSigma)\)`. 
+]
+
+---
+## Accouting for covariates and offset
+
+In many cases we have access to covariates `\(\bx\)` and we're interested in the matrix `\(\bTheta\)` of the effects of covariates on species `\(j\)`. 
+
+We can include them in the model by setting 
+$$
+\bmu = \bTheta\bx
+$$
+
+--
+
+We also have access to offsets to account for differences in observation effort `\(\bo\)`, we can include them by setting
+
+$$
+Y_j | Z_j \sim \P(e^{o_j + Z_j})
+$$
+
+This change the complete log-likelihood to 
+$$
+`\begin{align}
+\log P(\bY, \bZ; \bTheta, \bSigma) &amp; = \sum_{j=1}^p Y_j (o_j + Z_j) - e^{o_j + Z_j} + \log(Y_j!)) \\  &amp; \quad -\frac{1}{2}\log|\bSigma| - \frac{p}{2}\log(2\pi) -\frac{(\bZ - \bTheta\bx)^\top \bSigma^{-1} (\bZ - \bTheta\bx)}{2}
+\end{align}`
+$$
+
+---
+## Maximum Likelihood Estimation
+
+The observed likelihood `\(\ell_{obs}(\bTheta, \bSigma)\)` is .alert[untractable]. 
+
+--
+
+Remember the .alert[lower bound] from the Mixture of Multinomial section. For any distribution `\(Q(.)\)` over `\(\bZ\)`,
+
+$$
+`\begin{align}
+\ell_{obs}(\bTheta, \bSigma) &amp; = \log\left( \int_{\bZ} P(\bY, \bZ; \bTheta, \bSigma)d\bZ\right) \\
+&amp; = \log\left( \int_{\bZ} \frac{P(\bY, \bZ; \bTheta, \bSigma)}{q(\bZ)} q(\bZ)d\bZ\right) \\
+&amp; \geq \int_{\bZ} \log\left( \frac{P(\bY, \bZ; \bTheta, \bSigma)}{q(\bZ)}\right) q(\bZ) \\
+&amp; = E_Q\left[ \log(P(\bY, \bZ; \bTheta, \bSigma)\right] - E_Q\left[ \log Q(\bZ)\right] \\
+&amp; = F(Q, (\bTheta, \bSigma)) \\
+% &amp; = E_Q\left[ \log(P(\bY | \bZ)\log(P(\bZ; \bTheta, \bSigma)\right] - E_Q\left[ \log Q(\bZ)\right] \\
+% &amp; = E_Q\left[ \log(P(\bY | \bZ)] + E_Q[\log(P(\bZ; \bTheta, \bSigma)\right] - E_Q\left[ \log Q(\bZ)\right] \\
+\end{align}`
+$$
+
+We can maximize `\(\ell_{obs}(\bTheta, \bSigma)\)` by iteratively .alert[updating]
+- E-step: `\(Q = \text{arg}\max_Q F(Q, (\bTheta, \bSigma))\)`
+- M-step: `\((\bTheta, \bSigma) = \text{arg}\max_{(\bTheta, \bSigma)} F(Q, (\bTheta, \bSigma))\)`
+
+---
+## Variational Approximation
+
+In the mixture of MN, we solved the E-step explicitly by setting 
+
+$$
+`\begin{equation}
+Q(.) = P(.|\bY; (\bTheta, \bSigma)) = \frac{P(.|\bY; (\bTheta, \bSigma))}{\int_{\bZ} P(\bY, \bZ; (\bTheta, \bSigma))}
+\end{equation}`
+$$
+
+but we can't compute `\(\int_{\bZ} P(\bY, \bZ; (\bTheta, \bSigma))\)`...
+
+--
+
+Instead of finding the .alert[absolute best] distribution `\(Q\)`, we .alert[restrict] the search to a space of distribution which makes `\(F(Q, (\bTheta, \bSigma))\)` tractable.
+
+--
+
+Assuming we have `\(n\)` samples `\(\bY = (\bY_1, \dots, \bY_n)\)`, we consider `\(Q\)` of the form
+$$
+Q(\bZ_1, \dots, \bZ_n) = Q_1(\bZ_1) \otimes \dots \otimes Q_n(\bZ_n) = \N(\bm_1, Diag(\bs^2_1)) \otimes \dots \otimes \N(\bm_n, Diag(\bs^2_n))
+$$
+
+where `\(\bm_i\)` and `\(\bs_i\)` are .alert[variational parameters] for sample `\(i\)` and can be interpreted as `\(\bm_i \simeq E[\bY_i | \bZ_i; \bTheta, \bSigma]\)` and `\(\bs^2_i \simeq V[\bY_i | \bZ_i; \bTheta, \bSigma]\)`
+
+---
+## Variational Objective
+
+Note that `\(Q\)` depends only on `\(\bM = (\bm_1, \dots, \bm_n)\)` and `\(\bS = (\bs^2_1, \dots, \bs^2_n)\)`. 
+$$
+`\begin{align}
+F(Q, (\bTheta, \bSigma)) &amp; = F((\bM, \bS), (\bTheta, \bSigma)) \\
+&amp; = \sum_{i=1}^n E_Q\left[ \log(P(\bY_i, \bZ_i; \bTheta, \bSigma)\right] - E_Q\left[ \log Q(\bZ_i)\right] \\
+&amp; = \sum_{i=1}^n E_Q\left[ \log(P(\bY_i | \bZ_i)\log(P(\bZ_i; \bTheta, \bSigma) \right] - E_Q\left[ \log Q(\bZ_i)\right] \\
+&amp; = \sum_{i=1}^n E_Q\left[ \log(P(\bY_i | \bZ_i)\right] + E_Q\left[\log(P(\bZ_i; \bTheta, \bSigma) \right] - E_Q\left[ \log Q(\bZ_i)\right]
+\end{align}`
+$$
+---
+## `\(E_Q\left[ \log P(\bY_i | \bZ_i)\right]\)`
+
+Remember that the coordinates of `\(\bY_i|\bZ_i\)` are Poisson-distributed.
+
+--
+
+$$
+`\begin{align}
+\log P(\bY_i | \bZ_i) &amp; = \sum_{j=1}^p Y_{ij}(o_{ij} + Z_{ij}) - e^{Z_{ij}} + C \\
+E_Q\left[ \log P(\bY_i | \bZ_i) \right] &amp; = \sum_{j=1}^p Y_{ij} (o_{ij} + E_Q[Z_{ij}]) - E_Q[e^{Z_{ij}}] + C\\
+&amp; = \sum_{j=1}^p Y_{ij} (o_{ij} + m_{ij}) - e^{m_{ij} + s_{ij}^2/2} + C \\
+&amp; = \bY_i^\top (\bo_i + \bm_i) + 1_p^\top e^{\bm_i + \bs_i^2/2}
+\end{align}`
+$$
+
+---
+## `\(E_Q\left[\log(P(\bZ_i; \bTheta, \bSigma) \right]\)`
+
+Remember that `\(P(\bZ_i; \bTheta, \bSigma)\)` is a Gaussian density
+
+--
+
+$$
+`\begin{align}
+\log(P(\bZ_i; \bTheta, \bSigma) &amp; = -\frac{1}{2}\left[ \log|\bSigma| + (\bZ_i -\bTheta\bx_i)^\top \bSigma^{-1} (\bZ_i -\bTheta\bx_i) \right] + C\\
+E_Q\left[ \log(P(\bZ_i; \bTheta, \bSigma) \right] &amp; = -\frac{1}{2}\left( \log|\bSigma| + E_Q\left[(\bZ_i -\bTheta\bx_i)^\top \bSigma^{-1} (\bZ_i -\bTheta\bx_i) \right] \right) + C \\
+&amp; = -\frac{1}{2}\left( \log|\bSigma| + (\bm_i -\bTheta\bx_i)^\top \bSigma^{-1} (\bm_i -\bTheta\bx_i) + Tr\left[\bSigma^{-1} Diag(\bs_i^2)\right] \right) + C \\
+\end{align}`
+$$
+
+---
+## `\(E_Q\left[\log(Q(\bZ_i) \right]\)`
+
+Remember that `\(Q(\bZ_i)\)` is a Gaussian density with parameters `\(\bm_i\)` and `\(\bs_i^2\)`
+
+--
+
+$$
+`\begin{align}
+\log Q(\bZ_i) &amp; = -\frac{1}{2}\left[ \log|Diag(\bs_i^2)| + (\bZ_i -\bm_i)^\top Diag(\bs_i^2)^{-1} (\bZ_i -\bm_i) \right] + C\\
+E_Q\left[ \log Q(\bZ_i) \right] &amp; = -\frac{1}{2}\left( \log|Diag(\bs_i^2)| + E_Q\left[(\bZ_i -\bm_i)^\top Diag(\bs_i^2)^{-1} (\bZ_i -\bm_i) \right] \right) + C \\
+&amp; = -\frac{1}{2}\left( \log|Diag(\bs_i^2)| + p \right) + C \\
+&amp; = -\frac{1}{2}\log|Diag(\bs_i^2)| + C \\
+\end{align}`
+$$
+---
+class: inverse, center, middle
+
+# Parameter estimation
+
+---
+## Variational Objective
+
+Putting all the parts together, the variational objective is
+$$
+`\begin{align}
+F(\bM, \bS, \bTheta, \bSigma) = &amp; -\frac{n}{2}\log|\bSigma| - \frac{1}{2}\sum_{i=1}^n \left( (\bm_i - \bTheta\bx_i)^\top \bSigma^{-1} (\bm_i - \bTheta\bx_i) + Tr(\bSigma^{-1} Diag(\bS_i^2)) \right) \\
+&amp; + \sum_{i=1}^n \bY_i^\top (\bo_i + \bm_i) - 1_p^\top \exp(\bo_i + \bm_i + \bs_i^2/2)
+\end{align}`
+$$
+We can thus compute the partial derivatives of `\(F\)` with respect to `\(\bM, \bS, \bTheta, \bSigma\)`.
+
+---
+## M step
+
+In matrix form, we can write
+
+$$
+`\begin{equation}
+\frac{\partial F}{\partial \bTheta} = - \bSigma^{-1}\left[ \bX^\top\bX \bTheta - \bX^\top \bM\right] \quad \text{and} \quad \frac{\partial F}{\partial \bSigma^{-1}} = \frac{n}{2}\bSigma^{-1} - \frac{1}{2}\left[  \sum_{i=1}^n (\bm_i - \bTheta\bx_i)^\top (\bm_i - \bTheta\bx_i) + \sum_{i=1}^n Diag(\bs_i^2) \right]
+\end{equation}`
+$$
+
+--
+
+Setting the derivatives to `\(0\)` leads to the following update
+$$
+`\begin{align}
+\bTheta^{(t+1)} &amp; = (\bX^\top\bX)^{-1}\bX^\top \bM^{(t)} \\
+\bSigma^{(t+1)} &amp; =  \frac{1}{n}\left[  \sum_{i=1}^n (\bm_i^{(t)} - \bTheta^{(t+1)}\bx_i)^\top (\bm_i^{(t)} - \bTheta^{(t+1)}\bx_i) + \sum_{i=1}^n Diag({\bs_i^2}^{(t)}) \right] \\
+\end{align}`
+$$
+
+---
+## E step
+
+Noting `\(\bA\)` the matrix with coordinates `\(A_{ij} = \exp(o_{ij} + m_{ij} + s_{ij}^2/2)\)`, we have
+$$
+`\begin{align}
+\frac{\partial F}{\partial \bm_i} &amp; = \bSigma^{-1} (\bTheta^{(t+1)}\bx_i - \bm_i) + (\bY_i - \bA_i) \\
+\frac{\partial F}{\partial \bs_i^2} &amp; = \frac{1}{2} \left[ Diag\left({\bSigma^{(t+1)}}^{-1}\right) - \bA_i + Diag(\bs_i^2)^{-1} \right]
+\end{align}`
+$$
+
+--
+
+There is no explicit solution for setting those derivatives to `\(0\)` so we use .alert[gradient descent] to find `\(\text{arg}\max_{(\bM, \bS)} F(\bM, \bS, \bTheta^{(t+1)}, \bSigma^{(t+1)})\)`
+
+---
+class: middle, center
+
+&lt;img src="ext_figures/graphical_abstract.png" width="100%" /&gt;
+
+---
+## Take Home Message
+
+- ### The PLN model is .alert[flexible] for modelling (no sign constraint)
+- ### Parameter estimation is tricky and relies a lot of computational tricks and .alert[variational estimation] (see [CMR21] for details)
+- ### Variational estimation is a .alert[powerful tool] to estimate parameter in .alert[untractable models]
+
+---
+Aitchison, J. and C. Ho (1989). "The multivariate Poisson-log normal
+distribution". In: _Biometrika_ 76.4, pp. 643-653.
+
+Chiquet, J., M. Mariadassou, and S. Robin (2021). "The
+Poisson-lognormal model as a versatile framework for the joint analysis
+of species abundances". In: _Frontiers in Ecology and Evolution_ 9, p.
+188. DOI:
+[10.3389/fevo.2021.588292](https://doi.org/10.3389%2Ffevo.2021.588292).
+
+Jakuschkin, B., V. Fievet, L. Schwaller, et al. (2016). "Deciphering
+the pathobiome: intra-and interkingdom interactions involving the
+pathogen Erysiphe alphitoides". In: _Microbial ecology_ 72.4, pp.
+870-880.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
