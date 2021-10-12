@@ -40,6 +40,7 @@
     };
   </script>
 
+  <script src="libs/header-attrs-2.11/header-attrs.js"></script>
   <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
@@ -85,6 +86,13 @@ slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
   </style>
 
   <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
@@ -99,7 +107,7 @@ slide:not(.current) .plotly.html-widget{
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      
       <p data-config-presenter><!-- populated from slide_config.json --></p>
             <p style="margin-top: 6px; margin-left: -2px;">30 Septembre 2019</p>
           </hgroup>
@@ -107,7 +115,7 @@ slide:not(.current) .plotly.html-widget{
 
 <slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introduction</h2></hgroup><article  id="introduction">
 
-</article></slide><slide class=""><hgroup><h2>Plan de la leçon</h2></hgroup><article  id="plan-de-la-lecon">
+</article></slide><slide class=""><hgroup><h2>Plan de la leçon</h2></hgroup><article  id="plan-de-la-leçon">
 
 <ul>
 <li>L’ensemble \(\mathbb{C}\)</li>
@@ -129,7 +137,7 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Les nombres complexes</h2></hgroup><article  id="les-nombres-complexes">
 
-</article></slide><slide class=""><hgroup><h2>Définition et généralités</h2></hgroup><article  id="definition-et-generalites">
+</article></slide><slide class=""><hgroup><h2>Définition et généralités</h2></hgroup><article  id="définition-et-généralités">
 
 On admet l’existence de \(\mathbb{C}\) défini par le théorème suivant:
 
@@ -165,7 +173,7 @@ Le nombre \(b\) s’appelle <em>partie imaginaire</em> de \(z\) et se note \(Im(
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Complexe conjugué</h2></hgroup><article  id="complexe-conjugue">
+</article></slide><slide class=""><hgroup><h2>Complexe conjugué</h2></hgroup><article  id="complexe-conjugué">
 
 <div class="definition">
 <p>Soit \(z = a + ib\) un nombre complexe sous forme algébrique. On appelle <em>nombre complexe conjugué</em>, noté \(\bar{z}\), le complexe \[\bar{z} = a -ib\]</p></div>
@@ -174,7 +182,7 @@ Le nombre \(b\) s’appelle <em>partie imaginaire</em> de \(z\) et se note \(Im(
 
 <p><strong>Remarques</strong> - Un complexe \(z\) est un réel si et seulement si \(Im(z) = 0\). - Un complexe \(z\) dont la partie réelle est nulle (\(Re(z) = 0\)) est dit <em>imaginaire pur</em>. On note \(i\mathbb{R}\) l’ensemble des imaginaires purs.</p>
 
-</article></slide><slide class=""><hgroup><h2>Conjugaison, réels et imaginaire purs</h2></hgroup><article  id="conjugaison-reels-et-imaginaire-purs">
+</article></slide><slide class=""><hgroup><h2>Conjugaison, réels et imaginaire purs</h2></hgroup><article  id="conjugaison-réels-et-imaginaire-purs">
 
 <div class="proposition">
 Soit \(z, z&#39;\) deux nombres complexes
@@ -207,7 +215,7 @@ Si \(\lambda \in \mathbb{R}\), alors \(Re(\lambda z) = \lambda Re(z)\) et \(Im(\
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Opérations sur les complexes</h2></hgroup><article  id="operations-sur-les-complexes">
+</article></slide><slide class=""><hgroup><h2>Opérations sur les complexes</h2></hgroup><article  id="opérations-sur-les-complexes">
 
 <p>On a les mêmes règles d’opérations dans \(\mathbb{C}\) que dans \(C\) (et même un peu plus avec la conjugaison)</p>
 
@@ -260,7 +268,7 @@ Si \(z = a+ib \neq 0\), \(z^{-1} = \frac{a - ib}{a^2 + b^2}\)
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Écriture algébrique: exercices</h2></hgroup><article  id="ecriture-algebrique-exercices">
+</article></slide><slide class=""><hgroup><h2>Écriture algébrique: exercices</h2></hgroup><article  id="écriture-algébrique-exercices">
 
 <div class="exercice">
 Écrire sous forme algébrique les complexes suivants:<br>
@@ -287,16 +295,16 @@ Si \(z = a+ib \neq 0\), \(z^{-1} = \frac{a - ib}{a^2 + b^2}\)
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Interprétation géométrique</h2></hgroup><article  id="interpretation-geometrique">
+</article></slide><slide class=""><hgroup><h2>Interprétation géométrique</h2></hgroup><article  id="interprétation-géométrique">
 
 <p>On peut voir un nombre complexe \(z\) comme un couple \((a, b)\) de nombres réels. On peut donc représenter les complexes comme des points dans le plan \(\mathcal{P}\) muni du repère orthonormé \((O, \vec{i}, \vec{j})\).</p>
 
 <div class="proposition">
-<p>Soit \(M\) un point de coordonnées \((a, b)\) dans le plan \(\mathcal{P}\) muni du repère \((O, \vec{i}, \vec{j})\). On associe à \(M\) le nombre complexe \(z_M = a + ib\). \(z_M\) est appelé <em>affine (complexe)</em> du point \(M\). <br> Réciproquement, à tout complexe \(z = a + ib\), on peut associer son <em>point image</em> \(M(z) \in \mathcal{P}\) de coordonnées \((a, b)\). <br> Enfin, si \(\vec{\alpha}\) est un vecteur du plan de coordonnées \((a, b)\), on lui associe son <em>affine complexe</em> \(z_{\vec{\alpha}} = a + ib\).</p></div>
+<p>Soit \(M\) un point de coordonnées \((a, b)\) dans le plan \(\mathcal{P}\) muni du repère \((O, \vec{i}, \vec{j})\). On associe à \(M\) le nombre complexe \(z_M = a + ib\). \(z_M\) est appelé <em>affixe (complexe)</em> du point \(M\). <br> Réciproquement, à tout complexe \(z = a + ib\), on peut associer son <em>point image</em> \(M(z) \in \mathcal{P}\) de coordonnées \((a, b)\). <br> Enfin, si \(\vec{\alpha}\) est un vecteur du plan de coordonnées \((a, b)\), on lui associe son <em>affixe complexe</em> \(z_{\vec{\alpha}} = a + ib\).</p></div>
 
 <p>Pour les propriétés qui suivent, faites des dessins pour les visualiser.</p>
 
-</article></slide><slide class=""><hgroup><h2>Interprétation géométrique (II)</h2></hgroup><article  id="interpretation-geometrique-ii">
+</article></slide><slide class=""><hgroup><h2>Interprétation géométrique (II)</h2></hgroup><article  id="interprétation-géométrique-ii">
 
 <div class="proposition">
 <p>Soit \(A, B\) deux points du plan, on a \[z_\vec{AB} = z_B - z_A\]</p></div>
@@ -334,11 +342,11 @@ Soit \(z \in \mathbb{C}\) et \(M(z)\) son point image. Alors le point \(M(\bar{z
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Interprétation géométrique du conjugué</h2></hgroup><article  id="interpretation-geometrique-du-conjugue">
+</article></slide><slide class=""><hgroup><h2>Interprétation géométrique du conjugué</h2></hgroup><article  id="interprétation-géométrique-du-conjugué">
 
 <p><img src="figures/complexes_conjugaison-1.png" width="768" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Interprétation géométrique: exercices</h2></hgroup><article  id="interpretation-geometrique-exercices">
+</article></slide><slide class=""><hgroup><h2>Interprétation géométrique: exercices</h2></hgroup><article  id="interprétation-géométrique-exercices">
 
 <div class="exercice">
 Soit \(A\), \(B\) et \(C\) 3 points distincts du plan d’affixes \(a\), \(b\) et \(c\). Montrer que <br>:
@@ -370,11 +378,11 @@ Le triangle \(ABC\) est rectangle en \(A\) si et seulement si \(Re((b -a) (\over
 
 <p>Le module est la généralisation à \(\mathbb{C}\) de la valeur absolue sur \(\mathbb{R}\). C’est pour ça qu’on utilise la même notation.</p>
 
-</article></slide><slide class=""><hgroup><h2>Module d’un complexe: géométrie</h2></hgroup><article  id="module-dun-complexe-geometrie">
+</article></slide><slide class=""><hgroup><h2>Module d’un complexe: géométrie</h2></hgroup><article  id="module-dun-complexe-géométrie">
 
 <p><img src="figures/complexes_module-1.png" width="960" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Module d’un complexe: propriétés</h2></hgroup><article  id="module-dun-complexe-proprietes">
+</article></slide><slide class=""><hgroup><h2>Module d’un complexe: propriétés</h2></hgroup><article  id="module-dun-complexe-propriétés">
 
 <div class="proposition">
 Soit \(z, z&#39;\) deux complexes d’image \(M(z)\) et \(M(z&#39;)\).
@@ -452,24 +460,22 @@ Déterminer les \(z \in \mathbb{C}\) tels que \(z\), \(1/z\) et \(1-z\) ont le m
 
 </ul></div>
 
-</article></slide><slide class=""><hgroup><h2>Inégalité triangulaire</h2></hgroup><article  id="inegalite-triangulaire">
+</article></slide><slide class=""><hgroup><h2>Inégalité triangulaire</h2></hgroup><article  id="inégalité-triangulaire">
 
 <div class="proposition">
 <p>Soit \(z\) et \(z&#39;\) deux complexes. On a \[ |z + z&#39;| \leq |z| + |z&#39;|\]</p></div>
 
-</article></slide><slide class=""><hgroup><h2>Inégalité triangulaire: preuve géométrique</h2></hgroup><article  id="inegalite-triangulaire-preuve-geometrique">
+</article></slide><slide class=""><hgroup><h2>Inégalité triangulaire: preuve géométrique</h2></hgroup><article  id="inégalité-triangulaire-preuve-géométrique">
 
-<p>left: 60%</p>
-
+<div style="float: left; width: 50%;">
 <p>Soit \(O\) le point d’affixe \(0\), \(A\) celui d’affixe \(z\) et \(B\) celui d’affixe \(z+z&#39;\).</p>
 
 <p>L’inégalité triangulaire dans le triangle \(ABO\) donne \[ OB \leq OA + AB \]</p>
 
-<p>Or \(OB = |z + z&#39;|\), \(OA = |z|\) et \(AB = |z&#39;|\) donc on a bien \[ |z + z&#39;| \leq |z| + |z&#39;|\]</p>
+<p>Or \(OB = |z + z&#39;|\), \(OA = |z|\) et \(AB = |z&#39;|\) donc on a bien \[ |z + z&#39;| \leq |z| + |z&#39;|\]</p></div>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
-
-<p><img src="figures/complexes_inegalite-triangulaire-1.png" width="720" /></p>
+<div style="float: right; width: 50%;">
+<p><img src="figures/complexes_inegalite-triangulaire-1.png" width="720" /></p></div>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Exponentielle complexe</h2></hgroup><article  id="exponentielle-complexe">
 
@@ -490,7 +496,7 @@ Déterminer les \(z \in \mathbb{C}\) tels que \(z\), \(1/z\) et \(1-z\) ont le m
 
 <p><strong>Remarques</strong> - Il y a une <strong>infinité</strong> d’arguments, l’argument n’est défini qu’à \(2\pi\) près. - On parle d’<strong>un</strong> argument, pas de <strong>l’</strong>argument d’un complexe - Si on se restreint à un intervalle \(I\) de longueur \(2\pi\) (par exemple \(]-\pi, \pi]\)), l’argument est bien unique dans \(I\).</p>
 
-</article></slide><slide class=""><hgroup><h2>Argument d’un nombre complexe: propriété</h2></hgroup><article  id="argument-dun-nombre-complexe-propriete">
+</article></slide><slide class=""><hgroup><h2>Argument d’un nombre complexe: propriété</h2></hgroup><article  id="argument-dun-nombre-complexe-propriété">
 
 <div class="proposition">
 Soit \(z\) et \(z&#39;\) deux nombres complexes non nuls. On note \(\theta\) (resp. \(\theta&#39;\)) un argument de \(z\) (resp. de \(z&#39;\))
@@ -554,16 +560,16 @@ Déterminer le module et un argument des nombres complexes suivants: \[z_0 = i\s
 </article></slide><slide class=""><hgroup><h2>Exponentielle complexe</h2></hgroup><article  id="exponentielle-complexe-1">
 
 <div class="definition">
-<p>Soit \(\theta \in \mathbb{R}\), on note \[e^{î\theta} = \cos(\theta) + i\sin(\theta)\]</p></div>
+<p>Soit \(\theta \in \mathbb{R}\), on note \[e^{i\theta} = \cos(\theta) + i\sin(\theta)\]</p></div>
 
 <p><br></p>
 
 <div class="proposition">
-<p>Soit \(\theta, \theta&#39; \in \mathbb{R}\), on a \[e^{î\theta + i\theta&#39;} = e^{î(\theta + \theta&#39;)} = e^{î\theta} \times  e^{i\theta&#39;}\]</p></div>
+<p>Soit \(\theta, \theta&#39; \in \mathbb{R}\), on a \[e^{i\theta + i\theta&#39;} = e^{i(\theta + \theta&#39;)} = e^{i\theta} \times  e^{i\theta&#39;}\]</p></div>
 
 <p><br></p>
 
-<p><strong>Remarques</strong> La définiton de \(e^{i\theta}\) peut sembler arbitraire mais la proposition précédente montre que c’est la &ldquo;bonne&rdquo; définition: c’est celle qui étend les propriétés de l’exponentielle des réels purs aux imaginaires purs.</p>
+<p><strong>Remarques</strong> La définition de \(e^{i\theta}\) peut sembler arbitraire mais la proposition précédente montre que c’est la &ldquo;bonne&rdquo; définition: c’est celle qui étend les propriétés de l’exponentielle des réels purs aux imaginaires purs.</p>
 
 </article></slide><slide class=""><hgroup><h2>Exponentielle complexe et conjugaison, argument</h2></hgroup><article  id="exponentielle-complexe-et-conjugaison-argument">
 
@@ -670,9 +676,9 @@ Soit \(z\) un nombre complexe. <br>
 <li>\(A_n = \sum_{k=0}^n {n \choose k} \cos(k\theta)\) et \(B_n = \sum_{k=0}^n {n \choose k} \sin(k\theta)\)</li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Nombres complexes et trigonométrie</h2></hgroup><article  id="nombres-complexes-et-trigonometrie">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Nombres complexes et trigonométrie</h2></hgroup><article  id="nombres-complexes-et-trigonométrie">
 
-</article></slide><slide class=""><hgroup><h2>Application à la trigonométrie</h2></hgroup><article  id="application-a-la-trigonometrie">
+</article></slide><slide class=""><hgroup><h2>Application à la trigonométrie</h2></hgroup><article  id="application-à-la-trigonométrie">
 
 <p>On l’a vu dans la définition de l’exponentielle complexe mais il existe un lien fort entre les fonctions trigonométriques et l’exponentielle complexe. Ce lien est formalisé par les <strong>formules d’Euler</strong></p>
 
@@ -684,7 +690,7 @@ Soit \(z\) un nombre complexe. <br>
 <div class="proposition">
 <p>Soit \(\theta\) un nombre réel et \(n \in \mathbb{Z}\). On a \[(\cos(\theta) + i\sin(\theta))^n = (e^{i\theta})^n = \cos(n\theta) + i\sin(n\theta)\]</p></div>
 
-</article></slide><slide class=""><hgroup><h2>Application à la trigonométrie (II)</h2></hgroup><article  id="application-a-la-trigonometrie-ii">
+</article></slide><slide class=""><hgroup><h2>Application à la trigonométrie (II)</h2></hgroup><article  id="application-à-la-trigonométrie-ii">
 
 <p>Il est plus aisé de retrouver les formules d’additions à partir de la définition de l’exponentielle complexe que de les apprendre par coeur. En effet:</p>
 
@@ -699,7 +705,7 @@ Soit \(z\) un nombre complexe. <br>
 
 <p>Toutes les autres formules en découlent.</p>
 
-</article></slide><slide class=""><hgroup><h2>Linéarisation</h2></hgroup><article  id="linearisation">
+</article></slide><slide class=""><hgroup><h2>Linéarisation</h2></hgroup><article  id="linéarisation">
 
 <p>L’idée est d’exprimer \(\cos^n(x)\sin^p(x)\) pour \(x \in \mathbb{R}\) et \(n,p \in \mathbb{N}\) en fonction des \(\cos(kx)\) et des \(\sin(kx)\). Pour ce faire on utilise les formules d’Euler.</p>
 
@@ -707,7 +713,7 @@ Soit \(z\) un nombre complexe. <br>
 
 <p>Ensuite, on développe (en utilisant le binôme de Newton) et on utiliser les formules d’Euler dans l’autre sens pour simplifier.</p>
 
-</article></slide><slide class=""><hgroup><h2>Linéarisation: Exemple</h2></hgroup><article  id="linearisation-exemple">
+</article></slide><slide class=""><hgroup><h2>Linéarisation: Exemple</h2></hgroup><article  id="linéarisation-exemple">
 
 <p>On chercher à linéariser \(\cos^3(x)\)</p>
 
@@ -743,7 +749,7 @@ Soit \(z\) un nombre complexe. <br>
 \end{align}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>Linéarisation, transformation: exemples</h2></hgroup><article  id="linearisation-transformation-exemples">
+</article></slide><slide class=""><hgroup><h2>Linéarisation, transformation: exemples</h2></hgroup><article  id="linéarisation-transformation-exemples">
 
 <div class="exercice">
 <ul>
@@ -762,22 +768,22 @@ Exprimer \(\cos(5x)\) en fonction de \(\cos(x)\) (uniquement \(\cos(x)\))
 
 </ul></div>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Recherche d’une raciné carrée dans \(\mathbb{C}\)</h2></hgroup><article  id="recherche-dune-racine-carree-dans-mathbbc">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Recherche d’une raciné carrée dans \(\mathbb{C}\)</h2></hgroup><article  id="recherche-dune-raciné-carrée-dans-mathbbc">
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe</h2></hgroup><article  id="calcul-dune-racine-carree-complexe">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe">
 
 <p>Soit \(Z\) un nombre complexe, on cherche à calculer une racine carrée de \(Z\) c’est à dire <strong>un</strong> nombre complexe \(z\) tel que \(z^2 = Z\).</p>
 
 <p>Comme dans \(\mathbb{R}\), si \(z\) est solution, alors \(-z\) mais contrairement à \(\mathbb{R}\), on ne peut pas parler de <strong>la</strong> racine carrée puisque la condition \(z &gt; 0\) n’a <strong>pas de sens</strong> pour un complexe.</p>
 
-</article></slide><slide class=""><hgroup><h2>Racine carrée dans \(\mathbb{C}\)</h2></hgroup><article  id="racine-carree-dans-mathbbc">
+</article></slide><slide class=""><hgroup><h2>Racine carrée dans \(\mathbb{C}\)</h2></hgroup><article  id="racine-carrée-dans-mathbbc">
 
 <div class="proposition">
 <p>Soit \(Z\) un nombre complexe <alert>quelconque</alert>. L’équation d’inconnue complexe \(z\): \[z^2 = Z\] a <alert>toujours</alert> deux solutions (éventuellement confondues). <br> Si \(Z = \rho e^{i\theta}\) avec \(\rho \geq 0\), ces deux solutions sont: \[z_1 = \sqrt{\rho}e^{i\theta/2} \text{ et } z_2 = -z_1 = -\sqrt{\rho}e^{i\theta/2}\]</p></div>
 
 <p><br> Si \(Z\) est donné sous forme algébrique, il faut faire plus d’efforts…</p>
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carree-complexe-forme-algebrique">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe-forme-algébrique">
 
 <p>Si \(Z\) est donné sous forme algébrique \(Z = A + iB\) (avec \(A, B\) réels), on va chercher les racines carrés \(z\) sous forme algébrique \(z = a + ib\) en utilisant 2 propriétés:</p>
 
@@ -786,7 +792,7 @@ Exprimer \(\cos(5x)\) en fonction de \(\cos(x)\) (uniquement \(\cos(x)\))
 <li>\(|z|^2 = |Z|\)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carree-complexe-forme-algebrique-1">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe-forme-algébrique-1">
 
 <p>La première (\(z^2 = Z\)) donne: \[\begin{align} 
 z^2 = A + iB &amp; \Leftrightarrow (a^2-b^2) + 2iab = A + iB \\ 
@@ -796,7 +802,7 @@ z^2 = A + iB &amp; \Leftrightarrow (a^2-b^2) + 2iab = A + iB \\
 
 <p>La deuxième (\(|z|^2 = |Z|\)) donne \[a^2 + b^2 = \sqrt{A^2 + B^2}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carree-complexe-forme-algebrique-2">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: forme algébrique</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe-forme-algébrique-2">
 
 <p>On peut résoudre le premier système: \[
 \begin{align*}
@@ -807,27 +813,27 @@ z^2 = A + iB &amp; \Leftrightarrow (a^2-b^2) + 2iab = A + iB \\
 
 <p>On a donc \(4\) possibilités pour \((a, b)\). Le signe de \(B = 2ab\) permet de n’en conserver que deux des 4.</p>
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: Exemple</h2></hgroup><article  id="calcul-dune-racine-carree-complexe-exemple">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: Exemple</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe-exemple">
 
 <p>On essaie de calculer les racines carrés de \(5 - 12i\). Il n’y a pas de forme exponentielle intéressante pour ce complexe donc on passe par la forme algébrique. On cherche une racine carré \(z = a + ib\) sous forme algébrique. On a d’une part: \[ \begin{eqnarray*}
 z^2 = 5 - 12i &amp; \Leftrightarrow &amp;  (a^2 - b^2) + 2iab = 5 - 12i \\
 &amp; \Leftrightarrow &amp; \begin{cases} a^2 - b^2 &amp; = &amp; 5 \\ 2ab &amp; = &amp; -12 \end{cases}
 \end{eqnarray*}\] Et d’autre part \(|z|^2 = a^2 + b^2 = |5 - 12i| = \sqrt{25 + 144} = \sqrt{169} = 13\).</p>
 
-</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: Exemple</h2></hgroup><article  id="calcul-dune-racine-carree-complexe-exemple-1">
+</article></slide><slide class=""><hgroup><h2>Calcul d’une racine carrée complexe: Exemple</h2></hgroup><article  id="calcul-dune-racine-carrée-complexe-exemple-1">
 
 <p>On doit donc résoudre le système: \[\begin{cases} a^2 - b^2 &amp; = &amp; 5 \\ a^2 + b^2 &amp; = &amp; 13 \end{cases} \Leftrightarrow \begin{cases} a^2 &amp; = &amp; 9 \\ b^2 &amp; = &amp; 4 \end{cases}\]</p>
 
 <p>Qui donne \(a = \pm 3\) et \(b = \pm 2\). Comme \(ab = 6 &lt; 0\), les deux solutions sont: \[z_1 = 3-2i \text{ et } z_2 = -3 + 2i\].</p>
 
-</article></slide><slide class=""><hgroup><h2>Trinôme de degré 2 dans C</h2></hgroup><article  id="trinome-de-degre-2-dans-c">
+</article></slide><slide class=""><hgroup><h2>Trinôme de degré 2 dans C</h2></hgroup><article  id="trinôme-de-degré-2-dans-c">
 
 <div class="proposition">
 <p>Soit \((a, b, c) \in \mathbb{C}\) avec <alert>\(a \neq 0\)</alert>. On considère l’équation \((E)\): \[ az^2 + bz + c = 0\]. Cette équation est équivalente à l’équation suivante \[ \left(z + \frac{b}{2a} \right)^2 = \frac{\Delta}{4a^2}\] où \(\Delta = b^2 - 4ac\). <br> En notant \(\alpha\) une racine carrée de \(\Delta\) (qui existe toujours), les solutions de \((E)\) sont: \[ z_1 = \frac{-b + \alpha}{2a} \text{ et } z_1 = \frac{-b - \alpha}{2a}\]</p></div>
 
 <p><br> <strong>Remarque</strong> Contrairement aux équations de degré 2 dans \(\mathbb{R}\), les équations de degré \(2\) dans \(\mathbb{C}\) ont <strong>toujours</strong> deux solutions (potentiellement confondues).</p>
 
-</article></slide><slide class=""><hgroup><h2>Trinôme de degré 2 dans C: racines</h2></hgroup><article  id="trinome-de-degre-2-dans-c-racines">
+</article></slide><slide class=""><hgroup><h2>Trinôme de degré 2 dans C: racines</h2></hgroup><article  id="trinôme-de-degré-2-dans-c-racines">
 
 <div class="proposition">
 <p>Avec les notations précédentes, on a \(z_1 z_2 = c/a\) et \(z_1 + z_2 = - b/a\)</p></div>
