@@ -1,5 +1,8 @@
 - name: Oral Presentations (Invited Speaker)
   values:
+  - period: 2021
+    name: <a href="../docs/presentations/2120-EDMH.pdf">Méthodes Comparatives Phylogéniques</a>
+    at: <a href="https://www.universite-paris-saclay.fr/ecoles-doctorales/mathematiques-hadamard-edmh#edit-group-deroulement" target="_blank">Journée de rentrée de l'EDMH</a>, October 18th 2021, Bures-sur-Yvette, France
   - period: 2018
     name: A mathematical framework for multivariate count data
     role: 
