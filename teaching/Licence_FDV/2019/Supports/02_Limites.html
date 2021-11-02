@@ -40,6 +40,7 @@
     };
   </script>
 
+  <script src="libs/header-attrs-2.11/header-attrs.js"></script>
   <link href="libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
   <link href="libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
@@ -85,6 +86,13 @@ slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
   </style>
 
   <link rel="stylesheet" href="css/custom_licence_fdv.css" type="text/css" />
@@ -99,7 +107,7 @@ slide:not(.current) .plotly.html-widget{
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      
       <p data-config-presenter><!-- populated from slide_config.json --></p>
             <p style="margin-top: 6px; margin-left: -2px;">14 octobre 2019</p>
           </hgroup>
@@ -270,7 +278,7 @@ une fonction \(f\) est dite périodique de période \(T &gt; 0\) lorsque<br/>
 
 <p>On dit que \(f\) tend vers \(+\infty\) en \(+\infty\), noté \(\lim_{+\infty} f = +\infty\), si pour tout réel \(M\) (arbitrairement grand), \(f(x)\) est plus grand que \(M\) pour \(x\) assez grand (proche de \(\infty\)). \[\forall M \in \mathbb{R}, \exists A \in \mathbb{R} \text{ tel que } \forall x \in D_f, x \in ]A, +\infty[ \Rightarrow f(x) &gt; M\]</p>
 
-<p>On dit que \(f\) tend vers \(-\infty\) en \(+\infty\), noté \(\lim_{-\infty} f = +\infty\), si pour tout réel \(M\) (arbitrairement petit), \(f(x)\) est plus petit que \(M\) pour \(x\) assez grand (proche de \(\infty\)) \[\forall M \in \mathbb{R}, \exists A \in \mathbb{R} \text{ tel que } \forall x \in D_f, x \in ]A, +\infty[ \Rightarrow f(x) &lt; M\]</p>
+<p>On dit que \(f\) tend vers \(-\infty\) en \(+\infty\), noté \(\lim_{+\infty} f = -\infty\), si pour tout réel \(M\) (arbitrairement petit), \(f(x)\) est plus petit que \(M\) pour \(x\) assez grand (proche de \(\infty\)) \[\forall M \in \mathbb{R}, \exists A \in \mathbb{R} \text{ tel que } \forall x \in D_f, x \in ]A, +\infty[ \Rightarrow f(x) &lt; M\]</p>
 
 </article></slide><slide class=""><hgroup><h2>Limite finie à l’infini.</h2></hgroup><article  id="limite-finie-à-linfini." class="small">
 
@@ -450,9 +458,9 @@ Si \(f\) est définie en \(a\), \(f\) admet une limite en \(a\) si et seulement 
 <p>Dans le cas de fonctions de la forme \(u(x)^{v(x)}\) on repasse <strong>toujours</strong> à la forme exponentielle \(u(x)^{v(x)} = e^{v(x) \ln(u(x))}\) et on procède en deux temps:</p>
 
 <ul>
-<li>on étudie la limite de \(v(x) \ln(u(x))\)</li>
+<li><p>on étudie la limite de \(v(x) \ln(u(x))\)</p></li>
 <li><p>on en déduit la limite recherchée par composition avec l’exponentielle. <b>Attention</b> La forme \(1^{\infty}\) est <alert>indéterminée</alert></p></li>
-<li>\(\lim_0 \cos(x)^{1/x} = 1\)</li>
+<li><p>\(\lim_0 \cos(x)^{1/x} = 1\)</p></li>
 <li><p>\(\lim_{0+} (1 + \sin(x))^{1/x^2} = +\infty\)</p></li>
 </ul>
 
