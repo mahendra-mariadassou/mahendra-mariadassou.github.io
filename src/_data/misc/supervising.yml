@@ -1,5 +1,12 @@
 - name: PhD Students
   values:
+  - period: 2021 - 2020
+    supervisors: MM, M. Berland (MGP, INRAE), S. Fromentin (MGP, INRAE)
+    name: <a href="https://www.linkedin.com/in/stephanebereux/" target="_blank">Stéphane Béreux</a>
+    title: "Modéliser et prédire les modifications microbiennes associées à l’émergence de maladies."
+    univ: <a href = "https://www.universite-paris-saclay.fr/fr/formation/doctorat/ecole-doctorale-de-mathematiques-hadamard-edmh">EDMH</a>, Université Paris Saclay
+    thesis: ""
+  
   - period: 2018 - 2020
     supervisors: MM, C. Ambroise (LaMME, UEVE), J. Plassais (Enterome)
     name: <a href="https://abichat.github.io" target="_blank">Antoine Bichat</a>
