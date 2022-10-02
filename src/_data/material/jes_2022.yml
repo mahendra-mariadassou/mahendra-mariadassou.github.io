@@ -1,0 +1,11 @@
+- class: Transparents 
+  lectures:
+    - name: Cours 2 (chap. 3)
+      elements:
+      - nature: Simplexe, structure et coordonnées <i class= "fab fa-html5" ></i>
+        at: "01_simplexe_structure_transformations.html"
+        
+    - name: Cours 4 (chap. 5)
+      elements:
+      - nature: Traitement des zéros <i class="fab fa-html5"></i>
+        at: "02_traitement_des_zéros.html"

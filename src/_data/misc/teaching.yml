@@ -25,3 +25,10 @@
     name: Shandong University Statistical Summer School
     role: Introductory Statistics (16h) <br> <a href="sdu_ss_2022">Lecture slides</a>
     at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>
+    
+- name: JES 2022
+  values:
+  - period: Fall 2022
+    name: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Journées d'études en statistiques 2022</a>
+    role: Données de composition<br> <a href="jes_2022">Lecture slides</a>
+    at: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Villa Clithya (Fréjus, France)</a>    
