@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="01_simplexe_structure_transformations_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01_simplexe_structure_transformations_files/libs/quarto-html/tabby.min.js"></script>
+<script src="01_simplexe_structure_transformations_files/libs/quarto-html/popper.min.js"></script>
+<script src="01_simplexe_structure_transformations_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="01_simplexe_structure_transformations_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01_simplexe_structure_transformations_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="01_simplexe_structure_transformations_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.37">
+
+  <meta name="author" content="Mahendra Mariadassou INRAE - MaIAGE JES 2022">
+  <title>Simplexe, structure et transformations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="01_simplexe_structure_transformations_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="01_simplexe_structure_transformations_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="01_simplexe_structure_transformations_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="01_simplexe_structure_transformations_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Simplexe, structure et transformations</h1>
+  <p class="author">Mahendra Mariadassou<br>INRAE - MaIAGE<br>JES 2022</p>
+</section>
+
+<section class="slide level2">
+
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-1_4f853db5f348fc393f50ff802a04b3b8">
+
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-2_126b988e936ad0f486f52cf285b0daae">
+
+</div>
+</section>
+<section id="plan" class="slide level2">
+<h2>Plan</h2>
+<div>
+<ul>
+<li class="fragment">Premiers contacts avec le simplexe</li>
+<li class="fragment">Géométrie de Aitchison</li>
+<li class="fragment">Coordonnées log-ratio</li>
+<li class="fragment">Choix de la base</li>
+<li class="fragment">Applications linéaires</li>
+</ul>
+</div>
+<div class="hidden">
+<p><span class="math display">\[
+  \def\vect#1{{\mathbf{#1}}}
+  \def\CS{{\mathcal{S}}}
+  \def\CC{{\mathcal{C}}}
+  \def\RR{{\mathbb{R}}}
+  \def\xlr{{\text{xlr}}}
+  \def\alr{{\text{alr}}}
+  \def\clr{{\text{clr}}}
+  \def\ilr{{\text{ilr}}}
+\]</span></p>
+</div>
+</section>
+<section>
+<section id="premiers-contacts-avec-le-simplexe" class="title-slide slide level1 center">
+<h1>Premiers contacts avec le simplexe</h1>
+
+</section>
+<section id="définition-mathématique" class="slide level2 smaller">
+<h2>Définition mathématique</h2>
+<div id="def-simplexe" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Simplexe <span class="citation" data-cites="aitchison1982">(<a href="#/ref-aitchison1982" role="doc-biblioref" onclick="return false;">Aitchison 1982</a>)</span>) </strong></span>Le <strong>simplexe</strong> <span class="math inline">\(\mathcal{S}^D\)</span> est défini comme l’ensemble des vecteurs de <span class="math inline">\(\mathbb{R}^D\)</span> à coordonnées positives qui somment à <span class="math inline">\(1\)</span>:</p>
+<p><span class="math display">\[
+\CS^D = \left\{ \vect{x} = (x_1, \dots, x_D) \in \RR^D \text{ tels que } \sum_{j=1}^D x_j = 1 \text{ et } x_j &gt; 0 \text{ pour } j=1,\dots,D \right\}.
+\]</span></p>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="figures/S3.png" style="width:90.0%"></p>
+<p></p><figcaption>Simplexe <span class="math inline">\(\CS^3\)</span>, issu de <a href="https://fr.wikipedia.org/wiki/Simplexe">Wikipedia</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:15%;">
+
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<div class="callout callout-warning callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Le simplexe est parfois défini avec des inégalités <strong>larges</strong> (<span class="math inline">\(\geq\)</span>) plutôt que <strong>strictes</strong> (<span class="math inline">\(&gt;\)</span>).</li>
+<li>Par cohérence avec les opérations définies sur le simplexe, on utilise des <strong>inégalités strictes</strong></li>
+<li>En particulier, la <strong>bordure du simplexe</strong> (compositions avec une ou plusieurs composantes nulles) <strong>n’est pas</strong> inclus dans le simplexe.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="popriétés-du-simplexe" class="slide level2 smaller">
+<h2>Popriétés du simplexe</h2>
+<div id="prp-simplexe" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Propriétés du simplexe) </strong></span>On énonce quelques propriétés simples du simplexe</p>
+<ul>
+<li><p>Soit <span class="math inline">\(H\)</span> hyperplan affine d’équation <span class="math inline">\(\vect{1}^\intercal \vect{x} = 1\)</span> et <span class="math inline">\(C\)</span> l’orthant positif <span class="math inline">\((\RR_+^\star)^D\)</span>. Le simplexe est défini comme <span class="math inline">\(\CS^D = H \cap C\)</span>.</p></li>
+<li><p>Le simplexe <span class="math inline">\(\CS^D\)</span> est de dimension <span class="math inline">\(D-1\)</span></p></li>
+<li><p>Les points extrêmaux du simplexe (non-inclus dans ce dernier) sont les vecteurs <span class="math inline">\(e_1, \dots, e_D\)</span> formant la base canonique de <span class="math inline">\(\RR^D\)</span>, de coordonnées:</p></li>
+</ul>
+<span class="math display">\[\begin{align*}
+e_1 &amp; = (1, 0, 0, \dots, 0) \\
+e_2 &amp; = (0, 1, 0, \dots, 0) \\
+\vdots &amp; \\
+e_{D} &amp; = (0, 0, 0, \dots, 1)
+\end{align*}\]</span>
+</div>
+</section>
+<section id="opérateur-de-clôture" class="slide level2 smaller">
+<h2>Opérateur de clôture</h2>
+<p>L’opérateur de <strong>clôture</strong>, noté <span class="math inline">\(\CC\)</span>, permet de ramener une composition <strong>arbitraire</strong>, c’est à dire dont les coordonnées sont strictement positives mais dont la somme totale n’est pas forcément 1, dans le simplexe <span class="math inline">\(\CS^D\)</span></p>
+<div class="fragment">
+<div id="def-cloture" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Clôture) </strong></span>L’opérateur de clôture est défini par</p>
+<p><span class="math display">\[
+\CC: \vect{x} \in (\RR_+^\star)^D \mapsto \CC(\vect{x}) = \left[ \frac{x_1}{\sum_{j=1}^D x_j}, \dots, \frac{x_D}{\sum_{j=1}^D x_j} \right] \in \CS^D.
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<p>L’opérateur <span class="math inline">\(\CC\)</span> consiste à normaliser les composantes pour qu’ils somment à <span class="math inline">\(1\)</span> et justifie donc ne s’intéresser qu’aux compositions qui somment à <span class="math inline">\(1\)</span>.</p>
+</div>
+</section>
+<section id="opérations-dans-le-simplexe-i" class="slide level2 smaller">
+<h2>Opérations dans le simplexe (I)</h2>
+<p>La géométrie d’Aitchison permet de doter <span class="math inline">\(\CS^D\)</span> d’une structure d’espace vectoriel en remplaçant l’addition <span class="math inline">\(+\)</span> et la multiplication <span class="math inline">\(\times\)</span> par les opérateurs de <strong>perturbation</strong> <span class="math inline">\(\oplus\)</span> et de <strong>powering</strong> <span class="math inline">\(\odot\)</span>, définis comme suit:</p>
+<div id="def-opérations" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Opérations dans le simplexe) </strong></span>Soient <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D\)</span> et <span class="math inline">\(\alpha \in \RR\)</span>,</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><span class="math display">\[
+\begin{align*}
+\vect{x} \oplus \vect{y} &amp; = \left[ \frac{x_1 y_1}{\sum_{j=1}^D x_j y_j}, \dots, \frac{x_D y_D}{\sum_{j=1}^D x_j y_j} \right] \\
+&amp; = \CC(x_1 y_1, \dots, x_D y_D)
+\end{align*}
+\]</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span class="math display">\[
+\begin{align}
+\alpha \odot \vect{x} &amp; = \left[ \frac{x_1^\alpha}{\sum_{j=1}^D x_j^\alpha}, \dots, \frac{x_1^\alpha}{\sum_{j=1}^D x_j^\alpha} \right] \\
+&amp; = \CC(x_1^\alpha, \dots, x_D^\alpha)
+\end{align}
+\]</span></p>
+</div>
+</div>
+</div>
+<p>en utilisant la convention <span class="math inline">\(0^0 = 0\)</span>.</p>
+</div>
+</section>
+<section id="opérations-dans-le-simplexe-ii" class="slide level2 smaller">
+<h2>Opérations dans le simplexe (II)</h2>
+<p>Illustrons les opérateurs <span class="math inline">\(\oplus\)</span> et <span class="math inline">\(\odot\)</span> avec <span class="math inline">\(\vect{a} = (0.15, 0.35, 0.5)\)</span>, <span class="math inline">\(\vect{b} = (0.35, 0.15, 0.5)\)</span> et:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Perturbation</strong>:</p>
+<p><span class="math inline">\(\vect{c} = \vect{a} \oplus \vect{b}\)</span></p>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-3_f2e208c227ba411a381e320e51039529">
+
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-addition_bf40301985788afad89296db9ec68cae">
+<div class="cell-output-display">
+<div id="fig-addition" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-addition-1.png" width="672"></p>
+<p></p><figcaption>Figure 1: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Powering</strong>:</p>
+<p><span class="math inline">\(\vect{d} = 2 \odot \vect{a}\)</span>, <span class="math inline">\(\vect{e} = 0.5 \odot \vect{a}\)</span> et <span class="math inline">\(\vect{f} = -2 \odot \vect{a}\)</span></p>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-multiplication_9db0a62b2a7364db84d68cae7c8e7445">
+<div class="cell-output-display">
+<div id="fig-multiplication" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-multiplication-1.png" width="672"></p>
+<p></p><figcaption>Figure 2: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="espace-vectoriel" class="slide level2 smaller">
+<h2>Espace vectoriel</h2>
+<div id="prp-simplexe-ev" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Structure d’espace vectoriel) </strong></span><span class="math inline">\((\CS^D, \oplus, \odot)\)</span> est un <span class="math inline">\(\RR\)</span>-espace vectoriel:</p>
+<ul>
+<li>l’élément neutre pour <span class="math inline">\(\oplus\)</span> est la composition <span class="math inline">\(\vect{1}_D / D = (1/D, \dots, 1/D)\)</span>.</li>
+<li>l’élément neutre pour <span class="math inline">\(\odot\)</span> est le réel <span class="math inline">\(1\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<div id="def-soustraction" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Soustraction) </strong></span>On peut définir la <strong>soustraction</strong> <span class="math inline">\(\ominus\)</span> dans le simplexe.</p>
+<p><span class="math display">\[
+\vect{x} \ominus \vect{y} = \vect{x} \oplus (-1 \odot \vect{y}) = \CC\left( \frac{x_1}{y_1}, \dots, \frac{x_D}{y_D}\right)
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>La restriction de <span class="math inline">\(\CS^D\)</span> aux compositions à composantes non-nulles permet de bien définir <span class="math inline">\(\ominus\)</span> sur le simplexe.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="espace-euclidien" class="slide level2 smaller">
+<h2>Espace euclidien</h2>
+<p><span class="math inline">\(\CS^D\)</span> peut être doté d’un produit scalaire pour le transformer en espace euclidien.</p>
+<div class="fragment" data-fragment-index="1">
+<div id="def-prod-scalaire-ait" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (Produit scalaire) </strong></span>Soient <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D\)</span>, le <strong>produit scalaire de Aitchison</strong> entre <span class="math inline">\(\vect{x}\)</span> et <span class="math inline">\(\vect{y}\)</span>, noté <span class="math inline">\(\langle \vect{x}, \vect{y} \rangle_A\)</span> est défini par</p>
+<p><span class="math display">\[
+&lt;\vect{x}, \vect{y}&gt;_A = \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \log \frac{x_j}{x_{j'}} \log \frac{y_j}{y_{j'}}.
+\]</span></p>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div id="prp-prod-scalaire-ait" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Norme d’Aitchison) </strong></span>Le produit scalaire <span class="math inline">\(&lt;., .&gt;_A\)</span> induit la <span class="fragment highlight-red" data-fragment-index="3"><strong>norme de Aitchison</strong></span> <span class="math inline">\(\parallel . \parallel_A\)</span> et la <span class="fragment highlight-red" data-fragment-index="4"><strong>distance de Aitchison</strong></span> <span class="math inline">\(d_A(., .)\)</span> définies sur <span class="math inline">\(\CS^D\)</span> par:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="fragment" data-fragment-index="3">
+<p><span class="math display">\[
+\begin{align}
+\parallel \vect{x} \parallel_A &amp; = \sqrt{&lt;\vect{x}, \vect{x}&gt;_A} \\
+&amp; = \left(\frac{1}{2D} \sum_{j = 1}^D \sum_{j' = 1}^D \left( \log \frac{x_j}{x_{j'}}\right)^2\right)^{1/2}
+\end{align}
+\]</span></p>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="fragment" data-fragment-index="4">
+<p><span class="math display">\[
+\begin{align}
+d_A(\vect{x}, \vect{y}) &amp; = \parallel \vect{x} \ominus \vect{y} \parallel_A \\
+&amp; = \left(\frac{1}{2D} \sum_{j = 1}^D \sum_{j' = 1}^D \left( \log \frac{x_j}{x_{j'}} - \log \frac{y_j}{y_{j'}}\right)^2\right)^{1/2}.
+\end{align}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="espace-euclidien-ii" class="slide level2 smaller">
+<h2>Espace euclidien (II)</h2>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>On vérifie aisément que <span class="math inline">\(&lt;., .&gt;_A\)</span> est symétrique. L’égalité suivante montre qu’elle est bilinéaire.</p>
+<p><span class="math display">\[
+\begin{align}
+&lt;\vect{x} \oplus \alpha \odot \vect{z}, \vect{y}&gt;_A &amp; = \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \log \frac{x_j z_j^\alpha}{x_{j'} z_{j'}^\alpha} \log \frac{y_j}{y_{j'}} \\
+&amp;= \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \log \left( \frac{x_j}{x_{j'}} + \alpha \frac{z_j}{z_{j'}}\right)  \log \frac{y_j}{y_{j'}} \\
+&amp; = &lt;\vect{x}, \vect{y}&gt;_A + \alpha &lt;\vect{z}, \vect{y}&gt;_A.
+\end{align}
+\]</span></p>
+<p>Et celle-ci qu’elle est définie positive</p>
+<p><span class="math display">\[
+&lt;\vect{x}, \vect{x}&gt;_A = 0 \Leftrightarrow \sum_{1 \leq j, j' \leq D} \left( \log \frac{x_j}{x_{j'}}\right)^2 = 0
+\Leftrightarrow \forall 1 \leq j, j' \leq D, \, x_j = x_{j'}
+\Rightarrow \vect{x} = \vect{1}_D / D
+\]</span></p>
+</div>
+</section></section>
+<section>
+<section id="géométrie-du-simplexe" class="title-slide slide level1 center">
+<h1>Géométrie du simplexe</h1>
+
+</section>
+<section id="géométrie-dans-le-simplexe" class="slide level2 smaller">
+<h2>Géométrie dans le simplexe</h2>
+<p><span class="math inline">\((\CS^D, &lt;., .&gt;_A)\)</span> est un espace euclidien de dimension <span class="math inline">\(D-1\)</span>. Il dispose donc de sa propre géométrie que nous allons brièvement décrire et illustrer dans <span class="math inline">\(\CS^3\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div id="def-boule" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (Boule) </strong></span>La boule <span class="math inline">\(\mathcal{B}_R(\vect{c})\)</span> de rayon <span class="math inline">\(R\)</span> et de centre <span class="math inline">\(\vect{c}\)</span> est définie par:</p>
+<p><span class="math display">\[
+\mathcal{B}_R(\vect{c}) = \{ \vect{x} \in \CS^D \text{ t.q.} \parallel \vect{x} \ominus \vect{y} \parallel_A \leq R\}
+\]</span></p>
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-circle_fc2bf752ab53de81d636a749388236f7">
+<div class="cell-output-display">
+<div id="fig-circle" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-circle-1.png" width="480"></p>
+<p></p><figcaption>Figure 3: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div id="def-droite" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (Droite) </strong></span>La droite <span class="math inline">\(D_{\vect{a}, \vec{\vect{u}}}\)</span> passant par <span class="math inline">\(\vect{a} \in \CS^D\)</span> de direction <span class="math inline">\(\vect{u}\)</span> est définie par</p>
+<p><span class="math display">\[
+D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x} = \vect{a} \oplus \alpha \odot \vect{u}, \alpha \in \RR \right\}
+\]</span></p>
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-line_c42aa30b2f8aec81cb2bc718a5f88c97">
+<div class="cell-output-display">
+<div id="fig-line" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-line-1.png" width="480"></p>
+<p></p><figcaption>Figure 4: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="droites-dans-le-simplexe" class="slide level2 smaller">
+<h2>Droites dans le simplexe</h2>
+<p>On peut également définir des droites <span class="fragment highlight-red" data-fragment-index="2">parallèles</span> et <span class="fragment highlight-red" data-fragment-index="3">orthogonales</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="2">
+<div id="def-parallele" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8 (Parallélisme) </strong></span></p>
+<p>Deux droites <span class="math inline">\(D_{\vect{a}, \vec{\vect{u}}}\)</span> et <span class="math inline">\(D_{\vect{b}, \vec{\vect{v}}}\)</span> sont parallèles ssi les compositions <span class="math inline">\(\vect{u}\)</span> et <span class="math inline">\(\vect{v}\)</span> sont colinéaires <span class="math inline">\(\Leftrightarrow \exists \alpha \in \RR, \vect{v} = \alpha \odot \vect{u}\)</span></p>
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-par-lines_cab415b0e8fa069f9d98bf7a44697c89">
+<div class="cell-output-display">
+<div id="fig-par-lines" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-par-lines-1.png" width="480"></p>
+<p></p><figcaption>Figure 5: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="3">
+<div id="def-orthogonale" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 9 (Orthogonalité) </strong></span></p>
+<p>Deux droites <span class="math inline">\(D_{\vect{a}, \vec{\vect{u}}}\)</span> et <span class="math inline">\(D_{\vect{b}, \vec{\vect{v}}}\)</span> sont orthogonales si les compositions <span class="math inline">\(\vect{u}\)</span> et <span class="math inline">\(\vect{v}\)</span> sont orthogonales, c’est à dire si <span class="math inline">\(&lt;\vect{u}, \vect{v}&gt;_A = 0\)</span>.</p>
+</div>
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-perp-line_143cfeecd3a81598677a9f35bab59f68">
+<div class="cell-output-display">
+<div id="fig-perp-line" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-perp-line-1.png" width="480"></p>
+<p></p><figcaption>Figure 6: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="autres-formes" class="slide level2 smaller">
+<h2>Autres formes</h2>
+<p>On peut également définir d’autres formes comme des <strong>carrés</strong> ou des <strong>triangles</strong>.</p>
+<div class="cell quarto-layout-panel" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-square-and-triangle_e75b799d1c706bab13013fa4d84cc7ae">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-square-and-triangle-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-square-and-triangle-1.png" width="480"></p>
+<p></p><figcaption>Figure 7: Carrés</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-square-and-triangle-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/fig-square-and-triangle-2.png" width="480"></p>
+<p></p><figcaption>Figure 8: Triangles équilatéraux</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>On reviendra plus tard sur la façon de définir ces objets.</p>
+</div>
+</section></section>
+<section>
+<section id="coordonnées-log-ratio" class="title-slide slide level1 center">
+<h1>Coordonnées log-ratio</h1>
+
+</section>
+<section id="la-philosophie-de-la-transformation" class="slide level2 smaller">
+<h2>La philosophie de la transformation</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="fragment">
+<p><strong>Géométrie du simplexe</strong></p>
+<ul>
+<li>Géométrie contre-intuitive</li>
+<li>Information pertinente: <strong>ratios des composants</strong></li>
+<li>Transformation <span class="math inline">\(\log\)</span> pour <strong>symétriser</strong> les ratios</li>
+<li>Transformations log-ratio (xlr): <span class="math inline">\(\CS^D \leftrightarrow \RR^D\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Philosophie de la transformation</strong></p>
+<ul>
+<li>Transformer les compositions en vecteurs de <span class="math inline">\(\RR^D\)</span></li>
+<li>Appliquer les opérations usuelles dans <span class="math inline">\(\RR^D\)</span></li>
+<li>Transformer le résultat dans <span class="math inline">\(\CS^D\)</span></li>
+</ul>
+</div>
+</div><div class="column" style="width:35%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/mermaid-figure-1.png" style="width:2.84in;height:5.45in"></p>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Aussi utilisé pour définir des formes (carrés, triangles, cercles, etc) dans <span class="math inline">\(\CS^D\)</span></p>
+</div>
+</section>
+<section id="la-philosophie-de-la-transformation-1" class="slide level2">
+<h2>La philosophie de la transformation</h2>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Pour être <strong>utile</strong>, les transformations xlr doivent idéalement la structure de <span class="math inline">\(\CS^D\)</span>:</p>
+<div class="fragment" data-fragment-index="2">
+<p><strong>Espace vectoriel</strong></p>
+<ul>
+<li><span class="math inline">\(\xlr(\vect{x} \oplus \vect{y}) = \xlr(\vect{x}) + \xlr(\vect{y})\)</span></li>
+<li><span class="math inline">\(\xlr(\alpha \odot \vect{x}) = \alpha \xlr(\vect{x})\)</span></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p><strong>Espace euclidien</strong></p>
+<ul>
+<li><span class="math inline">\(\langle \vect{x}, \vect{y} \rangle_A = \xlr(\vect{x})^T \xlr(\vect{y})\)</span></li>
+<li><span class="math inline">\(\parallel \vect{x} \parallel_A = \parallel \xlr(\vect{x}) \parallel\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>On cherche un <span class="fragment highlight-red" data-fragment-index="3"><strong>(iso)morphisme</strong></span> <span class="fragment fade-in" data-fragment-index="5"><strong>isométrique</strong></span> de <span class="math inline">\(\CS^D\)</span> dans <span class="math inline">\(\RR^D\)</span></p>
+</div>
+</section>
+<section id="coordonnées-alr" class="slide level2 smaller">
+<h2>Coordonnées alr</h2>
+<div id="def-alr" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 10 </strong></span>La transformation alr (pour <em>additive log ratio</em>) avec composante de référence <span class="math inline">\(j\)</span> est définie par:</p>
+<p><span class="math display">\[
+\text{alr}_j(\vect{x}) = \left[ \log \frac{x_1}{x_j}, \dots, \log  \frac{x_{j-1}}{x_j}, \log \frac{x_{j+1}}{x_j}, \dots, \log \frac{x_D}{x_j} \right]
+\]</span></p>
+</div>
+<div class="fragment">
+<div id="prp-alr" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 </strong></span><span class="math inline">\(\alr_j\)</span> est un <strong>isomorphisme</strong> de <span class="math inline">\((\CS^{D}, \oplus, \odot)\)</span> dans <span class="math inline">\((\RR^{D-1}, +, \times)\)</span>. En particulier, pour tout <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D, \alpha \in \RR\)</span></p>
+<p><span class="math display">\[
+\alr(\vect{x} \oplus \vect{y}) = \text{alr}_j(\vect{x}) + \text{alr}_j(\vect{y}) \quad \text{et} \quad \alr(\alpha \odot \vect{x}) = \alpha \text{alr}_j(\vect{x})
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div id="prp-alr-inverse" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 </strong></span>La transformation <span class="math inline">\(\text{alr}_j^{-1}\)</span> est définie par:</p>
+<p><span class="math display">\[
+\begin{align*}
+  \vect{x} \in \RR^{D-1} \mapsto \text{alr}_j^{-1}(\vect{x}) &amp; = \CC(e^{x_1}, \dots, e^{x_{j-1}}, 1, e^{x_{j+1}}, \dots, e^{x_D}) \\
+  &amp; = \left[ \frac{e^{x_1}}{1 + \sum_{j' \neq j} e^{x_{j'}}}, \dots, \frac{e^{x_D}}{1 + \sum_{j' \neq j} e^{x_{j'}}} \right]\in \CS^D
+\end{align*}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="coordonnées-alr-illustrations" class="slide level2 smaller">
+<h2>Coordonnées alr: illustrations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Le choix de la composante de référence <span class="math inline">\(j\)</span> est arbitraire. Pour <span class="math inline">\(\vect{x} = c(0.5, 0.3, 0.2)\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\alr_1(\vect{x}) &amp; = (-0.511, 0.916) \\
+\alr_2(\vect{x}) &amp; = (0.511, -0.405) \\
+\alr_3(\vect{x}) &amp; = (0.916, 0.405)
+\end{align}
+\]</span></p>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(\alr\)</span> n’est pas une isométrie</li>
+</ul>
+<p><span class="math display">\[
+\| \alr_1(\vect{x}) \| &gt; \| \alr_3(\vect{x}) \| &gt; \| \alr_2(\vect{x}) \| &gt; \| \vect{x} \|_A
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>les droites ressemblent à des droites mais ni les cercles, ni les angles ne sont conservés.</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell" data-layout-align="center" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-12_b65c740fa83ac2338317f13ab3bd4221">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-12-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-13_411909354ef99d362fe82ec6f3512d90">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-13-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="coordonnées-clr" class="slide level2 smaller">
+<h2>Coordonnées clr</h2>
+<div id="def-clr" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 11 </strong></span>La transformation clr (pour <em>centered log ratio</em>) est définie par:</p>
+<p><span class="math display">\[
+\text{clr}(\vect{x}) = \left[ \log \frac{x_1}{\bar{g}(\vect{x})}, \dots, \log \frac{x_D}{\bar{g}(\vect{x})} \right] \quad \text{avec} \quad \bar{g}(\vect{x}) = \sqrt[n]{x_1 \dots x_D}
+\]</span></p>
+</div>
+<div class="fragment">
+<div id="prp-clr" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 6 </strong></span><span class="math inline">\(\clr\)</span> est un <strong>morphisme isométrique</strong>. Pour tout <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D, \alpha \in \RR\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+\clr(\vect{x} \oplus \vect{y}) = \text{clr}_j(\vect{x}) + \text{clr}_j(\vect{y}) &amp; \quad \text{et} \quad \clr(\alpha \odot \vect{x}) = \alpha \text{clr}_j(\vect{x}) \\
+\langle \vect{x}, \vect{y} \rangle_A = \clr(\vect{x})^T \clr(\vect{y}) &amp; \quad \text{et} \quad \| \vect{x} \|_A = \| \clr(\vect{x}) \|
+\end{align}
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div id="prp-clr-inverse" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 7 </strong></span>La transformation <span class="math inline">\(\text{clr}^{-1}\)</span>, aussi appelé <em>softmax</em>, est définie par:</p>
+<p><span class="math display">\[
+\begin{align*}
+  \vect{x} \in \RR^D \mapsto \text{clr}^{-1}(\vect{x}) = \CC(e^{x_1}, \dots, e^{x_D}) = \left[ \frac{e^{x_1}}{\sum_{j=1}^D e^{x_j}}, \dots, \frac{e^{x_D}}{\sum_{j=1}^D e^{x_j}} \right]\in \CS^D
+\end{align*}
+\]</span></p>
+<p>Elle est invariante par translation par un multiple de <span class="math inline">\(\vect{1}_D\)</span></p>
+</div>
+</div>
+</section>
+<section id="coordonnées-clr-remarques" class="slide level2 smaller">
+<h2>Coordonnées clr: remarques</h2>
+<div>
+<ul>
+<li class="fragment">La transformation <span class="math inline">\(\clr\)</span> n’a pas de composante de référence, c’est la moyenne géométrique <span class="math inline">\(g(\vect{x})\)</span> qui joue ce rôle.</li>
+<li class="fragment">Le vecteur <span class="math inline">\(\clr(\vect{x})\)</span> a <strong><span class="math inline">\(D\)</span></strong> composantes et pas <span class="math inline">\(D-1\)</span></li>
+<li class="fragment">La transformation <span class="math inline">\(\clr\)</span> n’est <strong>pas surjective</strong>: toutes les valeurs de <span class="math inline">\(\RR^D\)</span> ne sont pas atteintes.</li>
+<li class="fragment">Plus précisément, tous les vecteurs <span class="math inline">\(\clr(\vect{x})\)</span> sont <em>centrés</em> (<span class="math inline">\(\clr(\vect{x})^T \vect{1}_D = 0\)</span>) et <span class="math inline">\(\clr\)</span> est bijective entre <span class="math inline">\(\CS^D\)</span> et <span class="math inline">\(H = \{ \vect{x} \in \RR^D: \vect{x}^T \vect{1}_D = 0\}\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p>La contrainte linéaire <span class="math inline">\(\clr(\vect{x})^T \vect{1}_D = 0\)</span> est désagréable et reflète le fait que <span class="math inline">\(H\)</span> est de dimension <span class="math inline">\(D-1\)</span>, on peut s’en débarrasser en utilisant une base orthonormale <span class="math inline">\(\vect{V}\)</span> de <span class="math inline">\(H\)</span> et en exprimant <span class="math inline">\(\clr(\vect{x})\)</span> dans cette base.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>C’est le principe des transformations <span class="math inline">\(\ilr\)</span> <span class="citation" data-cites="egozcue2003isometric">(<a href="#/ref-egozcue2003isometric" role="doc-biblioref" onclick="return false;">Egozcue et al. 2003</a>)</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="coordonnées-ilr" class="slide level2 smaller">
+<h2>Coordonnées ilr</h2>
+<p>Soit <span class="math inline">\(\mathcal{V} = (\vect{v}_1, \dots, \vect{v}_{D-1})\)</span> une base orthonornormée de <span class="math inline">\(H\)</span> et <span class="math inline">\(\vect{V} = \left[ \vect{v}_1, \dots, \vect{v}_{D_1} \right]\)</span> la matrice correspondante.</p>
+<div id="def-ilr" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 12 </strong></span>La transformation ilr de base <span class="math inline">\(\vect{V}\)</span> est définie par:</p>
+<p><span class="math display">\[
+\begin{align*}
+\vect{x} \in \CS^D \mapsto \text{ilr}_\vect{V}(\vect{x}) &amp;= \left(&lt;\text{clr}(\vect{x}),\vect{v_1}&gt;, \dots, &lt;\text{clr}(\vect{x}),\vect{v_{D-1}}&gt; \right) \\
+&amp; = \vect{V}^T \text{clr}(\vect{x})
+\end{align*}
+\]</span></p>
+</div>
+<div class="fragment">
+<div id="prp-ilr" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 8 </strong></span></p>
+<p><span class="math inline">\(\ilr_V\)</span> est un <strong>isomorphisme isométrique</strong> de <span class="math inline">\(\CS^D\)</span> dans <span class="math inline">\(\RR^{D-1}\)</span> et vérifie les même propriétés que la transformation <span class="math inline">\(\clr\)</span> (cf <a href="#/prp-clr">Proposition&nbsp;6</a>)</p>
+</div>
+</div>
+<div class="fragment">
+<div id="prp-ilr-inverse" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 9 </strong></span>La transformation <span class="math inline">\(\text{ilr}^{-1}\)</span> est définie par:</p>
+<p><span class="math display">\[
+  \vect{x} \in \RR^{D-1} \mapsto \text{ilr}_{\vect{V}}^{-1}(\vect{x}) = \CC(\exp(\vect{V}\vect{x})) \in \CS^D
+\]</span></p>
+<p>où la fonction exponentielle est appliquée terme à terme à <span class="math inline">\(\vect{x}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="coordonnées-ilr-illustrations" class="slide level2 smaller">
+<h2>Coordonnées ilr: illustrations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(\vect{V}\)</span> est une <strong>matrice de contraste:</strong> <span class="fragment fade-in">chaque vecteur <span class="math inline">\(\vect{v}_j\)</span> vérifie <span class="math inline">\(v_{j1} + \dots + v_{jD} = 0\)</span>. Le produit scalaire <span class="math inline">\(\vect{v}_j^T \text{clr}(\vect{x})\)</span> définit donc un contraste sur les composantes de <span class="math inline">\(\log \vect{x}\)</span>.</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>On peut compléter <span class="math inline">\(\vect{V}\)</span> pour avoir une matrice orthogonale dans <span class="math inline">\(\RR^D\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{align}
+\vect{V}^\star &amp; = [\vect{V}\quad  \vect{1}_D/\sqrt{D}] \in \mathbb{O}_D \\
+\vect{V}^T\vect{V} &amp; = \vect{I}_{D-1} \\
+\vect{V}\vect{V}^T &amp; = \underbrace{\vect{I}_D - \vect{1}_D\vect{1}_D^T / D}_{= \vect{G}_D}
+\end{align}
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(\ilr_V\)</span> préserve les droites, les angles et les distances.</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell" data-layout-align="center" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-14_d92d46d2ed1b42bf56846abdc23f7107">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-14-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-15_801d74dba329eceacfd00653b3205c7b">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-15-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="coordonnées-ilr-remarques" class="slide level2">
+<h2>Coordonnées ilr: remarques</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Les coordonnées <span class="math inline">\(\ilr\)</span> sont moins interprétables que les coordonnées <span class="math inline">\(\clr\)</span> et <span class="math inline">\(\alr\)</span></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Les coordonnées <span class="math inline">\(\ilr\)</span> dépendent de <span class="math inline">\(\vect{V}\)</span> et il faut donc choisir une <strong>base pertinente</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell quarto-layout-panel" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-16_5bd7e55855a1714f45131cecaefa781f">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-16-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-16-2.png" width="288"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-16-3.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="liens-entre-les-systèmes" class="slide level2 smaller">
+<h2>Liens entre les systèmes</h2>
+<div>
+<ul>
+<li class="fragment">Toutes les transformations log-ratio sont construites à partir des <span class="fragment fade-in">log-composantes</span></li>
+<li class="fragment">On peut donc toujours écrire <span class="math inline">\(\xlr(\vect{x}) = \vect{A} \log(\vect{x})\)</span> pour une matrice <span class="math inline">\(\vect{A}\)</span> bien choisie</li>
+</ul>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="fragment">
+<p>Pour <span class="math inline">\(\alr_D\)</span>,</p>
+<p><span class="math display">\[
+\vect{A} = \vect{F}_D = [\vect{I}_{D-1} \; -\vect{1}_{D-1}^T]
+\]</span></p>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<p>Pour <span class="math inline">\(\clr\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+\vect{A} &amp; = \vect{G}_D \\
+         &amp; = \vect{I}_D - \vect{1}_{D\times D}/D \\
+         &amp; = \vect{I}_D - \vect{1}_{D}\vect{1}_{D}^T/D
+\end{align}
+\]</span></p>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<p>Pour <span class="math inline">\(\ilr_V\)</span>,</p>
+<p><span class="math display">\[
+\vect{A} = \vect{V}^T \vect{G}_D = \vect{V}^T
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>On sait que <span class="math inline">\(\ilr_V(\vect{x}) = \vect{V}^T \clr(\vect{x})\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\vect{G}_D\)</span> est la matrice de projection orthogonale sur <span class="math inline">\(H = \vect{1}_D^\perp\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Peut-on exprimer simplement n’importe quel <span class="math inline">\(\xlr(\vect{x})\)</span> en fonction des autres ?</p>
+</div>
+</section>
+<section id="liens-entre-les-systèmes-ii" class="slide level2 smaller">
+<h2>Liens entre les systèmes (II)</h2>
+<div id="prp-liens-xlr" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 10 </strong></span>Soit <span class="math inline">\(\vect{x} \in \CS^D\)</span> une composition et <span class="math inline">\(\log\vect{x}\)</span> le vecteur des log-composantes. Les transformations alr<span class="math inline">\(_D\)</span>, clr et ilr<span class="math inline">\(_\vect{V}\)</span> peuvent se réécrire comme suit:</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{alr}_D(\vect{x}) &amp; = \mathbf{F}_D \log\vect{x} \\
+\text{clr}(\vect{x}) &amp; = \vect{G}_D \log\vect{x} = \log \vect{x} - \log \bar{g}(\vect{x}) \vect{1}_D \\
+\text{ilr}_{\vect{V}}(\vect{x}) &amp; = \vect{V}^T \vect{G}_D \log\vect{x}  =  \vect{V}^T \log \vect{x} \\
+\end{align*}
+\]</span></p>
+<div class="fragment">
+<p>Ils peuvent également s’exprimer les uns en fonctions des autres comme suit:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{alr}_D(\vect{x}) &amp; =  \vect{F}_D \text{clr}(\vect{x}) &amp;
+\text{ilr}_\vect{V}(\vect{x}) &amp; = \vect{V}^T \text{clr}(\vect{x}) &amp;
+\text{alr}_D(\vect{x}) &amp; =  \vect{F}_D \vect{V} \ilr_V(\vect{x})
+\\
+\text{clr}(\vect{x}) &amp; =  \vect{K}_D \alr_D(\vect{x}) &amp;
+\text{clr}(\vect{x}) &amp; = \vect{V} \text{ilr}_\vect{V}(\vect{x}) &amp;
+\ilr_V(\vect{x}) &amp; =  \vect{V}^T \vect{K}_D \alr_D(\vect{x})
+\end{align}
+\]</span></p>
+<p>où <span class="math inline">\(\mathbf{K}_D=\begin{bmatrix} \mathbf{I}_{D-1} - \mathbf{1}_{D-1}\mathbf{1}_{D-1}^T/D\\ -\mathbf{1}_{D-1}^T/D \end{bmatrix}\)</span></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="bases" class="title-slide slide level1 center">
+<h1>Bases</h1>
+
+</section>
+<section id="base-ilr" class="slide level2">
+<h2>Base ilr</h2>
+<p>Il est nécessaire de choisir une <strong>base orthonormée</strong> de <span class="math inline">\(H\)</span>. Nous considérons ici deux stratégies:</p>
+<div>
+<ul>
+<li class="fragment">le pivot, obtenu en appliquant l’orthogonalisation de Gram-Schmidt à la base canonique <span class="citation" data-cites="filzmoser2018applied">(<a href="#/ref-filzmoser2018applied" role="doc-biblioref" onclick="return false;">Filzmoser, Hron, and Templ 2018</a>)</span></li>
+<li class="fragment">les partitions binaires, si on dispose d’un arbre binaire sur les composantes <span class="citation" data-cites="egozcue2005groups">(<a href="#/ref-egozcue2005groups" role="doc-biblioref" onclick="return false;">Egozcue and Pawlowsky-Glahn 2005</a>)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>La base pivot, qui donne les <strong>pivot log-ratio</strong>, est souvent la base utilisée par défaut en l’absence d’information sur les composantes.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="base-ilr-ii" class="slide level2 smaller">
+<h2>Base ilr (II)</h2>
+<p>De façon générale, les transformations ilr sont <strong>simples</strong> si chaque vecteur <span class="math inline">\(\vect{v}\)</span> est associé à une partition en 3 parties, <span class="math inline">\(\{1, \dots, D\} = J_{-} \sqcup J_{0} \sqcup J_{+}\)</span>, et peut se réécrire:</p>
+<p><span class="math display">\[
+v_j = \begin{cases}
+        \frac{-\alpha}{|J_{-}|} &amp; \text{si } j \in J_{-} \\
+         0           &amp; \text{si } j \in J_{0} \\
+         \frac{\alpha}{|J_{+}|} &amp; \text{si } j \in J_{+}
+       \end{cases}
+\quad \text{avec} \quad \alpha = \sqrt{\frac{|J_+||J_-|}{|J_+|+|J_-|}}
+\]</span></p>
+<div class="fragment">
+<p>La coordonnée ilr correspondante est simplement (à <span class="math inline">\(\alpha\)</span> près) le log-ratio entre les moyennes géométriques des éléments de <span class="math inline">\(J_+\)</span> et de ceux de <span class="math inline">\(J_-\)</span>:</p>
+<p><span class="math display">\[
+\begin{eqnarray}
+&lt;\text{clr}(\vect{x}), \vect{v}&gt; &amp;=&amp; \alpha \log \frac{\left( \prod_{j \in J_+}x_j\right)^{\frac{1}{|J_+|}}}{\left( \prod_{j \in J_-}x_j\right)^{\frac{1}{|J_-|}}}\\
+&amp;=&amp; \sqrt{\frac{|J_+||J_-|}{|J_+|+|J_-|}} \left( \frac{1}{|J_+|} \sum_{j \in J_+} \log x_j - \frac{1}{|J_-|} \sum_{j \in J_-} \log x_j \right)
+\end{eqnarray}
+\]</span></p>
+</div>
+</section>
+<section id="base-pivot-pivot-log-ratio" class="slide level2 smaller">
+<h2>Base pivot: <em>Pivot log-ratio</em></h2>
+<div id="prp-base-pivot" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 11 (base et coordonnées pivot) </strong></span>La base pivot <span class="math inline">\(\vect{V} = [\vect{v}_1\, \dots\, \vect{v}_{D-1}]\)</span> est définie par les vecteurs unitaires:</p>
+<p><span class="math display">\[
+\begin{align*}
+\vect{v}_1 &amp; =  \sqrt{\frac{D-1}{D}} \left(1, -\frac{1}{D-1}, \dots, -\frac{1}{D-1}\right) \\
+\vect{v}_j &amp; =  \sqrt{\frac{D-j}{D -j+1}}\bigg(\underbrace{0, \dots, 0 }_{j-1}, 1, \underbrace{-\frac{1}{D-j}, \dots, -\frac{1}{D-j}}_{D-j} \bigg)\\
+\vect{v}_{D-1} &amp; = \frac{1}{\sqrt{2}}(0, \dots, 0, -1, 1)
+\end{align*}
+\]</span></p>
+<p>correspondant aux couples <span class="math inline">\((J_+, J_-) = (\{j\}, \{j+1, \dots, D\})\)</span>.</p>
+<div class="fragment">
+<p>Les coordonnées PLR se comprennent (à un facteur multiplicatif près) comme la moyenne des log-ratio <span class="math inline">\(\log \frac{x_j}{x_{j+1}}, \dots, \log \frac{x_j}{x_D}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="balances" class="slide level2 smaller">
+<h2>Balances</h2>
+<ul>
+<li>Utile lorsque les composantes sont organisées dans un <strong>arbre binaire</strong>.</li>
+</ul>
+<div class="fragment">
+<div id="prp-balance-lr" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 12 (Balance) </strong></span>Soit <span class="math inline">\(\mathcal{T}\)</span> un arbre binaire sur <span class="math inline">\({1, \dots, D}\)</span>. Chacun des <span class="math inline">\(D-1\)</span> noeuds internes <span class="math inline">\(n_1, \dots, n_{D-1}\)</span> définit deux sous ensembles de composantes <span class="math inline">\(J_{i,g}\)</span> et <span class="math inline">\(J_{i,d}\)</span> (liés aux sous-arbres <em>gauche</em> et <em>droit</em>). La base pivot <span class="math inline">\(\vect{V} = [\vect{v}_1\, \dots\, \vect{v}_{D-1}]\)</span> associée à <span class="math inline">\(\mathcal{T}\)</span> est définie par les vecteurs unitaires:</p>
+<p><span class="math display">\[
+v_{ij} = \begin{cases}
+        \frac{\alpha_i}{|J_{i,g}|} &amp; \text{si } j \in J_{i,g} \\
+        \frac{-\alpha_i}{|J_{i,d}|} &amp; \text{si } j \in J_{i,d} \\
+         0           &amp; \text{sinon} \\
+         \end{cases}
+\quad \text{avec} \quad \alpha_i = \sqrt{\frac{|J_{i,d}||J_{i,g}|}{|J_{i,d}|+|J_{i,g}|}}
+\]</span></p>
+<div class="fragment">
+<p>Les balances correspondent, à un facteur multiplicatif près, au log-ratio entre la moyenne géométrique des composantes du sous-fils gauche et celle des composantes du sous-fils droit.</p>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Les log-ratio pivots correspondent au cas particulier de l’arbre peigne.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="balances-exemples" class="slide level2 smaller">
+<h2>Balances: exemples</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-17_4041a55c3003cadf44a0314a046508b8">
+<div class="cell-output-display">
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-17-1.png" width="576"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{array}{l|lllll}
+           &amp; x_1 &amp; x_2 &amp; x_3 &amp; x_4 &amp; x_5 \\
+           \hline
+\vect{v}_1 &amp; +   &amp; -   &amp;     &amp;     &amp;     \\
+\vect{v}_2 &amp;     &amp;     &amp;     &amp; +   &amp; -   \\
+\vect{v}_3 &amp;     &amp;     &amp; +   &amp; -   &amp; -   \\
+\vect{v}_4 &amp; +   &amp; +   &amp; -   &amp; -   &amp; -   
+\end{array}
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/unnamed-chunk-18_af72292fdaf8ef3557a16d31ef5a34d2">
+<div class="cell-output-display">
+<p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/unnamed-chunk-18-1.png" width="576"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{array}{l|lllll}
+           &amp; x_1 &amp; x_2 &amp; x_3 &amp; x_4 &amp; x_5 \\
+           \hline
+\vect{v}_1 &amp; +   &amp; -   &amp; -   &amp; -   &amp; -   \\
+\vect{v}_2 &amp;     &amp; +   &amp; -   &amp; -   &amp; -   \\
+\vect{v}_3 &amp;     &amp;     &amp; +   &amp; -   &amp; -   \\
+\vect{v}_4 &amp;     &amp;     &amp;     &amp; +   &amp; -   
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="applications-linéaires" class="title-slide slide level1 center">
+<h1>Applications linéaires</h1>
+
+</section>
+<section id="pourquoi-faire" class="slide level2 smaller">
+<h2>Pourquoi faire ?</h2>
+<!-- ::::: {.columns} -->
+<!-- :::: {.column width="80%"} -->
+<ul>
+<li>Pour définir des applications entre simplexes</li>
+<li>Pour définir des applications entre simplexes et espaces euclidiens usuels</li>
+<li>Comme brique de base pour définir des lois de probabilités sur le simplexe</li>
+<li>Comme brique de base pour faire des méthodes d’analyse de données</li>
+</ul>
+<p><span class="fragment">Comme pour géométrie de Aitchison, les applications linéaires utilisent la <strong>philosophie de la transformation</strong>.</span> <!-- :::: --></p>
+<!-- :::: {.column width="20%"} -->
+<!-- ::: {.fragment} -->
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><p><img data-src="01_simplexe_structure_transformations_files/figure-revealjs/mermaid-figure-2.png" style="width:12in;height:0.87in"></p>
+<p></p>
+</div>
+</div>
+</div>
+<!-- ::: -->
+<!-- :::: -->
+<!-- ::::: -->
+</div>
+</section>
+<section id="endomorphismes-du-simplexe-csd" class="slide level2 smaller">
+<h2>Endomorphismes du simplexe <span class="math inline">\(\CS^D\)</span></h2>
+<div id="def-endomorphisme" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 13 </strong></span>Soit <span class="math inline">\(\vect{V}\)</span> une matrice de contrastes de taille <span class="math inline">\(D \times (D-1)\)</span> et <span class="math inline">\(\vect{A}^\star \in \mathcal{M}_{D-1}(\RR)\)</span> une matrice carrée de taille <span class="math inline">\(D-1\)</span>. <span class="math inline">\(\vect{A}^\star\)</span> représente un endomorphisme <span class="math inline">\(f_{\vect{A}^\star}\)</span> de <span class="math inline">\(\RR^{D-1}\)</span> dans la base canonique. L’<strong>endomorphisme</strong> <span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}}\)</span> sur <span class="math inline">\(\CS^D\)</span> est défini par</p>
+<p><span class="math display">\[
+\vect{x} \in \CS^D \mapsto \psi_{\vect{A}^\star, \vect{V}}(\vect{x}) = \left(\text{ilr}_\vect{V}^{-1} \circ f_{\vect{A}^\star} \circ \text{ilr}_\vect{V} \right)(\vect{x}) \in \CS^D
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Définition désagréable puisqu’elle dépend <em>a priori</em> du choix de <span class="math inline">\(\vect{A}^\star\)</span> et de la base <span class="math inline">\(\vect{V}\)</span>.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="prp-endomorphisme" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 13 </strong></span></p>
+<p><span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}}\)</span> ne dépend que de <span class="math inline">\(\vect{A} = \vect{V} \vect{A}^\star \vect{V}^T\)</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}}(\vect{x}) = \CC\left(\exp\left( \vect{V} \vect{A}^\star \vect{V}^T \clr (\vect{x}) \right)\right)\)</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Peut-on définir <span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}}(\vect{x})\)</span> à partir de <span class="math inline">\(\vect{A}\)</span> et <span class="math inline">\(\clr(\vect{x})\)</span>?</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<ul>
+<li>Que faut-il imposer à <span class="math inline">\(\vect{A}\)</span> ?</li>
+<li><span class="math inline">\(\vect{A} = \vect{V} \vect{A}^\star \vect{V}^T\)</span> est à somme nulle en ligne et en colonne:</li>
+</ul>
+<p><span class="math display">\[
+\vect{A} \vect{1}_D = \vect{A}^T \vect{1}_D = \vect{0}_D \Leftrightarrow \vect{A} = \vect{G}_D \vect{A} \vect{G_D}
+\]</span></p>
+<ul>
+<li>C’est un <strong>invariant caractéristique</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="propriétés-de-vecta" class="slide level2 smaller">
+<h2>Propriétés de <span class="math inline">\(\vect{A}\)</span></h2>
+<div id="prp-matrice-double-centrée" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 14 </strong></span></p>
+<p>Soit <span class="math inline">\(\mathcal{A}_D\)</span> l’ensemble des matrices carré de taille <span class="math inline">\(D\)</span> à somme nulle en ligne et en colonne. Toute matrice <span class="math inline">\(\vect{A}\)</span> de <span class="math inline">\(\mathcal{A}_D\)</span> peut être décomposée sous la forme <span class="math inline">\(\vect{A} = \vect{V} \vect{A}^\star \vect{V}^T\)</span> avec <span class="math inline">\(\vect{V}\)</span> une matrice de contrastes et <span class="math inline">\(\vect{A}^\star = \vect{V}^T \vect{A} \vect{V}\)</span> carrée de taille <span class="math inline">\(D-1\)</span>.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\mathcal{A}_D\)</span> est parfois appelé l’ensemble des matrices <em>double centrées</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="def">
+<p>Soit <span class="math inline">\(\vect{A} \in \mathcal{A}_D\)</span> une matrice à somme nulle et <span class="math inline">\((\vect{A}^\star, \vect{V})\)</span>, avec <span class="math inline">\(\vect{V}\)</span> matrice de contraste, une décomposition quelconque de <span class="math inline">\(\vect{A}\)</span>. L’<strong>endomorphisme de <span class="math inline">\(\CS^D\)</span> associé à <span class="math inline">\(\vect{A}\)</span></strong> est</p>
+<p><span class="math display">\[
+\vect{x} \in \CS^D \mapsto \vect{A} \boxdot \vect{x} = \psi_{\vect{A}^\star, \vect{V}}(\vect{x}) = \text{clr}^{-1}\left( \vect{A} \text{clr}(\vect{x})\right)
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Si <span class="math inline">\(\vect{A} \notin \mathcal{A}_D\)</span>, on peut bien sûr écrire <span class="math inline">\(\text{clr}^{-1}\left( \vect{A} \text{clr}(\vect{x})\right)\)</span> mais on a alors <span class="math inline">\(\text{clr}^{-1}\left( \vect{A} \text{clr}(\vect{x})\right) = \underbrace{\vect{G}_D \vect{A} \vect{G}_D}_{\in \mathcal{A}_D} \boxdot \vect{x}\)</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="propriétés-de-mathcala_d" class="slide level2 smaller">
+<h2>Propriétés de <span class="math inline">\(\mathcal{A}_D\)</span></h2>
+<div id="prp-identité" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 15 </strong></span>L’<strong>endomorphisme identité</strong> de <span class="math inline">\(\CS^D\)</span> correspond à <span class="math inline">\(\vect{A} = \vect{G}_D\)</span>. Soit <span class="math inline">\(\vect{A} \in \mathcal{A}_D\)</span> et <span class="math inline">\((\vect{A}^\star, \vect{V})\)</span> une décomposition de <span class="math inline">\(\vect{A}\)</span>. <span class="math inline">\(\vect{A}\)</span> est inversible dans <span class="math inline">\(\mathcal{A}_D\)</span> si et seulement si <span class="math inline">\(\vect{A}^\star\)</span> est inversible et son inverse est donnée par</p>
+<p><span class="math display">\[
+\vect{A}^{-1} = (\vect{A} + \vect{1}_D\vect{1}_D^T)^{-1} -  \vect{1}_D\vect{1}_D^T
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Preuve</strong></p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<div>
+<ul>
+<li class="fragment">La première affirmation vient de <span class="math inline">\(\vect{G}_D = \vect{V} \vect{I}_{D-1} \vect{V}^T\)</span> pour n’importe quel <span class="math inline">\(\vect{V}\)</span>.</li>
+<li class="fragment">L’écriture <span class="math inline">\(\text{ilr}_\vect{V}^{-1} \circ f_{\vect{A}^\star} \circ \text{ilr}_\vect{V}\)</span> prouve que <span class="math inline">\(\vect{x} \mapsto \vect{A} \boxdot \vect{x}\)</span> est inversible si et seulement <span class="math inline">\(\vect{A}^\star\)</span> est inversible, d’inverse <span class="math inline">\(\text{ilr}_\vect{V}^{-1} \circ f_{{\vect{A}^\star}^{-1}} \circ \text{ilr}_\vect{V}\)</span></li>
+<li class="fragment">Il reste donc à prouver que <span class="math inline">\({\vect{A}^\star}^{-1} = \left(\vect{A}^{-1}\right)^\star\)</span>:</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{align*}
+\vect{A}^\star \left(\vect{A}^{-1}\right)^\star &amp;=  \vect{V}^T \vect{A} \vect{V} \vect{V}^T \vect{A}^{-1} \vect{V} \\
+&amp; = \vect{V}^T (\vect{A} + \vect{1}_D \vect{1}_D^T) \vect{V} \vect{V}^T \left( (\vect{A} + \vect{1}_D \vect{1}_D^T)^{-1} - \vect{1}_D \vect{1}_D^T \right) \vect{V} \\
+&amp; = \vect{V}^T (\vect{A} + \vect{1}_D \vect{1}_D^T) \vect{V} \vect{V}^T (\vect{A} + \vect{1}_D \vect{1}_D^T)^{-1} \vect{V} = \vect{I}_{D-1}
+\end{align*}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="applications-linéaires-entre-simplexes" class="slide level2 smaller">
+<h2>Applications linéaires entre simplexes</h2>
+<p>La démarche précédente peut-être adaptée aux applications linéaires entre simplexes de tailles différentes.</p>
+<div id="def-application-linéaire-entres-simplexe" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14 (Morphismes entre simplexes) </strong></span>Soient</p>
+<ul>
+<li><span class="math inline">\(\vect{V}_D\)</span> une matrice de contrastes de taille <span class="math inline">\(D \times (D-1)\)</span>,</li>
+<li><span class="math inline">\(\vect{V}_L\)</span> une matrice de contrastes de taille <span class="math inline">\(L \times (L-1)\)</span></li>
+<li><span class="math inline">\(\vect{A}^\star\)</span> une matrice de taille <span class="math inline">\((D-1) \times (L-1)\)</span>.</li>
+</ul>
+<p><span class="math inline">\(\vect{A}^\star\)</span> représente une application linéaire de <span class="math inline">\(\RR^{L-1}\)</span> dans <span class="math inline">\(\RR^{D-1}\)</span> dans leurs bases canoniques respectives: <span class="math inline">\(f_{\vect{A}^\star}: \vect{x} \in \RR^{L-1} \mapsto \vect{A}^\star \vect{x} \in \RR^{D-1}\)</span>. L’application linéaire <span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}_L, \vect{V}_D}\)</span> de <span class="math inline">\(\CS^L\)</span> à valeurs dans <span class="math inline">\(\CS^D\)</span> est définie par</p>
+<p><span class="math display">\[
+\vect{x} \in \CS^L \mapsto \psi_{\vect{A}^\star, \vect{V}_L, \vect{V}_D}(\vect{x}) = \left(\text{ilr}_{\vect{V}_D}^{-1} \circ f_{\vect{A}^\star} \circ \text{ilr}_{\vect{V}_L} \right)(\vect{x}) \in \CS^D
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Comme précédemment, l’application <span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}_L, \vect{V}_D}\)</span> est entièrement déterminée par <span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star \vect{V}_L^T\)</span> et cette dernière est à somme nulle en ligne et en colonne.</p>
+</div>
+</section>
+<section id="applications-linéaires-entre-simplexes-1" class="slide level2 smaller">
+<h2>Applications linéaires entre simplexes</h2>
+<div id="prp-morphismes-entres-simplexe" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 16 </strong></span>Soit <span class="math inline">\(\mathcal{A}_{DL}\)</span> l’ensemble des matrices <span class="math inline">\(\vect{A}\)</span> de taille <span class="math inline">\(D \times L\)</span> à somme nulle en ligne et en colonne, c’est à dire tels que <span class="math inline">\(\vect{A} = \vect{G}_D \vect{A} \vect{G}_L\)</span>. Avec les notations précédentes:</p>
+<ul>
+<li><span class="math inline">\(\vect{V}_D \vect{A}^\star \vect{V}_L^T \in \mathcal{A}_{DL}\)</span> pour tout <span class="math inline">\(\vect{A}^\star\)</span> de taille <span class="math inline">\((D-1) \times (L-1)\)</span></li>
+<li>Toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{DL}\)</span> peut se décomposer sous la forme <span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star \vect{V}_L^T\)</span></li>
+<li><span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}_L, \vect{V}_D}(\vect{x}) = \text{clr}_D^{-1}\left( \vect{A} \text{clr}_L(\vect{x}) \right)\)</span> ne dépend que de <span class="math inline">\(\vect{A}\)</span>.</li>
+</ul>
+<div class="fragment">
+<p>En particulier, toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{DL}\)</span> dont une décomposition est <span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star \vect{V}_L^T\)</span> induit une application linéaire de <span class="math inline">\(\CS^L\)</span> dans <span class="math inline">\(\CS^D\)</span> définie par</p>
+<p><span class="math display">\[
+\vect{x} \in \CS^L \mapsto \vect{A} \boxdot \vect{x} = \psi_{\vect{A}^\star, \vect{V}_L, \vect{V}_D}(\vect{x}) \in \CS^D.
+\]</span></p>
+<p>Cette dernière est bien définie et ne dépend pas de la décomposition choisie pour <span class="math inline">\(\vect{A}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="applications-dun-simplexe-vers-rrd" class="slide level2 smaller">
+<h2>Applications d’un simplexe vers <span class="math inline">\(\RR^D\)</span></h2>
+<div id="prp-app-lin-simplexe-esp-euc" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 17 </strong></span>Soit <span class="math inline">\(\mathcal{A}_{\bullet L}\)</span> l’ensemble des matrices <span class="math inline">\(\vect{A}\)</span> de taille <span class="math inline">\(D \times L\)</span> à somme nulle en ligne (mais pas forcément en colonne), c’est à dire tels que <span class="math inline">\(\vect{A} \vect{G}_L = \vect{A}\)</span>. En notant comme précédemment <span class="math inline">\(\vect{D}_L\)</span> une matrice de contrastes de taille <span class="math inline">\(L \times (L-1)\)</span> et <span class="math inline">\(\vect{A}^\star\)</span> une matrice quelconque de taille <span class="math inline">\(D \times (L-1)\)</span>, on a:</p>
+<ul>
+<li><span class="math inline">\(\vect{A} = \vect{A}^\star \vect{V}_L^T \in \mathcal{A}_{\bullet L}\)</span></li>
+<li>Toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{\bullet L}\)</span> peut se décomposer sous la forme <span class="math inline">\(\vect{A} = \vect{A}^\star \vect{V}_L^T\)</span> (avec <span class="math inline">\(\vect{A}^\star = \vect{A} \vect{V}_L\)</span>)</li>
+<li><span class="math inline">\(\psi_{\vect{A}^\star, \vect{V}_L, \bullet}(\vect{x}) = (f_{\vect{A}^\star} \circ \text{ilr}_{\vect{V}_L})(\vect{x})\)</span> ne dépend que de <span class="math inline">\(\vect{A}\)</span>.</li>
+</ul>
+<div class="fragment">
+<p>En particulier, toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{\bullet L}\)</span> dont une décomposition est <span class="math inline">\(\vect{A} = \vect{A}^\star \vect{V}_L^T\)</span> induit une application linéaire de <span class="math inline">\(\CS^L\)</span> dans <span class="math inline">\(\RR^D\)</span> définie par</p>
+<p><span class="math display">\[
+\vect{x} \in \CS^L \mapsto \vect{A} \boxdot \vect{x} = \vect{A}^\star \text{ilr}_{\vect{V}_L}(\vect{x}) \in \RR^D.
+\]</span></p>
+<p>Cette dernière est bien définie et ne dépend pas de la décomposition choisie pour <span class="math inline">\(\vect{A}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="applications-de-rrl-vers-un-simplexe" class="slide level2 smaller">
+<h2>Applications de <span class="math inline">\(\RR^L\)</span> vers un simplexe</h2>
+<div id="prp-app-lin-simplexe-esp-euc" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 18 </strong></span>Soit <span class="math inline">\(\mathcal{A}_{D\bullet}\)</span> l’ensemble des matrices <span class="math inline">\(\vect{A}\)</span> de taille <span class="math inline">\(D \times L\)</span> à somme nulle en colonne (mais pas forcément en ligne), c’est à dire tels que <span class="math inline">\(\vect{G}_D \vect{A} = \vect{A}\)</span>. En notant comme précédemment <span class="math inline">\(\vect{V}_D\)</span> une matrice de contrastes de taille <span class="math inline">\(D \times (D-1)\)</span> et <span class="math inline">\(\vect{A}^\star\)</span> une matrice quelconque de taille <span class="math inline">\((D-1) \times L\)</span>, on a:</p>
+<ul>
+<li><span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star \in \mathcal{A}_{D \bullet}\)</span></li>
+<li>toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{D \bullet}\)</span> peut se décomposer sous la forme <span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star\)</span> (avec <span class="math inline">\(\vect{A}^\star = \vect{V}_D^T \vect{A}\)</span>)</li>
+<li><span class="math inline">\(\psi_{\vect{A}^\star, \bullet, \vect{V}_L}(\vect{x}) = (\text{ilr}_{\vect{V}_L}^{-1} \circ f_{\vect{A}^\star})(\vect{x})\)</span> ne dépend que de <span class="math inline">\(\vect{A}\)</span>.</li>
+</ul>
+<div class="fragment">
+<p>En particulier, toute matrice <span class="math inline">\(\vect{A} \in \mathcal{A}_{D \bullet}\)</span> dont une décomposition est <span class="math inline">\(\vect{A} = \vect{V}_D \vect{A}^\star\)</span> induit une application linéaire de <span class="math inline">\(\RR^L\)</span> dans <span class="math inline">\(\CS^D\)</span> définie par</p>
+<p><span class="math display">\[
+\vect{x} \in \RR^L \mapsto \vect{A} \boxdot \vect{x} = \text{ilr}_{\vect{V}_D}^{-1}(\vect{A}^\star\vect{x}) \in \CS^D.
+\]</span></p>
+<p>Cette dernière est bien définie et ne dépend pas de la décomposition choisie pour <span class="math inline">\(\vect{A}\)</span>.</p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="messages-à-retenir" class="slide level2">
+<h2>Messages à retenir</h2>
+<div>
+<ul>
+<li class="fragment">Les compositions vivent dans le <strong>simplexe</strong> <span class="math inline">\(\CS^D\)</span></li>
+<li class="fragment"><span class="math inline">\(\CS^D\)</span> est un <strong>espace euclidien</strong> avec sa propre <strong>géométrie</strong>
+<ul>
+<li class="fragment">relativement contre-intuitive (courbure négative)</li>
+</ul></li>
+<li class="fragment">Les <strong>transformations log-ratio</strong> permettent de plonger <span class="math inline">\(\CS^D\)</span> dans un espace euclidien:
+<ul>
+<li class="fragment">alr est la plus simple à comprendre</li>
+<li class="fragment">clr, ilr sont les plus <em>simples</em> du point de vue géométrique</li>
+</ul></li>
+<li class="fragment">La <strong>philosophie de la transformation</strong> permet de jongler entre <span class="math inline">\(\RR^D\)</span> / <span class="math inline">\(\RR^{D-1}\)</span> et <span class="math inline">\(\CS^D\)</span> et définir simplement des fonctions sur <span class="math inline">\(\CS^D\)</span>.</li>
+</ul>
+</div>
+</section>
+<section id="réferences" class="slide level2 smaller scrollable">
+<h2>Réferences</h2>
+<div class="footer footer-default">
+
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-aitchison1982" class="csl-entry" role="doc-biblioentry">
+Aitchison, J. 1982. <span>“The Statistical Analysis of <span>C</span>ompositional <span>D</span>ata.”</span> <em>Journal of the Royal Statistical Society. Series B (Methodological)</em>, 139–77.
+</div>
+<div id="ref-egozcue2005groups" class="csl-entry" role="doc-biblioentry">
+Egozcue, Juan José, and Vera Pawlowsky-Glahn. 2005. <span>“Groups of Parts and Their Balances in Compositional Data Analysis.”</span> <em>Mathematical Geology</em> 37 (7): 795–828.
+</div>
+<div id="ref-egozcue2003isometric" class="csl-entry" role="doc-biblioentry">
+Egozcue, Juan José, Vera Pawlowsky-Glahn, Glòria Mateu-Figueras, and Carles Barcelo-Vidal. 2003. <span>“Isometric Logratio Transformations for Compositional Data Analysis.”</span> <em>Mathematical Geology</em> 35 (3): 279–300.
+</div>
+<div id="ref-filzmoser2018applied" class="csl-entry" role="doc-biblioentry">
+Filzmoser, Peter, Karel Hron, and Matthias Templ. 2018. <em>Applied Compositional Data Analysis with Worked Examples in r</em>. Springer.
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="01_simplexe_structure_transformations_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
