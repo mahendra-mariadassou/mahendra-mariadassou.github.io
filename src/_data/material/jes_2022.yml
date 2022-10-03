@@ -9,3 +9,8 @@
       elements:
       - nature: Traitement des zéros <i class="fab fa-html5"></i>
         at: "02_traitement_des_zéros.html"
+
+    - name: Cours 6 (chap. 7)
+      elements:
+      - nature: Traitement des zéros <i class="far fa-file-pdf"></i>
+        at: "03_distributions_sur_le_simplexe.pdf"
