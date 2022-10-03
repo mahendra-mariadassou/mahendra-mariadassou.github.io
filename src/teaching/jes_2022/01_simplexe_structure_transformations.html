@@ -604,7 +604,7 @@ d_A(\vect{x}, \vect{y}) &amp; = \parallel \vect{x} \ominus \vect{y} \parallel_A 
 <p><span class="math display">\[
 \begin{align}
 &lt;\vect{x} \oplus \alpha \odot \vect{z}, \vect{y}&gt;_A &amp; = \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \log \frac{x_j z_j^\alpha}{x_{j'} z_{j'}^\alpha} \log \frac{y_j}{y_{j'}} \\
-&amp;= \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \log \left( \frac{x_j}{x_{j'}} + \alpha \frac{z_j}{z_{j'}}\right)  \log \frac{y_j}{y_{j'}} \\
+&amp;= \frac{1}{2D} \sum_{j=1}^D \sum_{j' = 1}^D \left[ \log \left(\frac{x_j}{x_{j'}}\right) + \alpha \log \left(\frac{z_j}{z_{j'}}\right) \right] \log \frac{y_j}{y_{j'}} \\
 &amp; = &lt;\vect{x}, \vect{y}&gt;_A + \alpha &lt;\vect{z}, \vect{y}&gt;_A.
 \end{align}
 \]</span></p>
@@ -630,7 +630,7 @@ d_A(\vect{x}, \vect{y}) &amp; = \parallel \vect{x} \ominus \vect{y} \parallel_A 
 <div id="def-boule" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6 (Boule) </strong></span>La boule <span class="math inline">\(\mathcal{B}_R(\vect{c})\)</span> de rayon <span class="math inline">\(R\)</span> et de centre <span class="math inline">\(\vect{c}\)</span> est définie par:</p>
 <p><span class="math display">\[
-\mathcal{B}_R(\vect{c}) = \{ \vect{x} \in \CS^D \text{ t.q.} \parallel \vect{x} \ominus \vect{y} \parallel_A \leq R\}
+\mathcal{B}_R(\vect{c}) = \{ \vect{x} \in \CS^D \text{ t.q.} \parallel \vect{x} \ominus \vect{c} \parallel_A \leq R\}
 \]</span></p>
 </div>
 <div class="cell" data-hash="01_simplexe_structure_transformations_cache/revealjs/fig-circle_fc2bf752ab53de81d636a749388236f7">
@@ -820,7 +820,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <div id="prp-alr" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4 </strong></span><span class="math inline">\(\alr_j\)</span> est un <strong>isomorphisme</strong> de <span class="math inline">\((\CS^{D}, \oplus, \odot)\)</span> dans <span class="math inline">\((\RR^{D-1}, +, \times)\)</span>. En particulier, pour tout <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D, \alpha \in \RR\)</span></p>
 <p><span class="math display">\[
-\alr(\vect{x} \oplus \vect{y}) = \text{alr}_j(\vect{x}) + \text{alr}_j(\vect{y}) \quad \text{et} \quad \alr(\alpha \odot \vect{x}) = \alpha \text{alr}_j(\vect{x})
+\alr_j(\vect{x} \oplus \vect{y}) = \text{alr}_j(\vect{x}) + \text{alr}_j(\vect{y}) \quad \text{et} \quad \alr_j(\alpha \odot \vect{x}) = \alpha \text{alr}_j(\vect{x})
 \]</span></p>
 </div>
 </div>
@@ -829,8 +829,8 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <p><span class="theorem-title"><strong>Proposition 5 </strong></span>La transformation <span class="math inline">\(\text{alr}_j^{-1}\)</span> est définie par:</p>
 <p><span class="math display">\[
 \begin{align*}
-  \vect{x} \in \RR^{D-1} \mapsto \text{alr}_j^{-1}(\vect{x}) &amp; = \CC(e^{x_1}, \dots, e^{x_{j-1}}, 1, e^{x_{j+1}}, \dots, e^{x_D}) \\
-  &amp; = \left[ \frac{e^{x_1}}{1 + \sum_{j' \neq j} e^{x_{j'}}}, \dots, \frac{e^{x_D}}{1 + \sum_{j' \neq j} e^{x_{j'}}} \right]\in \CS^D
+  \vect{x}^\star \in \RR^{D-1} \mapsto \text{alr}_j^{-1}(\vect{x}^\star) &amp; = \CC(e^{x_1^\star}, \dots, e^{x^\star_{j-1}}, 1, e^{x^\star_{j+1}}, \dots, e^{x^\star_D}) \\
+  &amp; = \left[ \frac{e^{x^\star_1}}{1 + \sum_{j' \neq j} e^{x^\star_{j'}}}, \dots, \frac{e^{x^\star_D}}{1 + \sum_{j' \neq j} e^{x^\star_{j'}}} \right]\in \CS^D
 \end{align*}
 \]</span></p>
 </div>
@@ -900,7 +900,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <p><span class="theorem-title"><strong>Proposition 6 </strong></span><span class="math inline">\(\clr\)</span> est un <strong>morphisme isométrique</strong>. Pour tout <span class="math inline">\(\vect{x}, \vect{y} \in \CS^D, \alpha \in \RR\)</span></p>
 <p><span class="math display">\[
 \begin{align}
-\clr(\vect{x} \oplus \vect{y}) = \text{clr}_j(\vect{x}) + \text{clr}_j(\vect{y}) &amp; \quad \text{et} \quad \clr(\alpha \odot \vect{x}) = \alpha \text{clr}_j(\vect{x}) \\
+\clr(\vect{x} \oplus \vect{y}) = \text{clr}_j(\vect{x}) + \text{clr}_j(\vect{y}) &amp; \quad \text{et} \quad \clr(\alpha \odot \vect{x}) = \alpha \text{clr}(\vect{x}) \\
 \langle \vect{x}, \vect{y} \rangle_A = \clr(\vect{x})^T \clr(\vect{y}) &amp; \quad \text{et} \quad \| \vect{x} \|_A = \| \clr(\vect{x}) \|
 \end{align}
 \]</span></p>
@@ -911,7 +911,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <p><span class="theorem-title"><strong>Proposition 7 </strong></span>La transformation <span class="math inline">\(\text{clr}^{-1}\)</span>, aussi appelé <em>softmax</em>, est définie par:</p>
 <p><span class="math display">\[
 \begin{align*}
-  \vect{x} \in \RR^D \mapsto \text{clr}^{-1}(\vect{x}) = \CC(e^{x_1}, \dots, e^{x_D}) = \left[ \frac{e^{x_1}}{\sum_{j=1}^D e^{x_j}}, \dots, \frac{e^{x_D}}{\sum_{j=1}^D e^{x_j}} \right]\in \CS^D
+  \vect{x}^\star \in \RR^D \mapsto \text{clr}^{-1}(\vect{x}^\star) = \CC(e^{x^\star_1}, \dots, e^{x^\star_D}) = \left[ \frac{e^{x^\star_1}}{\sum_{j=1}^D e^{x^\star_j}}, \dots, \frac{e^{x^\star_D}}{\sum_{j=1}^D e^{x^\star_j}} \right]\in \CS^D
 \end{align*}
 \]</span></p>
 <p>Elle est invariante par translation par un multiple de <span class="math inline">\(\vect{1}_D\)</span></p>
@@ -925,7 +925,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <li class="fragment">La transformation <span class="math inline">\(\clr\)</span> n’a pas de composante de référence, c’est la moyenne géométrique <span class="math inline">\(g(\vect{x})\)</span> qui joue ce rôle.</li>
 <li class="fragment">Le vecteur <span class="math inline">\(\clr(\vect{x})\)</span> a <strong><span class="math inline">\(D\)</span></strong> composantes et pas <span class="math inline">\(D-1\)</span></li>
 <li class="fragment">La transformation <span class="math inline">\(\clr\)</span> n’est <strong>pas surjective</strong>: toutes les valeurs de <span class="math inline">\(\RR^D\)</span> ne sont pas atteintes.</li>
-<li class="fragment">Plus précisément, tous les vecteurs <span class="math inline">\(\clr(\vect{x})\)</span> sont <em>centrés</em> (<span class="math inline">\(\clr(\vect{x})^T \vect{1}_D = 0\)</span>) et <span class="math inline">\(\clr\)</span> est bijective entre <span class="math inline">\(\CS^D\)</span> et <span class="math inline">\(H = \{ \vect{x} \in \RR^D: \vect{x}^T \vect{1}_D = 0\}\)</span></li>
+<li class="fragment">Plus précisément, tous les vecteurs <span class="math inline">\(\clr(\vect{x})\)</span> sont <em>centrés</em> (<span class="math inline">\(\clr(\vect{x})^T \vect{1}_D = 0\)</span>) et <span class="math inline">\(\clr\)</span> est bijective entre <span class="math inline">\(\CS^D\)</span> et <span class="math inline">\(H = \{ \vect{x}^\star \in \RR^D:\vect{1}_D^T \vect{x}^\star = 0\}\)</span></li>
 </ul>
 </div>
 <div class="fragment">
@@ -949,7 +949,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 </section>
 <section id="coordonnées-ilr" class="slide level2 smaller">
 <h2>Coordonnées ilr</h2>
-<p>Soit <span class="math inline">\(\mathcal{V} = (\vect{v}_1, \dots, \vect{v}_{D-1})\)</span> une base orthonornormée de <span class="math inline">\(H\)</span> et <span class="math inline">\(\vect{V} = \left[ \vect{v}_1, \dots, \vect{v}_{D_1} \right]\)</span> la matrice correspondante.</p>
+<p>Soit <span class="math inline">\(\mathcal{V} = (\vect{v}_1, \dots, \vect{v}_{D-1})\)</span> une base orthonornormée de <span class="math inline">\(H\)</span> et <span class="math inline">\(\vect{V} = \left[ \vect{v}_1, \dots, \vect{v}_{D-1} \right]\)</span> la matrice de taille <span class="math inline">\(D \times (D-1)\)</span> correspondante.</p>
 <div id="def-ilr" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 12 </strong></span>La transformation ilr de base <span class="math inline">\(\vect{V}\)</span> est définie par:</p>
 <p><span class="math display">\[
@@ -969,9 +969,9 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <div id="prp-ilr-inverse" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 9 </strong></span>La transformation <span class="math inline">\(\text{ilr}^{-1}\)</span> est définie par:</p>
 <p><span class="math display">\[
-  \vect{x} \in \RR^{D-1} \mapsto \text{ilr}_{\vect{V}}^{-1}(\vect{x}) = \CC(\exp(\vect{V}\vect{x})) \in \CS^D
+  \vect{x}^\star \in \RR^{D-1} \mapsto \text{ilr}_{\vect{V}}^{-1}(\vect{x}^\star) = \CC(\exp(\vect{V}\vect{x}^\star)) \in \CS^D
 \]</span></p>
-<p>où la fonction exponentielle est appliquée terme à terme à <span class="math inline">\(\vect{x}\)</span>.</p>
+<p>où la fonction exponentielle est appliquée terme à terme à <span class="math inline">\(\vect{x}^\star\)</span>.</p>
 </div>
 </div>
 </section>
@@ -1090,7 +1090,7 @@ D_{\vect{a}, \vec{\vect{u}}} = \left\{ \vect{x} \in \CS^D \text{ t.q. } \vect{x}
 <div class="fragment">
 <p>Pour <span class="math inline">\(\alr_D\)</span>,</p>
 <p><span class="math display">\[
-\vect{A} = \vect{F}_D = [\vect{I}_{D-1} \; -\vect{1}_{D-1}^T]
+\vect{A} = \vect{F}_D = [\vect{I}_{D-1} | -\vect{1}_{D-1}]
 \]</span></p>
 </div>
 </div><div class="column" style="width:33%;">
