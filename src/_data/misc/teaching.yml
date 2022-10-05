@@ -5,12 +5,19 @@
     role: Mathématiques pour les Sciences du Vivant (50h / year) <a href="Licence_FDV">Supports de cours</a>
     at: <a href="https://cri-paris.org/" target="_blank">Centre de Recherche Interdisciplinaire</a>
 
-- name: Master Level
+- name: JES 2022
   values:
-  - period: 2015-2017
-    name: Master <a href = "http://www.math-evry.cnrs.fr/departement/doku.php?id=formation:master:m2isg">Ingénierie Statistique et Génomique</a>
-    role: Modèle d'évolution (18h / year)
-    at: <a href="https://www.universite-paris-saclay.fr/fr">Université Paris Saclay</a>
+  - period: Fall 2022
+    name: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Journées d'études en statistiques 2022</a>
+    role: Données de composition<br> <a href="jes_2022">Lecture slides</a>
+    at: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Villa Clithya (Fréjus, France)</a>    
+
+- name: Summer School
+  values:
+  - period: Summer 2022
+    name: Shandong University Statistical Summer School
+    role: Introductory Statistics (16h) <br> <a href="sdu_ss_2022">Lecture slides</a>
+    at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>
     
 - name: Summer School
   values:
@@ -19,16 +26,9 @@
     role: A tour through statistical models for multivariate counts (20h) <br> <a href="sdu_ss_2021">Lecture slides</a>
     at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>
     
-- name: Summer School
+- name: Master Level
   values:
-  - period: Summer 2022
-    name: Shandong University Statistical Summer School
-    role: Introductory Statistics (16h) <br> <a href="sdu_ss_2022">Lecture slides</a>
-    at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>
-    
-- name: JES 2022
-  values:
-  - period: Fall 2022
-    name: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Journées d'études en statistiques 2022</a>
-    role: Données de composition<br> <a href="jes_2022">Lecture slides</a>
-    at: <a href="https://www.sfds.asso.fr/fr/group/activites_et_parrainages/activites_de_la_sfds/698-jes_2022/">Villa Clithya (Fréjus, France)</a>    
+  - period: 2015-2017
+    name: Master <a href = "http://www.math-evry.cnrs.fr/departement/doku.php?id=formation:master:m2isg">Ingénierie Statistique et Génomique</a>
+    role: Modèle d'évolution (18h / year)
+    at: <a href="https://www.universite-paris-saclay.fr/fr">Université Paris Saclay</a>
