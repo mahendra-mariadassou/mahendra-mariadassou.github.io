@@ -498,7 +498,7 @@
 <section id="origine-limites-de-détection" class="slide level2 smaller">
 <h2>Origine : limites de détection</h2>
 <div class="fragment" data-fragment-index="1">
-<p>Données issues de Les 0 peuvent aussi apparaîtrent à cause de <strong>limites de détection</strong> (concentration trop faible pour être mesurée). On parle alors de <strong>censure à gauche.</strong></p>
+<p>Les 0 peuvent aussi apparaîtrent à cause de <strong>limites de détection</strong> (concentration trop faible pour être mesurée). On parle alors de <strong>censure à gauche.</strong></p>
 </div>
 <div class="columns">
 <div class="column" style="width:75%;">
@@ -842,10 +842,11 @@ f_c(x) = \begin{cases}
 </div><div class="column" style="width:40%;">
 <div class="fragment">
 <ol start="3" type="1">
-<li>en repassant à une composition <span class="math display">\[
-\tilde{\vect{x}} = \alr_j^{-1}(\tilde{\vect{y}})
-\]</span></li>
+<li>en repassant aux composantes</li>
 </ol>
+<p><span class="math display">\[
+\tilde{x}_j = x_{j_0}\exp(y_j)    
+\]</span></p>
 </div>
 <div class="fragment">
 <ol start="4" type="1">
@@ -924,7 +925,7 @@ f_c(x) = \begin{cases}
 <p><span class="math display">\[
 \begin{align*}
 \vect{x} \sim &amp; \mathcal{D}(1, \boldsymbol{\alpha}) \\
-\vect{c} \sim &amp; \mathcal{M}(N, \boldsymbol{\alpha})
+\vect{c} | \vect{x} \sim &amp; \mathcal{M}(N, \vect{x})
 \end{align*}
 \]</span></p>
 <p>où</p>

@@ -12,5 +12,10 @@
 
     - name: Cours 6 (chap. 7)
       elements:
-      - nature: Traitement des zéros <i class="far fa-file-pdf"></i>
+      - nature: Distributions continues sur le simplexe <i class="far fa-file-pdf"></i>
         at: "03_distributions_sur_le_simplexe.pdf"
+
+    - name: Cours 8 (chap. 7)
+      elements:
+      - nature: Compositions discrètes <i class="far fa-file-pdf"></i>
+        at: "04_distributions_discrètes_sur_le_simplexe.pdf"
