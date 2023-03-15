@@ -4,8 +4,12 @@
     <title>Confidence Intervals</title>
     <meta charset="utf-8" />
     <meta name="author" content="Mahendra Mariadassou, INRAE   .small[from original slides by Tristan Mary-Huard]" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.20/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
     <link rel="stylesheet" href="css/custom_weihai_ss.css" type="text/css" />
   </head>
   <body>
@@ -69,6 +73,8 @@ MathJax.Hub.Config({
 });
 </script>
     
+
+
 
 
 ---
@@ -220,9 +226,9 @@ The obtained measurements are the following:
 
 
 ```
-0.99876 0.99768 1.00106 0.99843 1.00105 
-1.00118 1.00234 1.00073 1.00281 1.00034 
-0.99858 0.99968 0.99998 1.00113 1.00065 
+0.99966 1.00193 0.99939 1.00005 0.99698 
+1.00153 0.99879 0.99925 1 0.99772 
+0.9993 1.0011 0.99714 0.99833 0.99848 
 ```
 
 --
@@ -343,7 +349,7 @@ One then has
 One has
 
 - `\(n=\)` 15
-- `\(\widehat{\sigma}^2 = \frac{1}{n}\sum_i(w_i-1)^2= 2.06\times 10^{-6}\)`
+- `\(\widehat{\sigma}^2 = \frac{1}{n}\sum_i(w_i-1)^2= 2.53\times 10^{-6}\)`
 
 --
 
@@ -356,7 +362,7 @@ Assume one wants a confidence interval at level 95%, then
 
 Consequently, one has
 
-`$$\text{IC}_{0.95}(\sigma) = \left[ 0.0011 ;\ 0.0022  \right].$$`
+`$$\text{IC}_{0.95}(\sigma) = \left[ 0.0012 ;\ 0.0025  \right].$$`
 
 .blue[Conclusion ?]
 
@@ -683,11 +689,9 @@ $$
 ]
 
 ---
-## Table of the  `\(\N(0,1)\)` quantiles
+#### Table of the  `\(\N(0,1)\)` quantiles
 
-.center[
-![](Figures/QuantilesNormaleCentreeReduite_Extrait.png)
-]
+&lt;img src="Figures/QuantilesNormaleCentreeReduite.png" width="587" style="display: block; margin: auto;" /&gt;
 
 ---
 #### Table of the `\(\chi^2\left(k\right)\)` quantiles
