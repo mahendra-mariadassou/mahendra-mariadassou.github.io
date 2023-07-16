@@ -1,0 +1,26 @@
+- class: Lectures slides
+  lectures:
+    - name: Lecture 1
+      elements:
+      - nature: Introduction and basic statistics <i class= "fab fa-html5" ></i>
+        at: "01_Basics.html"
+        
+    - name: Lecture 2
+      elements:
+      - nature: Joint distribution and bivariate analysis <i class="fab fa-html5"></i>
+        at: "02_BivariateAnalysis.html"
+
+    - name: Lecture 3
+      elements:
+      - nature: Sampling schemes <i class="fab fa-html5"></i>
+        at: "03_Sampling.html"
+
+    - name: Lecture 4
+      elements:
+      - nature: Estimation <i class="fab fa-html5"></i>
+        at: "04_Estimation.html"
+
+    - name: Lecture 5
+      elements:
+      - nature: Confidence Intervals <i class="fab fa-html5"></i>
+        at: "05_Confidence_Interval.html"
