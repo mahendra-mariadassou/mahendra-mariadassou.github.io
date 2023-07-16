@@ -1,3 +1,10 @@
+- name: Summer School
+  values:
+  - period: Summer 2023
+    name: Shandong University Statistical Summer School
+    role: Introductory Statistics (16h) <br> <a href="sdu_ss_2023">Lecture slides</a>
+    at: <a href="https://ipo.wh.sdu.edu.cn/">Shandong University (Weihai, China)</a>
+
 - name: Bachelor level
   values:
   - period: 2010-Present
