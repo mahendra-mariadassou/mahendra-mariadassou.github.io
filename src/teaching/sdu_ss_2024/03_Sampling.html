@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Sampling</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mahendra Mariadassou, INRAE   .small[from original slides by Tristan Mary-Huard]" />
+    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.33/datatables.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="css/custom_weihai_ss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Sampling
+]
+.author[
+### Mahendra Mariadassou, INRAE <br> .small[from original slides by Tristan Mary-Huard]
+]
+.date[
+### Shandong University, Weihai (CN)<br>Summer School 2024
+]
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      P: "{\\mathcal{P}}",
+      B: "{\\mathcal{B}}",
+      L: "{\\mathcal{L}}",
+      F: "{\\mathcal{F}}",
+      N: "{\\mathcal{N}}",
+      M: "{\\mathcal{M}}",
+      D: "{\\mathcal{D}}",
+      LN: "{\\mathcal{LN}}",
+      Rbb: "{\\mathbb{R}}",
+      Nbb: "{\\mathbb{N}}",
+      Sbb: "{\\mathbb{S}}", 
+      bpi: "{\\boldsymbol{\\pi}}",
+      bp: "{\\mathbf{p}}",
+      bg: "{\\mathbf{g}}",
+      bm: "{\\mathbf{m}}",
+      bn: "{\\mathbf{n}}",
+      bo: "{\\mathbf{o}}",
+      bs: "{\\mathbf{s}}",
+      bx: "{\\mathbf{x}}",
+      bA: "{\\mathbf{A}}",
+      bB: "{\\mathbf{B}}",
+      bM: "{\\mathbf{M}}",
+      bS: "{\\mathbf{S}}",
+      bX: "{\\mathbf{X}}",
+      bY: "{\\mathbf{Y}}",
+      bZ: "{\\mathbf{Z}}",
+      balpha: "{\\boldsymbol{\\alpha}}",
+      bbeta: "{\\boldsymbol{\\beta}}",
+      bfeta: "{\\boldsymbol{\\eta}}",
+      bgamma: "{\\boldsymbol{\\gamma}}",
+      bphi: "{\\boldsymbol{\\phi}}",
+      btau: "{\\boldsymbol{\\tau}}", 
+      btheta: "{\\boldsymbol{\\theta}}",
+      bTheta: "{\\boldsymbol{\\Theta}}",
+      bmu: "{\\boldsymbol{\\mu}}",
+      bSigma: "{\\boldsymbol{\\Sigma}}",
+      bOmega: "{\\boldsymbol{\\Omega}}"
+    }
+  }
+});
+</script>
+  
+
+
+---
+class: middle, center, inverse
+
+# Technical results
+
+### Mean and variance of a sum
+
+---
+## Refresher
+
+Recall the following definitions/properties:
+
+`$$\begin{align}
+E[Y] &amp;= \sum_{k=1}^K y_k P(Y = y_k) \\
+V[Y] &amp;= E\left[ \left(Y-E[Y]\right)^2\right]\\
+     &amp;= E[Y^2]-E[Y]^2\\
+Cov(X,Y) &amp;= E\left[ (X-E[X])(Y-E[Y]) \right]\\
+         &amp;= E[XY]-E[X]E[Y]\\
+\end{align}$$`
+
+--
+
+What about:
+
+- `\(f(Y)\)` for a general numeric function `\(f: \mathbb{R} \to \mathbb{R}\)`
+
+- `\(aY + b\)` (when `\(a, b \in \mathbb{R}\)`)
+
+- `\(f(X, Y)\)` for a general numeric function `\(f: \mathbb{R}^2 \to \mathbb{R}\)`
+
+- `\(X + Y\)`, `\(XY\)`
+
+---
+## Expectation of `\(f(Y)\)`
+
+Falling back to the definition, we have
+
+$$
+E[f(Y)] = \sum_{k=1}^K f(y_k) P(Y = y_k)
+$$
+
+In particular, the expectation of `\(aY + b\)` can be expressed simply as 
+
+--
+
+$$
+E[aY + b] = aE[Y] + b
+$$
+
+.blue[Proof:]
+
+--
+
+---
+## Expectation of `\(f(Y_1, Y_2)\)`
+
+Falling back to the definition, we have
+
+`$$\begin{align}
+E[f(Y_1, Y_2)] &amp; = \sum_{k_1=1}^{K_1} \sum_{k_2=1}^{K_2} f(y_{k_1}, y_{k_2}) P(Y_1 = y_{k_1}, Y_2 = y_{k_2})
+\end{align}$$`
+
+In particular, the expectation of `\(X + Y\)` can be expressed simply:
+
+--
+
+$$
+E[Y_1 + Y_2] = E[Y_1] + E[Y_2]
+$$
+--
+Proof:
+
+
+---
+## Another formula for the variance
+
+Using the previous result, we have an alternative form for the variance:
+
+$$
+V[X] = E\left[ (X - E[X])^2 \right] = E[X^2] - E[X]^2
+$$
+
+--
+
+Proof:
+
+`$$\begin{align}
+V[X] &amp; = E\left[ (X - E[X])^2 \right] \\
+&amp; = E\left[ X^2 - 2XE[X] + E[X]^2 \right] \\
+&amp; = E[X^2] - 2E\left[XE[X]\right] + E[X]^2 \\
+&amp; = E[X^2] - 2E[X]E\left[X\right] + E[X]^2 \\
+&amp; = E[X^2] - 2E[X]^2+ E[X]^2 \\
+&amp; = E[X^2] - E[X]^2
+\end{align}$$`
+
+---
+### Expectation of `\(Y_1 Y_2\)`
+
+- The .blue[expectation of a sum] of random variables is the .blue[sum of the expectations]
+- The .blue[expectation of a product] is
+--
+  
+  - no simple formula in general (but important exceptions)
+  - it depends on the covariance between `\(Y_1\)` and `\(Y_2\)`
+  
+--
+  
+&lt;img src="03_Sampling_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+  
+In each case, `\(E[Y_1] = 0\)` and `\(E[Y_2] = 0\)` but we have .question[quizz1]
+
+.pull-left[
+- .blue[A:] `\(E[Y_1 Y_2] = \dots\)`
+- .blue[B:] `\(E[Y_1 Y_2] = \dots\)`
+- .blue[C:] `\(E[Y_1 Y_2] = \dots\)`
+]
+
+--
+
+.pull-right[
+- `\(E[Y_1 Y_2] = -0.48\)`
+- `\(E[Y_1 Y_2] = -0.01\)`
+- `\(E[Y_1 Y_2] = 0.47\)`
+]
+
+---
+## Special case of independent variables
+
+If `\(Y_1\)` and `\(Y_2\)` are .alert[independant], noted `\(Y_1 \perp Y_2\)`, the result is simpler... 
+
+--
+
+`$$\begin{align}
+E[Y_1 Y_2] &amp;= \sum_{k_1=1}^{K_1} \sum_{k_2=1}^{K_2} y_{k_1} \times  y_{k_2} \underbrace{P(Y_1 = y_{k_1}, Y_2 = y_{k_2})}_{= P(Y_1 = y_{k_1}) \times P(Y_2 = y_{k_2})} \\
+&amp; = \sum_{k_1=1}^{K_1} \sum_{k_2=1}^{K_2} y_{k_1} \times  y_{k_2} P(Y_1 = y_{k_1}) \times P(Y_2 = y_{k_2}) \\
+&amp; = \sum_{k_1=1}^{K_1} \sum_{k_2=1}^{K_2} y_{k_1}P(Y_1 = y_{k_1}) \times  y_{k_2}P(Y_2 = y_{k_2}) \\
+&amp; = \left( \sum_{k_1=1}^{K_1} y_{k_1}P(Y_1 = y_{k_1}) \right) \times  \left( \sum_{k_2=1}^{K_2} y_{k_2}P(Y_2 = y_{k_2}) \right) \\
+&amp; = E[Y_1] \times E[Y_2]
+\end{align}$$`
+
+--
+
+- In particular `\(Cov(Y_1, Y_2) = E[Y_1 Y_2] - E[Y_1]E[Y_2] = 0\)`
+- More generally, `\(E[g_1(Y_1) \times g_2(Y_2)] = E[g_1(Y_1)] \times E[g_2(Y_2)]\)`
+
+---
+## Variance of a sum
+
+Using the previous result, we have
+
+$$
+V(Y_1 + Y_2) = \dots 
+$$
+
+--
+
+`$$\begin{align}
+V(Y_1 + Y_2) &amp; = E\left[ (Y_1 + Y_2)^2 \right] - E\left[ Y_1 + Y_2 \right]^2 \\
+&amp; = E[Y_1^2] + 2E[Y_1 Y_2] + E[Y_2^2] - \left( E[Y_1]^2 + 2E[Y_1]E[Y_2] + E[Y_2]^2 \right) \\ 
+&amp; = \underbrace{E[Y_1^2] - E[Y_1]^2}_{=V(Y_1)} + 2 \underbrace{E[Y_1 Y_2] - E[Y_1]E[Y_2]}_{=Cov(Y_1, Y_2)} + \underbrace{E[Y_2^2] - E[Y_2]^2}_{=V(Y_2)} \\
+&amp; = V(Y_1) + 2Cov(Y_1, Y_2) + V(Y_2) 
+\end{align}$$`
+
+--
+
+In particular, if `\(Y_1 \perp Y_2\)`, then `\(V(Y_1 + Y_2) = V(Y_1) + V(Y_2)\)`. 
+
+---
+## Sum of independent random variables
+
+If `\(Y_1, \dots, Y_n\)` are .blue[i.i.d.], the .blue[sum] `\(S_n = Y_1 + \dots + Y_n\)` has very simple mean and variance:
+
+--
+
+.blue[Mean]
+
+$$
+E[S_n] = E[Y_1 + \dots + Y_n] = E[Y_1] + \dots + E[Y_n] = nE[Y_1]
+$$
+
+--
+
+.remark[Remark:] The first equality is .alert[always] true and the second requires identical means.
+
+--
+
+.blue[Variance]
+
+$$
+V(S_n) = V[Y_1 + \dots + Y_n] = V[Y_1] + \dots + V[Y_n] = nV[Y_1]
+$$
+--
+
+.remark[Remark:] The equality requires .blue[independence] and the second requires identical variances.
+
+---
+## Application to the Binomial distribution 
+
+Remember that a binomial variable `\(Y \sim \mathcal{B}(K, p)\)` is the sum of `\(K\)` independent Bernoulli trials:
+
+$$
+X = Y_1 + \dots + Y_K \quad \text{where the } Y_i \text{ are i.i.d. with } Y_i \sim \mathcal{B}(p)
+$$
+
+Using the previous results, it results that 
+
+`$$\begin{align}
+E[X] &amp; = K E[Y_1] = Kp \\
+V[X] &amp; = K V[Y_1] = Kp(1 -p)
+\end{align}$$`
+---
+## Application to the Poisson distribution 
+
+We mentioned before that, if `\(X \sim \P(\lambda)\)`, then `\(V[X] = \lambda\)`. Remember that `\(E[X] = \lambda\)`. 
+
+
+`$$\begin{align}
+V(X) &amp; = E[X^2] - E[X]^2 \\
+     &amp;= E[X(X-1) + E[X] - E[X]^2 \\
+     &amp; = E[X(X-1)] + E[X] - E[X]^2 \\
+     &amp; = \lambda^2 + \lambda - \lambda^2 \\
+     &amp; = \lambda
+\end{align}$$`
+
+
+---
+class: middle, inverse, center
+
+# A first try at estimation
+
+## Finite population
+
+---
+### The Circle dataset
+
+.pull-left[
+
+- Population of `\(n = 100\)` circles
+
+- Indexed by `\(i = 1, \dots, n\)`
+
+- Each characterized by its diameter `\(D_i\)`
+
+]
+
+.pull-right[
+&lt;img src="03_Sampling_files/figure-html/circles-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+## List of diameters
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6e412c9a8b039bc6de1b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6e412c9a8b039bc6de1b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],[8.962036069016904,4.787287186132744,2.534007816808298,4.062364544020966,6.541595254326239,1.460909416200593,6.172420169226825,4.975719515001401,6.848855848424137,3.360737578710541,2.046161560108885,6.26657836441882,9.575441011926159,4.353376814629883,5.067389864940196,7.240574382711202,7.256528509780765,1.281014774460346,9.071197617333382,4.444549088831991,1.281815985916182,3.899475977057591,3.507509380346164,3.88876323425211,9.98816348076798,3.706198352854699,3.116197194438428,2.227990460116416,8.404765699757263,1.093151210108772,2.590907997684553,7.536570237483829,2.687382307602093,5.624400950502604,2.254618368810043,8.022244122810662,7.810821702471003,1.120936948806047,6.67393657239154,2.628178748302162,9.344550563255325,7.215355796739459,6.326258300803602,4.149825078900903,9.936431476613507,5.214538667816669,5.812111880397424,2.481129581108689,6.228859494207427,7.747678395127878,6.487858361797407,1.364626806695014,3.20860835374333,8.802955849096179,8.804867216385901,5.201745008584112,2.098387859761715,1.581847243010998,8.323680777801201,8.960622305981815,7.981377068441361,5.010625825030729,9.427129452582449,4.243136454606429,2.380150302080438,1.551367522915825,2.730066198157147,8.12476446502842,1.922102291602641,3.839488049736246,2.898178417468444,9.349354407982901,1.079114302992821,2.649463179055601,3.268829044420272,8.668143506161869,2.143299932591617,4.356356983538717,9.697179463459179,2.9586551040411,7.15522896242328,6.996121476171538,3.095877503976226,4.884378404123709,5.39267204538919,1.975674031302333,9.775347734568641,5.894210241502151,8.571198231773451,7.09640328027308,8.113489288138226,1.549139152048156,9.03833865839988,9.988798386882991,9.654696962796152,3.572357573080808,9.358142053941265,8.471925904275849,4.777798766968772,9.378442723769695]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Size<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","columnDefs":[{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[0,1]},{"name":"ID","targets":0},{"name":"Size","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
+
+.blue[Goal]: Provide an **estimate** of the mean circle diameter `\(E[D]=\mu_D\)`.
+
+---
+
+## Obtaining an estimate
+
+Requires three steps:
+
+.pull-left[
+
+- .blue[Step 1] Collect some data, i.e. a **sample**
+
+- .blue[Step 2] Apply some **estimator** to the sample
+
+- .blue[Step 3] Get the estimate:
+]
+
+--
+
+.pull-right[
+
+- `\(D_1,...,D_n\)` collected *at random*
+
+- `\(\overline{D}= \frac{1}{n} \sum_{i=1}^{n}D_i\)`
+
+- `\(\widehat{\mu}_D= \frac{1}{n} \sum_{i=1}^{n}d_i\)`
+]
+
+--
+
+.remark[The estimator is a random variable, the estimate is a numeric value]
+
+---
+
+## Remarks and questions
+
+.blue[One remark...]
+
+- .alert[ALWAYS] distinguish between the true expectation `\(\mu_D\)` and its estimate `\(\widehat{\mu}_D\)`.
+
+.blue[... and three questions]
+
+- Any (implicit) **assumption** about the way data were **collected** ?
+
+- We defined an intuitive estimator: is it a good one ? How can we **assess** its **performance** ?
+
+- If intuition fails to provide an estimator (or a good one), can we think of a **systematic strategy** to obtain a *good* estimator ?
+
+---
+
+## Several ways to "sample at random"
+
+In the Circle example, one can
+
+- Select the circles "by eye",
+
+- Use the droppin' pen technics,
+
+- Select identifiers at random,
+
+- Any other meaningful strategy 
+
+.def[Definition] A **S**imple **R**andom **S**ampling is such that all samples of size `\(n\)` have the same probability `\({n \choose N}^{-1}\)` to be drawn.
+
+--
+
+.def[Property]: In a SRS, each individual has the same probability `\(n/N\)` to be selected.
+
+---
+## Applying SRS to the Circle dataset
+
+Here are the estimates obtained from 32 SRS trials, with `\(n=10\)`:
+
+`$$\displaystyle{\frac{1}{10}\sum_{i=1}^{10}d_i}=$$`
+
+
+```
+    Estimate 01: 5.3076	Estimate 02: 5.8976	Estimate 03: 3.8780	Estimate 04: 4.1243
+    Estimate 05: 5.0101	Estimate 06: 4.5968	Estimate 07: 5.5176	Estimate 08: 4.2012
+    Estimate 09: 6.0778	Estimate 10: 6.3875	Estimate 11: 6.4796	Estimate 12: 6.4881
+    Estimate 13: 4.3832	Estimate 14: 5.9892	Estimate 15: 5.3621	Estimate 16: 5.3960
+    Estimate 17: 5.3632	Estimate 18: 4.2552	Estimate 19: 6.8789	Estimate 20: 4.7823
+    Estimate 21: 5.6886	Estimate 22: 5.2215	Estimate 23: 6.9647	Estimate 24: 6.7541
+    Estimate 25: 5.4322	Estimate 26: 4.9458	Estimate 27: 4.6955	Estimate 28: 5.4238
+    Estimate 29: 6.0931	Estimate 30: 3.8522	Estimate 31: 4.9817	Estimate 32: 5.2376
+```
+
+--
+
+.blue[*True mean:* 5.427]
+
+--
+
+.remark[Remark:] One cannot evaluate the performance of an estimator through an estimate since the estimate depends both on the estimator **and** the sample.
+
+.center[
+Performance has to be evaluated **on average** over **all** possible samples
+]
+
+---
+## Performance evaluation
+
+Estimator `\(\overline{D}\)` is a random variable (which depends on the sample).
+
+
+One can define:
+- the bias `\(B(\overline{D}) = E[\overline{D}]-\mu_D\)`
+- the variance `\(V(\overline{D})\)`.
+
+.blue[Mean Square Error]
+
+One defines `$$MSE(\overline{D}) = E[(\overline{D}-\mu_D)^2].$$` 
+
+.remark[Remark] How is `\(MSE(\overline{D})\)` related to bias and variance ? 
+
+--
+
+`$$MSE(\overline{D}) = B^2(\overline{D}) + V(\overline{D})$$`
+--
+
+.blue[Why is all of this useful at all ?] .question[quizz2]
+
+---
+class: middle, inverse, center
+
+# SRS in finite population 
+
+---
+## General framework
+
+Consider a population `\(\mathcal{P}\)` of size `\(N\)` and note `\(y_i\)` the value of variable `\(Y\)` measured on individual `\(i\)`.
+
+Define
+
+`$$\begin{eqnarray*}
+E[Y] &amp;=&amp; \frac{1}{N}\sum_{i=1}^{N}y_i  =\mu\\
+\text{and } V[Y] &amp;=&amp; \frac{1}{N}\sum_{i=1}^{N}(y_i-\mu)^2 = \sigma^2
+\end{eqnarray*}$$`
+
+--
+
+Assume `\(\mu\)` is estimated by applying the empirical mean to sample `\(S\)`:
+`$$\begin{equation}
+\overline{Y} = \frac{1}{n}\sum_{i\in S}Y_i = \frac{1}{n}\sum_{i=1}^{N}\varepsilon_i y_i
+ \quad \text{where} \quad \varepsilon_i = \begin{cases}
+1 &amp; \text{if } i\in S \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{equation}$$`
+
+--
+.remark[Remark] `\(n\)` (sample) is generally much smaller than `\(N\)` (population) !!
+
+---
+## Theoretical properties of `\(\overline{Y}\)`
+
+
+
+Consider a SRS, i.e. `\(P(S)={n \choose N}^{-1}\)`, then
+
+`$$\begin{eqnarray*}
+E[\overline{Y}] &amp;=&amp; \mu \\
+V[\overline{Y}] &amp;=&amp; \frac{1}{n}\left(1-\frac{n}{N}\right)\frac{N}{N-1}\sigma^2 =\frac{1}{n}\left(1-\frac{n}{N}\right)(\sigma^*)^2
+\end{eqnarray*}$$`
+
+where `\((\sigma^*)^2= \frac{N}{N-1}\sigma^2\)` is the corrected population variance (more on that later) .question[quizz3]
+
+.blue[Proof:] Next slide
+
+--
+
+Application to the circle dataset:
+`\(N=100\)`, `\(n=10\)`, `\(\sigma^2\)`=7.779
+
+`\(\Rightarrow V[\overline{Y}] =\frac{1}{10}\times\frac{100}{99}\times\left(1-\frac{10}{100}\right)\times\)` 7.779 = 0.707
+
+---
+## Proof
+
+---
+## Stratified sampling
+
+Assume that population `\(\mathcal{P}\)` has `\(H\)` strata `\(\mathcal{P}_1,...,\mathcal{P}_H\)`.
+
+.pull-left[
+
+Define
+
+- `\(N_h\)`: size of stratum `\(\mathcal{P}_h\)`, `\(h=1,...,H\)`,
+
+- `\(N=\sum_h N_h\)`: population size,
+
+- `\(\mu_h=\frac{1}{N_h}\sum_{i\in\mathcal{P}_h}y_i\)`: mean of stratum `\(h\)`,
+
+- `\(\sigma_h^*=\frac{1}{N_h-1}\sum_{i\in\mathcal{P}_h}(y_i-\mu_h)^2\)`: corrected variance of stratum `\(h\)`.
+]
+
+--
+
+.pull-right[
+
+.blue[Stratified sampling]
+
+Perform .alert[one SRS per stratum] where
+
+- `\(n_h\)`: number of sampled individuals per stratum,
+
+- `\(n=\sum_h n_h\)`: total sample size,
+
+- `\(\overline{Y}_h=\frac{1}{n_h}\sum_{i\in\mathcal{P}_h}Y_i\)`: empirical mean of stratum `\(h\)`.
+]
+
+--
+
+One then estimates the population mean `\(\mu\)` using
+`$$\overline{Y}_{St} = \sum_{h=1}^{H}\frac{N_h}{N}\overline{Y}_h$$`
+
+---
+## Properties of stratified sampling
+
+Consider a stratified sampling strategy. Then
+
+`$$\begin{eqnarray*}
+E[\overline{Y}_{St}] &amp;=&amp; \mu \\
+V[\overline{Y}_{St}] &amp;=&amp;
+\sum_{h=1}^H \left(\frac{N_h}{N}\right)^2\times \frac{1}{n_h}\left(1-\frac{n_h}{N_h}\right) \times (\sigma_h^*)^2 \\
+V[\overline{Y}_{St}] &amp;\leq&amp; V[\overline{Y}]
+\end{eqnarray*}$$`
+
+.blue[Proof]: based on the properties of SRS (equalities) and on the decomposition of the population variance + assuming `\(\frac{N_h-1}{N_h}\approx1\)` (inequality).
+
+---
+## Proof
+
+---
+class: middle, inverse, center
+
+# IID sampling in infinite populations
+
+---
+## Sampling in an infinite population
+
+Consider a population `\(\mathcal{P}\)` where variable `\(Y\)` has distribution `\(\mathcal{L}\)`.
+Define
+$$E[Y] = \mu, \quad V[Y] =\sigma^2 $$
+
+
+Assume `\(\mu\)` is estimated by applying the empirical mean to sample `\(Y_1,...,Y_n\)`, where
+`$$Y_i \sim \mathcal{L}, \text{ i.i.d.}$$`
+Then
+$$E\left[\overline{Y}\right] = \mu,\quad V\left[\overline{Y}\right] = \frac{\sigma^2}{n} $$
+
+.question[quizz4]
+
+.blue[Proof:] Your turn! 
+
+---
+class: middle, center, inverse
+
+# Exercises
+
+---
+## Exercise 1: Bulb lifetime
+
+
+
+A bulb manufacturer claims that 90% of the produced bulbs have a lifetime of 500 hours or higher. An investigator bought 12 bulbs and obtained the following lifetimes:
+
+```
+536 490 510 572 564 537 549 535 549 528 569 533
+```
+
+Assuming bulb lifetimes have a Poisson distribution: 
+
+- What is the average lifetime of the produced bulbs?
+- Is the manufacturer honest ?
+
+--
+
+.blue[Answers]
+
+`\(\widehat{E[L]} =\widehat{\lambda}=\)` 539.333,
+
+`\(\quad \widehat{P}_{\widehat{\lambda}}(L\geq 500)=\)` 0.954
+
+---
+## Exercise 2: Exponential distribution
+
+A a positive real valued random variable `\(X\)` has a exponential distribution `\(\mathcal{E}(\lambda)\)` with parameter `\(\lambda\)`, noted `\(X\sim\mathcal{E}(\lambda)\)`, if 
+
+$$f_X(x) = \lambda e^{-\lambda x}, \ x\geq0, \ \lambda\geq0. $$
+
+- Check that `\(\int_0^\infty f(t)dt = 1\)` (i.e. `\(f\)` is a density function).
+
+- Compute `\(E[X]\)`, where `\(X\sim\mathcal{E}(\lambda)\)`.
+
+- Assuming `\(X_1,...X_n\sim\mathcal{E}(\lambda)\)` i.i.d., suggest an estimator for `\(\lambda\)`.
+
+---
+## Summary
+
+.blue[3 quantities to distinguish]
+
+- `\(\mu=E[X]\)`: .alert[true] population mean.
+- `\(\overline{Y}=\frac{1}{n}\sum_{i=1}^nY_i\)`: estimator.
+- `\(\widehat{\mu}=\frac{1}{n}\sum_{i=1}^ny_i\)`: estimate.
+
+Remember that estimator `\(\neq\)` estimate
+
+--
+
+.blue[Sampling]
+
+- In the following, we will always assume either SRS (finite pop.) or i.i.d. sampling (infinite pop.).
+
+--
+
+.blue[Performance]
+
+- Different estimators can be compared through their MSE.
+- Keep in mind that `\(MSE(T) = B^2(T) + V(T)\)`
+
+--
+
+.blue[What's next ?]
+
+- What if intuition fails to provide an estimator (or a good one)?
+- `\(\Rightarrow\)` Need for a *systematic strategy* to obtain a .alert[satisfactory] estimator!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
