@@ -6,8 +6,8 @@
 </description>
     <link>https://mahendra-mariadassou.github.io/</link>
     <atom:link href="https://mahendra-mariadassou.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 11 Jul 2024 09:00:55 +0200</pubDate>
-    <lastBuildDate>Thu, 11 Jul 2024 09:00:55 +0200</lastBuildDate>
+    <pubDate>Thu, 18 Jul 2024 14:18:49 +0800</pubDate>
+    <lastBuildDate>Thu, 18 Jul 2024 14:18:49 +0800</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
@@ -79,7 +79,7 @@ where are the source and the target directories.
 I may use this in the future to simplify things and avoid some file copying.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 29 Jan 2016 00:00:00 +0100</pubDate>
+        <pubDate>Fri, 29 Jan 2016 00:00:00 +0800</pubDate>
         <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</link>
         <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/29/github-pages-without-the-workflow/</guid>
         
@@ -250,7 +250,7 @@ title: duties
 &lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>Wed, 27 Jan 2016 00:00:00 +0100</pubDate>
+        <pubDate>Wed, 27 Jan 2016 00:00:00 +0800</pubDate>
         <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</link>
         <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/27/generating-a-page-using-personal-data/</guid>
         
@@ -312,7 +312,7 @@ So let’s go for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt
 &lt;p class=&quot;text-justify&quot;&gt;&lt;strong&gt;Update:&lt;/strong&gt; just found the &lt;a href=&quot;http://jekyll.tips/&quot;&gt;Jekyll Tips&lt;/a&gt; site.
 Lots of interesting information here too.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 26 Jan 2016 00:00:00 +0100</pubDate>
+        <pubDate>Tue, 26 Jan 2016 00:00:00 +0800</pubDate>
         <link>https://mahendra-mariadassou.github.io/blog/posts/2016/01/26/jekyll-site-launched/</link>
         <guid isPermaLink="true">https://mahendra-mariadassou.github.io/blog/posts/2016/01/26/jekyll-site-launched/</guid>
         

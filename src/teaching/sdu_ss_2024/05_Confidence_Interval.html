@@ -164,6 +164,7 @@ One can show that the distribution of `\(Z\)` is symmetric, _i.e._ its density f
 `$$P\left(T= \theta\right) = 0$$`
 
 ---
+
 ## Confidence interval
 
 Instead of providing a single value, provide a **range** of values such that
@@ -173,6 +174,29 @@ where
 
 - `\(L\)` and `\(U\)` can be computed from the data,
 - the **confidence level** `\(\alpha\)` is **chosen** by the user.
+
+**Note:** `\(L\)` and `\(U\)` are .blue[random values] depending on `\(X_1, \dots, X_n\)`.
+
+---
+
+## Definition
+
+**Random interval** 
+
+Let `\(L = m(X_1, ..., X_n)\)` et  `\(U = M(X_1, ..., X_n)\)` two r.v. We define a .blue[random interval] `\([L, U]\)` for `\(\theta\)` with the couple `\((L, U)\)` and call `\(P(L &lt; \theta &lt; U)\)` the .blue[level of confidence].
+
+--
+
+**Confidence interval**
+
+A .blue[confidence interval] at level `\(1-\alpha\)` for `\(\theta\)` is a realisation `\([l, u]\)` of a random interval with confidence level `\(1-\alpha\)`
+
+--
+
+**Notes:** 
+
+- In general, we want the interval to be as .blue[narrow] as possible. 
+- `\(\theta\)` is a fixed value and `\([L, U]\)` is random. For any realisation `\([l, u]\)` of `\([L, U]\)`, `\(\theta\)` is .blue[either] in the interval or not. 
 
 ---
 ## Pivotal statistic
@@ -200,17 +224,81 @@ If the .blue[distribution] of `\(T_{pv}\)` is known and does not depend on `\(\t
 ---
 class: middle, inverse, center
 
-# Example 1
+# Example 0
 
-## Weighing scale precision
+## Mean of a gaussian with unit variance
 
 ---
-## Example 1: Weighing scale precision
+## Mean of a gaussian with unit variance
+- **Model** 
+`\(X_1, ..., X_n\)` gaussian with parameter `\(\mu\)` (unknown) and `\(\sigma^2 = 1\)` (known)
+
+- **Estimator** 
+`$$\bar{X} = \sum X_i /n$$`
+
+- We assume for simplicity that `\(V(X_i) = \sigma^2 = 1\)` is known
+
+- Model for the estimator [using properties of gaussian / Central Limit Theorem]
+
+$$
+\bar{X} \sim \mathcal{N}(\mu, 1/n)
+$$
+
+Or equivalently
+
+$$
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim\mathcal{N}(0, 1)
+$$
+--
+We can use .blue[quantiles] of the standard gaussian to find bounds. 
+
+---
+## Confidence Interval
+
+.pull-left[
+With probability 0.95
+
+$$
+`\begin{equation}
+q_{0.025} \leq \frac{\bar{Y} - \mu}{\sigma/\sqrt{n}} \leq q_{0.975}
+\end{equation}`
+$$
+Or with a bit of manipulation
+
+$$
+`\begin{align}
+\mu &amp; \in \left[ \bar{Y} - q_{0.975}\frac{\sigma}{\sqrt{n}}, \bar{Y} - q_{0.025}\frac{\sigma}{\sqrt{n}} \right] \\
+\mu &amp; \in \bar{Y} \pm 1.96 \frac{\sigma}{\sqrt{n}}
+\end{align}`
+$$
+]
+
+.pull-right[
+&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-1-1.png" width="500px" /&gt;
+]
+
+---
+## A cautionary tale
+
+- .blue[On average] 95% of the intervals contain the true value. 
+- But for a .blue[single] interval, the true value is .blue[either] in the interval or not in the interval
+
+&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-2-1.png" width="1000px" /&gt;
+
+---
+class: middle, inverse, center
+
+# Example 1
+
+## Weighting scale precision
+
+---
+## Example 1: Weighting scale precision
 
 
 
 
-A biologist needs a new weighing machine.
+A biologist needs a new weighting machine.
 
 --
 
@@ -227,9 +315,9 @@ The obtained measurements are the following:
 
 
 ```
-0.99644 0.99669 1.00094 0.99749 1.00093 
-0.9998 1.00238 1.00201 0.99779 0.99674 
-0.99803 0.99821 0.99727 0.99686 1.00244 
+1.00138 1.00172 1.00163 0.99721 0.99802 
+1.00039 1.0023 1.00004 0.99884 1.00156 
+0.99943 1.00121 0.99826 1.00354 0.99925 
 ```
 
 --
@@ -322,7 +410,7 @@ where `\(c_{n,u}\)` is the `\(u\)` order quantile of the `\(\chi^2(n)\)` distrib
 --
 
 .pull-right[
-![](05_Confidence_Interval_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](05_Confidence_Interval_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -350,7 +438,7 @@ One then has
 One has
 
 - `\(n=\)` 15
-- `\(\widehat{\sigma}^2 = \frac{1}{n}\sum_i(w_i-1)^2= 5.82\times 10^{-6}\)`
+- `\(\widehat{\sigma}^2 = \frac{1}{n}\sum_i(w_i-1)^2= 3.09\times 10^{-6}\)`
 
 --
 
@@ -363,7 +451,7 @@ Assume one wants a confidence interval at level 95%, then
 
 Consequently, one has
 
-`$$\text{IC}_{0.95}(\sigma) = \left[ 0.0018 ;\ 0.0037  \right].$$`
+`$$\text{IC}_{0.95}(\sigma) = \left[ 0.0013 ;\ 0.0027  \right].$$`
 
 .blue[Conclusion ?]
 
@@ -378,7 +466,7 @@ Recall
 
 --
 
-&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 `\(n\)` fixed at 15 and `\(\alpha\)` fixed at 0.05
 
 ---
@@ -530,7 +618,7 @@ where `\(u_{q}\)` is the `\(q\)` order quantile of the `\(\N(0,1)\)` distributio
 --
 
 .pull-right[
-&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="05_Confidence_Interval_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
