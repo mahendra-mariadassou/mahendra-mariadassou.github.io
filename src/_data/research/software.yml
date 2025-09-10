@@ -1,3 +1,43 @@
+- year: 2024-Present
+  kind: <i class="fab fa-r-project"></i> package enabling the identification of the local neighborhood of a species of interest, based on microbiome data.
+  name: NeighborFinder
+  links: <a href="https://github.com/metagenopolis/neighborfinder" target="_blank"><i class="fab fa-github"></i> project</a> and <a href="https://neighborfinder-metagenopolis-3398cd6bc35be89aad28d3e33c05780317.pages-forge.inrae.fr/" target="_blank">documentation</a>
+
+- year: 2023-Present
+  kind: <i class="fab fa-r-project"></i> implementation of a stability based network inference aggregation method from whole metagenome sequencing data, which aims at fostering reproducibility and precision.
+  name: OneNet
+  links: <a href="https://github.com/metagenopolis/OneNet" target="_blank"><i class="fab fa-github"></i> project</a> and article<a href="https://doi.org/10.1371/journal.pcbi.1012627" target="_blank"><i class="fa-solid fa-file"></i> article</a>
+
+- year: 2020-Present
+  kind: <i class="fab fa-r-project"></i> package and shiny application for exploration and disambiguation of FROGS multi-affiliation
+  name: Affiliation Explorer
+  links: <a href="https://forge.inrae.fr/migale/affiliationexplorer" target="_blank"><i class="fab fa-gitlab"></i> project</a> and <a href="https://shiny.migale.inrae.fr/app/affiliationExplorer" target="_blank"><i class="fa-solid fa-tablet-screen-button"></i> shiny app</a>
+  
+- year: 2018-Present
+  kind: <i class="fab fa-r-project"></i> package and shiny application designed to facilitate the exploration, visualization, and analysis of microbiome data.
+  name: Easy16S
+  links: <a href="https://easy16s.migale.inrae.fr/">website</a>, <a href="https://forge.inrae.fr/migale/easy16s" target="_blank"><i class="fab fa-gitlab"></i> project</a> and <a href="https://shiny.migale.inrae.fr/app/easy16S" target="_blank"><i class="fa-solid fa-tablet-screen-button"></i> shiny app</a>
+
+- year: 2017-Present
+  kind: R package to analyze multivariate count using the Poisson Log-Normal distribution. Includes PCA, Network Inference, LDA, Mixture Models, etc.
+  name: PLNmodels
+  links: <a href="https://cran.r-project.org/package=PLNmodels" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="https://pln-team.github.io/PLNmodels/">website</a> and <a href="https://github.com/PLN-team/PLNmodels/" target="_blank"><i class="fab fa-github"></i> project</a>
+
+- year: 2016-Present
+  kind: Python-based pipeline to reconstruct OTU count table from raw sequence reads
+  name: FROGS
+  links: <a href="http://frogs.toulouse.inrae.fr/" target="_blank"><i class="fas fa-frog"></i>website</a>, <a href="https://github.com/geraldinepascal/FROGS" target="_blank"><i class="fab fa-github"></i> project</a>
+
+- year: 2015-Present
+  kind: R package to detect adaptive shifts on phylogenies
+  name: PhylogeneticEM
+  links: <a href="https://cran.r-project.org/package=PhylogeneticEM" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="https://github.com/pbastide/PhylogeneticEM" target="_blank"><i class="fab fa-github"></i> project</a>
+
+- year: 2019
+  kind: Benchmark R packages for Microbiome Differential Abundance studies, Internship project of Léonard Dubois.
+  name: MetaDAF
+  links: <a href="https://github.com/LeoStafu/metaDAF" target="_blank"><i class="fab fa-github"></i> project</a>    
+
 - year: 2019
   kind: Benchmark R packages for Microbiome Differential Abundance studies, Internship project of Léonard Dubois.
   name: MetaDAF
@@ -7,21 +47,6 @@
   kind: Additional functions for R package phyloseq
   name: phyloseq-extended
   links: <a href="https://github.com/mahendra-mariadassou/phyloseq-extended" target="_blank"><i class="fab fa-github"></i> project</a>
-
-- year: 2017
-  kind: R package to analyze multivariate count using the Poisson Log-Normal distribution. Includes PCA, Network Inference, LDA, Mixture Models, etc.
-  name: PLNmodels
-  links: <a href="https://cran.r-project.org/package=PLNmodels" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="http://julien.cremeriefamily.info/PLNmodels/">website</a> and <a href="https://github.com/jchiquet/PLNmodels" target="_blank"><i class="fab fa-github"></i> project</a> and 
-
-- year: 2016
-  kind: Python-based pipeline to reconstruct OTU count table from raw sequence reads
-  name: FROGS
-  links: <a href="http://frogs.toulouse.inra.fr/" target="_blank"><i class="fas fa-frog"></i>website</a>, <a href="https://github.com/geraldinepascal/FROGS" target="_blank"><i class="fab fa-github"></i> project</a>
-
-- year: 2015
-  kind: R package to detect adaptive shifts on phylogenies
-  name: PhylogeneticEM
-  links: <a href="https://cran.r-project.org/package=PhylogeneticEM" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="https://github.com/pbastide/PhylogeneticEM" target="_blank"><i class="fab fa-github"></i> project</a>
 
 - year: 2015
   kind: R scripts to compute the Local Specifity Index, as used in <a href = "http://dx.doi.org/10.1111/ele.12478"><i>Mariadassou et al. (2015)</i></a>
