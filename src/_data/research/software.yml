@@ -1,12 +1,12 @@
 - year: 2024-Present
   kind: <i class="fab fa-r-project"></i> package enabling the identification of the local neighborhood of a species of interest, based on microbiome data.
   name: NeighborFinder
-  links: <a href="https://github.com/metagenopolis/neighborfinder" target="_blank"><i class="fab fa-github"></i> project</a> and <a href="https://neighborfinder-metagenopolis-3398cd6bc35be89aad28d3e33c05780317.pages-forge.inrae.fr/" target="_blank">documentation</a>
+  links: <a href="https://cran.r-project.org/package=NeighborFinder" target="_blank"><i class="fab fa-r-project"></i> package</a>, <a href="https://github.com/metagenopolis/NeighborFinder" target="_blank"><i class="fab fa-github"></i> project</a>, <a href="https://metagenopolis.github.io/NeighborFinder/" target="_blank">documentation website</a> and <a href="https://doi.org/10.64898/2025.12.05.692507" target="_blank"><i class="fas fa-file"></i> article</a>
 
 - year: 2023-Present
   kind: <i class="fab fa-r-project"></i> implementation of a stability based network inference aggregation method from whole metagenome sequencing data, which aims at fostering reproducibility and precision.
   name: OneNet
-  links: <a href="https://github.com/metagenopolis/OneNet" target="_blank"><i class="fab fa-github"></i> project</a> and article<a href="https://doi.org/10.1371/journal.pcbi.1012627" target="_blank"><i class="fa-solid fa-file"></i> article</a>
+  links: <a href="https://github.com/metagenopolis/OneNet" target="_blank"><i class="fab fa-github"></i> project</a> and <a href="https://doi.org/10.1371/journal.pcbi.1012627" target="_blank"><i class="fas fa-file"></i> article</a>
 
 - year: 2020-Present
   kind: <i class="fab fa-r-project"></i> package and shiny application for exploration and disambiguation of FROGS multi-affiliation
@@ -38,11 +38,6 @@
   name: MetaDAF
   links: <a href="https://github.com/LeoStafu/metaDAF" target="_blank"><i class="fab fa-github"></i> project</a>    
 
-- year: 2019
-  kind: Benchmark R packages for Microbiome Differential Abundance studies, Internship project of Léonard Dubois.
-  name: MetaDAF
-  links: <a href="https://github.com/LeoStafu/metaDAF" target="_blank"><i class="fab fa-github"></i> project</a>    
-  
 - year: 2019
   kind: Additional functions for R package phyloseq
   name: phyloseq-extended
